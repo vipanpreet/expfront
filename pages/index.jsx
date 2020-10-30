@@ -18,7 +18,7 @@ export default function Home({ products }) {
       </Head>
       <Navbar />
       <Header />
-      <Categoriessection />
+      {/* <Categoriessection /> */}
       <Recommendationbox products={products} />
       <Pageads />
       <Upsellsection />
