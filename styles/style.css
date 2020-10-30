@@ -4690,6 +4690,7 @@ input-out[type="checkbox"]:checked ~ .label-out::before {
     font-size: 1.8rem;
   }
   .nav__cart {
+    display: none;
     right: -100vw;
     width: 100vw;
     padding: 6rem 2rem;
