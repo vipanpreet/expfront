@@ -4945,6 +4945,7 @@ input-out[type="checkbox"]:checked ~ .label-out::before {
   width: 100%;
   height: 100%;
 }
+
 .section-oneproduct__body h1 {
   color: #4e5a72;
   font-size: 4rem;
