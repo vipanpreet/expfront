@@ -3925,7 +3925,10 @@ input-out[type="checkbox"] {
   .section-oneproduct {
     flex-direction: column; }
     .section-oneproduct--img {
-      width: 100%; }
+      width: 100%;
+      height: 200px;
+      display: none;
+      background-attachment: scroll; }
   .trending-menu {
     flex-direction: row;
     display: flex; }

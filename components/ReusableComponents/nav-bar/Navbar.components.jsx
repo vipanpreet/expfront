@@ -124,21 +124,6 @@ const Navbar = ({ cartItemsCount }) => {
             </div>
           </Link>
         </div>
-        <div className="nav__cart">
-          <div className="nav__cart--welcome">Hi There!</div>
-          <div className="para text-white">
-            Looks like you have not added anything to cart yet, please visit our
-            various sections to shop something you like.
-          </div>
-          <div className="mt-6">
-            <a href="#" className="btn btn--primary">
-              Categories
-            </a>
-            <a href="#" className="btn btn--secondary">
-              Shop Luxury
-            </a>
-          </div>
-        </div>
       </div>
     </div>
   );
