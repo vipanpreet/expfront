@@ -39,7 +39,7 @@ const Trendingsection = ({ products }) => {
         <div className="tending-body">
           <div className="container-xlarge mt-5">
             <div className="title">Trending site wide</div>
-            <div className="row no-gutters row-cols-2">
+            <div className="row ">
               <div class="col-md-3">
                 <div class="trending-menu mt-5">
                   <li class="trending-menu--item active">Shorts</li>
@@ -50,7 +50,7 @@ const Trendingsection = ({ products }) => {
                 </div>
               </div>
               <div class="col-md-9">
-                <div class="row">
+                <div class="row row-cols-2">
                   <div class="col-lg-2">
                     <div class="card no-hover">
                       <div class="card--img">

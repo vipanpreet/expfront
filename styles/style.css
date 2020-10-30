@@ -3667,25 +3667,6 @@ input-out[type="checkbox"] {
           text-decoration: none; }
     .nav__bar.is-active {
       left: 0; }
-  .nav__cart {
-    position: absolute;
-    z-index: 99;
-    height: 100vh;
-    background: #333c50;
-    top: 0;
-    right: -50vw;
-    width: 50vw;
-    transition: right 1.6s cubic-bezier(0.075, 0.82, 0.165, 1);
-    padding: 10rem 6rem;
-    text-align: center; }
-    .nav__cart--welcome {
-      font-size: 6rem;
-      font-weight: 800;
-      width: 100%;
-      display: block;
-      color: #fff; }
-    .nav__cart.is-active {
-      right: 0; }
 
 @media only screen and (max-width: 1024px) {
   .nav {
@@ -3715,11 +3696,7 @@ input-out[type="checkbox"] {
       .nav__bar__container--menu {
         padding-left: 50px; }
         .nav__bar__container--menu a {
-          font-size: 1.8rem; }
-    .nav__cart {
-      right: -100vw;
-      width: 100vw;
-      padding: 6rem 2rem; } }
+          font-size: 1.8rem; } }
 
 .hamburger {
   position: relative;
