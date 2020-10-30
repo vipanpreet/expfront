@@ -1,0 +1,1 @@
+{"ast":null,"code":"import { createSelector } from 'reselect';\n\nconst selectCart = state => state.cart;\n\nexport const selectCartItems = createSelector([selectCart], cart => Object.values(cart.cartItems));\nexport const selectCartItemsCount = createSelector([selectCartItems], cartItems => cartItems.length);","map":null,"metadata":{},"sourceType":"module"}
