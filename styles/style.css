@@ -3932,6 +3932,9 @@ input-out[type="checkbox"] {
   .trending-menu {
     flex-direction: row;
     display: flex; }
+    .trending-menu--item {
+      margin: 0 6px;
+      font-size: 1.2rem; }
   .section-catposter__container {
     position: absolute;
     top: 50%;
