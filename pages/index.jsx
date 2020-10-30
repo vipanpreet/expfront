@@ -17,7 +17,7 @@ export default function Home({ products }) {
         <title>Arktastic</title>
       </Head>
       <Navbar />
-      <Header /> 
+      <Header />
       <Categoriessection />
       <Recommendationbox products={products} />
       <Pageads />
@@ -32,7 +32,9 @@ export default function Home({ products }) {
 // fetching the products form backend in server side
 export async function getServerSideProps() {
   // Fetch data from external API
-  const res = await fetch(`http://localhost:5000/api/products`);
+  const res = await fetch(
+    `https://arktasticbackend.herokuapp.com/api/products`
+  );
   const products = await res.json();
   // Pass data to the page via props
   return { props: { products } };
