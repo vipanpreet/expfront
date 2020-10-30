@@ -1,4 +1,4 @@
-import Link from "next/Link";
+import Link from "next/link";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 import { selectCartItemsCount } from "../../../redux/cart/cart.selectors";
