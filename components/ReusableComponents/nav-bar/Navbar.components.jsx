@@ -4,6 +4,9 @@ import { createStructuredSelector } from "reselect";
 import { selectCartItemsCount } from "../../../redux/cart/cart.selectors";
 import { useEffect } from "react";
 import $ from "jquery";
+import { useDispatch, useSelector } from "react-redux";
+import Router from "next/router";
+import { logout } from "../../../redux/login/login.actions";
 
 const mapStateToProps = createStructuredSelector({
   cartItemsCount: selectCartItemsCount,
@@ -16,6 +19,26 @@ const Navbar = ({ cartItemsCount }) => {
       $(".nav__bar").toggleClass("is-active");
     });
   });
+
+  const dispatch = useDispatch();
+  const loginReducerState = useSelector((state) => state.login);
+  const { userInfo } = loginReducerState;
+
+  const handleAccountBtn = () => {
+    // checking if the object is not empty
+    if (Object.keys(userInfo).length !== 0 && userInfo.constructor === Object) {
+      // if logged in then show the profile page
+      // Router.push("/auth");
+    } else {
+      // if the user if not logged in show the login path
+      Router.push("/auth");
+    }
+  };
+
+  const handleLogoutBtn = () => {
+    dispatch(logout());
+  };
+
   return (
     <div>
       <div className="nav">
@@ -116,13 +139,29 @@ const Navbar = ({ cartItemsCount }) => {
               </a>
             </Link>
           </div>
-          <Link href="/auth">
+
+          {userInfo.firstName ? (
+            <div style={{ display: "flex", paddingLeft: "10px" }}>
+              <h2>Hello, {userInfo.firstName}</h2>
+              <div className="nav__icons--list">
+                <a
+                  style={{ textDecoration: "none", cursor: "pointer" }}
+                  onClick={handleLogoutBtn}
+                >
+                  Logout
+                </a>
+              </div>
+            </div>
+          ) : (
             <div className="nav__icons--list">
-              <a style={{ textDecoration: "none", cursor: "pointer" }}>
+              <a
+                style={{ textDecoration: "none", cursor: "pointer" }}
+                onClick={handleAccountBtn}
+              >
                 Account
               </a>
             </div>
-          </Link>
+          )}
         </div>
       </div>
     </div>

@@ -8,6 +8,7 @@ import Upsellsection from "../components/HomePage/upsell-section/Upsellsection.c
 import Trendingsection from "../components/HomePage/trending-section/Trendingsection.components";
 import Themesbanner from "../components/HomePage/themes-banner/Themesbanner.components";
 import Featuressection from "../components/HomePage/features-section/Featuressection.components";
+import Footer from "../components/ReusableComponents/footer/Footer.components";
 
 // this is Home page
 export default function Home({ products }) {
@@ -25,6 +26,7 @@ export default function Home({ products }) {
       <Trendingsection products={products} />
       <Themesbanner />
       <Featuressection />
+      <Footer />
     </div>
   );
 }

@@ -1,72 +1,62 @@
-import Productimages from "../../HomePage/product-images/Productimages.components";
+import Link from "next/link";
 import { addItem } from "../../../redux/cart/cart.actions";
 import { connect } from "react-redux";
-import { useState, useEffect } from "react";
+import Productadditional from "../product-details-additional/Productadditional.components";
+import { useEffect, useRef, useLayoutEffect, useState } from "react";
+import { motion } from "framer-motion";
 
+let easing = [0.6, -0.05, 0.01, 0.99];
+
+const stagger = {
+  animate: {
+    transition: {
+      staggerChildren: 0.05,
+    },
+  },
+};
+
+const fadeInUp = {
+  initial: {
+    y: 60,
+    opacity: 0,
+    transition: { duration: 0.6, ease: easing },
+  },
+  animate: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      duration: 0.6,
+      ease: easing,
+    },
+  },
+};
+
+const fadeInRight = {
+  initial: {
+    x: 60,
+    opacity: 0,
+    transition: { duration: 0.8, ease: easing },
+  },
+  animate: {
+    x: 0,
+    opacity: 1,
+    transition: {
+      duration: 1.6,
+      delay: 0.2,
+      ease: easing,
+    },
+  },
+};
 const Productdetail = ({ addItem, singleProduct }) => {
-  // useEffect(() => {
-  //   setProduct(products.find((item) => item.id === id));
-  // });
+  const [width, setWidth] = useState(null);
+  const imgref = useRef(null);
 
-  // const [products] = useState([
-  //   {
-  //     id: "0000001",
-  //     img_src: "assets/products/shirt1.jpg",
-  //     Brand: "Gucci",
-  //     name: "Lined Top",
-  //     price: "100.12",
-  //   },
-  //   {
-  //     id: "0000002",
-  //     img_src: "assets/products/shirt2.jpg",
-  //     Brand: "U.S.Polo",
-  //     name: "Blue Shirt",
-  //     price: "45.26",
-  //   },
-  //   {
-  //     id: "0000003",
-  //     img_src: "assets/products/shirt3.jpg",
-  //     Brand: "GAP",
-  //     name: "Navy Blue Polo T-shirt",
-  //     price: "75",
-  //   },
-  //   {
-  //     id: "0000004",
-  //     img_src: "assets/products/shirt4.jpg",
-  //     Brand: "Armani",
-  //     name: "Black Leather Jacket",
-  //     price: "250",
-  //   },
-  //   {
-  //     id: "0000005",
-  //     img_src: "assets/products/customizable-mug.jpg",
-  //     Brand: "Jack & Jones",
-  //     name: "Printed T-shirt",
-  //     price: "30",
-  //   },
-  //   {
-  //     id: "0000006",
-  //     img_src: "assets/products/mountain-fox-notebook.jpg",
-  //     Brand: "Armani",
-  //     name: "Black slippers",
-  //     price: "150",
-  //   },
-  //   {
-  //     id: "0000007",
-  //     img_src: "assets/products/mug-the-best-is-yet-to-come.jpg",
-  //     Brand: "Zara",
-  //     name: "Kurta round neck",
-  //     price: "90",
-  //   },
-  //   {
-  //     id: "0000008",
-  //     img_src: "assets/products/pack-mug-framed-poster.jpg",
-  //     Brand: "Gucci",
-  //     name: "Pixy cool Shirt",
-  //     price: "120.42",
-  //   },
-  // ]);
-  // const [product_info, setProduct] = useState({});
+  useLayoutEffect(() => {
+    // setTimeout(() => {
+    //   setWidth(imgref.current.offsetWidth);
+    //   document.getElementById("pdetails__body").style.marginLeft = `${width}px`;
+    // }, 50);
+  }, [width, imgref.current]);
 
   const handleAddToCart = () => {
     if (singleProduct) {
@@ -75,103 +65,296 @@ const Productdetail = ({ addItem, singleProduct }) => {
   };
 
   return (
-    <div className="pdetails mt-2">
-      <div className="row">
-        <div className="col-lg-5">
-          <Productimages />
-        </div>
+    <motion.div initial="initial" animate="animate" exit={{ opacity: 0 }}>
+      <div className="pdetails">
+        <motion.div ref={imgref} className="pdetails__img">
+          <motion.div
+            animate={{ opacity: 1 }}
+            initial={{ opacity: 0 }}
+            className="pdetails__img--img"
+          >
+            <motion.img
+              className="imgrr"
+              src="/assets/products/2M8A9308small - Copy.jpg"
+              alt=""
+              animate={{ x: 0, opacity: 1 }}
+              initial={{ x: -200, opacity: 0 }}
+              exit={{ opacity: 0 }}
+              transition={{ delay: 0.2 }}
+            />
+          </motion.div>
+        </motion.div>
+        <motion.div
+          variants={stagger}
+          id="pdetails__body"
+          className="pdetails__body"
+        >
+          <Link href="/">
+            <motion.a
+              style={{ cursor: "pointer" }}
+              variants={fadeInUp}
+              className="pdetails__body--back"
+            >
+              <ion-icon name="arrow-back-outline"></ion-icon> Back to Shirts
+            </motion.a>
+          </Link>
 
-        <div className="col-lg-7">
-          <div className="pdetails__body">
-            <div className="pdetails__body--title">{singleProduct.name}</div>
-            <div className="pdetails__body__rating">
-              <span className="pdetails__body__rating--stars">
-                <embed src="/assets/static/icon-star-full.svg" />
-                <embed src="/assets/static/icon-star-full.svg" />
-                <embed src="/assets/static/icon-star-full.svg" />
-                <embed src="/assets/static/icon-star-full.svg" />
-                <embed src="/assets/static/icon-star-outline.svg" />
-              </span>
-              <span className="pdetails__body__rating--count">3 Reviews</span>
+          <motion.div variants={fadeInUp} className="pdetails__body--brand">
+            {singleProduct.brand}
+          </motion.div>
+          <motion.div variants={fadeInUp} className="pdetails__body--name">
+            {singleProduct.name}
+          </motion.div>
+          <motion.div variants={fadeInUp} className="pdetails__body--rating">
+            <span className="pdetails__body--rating--stars">
+              <ion-icon name="star"></ion-icon>
+              <ion-icon name="star"></ion-icon>
+              <ion-icon name="star"></ion-icon>
+              <ion-icon name="star"></ion-icon>
+              <ion-icon name="star-half"></ion-icon>
+            </span>
+            <span className="pdetails__body--rating--count">
+              4.5 (3 Reviews)
+            </span>
+          </motion.div>
+
+          <motion.div variants={fadeInUp} className="pdetails__body--price">
+            <s>AUD {singleProduct.defaultPrice}</s> AUD {singleProduct.price}
+          </motion.div>
+          <motion.div variants={fadeInUp} className="pdetails__body--btns">
+            <h4>Select Color</h4>
+            <input type="radio" id="grey" name="color" value="grey" checked />
+            <label htmlFor="grey">Grey</label>
+
+            <input type="radio" id="black" name="color" value="black" />
+            <label htmlFor="black">Black</label>
+
+            <input type="radio" id="white" name="color" value="white" />
+            <label htmlFor="white">White</label>
+          </motion.div>
+          <motion.div variants={fadeInUp} className="pdetails__body--btns">
+            <h4>Select Size</h4>
+            <input
+              type="radio"
+              id="medium"
+              name="size"
+              value="medium"
+              checked
+            />
+            <label htmlFor="medium">Medium</label>
+
+            <input type="radio" id="large" name="size" value="large" checked />
+            <label htmlFor="large">Large</label>
+
+            <input type="radio" id="xl" name="size" value="xl" />
+            <label htmlFor="xl">Extra Large</label>
+
+            <input type="radio" id="xxl" name="size" value="xxl" />
+            <label htmlFor="xxl">XX Large</label>
+          </motion.div>
+          <motion.div variants={fadeInUp} className="pdetails__body--category">
+            Category: <span>{singleProduct.category}</span> <a href=""></a>
+          </motion.div>
+          {/* Product Others */}
+          <motion.div variants={fadeInUp} className="pothers mt-6">
+            <div className="pothers__menu">
+              <li className="pothers__menu--item pothers__menu--desc active">
+                Description
+              </li>
+              <li className="pothers__menu--item pothers__menu--add">
+                Additional Details
+              </li>
+              <li className="pothers__menu--item pothers__menu--rev">
+                Reviews
+              </li>
             </div>
-            <div className="split"></div>
-            <div className="pdetails__body--price">
-              <span className="old-price">$200</span>
-              <span className="new-price">${singleProduct.price}</span>
-            </div>
-            <div className="pdetails__body--details">
-              className Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Odit beatae dolorum deleniti officiis exercitationem, minima
-              debitis. Sequi illum culpa consequuntur, quisquam delectus sed
-              odio laudantium ipsum repudiandae doloribus repellat et.
-            </div>
-            <div className="pdetails__body--availibility mt-5">
-              <div className="av">
-                Availibility: <span>available</span>
+            <div className="pothers__body">
+              {/* <!-- ------- PANEL 1 DESCRIPTION --------- --> */}
+              <div className="pothers__body--item pothers__body--desc display-block">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde id
+                aut dicta dolorem beatae provident molestias perferendis.
+                Molestiae harum voluptatibus quas, exercitationem, amet delectus
+                quam nihil atque iste tempora illo? Lorem ipsum dolor sit amet
+                consectetur adipisicing elit. Unde id aut dicta dolorem beatae
+                provident molestias perferendis. <br />
+                <br />
+                Molestiae harum voluptatibus quas, exercitationem, amet delectus
+                quam nihil atque iste tempora illo? Lorem ipsum dolor sit amet
+                consectetur adipisicing elit. Unde id aut dicta dolorem beatae
+                provident molestias perferendis. Molestiae harum voluptatibus
+                quas, exercitationem, amet delectus quam nihil atque iste
+                tempora illo?
               </div>
-              <div className="de">
-                One Day Delivery available <ion-icon name="flash"></ion-icon>
+              {/* <!-- ------- PANEL 2 ADDITIONAL --------- --> */}
+              <div className="pothers__body--item pothers__body--add">
+                Molestiae harum voluptatibus quas, exercitationem, amet delectus
+                quam nihil atque iste tempora illo?
+              </div>
+
+              {/* <!-- ------- PANEL 3 REVIEWS --------- --> */}
+              <div className="pothers__body--item pothers__body--rev">
+                <div className="row">
+                  <div className="col-lg-6">
+                    {/* <!-- Reviews --> */}
+                    <div className="preview">
+                      <div className="preview--heading">
+                        3 Reviews for Cream Shirt with Sleeves
+                      </div>
+                      {/* <!-- Review 1 --> */}
+                      <div className="preview-item">
+                        <div className="preview-item__img">
+                          <div>
+                            <img src="/assets/users/demo.jpg" alt="" />
+                          </div>
+                        </div>
+                        <div className="preview-item__body">
+                          <div className="preview-item__body--stars">
+                            <embed src="assets/static/icon-star-full.svg" />
+                            <embed src="assets/static/icon-star-full.svg" />
+                            <embed src="assets/static/icon-star-full.svg" />
+                            <embed src="assets/static/icon-star-full.svg" />
+                            <embed src="assets/static/icon-star-full.svg" />
+                          </div>
+                          <div className="preview-item__body--username">
+                            <span>John Doe</span> <span>- 11 January 2020</span>
+                          </div>
+                          <div className="para">
+                            Lorem ipsum dolor sit amet, consectetur adipisicing
+                            elit. Dolorum sunt est, voluptas accusantium aliquam
+                            officia ab a quas.
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* <!-- Review 2 --> */}
+                      <div className="preview-item">
+                        <div className="preview-item__img">
+                          <div>
+                            <img src="/assets/users/demo.jpg" alt="" />
+                          </div>
+                        </div>
+                        <div className="preview-item__body">
+                          <div className="preview-item__body--stars">
+                            <embed src="assets/static/icon-star-full.svg" />
+                            <embed src="assets/static/icon-star-full.svg" />
+                            <embed src="assets/static/icon-star-full.svg" />
+                            <embed src="assets/static/icon-star-full.svg" />
+                            <embed src="assets/static/icon-star-half.svg" />
+                          </div>
+                          <div className="preview-item__body--username">
+                            <span>John Doe</span> <span>- 11 January 2020</span>
+                          </div>
+                          <div className="para">
+                            Lorem ipsum dolor sit amet, consectetur adipisicing
+                            elit. Dolorum sunt est, voluptas accusantium aliquam
+                            officia ab a quas ratione praesentium harum error,
+                            pariatur cupiditate architecto impedit vitae?
+                            Reiciendis, maiores laboriosam?
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* <!-- Review 3 --> */}
+                      <div className="preview-item">
+                        <div className="preview-item__img">
+                          <div>
+                            <img src="/assets/users/demo.jpg" alt="" />
+                          </div>
+                        </div>
+                        <div className="preview-item__body">
+                          <div className="preview-item__body--stars">
+                            <embed src="assets/static/icon-star-full.svg" />
+                            <embed src="assets/static/icon-star-full.svg" />
+                            <embed src="assets/static/icon-star-full.svg" />
+                            <embed src="assets/static/icon-star-half.svg" />
+                            <embed src="assets/static/icon-star-outline.svg" />
+                          </div>
+                          <div className="preview-item__body--username">
+                            <span>John Doe</span> <span>- 11 January 2020</span>
+                          </div>
+                          <div className="para">
+                            Lrum error, pclassNameariatur cupiditate architecto
+                            impedit vitae.
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="col-lg-6">
+                    <div className="bg-cream-light p-3 mt-3">
+                      <div className="title __600">Add a Review</div>
+                      <div className="subheading mt-3">Your Rating</div>
+                      <select name="" className="select" id="">
+                        <option value="">1 star</option>
+                        <option value="">2 stars</option>
+                        <option value="">3 stars</option>
+                        <option value="">4 stars</option>
+                        <option value="">5 stars</option>
+                      </select>
+                      <div className="subheading mt-3">Your Review</div>
+                      <textarea rows="5" className="input bg-white"></textarea>
+                      <div className="mt-3">
+                        <a className="btn btn--primary" href="#">
+                          Submit
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
-            <div className="pdetails__body--colors">
-              <span>colors :</span>
-              <select className="select" name="" id="">
-                <option value="">Red</option>
-                <option value="">White</option>
-                <option value="">Black</option>
-              </select>
-            </div>
-            <div className="pdetails__body__sizes">
-              <span>sizes :</span>
-              <select className="select" name="" id="">
-                <option value="">M</option>
-                <option value="">L</option>
-                <option value="">XL</option>
-                <option value="">XXL</option>
-              </select>
-              <div className="pdetails__body__sizes--guide">
-                <a href="#">
-                  {" "}
-                  <ion-icon name="list-outline"></ion-icon> Size Guide{" "}
-                </a>
-              </div>
-            </div>
-            <div className="pdetails__body--cart">
-              <button onClick={handleAddToCart}>
-                <span>Add to Cart</span>
-                <ion-icon name="cart"></ion-icon>
-              </button>
-              <button className="bg-font">
-                <span>Add to wishlist</span>
-                <ion-icon name="heart"></ion-icon>
-              </button>
-            </div>
-            <div className="pdetails__body__extras">
-              <div className="pdetails__body__extras--cat">
-                <span>Category:</span> T Shirts
-              </div>
-              <div className="pdetails__body__extras--share">
-                <a href="#">
-                  <ion-icon name="logo-facebook"></ion-icon>
-                </a>
-                <a href="#">
-                  <ion-icon name="logo-twitter"></ion-icon>
-                </a>
-                <a href="#">
-                  <ion-icon name="logo-whatsapp"></ion-icon>
-                </a>
-                <a href="#">
-                  <ion-icon name="mail-outline"></ion-icon>
-                </a>
-                <a href="#">
-                  <ion-icon name="link-outline"></ion-icon>
-                </a>
-              </div>
-            </div>
+          </motion.div>
+        </motion.div>
+      </div>
+
+      <motion.div variants={fadeInRight} className="paddtocart">
+        <div className="paddtocart__share">
+          <div>
+            <a href="#">
+              <ion-icon name="logo-facebook"></ion-icon>
+            </a>
+            <a href="#">
+              <ion-icon name="logo-twitter"></ion-icon>
+            </a>
+            <a href="#">
+              <ion-icon name="logo-whatsapp"></ion-icon>
+            </a>
+            <a href="#">
+              <ion-icon name="mail-outline"></ion-icon>
+            </a>
+            <a href="#">
+              <ion-icon name="link-outline"></ion-icon>
+            </a>
           </div>
         </div>
-      </div>
-    </div>
+        <div className="paddtocart__quantity">
+          <div>1</div>
+          <div className="paddtocart__quantity--btn">+</div>
+        </div>
+        <div className="paddtocart__buy">
+          <h2 className="paddtocart__buy--lightning">
+            <span className="paddtocart__buy--lightning--span">
+              Same Day Delivery
+            </span>
+            <ion-icon name="flash"></ion-icon>
+          </h2>
+          <div className="paddtocart__buy--buy">
+            <button className="paddtocart__buy--buy--wish">
+              <ion-icon name="heart"></ion-icon>
+            </button>
+            <button
+              onClick={handleAddToCart}
+              className="paddtocart__buy--buy--cart"
+            >
+              <span className="paddtocart__buy--buy--cart--span">
+                Add to cart
+              </span>
+              <ion-icon name="bag"></ion-icon>
+            </button>
+          </div>
+        </div>
+      </motion.div>
+    </motion.div>
   );
 };
 

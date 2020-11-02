@@ -1,9 +1,9 @@
 import loginActionTypes from './login.types';
 
 const INITIAL_STATE = {
-    loggedIn : false,
     loading : false,
-    userInfo : {}
+    userInfo : {},
+    error : ''
 };
 
 export const userLoginReducer = (state = INITIAL_STATE, action) => {
@@ -11,20 +11,20 @@ export const userLoginReducer = (state = INITIAL_STATE, action) => {
     case loginActionTypes.USER_LOGIN_REQUEST:
       return { 
         ...state,
-        loading: true 
+        loading: true, error : '', userInfo:{}
       };
     case loginActionTypes.USER_LOGIN_SUCCESS:
       return { 
         ...state,
-        loading: false, userInfo: action.payload 
+        loading: false, userInfo: action.payload, error : ''
       };
     case loginActionTypes.USER_LOGIN_FAIL:
       return { 
         ...state,
-        loading: false, error: action.payload 
+        loading: false, error: action.payload ,userInfo:{}
       };
     case loginActionTypes.USER_LOGOUT:
-      return {...state,userInfo : {}};
+      return {...state,userInfo:{}};
     default:
       return state;
   }

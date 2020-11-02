@@ -12,11 +12,7 @@ const Details = (props) => {
     <div>
       <Navbar />
       <main>
-        <div className="container-large">
-          <Breadcrum />
-          <Productdetail singleProduct={singleProduct} />
-          <Productadditional />
-        </div>
+        <Productdetail singleProduct={singleProduct} />
       </main>
     </div>
   );
