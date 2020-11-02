@@ -307,7 +307,7 @@ const Productdetail = ({ addItem, singleProduct }) => {
         </motion.div>
       </div>
 
-      <motion.div variants={fadeInRight} className="paddtocart">
+      <motion.div variants={fadeInUp} className="paddtocart">
         <div className="paddtocart__share">
           <div>
             <a href="#">
