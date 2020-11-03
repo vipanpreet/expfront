@@ -8,7 +8,7 @@ const Trendingsection = ({ products }) => {
           <div className="container-xlarge mt-5">
             <div className="title">Trending site wide</div>
             <div className="row no-gutters row-cols-2">
-              <div className="col-md-3">
+              <div className="col-lg-3">
                 <div className="trending-menu mt-5">
                   <li className="trending-menu--item active">Shorts</li>
                   <li className="trending-menu--item">Shoes</li>
@@ -18,7 +18,7 @@ const Trendingsection = ({ products }) => {
                 </div>
               </div>
               <div className="col-md-9">
-                <div className="row">
+                <div className="row row-cols-2">
                   <div className="col-lg-2">
                     <div className="card no-hover">
                       <div className="card--img">

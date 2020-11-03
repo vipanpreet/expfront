@@ -12,6 +12,12 @@ const Pageads = () => {
               <div className="page-offer__container">
                 <h2>beautiful Catalogue for women</h2>
                 <a href="#">Check out</a>
+                <p class="para mt-6">
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                  Magni ut est necessitatibus aliquam, reprehenderit sed at sit
+                  nam eveniet incidunt, dolorem laudantium odit molestias modi
+                  dolorum officiis quasi excepturi eos!
+                </p>
               </div>
             </div>
           </div>
@@ -20,6 +26,12 @@ const Pageads = () => {
               <div className="page-offer__container">
                 <h2>best offers in fashion</h2>
                 <a href="#">Check out</a>
+                <p class="para mt-6">
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                  Magni ut est necessitatibus aliquam, reprehenderit sed at sit
+                  nam eveniet incidunt, dolorem laudantium odit molestias modi
+                  dolorum officiis quasi excepturi eos!
+                </p>
               </div>
             </div>
           </div>

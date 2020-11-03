@@ -11,34 +11,58 @@
 // });
 // Nav hamburger
 $(document).ready(function () {
-  // $(".hamburger").click(function () {
-  //   $(this).toggleClass("is-active");
-  //   $(".nav__bar").toggleClass("is-active");
-  // });
+  $(".hamburger").click(function () {
+    $(this).toggleClass("is-active");
+    $(".nav__bar").toggleClass("is-active");
+  });
 
-  // $(".cart--trigger").click(function () {
-  //   $(".nav__cart").addClass("is-active");
-  //   $(".nav__icons--x").addClass("bring-x");
-  // });
+  $(".cart--trigger").click(function () {
+    $(".nav__cart").addClass("is-active");
+    $(".nav__icons--x").addClass("bring-x");
+  });
   $(".nav__icons--x").click(function () {
     $(".nav__cart").removeClass("is-active");
     $(this).removeClass("bring-x");
   });
 
   $("#nav-uppers").hover(function () {
-    $(".nav__bar__container--image").children().attr("src", "/assets/sections/nav-upper.jpg");
+    $(".nav__bar__container--image")
+      .children()
+      .attr("src", "/assets/sections/nav-upper.jpg");
   });
   $("#nav-home").hover(function () {
-    $(".nav__bar__container--image").children().attr("src", "/assets/sections/navigation-woman.jpg");
+    $(".nav__bar__container--image")
+      .children()
+      .attr("src", "/assets/sections/navigation-woman.jpg");
   });
   $("#nav-accessories").hover(function () {
-    $(".nav__bar__container--image").children().attr("src", "/assets/sections/nav-accessories.jpg");
+    $(".nav__bar__container--image")
+      .children()
+      .attr("src", "/assets/sections/nav-accessories.jpg");
   });
   $("#nav-footwear").hover(function () {
-    $(".nav__bar__container--image").children().attr("src", "/assets/sections/nav-foot.jpg");
+    $(".nav__bar__container--image")
+      .children()
+      .attr("src", "/assets/sections/nav-foot.jpg");
   });
   $("#nav-health").hover(function () {
-    $(".nav__bar__container--image").children().attr("src", "/assets/sections/nav-health.jpg");
+    $(".nav__bar__container--image")
+      .children()
+      .attr("src", "/assets/sections/nav-health.jpg");
+  });
+
+  // const imageWidth = $(".pdetails__img--img").innerWidth();
+  // $(".pdetails__body").css({
+  //   "margin-left": imageWidth,
+  // });
+  $(".search--trigger").on("click", (e) => {
+    $(".searchbar").toggleClass("isactive");
+    $(e.currentTarget).toggleClass("isactive");
+    if ($("#searchicon").attr("name") === "close") {
+      $("#searchicon").attr("name", "search");
+    } else {
+      $("#searchicon").attr("name", "close");
+    }
   });
 });
 
@@ -46,11 +70,11 @@ let menuitem = $(".pothers__menu--item");
 let menubody = $(".pothers__body--item");
 
 let menuDesc = $(".pothers__menu--desc");
-let menuAdd = $(".pothers__menu--add");
+let menuFaq = $(".pothers__menu--faq");
 let menuRev = $(".pothers__menu--rev");
 
 let bodyDesc = $(".pothers__body--desc");
-let bodyAdd = $(".pothers__body--add");
+let bodyFaq = $(".pothers__body--faq");
 let bodyRev = $(".pothers__body--rev");
 
 $(menuitem).on("click", (e) => {
@@ -64,9 +88,9 @@ $(menuDesc).click((e) => {
   $(bodyDesc).addClass("display-block");
   $(bodyDesc).siblings().removeClass("display-block");
 });
-$(menuAdd).click((e) => {
-  $(bodyAdd).addClass("display-block");
-  $(bodyAdd).siblings().removeClass("display-block");
+$(menuFaq).click((e) => {
+  $(bodyFaq).addClass("display-block");
+  $(bodyFaq).siblings().removeClass("display-block");
 });
 $(menuRev).click((e) => {
   $(bodyRev).addClass("display-block");

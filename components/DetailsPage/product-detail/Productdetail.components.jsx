@@ -155,6 +155,35 @@ const Productdetail = ({ addItem, singleProduct }) => {
           <motion.div variants={fadeInUp} className="pdetails__body--category">
             Category: <span>{singleProduct.category}</span> <a href=""></a>
           </motion.div>
+
+          <motion.div variants={fadeInRight} className="paddtocart">
+            <div class="paddtocart__share">
+              <div>
+                <a href="#">
+                  <ion-icon name="share-social"></ion-icon>
+                </a>
+              </div>
+            </div>
+            <div class="paddtocart__quantity">
+              <span>Quantity:</span>
+              <div>1</div>
+              <div class="paddtocart__quantity--btn">+</div>
+            </div>
+            <div class="paddtocart__buy">
+              <div class="paddtocart__buy--buy">
+                <button class="paddtocart__buy--buy--wish">
+                  <ion-icon name="heart"></ion-icon>
+                </button>
+                <button class="paddtocart__buy--buy--cart">
+                  <span class="paddtocart__buy--buy--cart--span">
+                    Add to cart
+                  </span>
+                  <ion-icon name="bag"></ion-icon>
+                </button>
+              </div>
+            </div>
+          </motion.div>
+
           {/* Product Others */}
           <motion.div variants={fadeInUp} className="pothers mt-6">
             <div className="pothers__menu">
@@ -306,54 +335,6 @@ const Productdetail = ({ addItem, singleProduct }) => {
           </motion.div>
         </motion.div>
       </div>
-
-      <motion.div variants={fadeInUp} className="paddtocart">
-        <div className="paddtocart__share">
-          <div>
-            <a href="#">
-              <ion-icon name="logo-facebook"></ion-icon>
-            </a>
-            <a href="#">
-              <ion-icon name="logo-twitter"></ion-icon>
-            </a>
-            <a href="#">
-              <ion-icon name="logo-whatsapp"></ion-icon>
-            </a>
-            <a href="#">
-              <ion-icon name="mail-outline"></ion-icon>
-            </a>
-            <a href="#">
-              <ion-icon name="link-outline"></ion-icon>
-            </a>
-          </div>
-        </div>
-        <div className="paddtocart__quantity">
-          <div>1</div>
-          <div className="paddtocart__quantity--btn">+</div>
-        </div>
-        <div className="paddtocart__buy">
-          <h2 className="paddtocart__buy--lightning">
-            <span className="paddtocart__buy--lightning--span">
-              Same Day Delivery
-            </span>
-            <ion-icon name="flash"></ion-icon>
-          </h2>
-          <div className="paddtocart__buy--buy">
-            <button className="paddtocart__buy--buy--wish">
-              <ion-icon name="heart"></ion-icon>
-            </button>
-            <button
-              onClick={handleAddToCart}
-              className="paddtocart__buy--buy--cart"
-            >
-              <span className="paddtocart__buy--buy--cart--span">
-                Add to cart
-              </span>
-              <ion-icon name="bag"></ion-icon>
-            </button>
-          </div>
-        </div>
-      </motion.div>
     </motion.div>
   );
 };
