@@ -1,8 +1,8 @@
 import Link from "next/link";
+import { useLayoutEffect, useEffect } from "react";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 import { selectCartItemsCount } from "../../../redux/cart/cart.selectors";
-import { useEffect } from "react";
 import $ from "jquery";
 import { useDispatch, useSelector } from "react-redux";
 import Router from "next/router";
@@ -129,11 +129,8 @@ const Navbar = ({ cartItemsCount }) => {
         </div>
       </div>
       <Link href="/">
-        <div
-          className="nav__logo"
-          style={{ textDecoration: "none", cursor: "pointer" }}
-        >
-          <h1>Arktastic</h1>
+        <div className="nav__logo">
+          <a style={{ cursor: "pointer" }}>Arktastic</a>
         </div>
       </Link>
       <div className="nav__icons">
