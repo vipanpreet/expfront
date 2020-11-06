@@ -1,6 +1,7 @@
-import CardItem from "../cart-item/CartItem.components";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
+import CartItem from "../cart-item/CartItem.components";
+
 import {
   selectCartItems,
   selectCartItemsCount,
@@ -25,7 +26,7 @@ const CartWrapper = ({ cartItems, cartItemsCount }) => {
         <div className="col-md-8">
           {cartItems.map((item) => {
             cartTotal = cartTotal + parseFloat(item.singleProduct.price);
-            return <CardItem product={item} key={item.storeId} />;
+            return <CartItem product={item} key={item.storeId} />;
           })}
 
           {/* <!-- Cart Total --> */}
