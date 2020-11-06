@@ -1,4 +1,5 @@
 import "../styles/style.css";
+import "react-multi-carousel/lib/styles.css";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import { AnimatePresence } from "framer-motion";
