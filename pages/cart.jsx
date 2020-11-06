@@ -1,5 +1,5 @@
 import Navbar from "../components/Layout/nav-bar/Navbar.components";
-// import CartWrapper from "../components/CartPage/cart-wrapper/CartWrapper.components";
+import CartWrapper from "../components/CartPage/cart-wrapper/Cartwrapper.components";
 import CartFooter from "../components/CartPage/cart-footer/Cartfooter.components";
 
 // import { connect } from "react-redux";
@@ -20,7 +20,7 @@ const Cart = () => {
     <div>
       <Navbar />
       <main>
-        {/* <CartWrapper /> */}
+        <CartWrapper />
         <CartFooter />
       </main>
     </div>
