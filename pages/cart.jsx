@@ -1,6 +1,6 @@
-import Navbar from "../components/ReusableComponents/nav-bar/Navbar.components";
-import Cartwrapper from "../components/CartPage/cart-wrapper/Cartwrapper.components";
-import Cartfooter from "../components/CartPage/cart-footer/Cartfooter.components";
+import Navbar from "../components/Layout/nav-bar/Navbar.components";
+import CartWrapper from "../components/CartPage/cart-wrapper/CartWrapper.components";
+import CartFooter from "../components/CartPage/cart-footer/CartFooter.components";
 
 // import { connect } from "react-redux";
 // import { createStructuredSelector } from "reselect";
@@ -20,8 +20,8 @@ const Cart = () => {
     <div>
       <Navbar />
       <main>
-        <Cartwrapper />
-        <Cartfooter />
+        <CartWrapper />
+        <CartFooter />
       </main>
     </div>
   );

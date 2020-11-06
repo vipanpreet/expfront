@@ -2,21 +2,21 @@ import styles from "./Footer.module.scss";
 
 const Footer = () => {
   return (
-    <footer class="footer">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-3">
-            <div class="subtitle text-upper __800">arktastic</div>
-            <p class="para mt-3">
+    <footer className="footer">
+      <div className="container">
+        <div className="row">
+          <div className="col-md-3">
+            <div className="subtitle text-upper __800">arktastic</div>
+            <p className="para mt-3">
               We work to bring happiness to all.
               <br />
               Arktastic
               <b>The Artist Retreat</b>
             </p>
           </div>
-          <div class="col-md-3">
-            <div class="menu">Explore</div>
-            <div class="mt-2">
+          <div className="col-md-3">
+            <div className="menu">Explore</div>
+            <div className="mt-2">
               <li>
                 <a href="#">Delivery</a>
               </li>
@@ -40,9 +40,9 @@ const Footer = () => {
               </li>
             </div>
           </div>
-          <div class="col-md-3">
-            <div class="menu">Legal</div>
-            <div class="mt-2">
+          <div className="col-md-3">
+            <div className="menu">Legal</div>
+            <div className="mt-2">
               <li>
                 <a href="#">Affiliates</a>
               </li>
@@ -53,8 +53,8 @@ const Footer = () => {
                 <a href="#">Terms</a>
               </li>
             </div>
-            <div class="menu mt-5">About Us</div>
-            <div class="mt-2">
+            <div className="menu mt-5">About Us</div>
+            <div className="mt-2">
               <li>
                 <a href="#">Who we are?</a>
               </li>
@@ -66,9 +66,9 @@ const Footer = () => {
               </li>
             </div>
           </div>
-          <div class="col-md-3">
-            <div class="menu">Follow</div>
-            <div class="mt-2">
+          <div className="col-md-3">
+            <div className="menu">Follow</div>
+            <div className="mt-2">
               <li>
                 <a href="#">Instagram</a>
               </li>

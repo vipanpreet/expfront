@@ -6,6 +6,9 @@ const {
   USER_LOGIN_SUCCESS,
   USER_LOGIN_FAIL,
   USER_LOGOUT,
+  TOKEN_LOADING,
+  TOKEN_VERIFIED,
+  TOKEN_NOTVERIFIED,
 } = loginActionTypes;
 
 export const login = (email, password) => async (dispatch) => {
@@ -34,6 +37,30 @@ export const login = (email, password) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: USER_LOGIN_FAIL,
+      payload:
+        error.response && error.response.data.msg
+          ? error.response.data.msg
+          : error.msg,
+    });
+  }
+};
+export const confirmUser = (token) => async (dispatch) => {
+  try {
+    // dispatching action to display loader
+    dispatch({
+      type: TOKEN_LOADING,
+    });
+
+    const { data } = await axios.get(
+      `https://arktasticbackend.herokuapp.com/api/auth/confirmation/${token}`
+    );
+    dispatch({
+      type: TOKEN_VERIFIED,
+      payload: data.message,
+    });
+  } catch (error) {
+    dispatch({
+      type: TOKEN_NOTVERIFIED,
       payload:
         error.response && error.response.data.msg
           ? error.response.data.msg

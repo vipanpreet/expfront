@@ -1,9 +1,11 @@
+import Link from "next/link";
+
 import { login } from "../../../redux/login/login.actions";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Router from "next/router";
 
-const Signinform = () => {
+const SigninForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -21,7 +23,7 @@ const Signinform = () => {
     dispatch(login(email, password));
   };
   return (
-    <div className="col-lg-6 mt-2">
+    <>
       <div className="title">Login to your Account</div>
       {error && <h1>{error}</h1>}
       <form>
@@ -30,7 +32,7 @@ const Signinform = () => {
           <input
             type="text"
             className="input"
-            value={email}
+            placeholder="Enter your email address"
             onChange={(e) => setEmail(e.target.value)}
           />
         </div>
@@ -39,21 +41,24 @@ const Signinform = () => {
           <input
             type="password"
             className="input"
-            value={password}
+            placeholder="Enter your password"
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
         <div className="mt-4">
-          <a href="#" className="btn btn--font mr-2" onClick={submitHandler}>
+          <a href="#" className="btn btn--primary mr-2" onClick={submitHandler}>
             login to account
           </a>
-          <a href="#" className="btn btn--primary">
-            Forgot?
+          <a href="#" className="btn btn--font mr-2">
+            Forgot
           </a>
+          <Link className="text-font subheading" href="/register">
+            Not Registered ?
+          </Link>
         </div>
       </form>
-    </div>
+    </>
   );
 };
 
-export default Signinform;
+export default SigninForm;

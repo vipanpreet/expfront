@@ -1,4 +1,4 @@
-import Carditem from "../cart-item/Cartitem.components";
+import CardItem from "../cart-item/CartItem.components";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 import {
@@ -11,7 +11,7 @@ const mapStateToProps = createStructuredSelector({
   cartItemsCount: selectCartItemsCount,
 });
 
-const Cartwrapper = ({ cartItems, cartItemsCount }) => {
+const CartWrapper = ({ cartItems, cartItemsCount }) => {
   var cartTotal = 0;
   return (
     <div className="container-large">
@@ -25,7 +25,7 @@ const Cartwrapper = ({ cartItems, cartItemsCount }) => {
         <div className="col-md-8">
           {cartItems.map((item) => {
             cartTotal = cartTotal + parseFloat(item.singleProduct.price);
-            return <Carditem product={item} key={item.storeId} />;
+            return <CardItem product={item} key={item.storeId} />;
           })}
 
           {/* <!-- Cart Total --> */}
@@ -57,4 +57,4 @@ const Cartwrapper = ({ cartItems, cartItemsCount }) => {
 };
 
 // export default Cartwrapper;
-export default connect(mapStateToProps, null)(Cartwrapper);
+export default connect(mapStateToProps, null)(CartWrapper);

@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
 import { clearItemFromCart } from "../../../redux/cart/cart.actions";
 
-const Cartitem = ({ product, clearItemFromCart }) => {
+const CartItem = ({ product, clearItemFromCart }) => {
   const handleRemoveBtn = () => {
     clearItemFromCart({ product });
   };
@@ -52,4 +52,4 @@ const mapDispatchToProps = (dispatch) => ({
   clearItemFromCart: (item) => dispatch(clearItemFromCart(item)),
 });
 
-export default connect(null, mapDispatchToProps)(Cartitem);
+export default connect(null, mapDispatchToProps)(CartItem);

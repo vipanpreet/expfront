@@ -1,8 +1,9 @@
 import Head from "next/head";
-import Navbar from "../components/ReusableComponents/nav-bar/Navbar.components";
-import Categorieslist from "../components/CategoriesPage/Categories-list/Categories-list.component";
-import Headercategories from "../components/CategoriesPage/Header-categories/Header-categories.component";
-import Sectiondeal from "../components//CategoriesPage/Section-deal/Section-deal.component";
+import Navbar from "../components/Layout/nav-bar/Navbar.components";
+import CategoriesList from "../components/CategoriesPage/Categories-list/CategoriesList.component";
+import CategoriesHeader from "../components/CategoriesPage/Categories-header/CategoriesHeader.component";
+import SectionDeal from "../components/CategoriesPage/Section-deal/SectionDeal.component";
+import Footer from "../components/ReusableComponents/footer/Footer.components";
 
 // this is Home page
 export default function Home({ products }) {
@@ -12,13 +13,14 @@ export default function Home({ products }) {
         <title>Arktastic</title>
       </Head>
       <Navbar />
-      <Headercategories />
+      <CategoriesHeader />
       <main>
         <div class="container-xlarge">
-          <Categorieslist />
-          <Sectiondeal />
+          <CategoriesList />
+          <SectionDeal />
         </div>
       </main>
+      <Footer />
     </div>
   );
 }

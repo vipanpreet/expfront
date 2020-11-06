@@ -45,7 +45,7 @@ const Card = ({ singleProduct, addItem }) => {
           initial={{ x: 60, opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
           transition={{ delay: 0.2 }}
-          src="assets/products/shirt3.jpg"
+          src="/assets/products/shirt3.jpg"
           alt=""
         />
       </div>
@@ -70,7 +70,7 @@ const Card = ({ singleProduct, addItem }) => {
         <div className="card--view">
           <Link
             href="/details/[productId]"
-            as={`/details/${singleProduct.slug}`}
+            as={`/details/${singleProduct._id}`}
           >
             <a>View Item</a>
           </Link>

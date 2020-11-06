@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-const Cartfooter = () => {
+const CartFooter = () => {
   return (
     <div className="checkout--floating">
       <Link href="/">
@@ -13,4 +13,4 @@ const Cartfooter = () => {
   );
 };
 
-export default Cartfooter;
+export default CartFooter;
