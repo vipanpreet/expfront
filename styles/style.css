@@ -3711,7 +3711,8 @@ label {
       left: -100vw;
       width: 100vw; }
       .nav__bar__container--image {
-        width: 40%; }
+        width: 40%;
+        height: 100%; }
       .nav__bar__container--menu {
         padding-left: 40px; }
         .nav__bar__container--menu a {
