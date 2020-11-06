@@ -1,5 +1,7 @@
+import React from "react";
 import Navbar from "../components/Layout/nav-bar/Navbar.components";
-import CartWrapper from "../components/CartPage/cart-wrapper/Cartwrapper.components";
+import CartWrapper from "../components/CartPage/cart-wrapper/Cartwrapper.components.jsx";
+
 import CartFooter from "../components/CartPage/cart-footer/Cartfooter.components";
 
 // import { connect } from "react-redux";
