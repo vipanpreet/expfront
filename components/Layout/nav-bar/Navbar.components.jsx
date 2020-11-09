@@ -56,7 +56,7 @@ const Navbar = ({ cartItemsCount }) => {
   const openNav = () => {
     let isMobile;
     window.innerWidth < 1024 ? (isMobile = "100vw") : (isMobile = "45vw");
-
+    console.log(isMobile);
     TweenMax.to(navBar, 1.4, {
       width: isMobile,
       ease: Power3.easeInOut,
