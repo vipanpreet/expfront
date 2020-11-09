@@ -34,14 +34,14 @@ const Card = ({ singleProduct, addItem }) => {
     addItem({ singleProduct });
   };
   return (
-    <motion.div
+    <div
       initial="initial"
       animate="animate"
       exit={{ opacity: 0 }}
       className="card"
     >
       <div className="card--img">
-        <motion.img
+        <img
           initial={{ x: 60, opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
           transition={{ delay: 0.2 }}
@@ -66,7 +66,7 @@ const Card = ({ singleProduct, addItem }) => {
         </a>
       </div>
 
-      <motion.div variants={stagger} className="card__body">
+      <div variants={stagger} className="card__body">
         <div className="card--view">
           <Link
             href="/details/[productId]"
@@ -75,19 +75,19 @@ const Card = ({ singleProduct, addItem }) => {
             <a>View Item</a>
           </Link>
         </div>
-        <motion.div className="card__body--align">
+        <div className="card__body--align">
           <div className="card__body--left">
             <div className="card__body--cat">{singleProduct.brand}</div>
-            <motion.a variants={fadeInUp} href="#" className="card__body--name">
+            <a variants={fadeInUp} href="#" className="card__body--name">
               {singleProduct.name}
-            </motion.a>
+            </a>
           </div>
-          <motion.a variants={fadeInUp} className="card__body--right">
+          <a variants={fadeInUp} className="card__body--right">
             <div className="card__body--price">${singleProduct.price}</div>
-          </motion.a>
-        </motion.div>
-      </motion.div>
-    </motion.div>
+          </a>
+        </div>
+      </div>
+    </div>
   );
 };
 

@@ -10,14 +10,35 @@ const HomeRecommendationBox = (props) => {
     },
     tablet: {
       breakpoint: { max: 1024, min: 464 },
-      items: 4,
-      slidesToSlide: 1, // optional, default to 1.
-    },
-    mobile: {
-      breakpoint: { max: 464, min: 0 },
       items: 3,
       slidesToSlide: 1, // optional, default to 1.
     },
+    mobile: {
+      breakpoint: { max: 1024, min: 450 },
+      items: 2,
+      slidesToSlide: 1, // optional, default to 1.
+    },
+  };
+
+  // customs button added in the Carsoul rather than its standard
+  const ButtonGroup = ({ next, previous, goToSlide, ...rest }) => {
+    const {
+      carouselState: { currentSlide },
+    } = rest;
+    return (
+      <div className="carousel-button-group">
+        <span className="recommended-prev">
+          <ion-icon
+            name="arrow-back-outline"
+            className={currentSlide === 0 ? "disable" : ""}
+            onClick={() => previous()}
+          ></ion-icon>
+        </span>
+        <span className="recommended-next" onClick={() => next()}>
+          <ion-icon name="arrow-forward-outline"></ion-icon>
+        </span>
+      </div>
+    );
   };
 
   return (
@@ -42,7 +63,7 @@ const HomeRecommendationBox = (props) => {
             swipeable={false}
             draggable={false}
             showDots={false}
-            focusOnSelect={true}
+            focusOnSelect={false}
             responsive={responsive}
             ssr={true} // means to render carousel on server-side.
             infinite={false}
@@ -50,10 +71,13 @@ const HomeRecommendationBox = (props) => {
             autoPlaySpeed={3000}
             keyBoardControl={true}
             containerClass="carousel-container"
-            removeArrowOnDeviceType={["mobile"]}
+            removeArrowOnDeviceType={[""]}
             deviceType={props.deviceType}
             dotListClass="custom-dot-list-style"
             itemClass="carousel-item-padding-40-px"
+            arrows={false}
+            renderButtonGroupOutside={true}
+            customButtonGroup={<ButtonGroup />}
           >
             {props.products.slice(0, 10).map((product) => (
               // <div key={product._id} className="col-md-2">  // this is commented buz CSS causing issue

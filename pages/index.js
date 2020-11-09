@@ -9,15 +9,15 @@ import HomeTrendingSection from "../components/HomePage/home-trending-section/Ho
 import HomeThemesBanner from "../components/HomePage/home-themes-banner/HomeThemesBanner.components";
 import HomeFeaturesSection from "../components/HomePage/home-features-section/HomeFeaturesSection.components";
 import Footer from "../components/ReusableComponents/footer/Footer.components";
-
+import Overlay from "../components/Layout/Overlay/Overlay.module";
 // this is Home page
 function Home({ products }) {
-  console.log(products);
   return (
-    <div>
+    <>
       <Head>
         <title>Arktastic</title>
       </Head>
+      <Overlay />
       <Navbar />
       <HomeHeader />
       <HomeCategoriesSection />
@@ -28,7 +28,7 @@ function Home({ products }) {
       <HomeThemesBanner />
       <HomeFeaturesSection />
       <Footer />
-    </div>
+    </>
   );
 }
 
