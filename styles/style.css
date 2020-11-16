@@ -3911,6 +3911,7 @@ body {
         font-size: 1.4rem;
         text-align: left;
         position: relative;
+        display: block;
         top: 0px;
         left: 0px; }
       .trend__category__other {
