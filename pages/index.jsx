@@ -18,7 +18,7 @@ function Home({ products }) {
       <HomeHeader />
       <HomeSection />
       <HomeDealSection />
-      <HomeTrendingSection products={products} />
+      {/* <HomeTrendingSection products={products} /> */}
       <HomeTopBrands />
       <HomeBarginSection />
       <HomeSustainable />
