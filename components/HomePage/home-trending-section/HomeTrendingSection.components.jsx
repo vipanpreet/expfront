@@ -2,62 +2,71 @@ import Card from "../../ReusableComponents/single-card/card.components";
 
 const HomeTrendingSection = ({ products }) => {
   return (
-    <div>
-      <section className="section-trending">
-        <div className="tending-body">
-          <div className="container-xlarge mt-5">
-            <div className="title">Trending site wide</div>
-            <div className="row no-gutters row-cols-2">
-              <div className="col-lg-3">
-                <div className="trending-menu mt-5">
-                  <li className="trending-menu--item active">Shorts</li>
-                  <li className="trending-menu--item">Shoes</li>
-                  <li className="trending-menu--item">Jeans</li>
-                  <li className="trending-menu--item">Sunglasses</li>
-                  <li className="trending-menu--item">Shirts</li>
-                </div>
-              </div>
-              <div className="col-md-9">
-                <div className="row row-cols-2">
-                  <div className="col-lg-2">
-                    <div className="card no-hover">
-                      <div className="card--img">
-                        <img src="assets/products/shirt1.jpg" alt="" />
-                      </div>
-                      <div className="card__body">
-                        <div className="card__body--align">
-                          <div className="card__body--left">
-                            <div className="card__body--cat">T shirts</div>
-                            <a href="#" className="card__body--name">
-                              Pixy Cool Shirt{" "}
-                            </a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div
-                      style={{ padding: "24px 0" }}
-                      className="bg-light text-center"
-                    >
-                      <a className="btn btn--text" href="#">
-                        See all
-                      </a>
-                    </div>
-                  </div>
-                  {products.slice(0, 3).map((product) => {
-                    return (
-                      <div className="col-md-3" key={product._id}>
-                        <Card singleProduct={product} key={product._id} />
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
+    <section className="section-trending mt">
+      <div className="container-xlarge">
+        <div className="trend">
+          <div className="trend--btn">
+            <a href="#" className="btn btn--primary">
+              Check All
+            </a>
+          </div>
+          <div className="trend__main">
+            <div className="trend__main--img">
+              <img src="/assets/sections/nav-upper.jpg" alt="" />
+            </div>
+            <a href="#" className="trend__main--link text-upper">
+              women shirt modern 2020
+            </a>
+          </div>
+          <div className="trend__category">
+            <div className="trend__category--btns">
+              <a href="#">
+                <ion-icon name="chevron-back-outline"></ion-icon>
+              </a>
+              <a href="#">
+                <ion-icon name="chevron-forward-outline"></ion-icon>
+              </a>
+            </div>
+            <div className="trend__category--small">Trending</div>
+            <div className="trend__category--name">Upperwear</div>
+            <div className="trend__category__other">
+              <a href="#" className="trend__category__other--name">
+                lowers
+              </a>
+              <a href="#" className="trend__category__other--name">
+                accessories
+              </a>
+              <a href="#" className="trend__category__other--name">
+                footwear
+              </a>
+              <a href="#" className="trend__category__other--name">
+                health
+              </a>
+            </div>
+          </div>
+          <div className="trend__extras">
+            <div className="trend__extras--img1">
+              <img src="/assets/theme-active.jpg" alt="" />
+              <a href="#" className="subheading text-upper">
+                women active top
+              </a>
+            </div>
+            <div className="trend__extras--img2">
+              <img src="/assets/theme-office.jpg" alt="" />
+              <a href="#" className="subheading text-upper">
+                women top clean
+              </a>
+            </div>
+            <div className="trend__extras--img3">
+              <img src="/assets/theme-party.jpg" alt="" />
+              <a href="#" className="subheading text-upper">
+                shirt for women{" "}
+              </a>
             </div>
           </div>
         </div>
-      </section>
-    </div>
+      </div>
+    </section>
   );
 };
 

@@ -70,11 +70,11 @@ const HomeRecommendationBox = (props) => {
             autoPlay={false}
             autoPlaySpeed={3000}
             keyBoardControl={true}
-            containerClass="carousel-container"
+            containerclassName="carousel-container"
             removeArrowOnDeviceType={[""]}
             deviceType={props.deviceType}
-            dotListClass="custom-dot-list-style"
-            itemClass="carousel-item-padding-40-px"
+            dotListclassName="custom-dot-list-style"
+            itemclassName="carousel-item-padding-40-px"
             arrows={false}
             renderButtonGroupOutside={true}
             customButtonGroup={<ButtonGroup />}

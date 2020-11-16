@@ -1,13 +1,10 @@
-import Navbar from "../../components/Layout/nav-bar/Navbar.components";
 import Header from "../../components/HomePage/home-header/HomeHeader.components";
 import ProductsSubcategories from "../../components/ProductsPage/product-section-subcategories/ProductsSubcategories.components";
-import Footer from "../../components/ReusableComponents/footer/Footer.components";
 import Card from "../../components/ReusableComponents/single-card/card.components";
 
 const Products = ({ products }) => {
   return (
     <div>
-      <Navbar />
       <Header />
       <ProductsSubcategories />
       <main>
@@ -16,7 +13,7 @@ const Products = ({ products }) => {
             {products ? (
               products.map((product) => {
                 return (
-                  <div class="col-lg-2">
+                  <div className="col-lg-2">
                     <Card singleProduct={product} key={product._id} />
                   </div>
                 );
@@ -27,7 +24,6 @@ const Products = ({ products }) => {
           </div>
         </div>
       </main>
-      <Footer />
     </div>
   );
 };

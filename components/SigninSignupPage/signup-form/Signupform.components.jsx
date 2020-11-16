@@ -43,46 +43,54 @@ const SignupForm = () => {
         <>
           <div className="title">Create a new Account</div>
           <form onSubmit={submitHandler}>
-            <div className="form-group">
-              <label htmlFor="email">Email Address:</label>
+            <div class="input-group">
               <input
-                type="email"
-                className="input"
-                name="email"
-                placeholder="Email Address"
-                onChange={(e) => setEmail(e.target.value)}
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="username">Username:</label>
-              <input
+                class="input"
                 type="text"
-                className="input"
-                name="username"
-                placeholder="Enter your name"
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
+              <span class="highlight"></span>
+              <span class="bar"></span>
+              <label class="label">Email Address</label>
+            </div>
+
+            <div class="input-group">
+              <input
+                class="input"
+                type="text"
                 onChange={(e) => setUsername(e.target.value)}
+                required
               />
+              <span class="highlight"></span>
+              <span class="bar"></span>
+              <label class="label">Username</label>
             </div>
-            <div className="form-group">
-              <label htmlFor="password">Password:</label>
+
+            <div class="input-group">
               <input
-                type="password"
-                name="password"
-                className="input"
-                placeholder="Password"
+                class="input"
+                type="text"
                 onChange={(e) => setPassword(e.target.value)}
+                required
               />
+              <span class="highlight"></span>
+              <span class="bar"></span>
+              <label class="label">Password</label>
             </div>
-            <div className="form-group">
-              <label htmlFor="password2">Confirm Password:</label>
+
+            <div class="input-group">
               <input
-                type="password"
-                name="confirmpassword"
-                className="input"
-                placeholder="Confirm password"
+                class="input"
+                type="text"
                 onChange={(e) => setConfirmPassword(e.target.value)}
+                required
               />
+              <span class="highlight"></span>
+              <span class="bar"></span>
+              <label class="label">Confirm Password</label>
             </div>
+
             <div className="form-group">
               <input className="d-inline" type="checkbox" name="terms" id="" />
               <p className="d-inline para">
@@ -94,7 +102,7 @@ const SignupForm = () => {
               </p>
             </div>
             <div className="mt-4">
-              <button className="btn btn--primary mr-2">
+              <button className="btn btn--primary-simple mr-2">
                 Register Account
               </button>
               <a href="#" className="btn btn--font">

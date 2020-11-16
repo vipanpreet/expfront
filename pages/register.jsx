@@ -1,10 +1,8 @@
-import Navbar from "../components/Layout/nav-bar/Navbar.components";
 import Signupform from "../components/SigninSignupPage/signup-form/Signupform.components";
 
 export default function Register(props) {
   return (
     <>
-      <Navbar />
       <main>
         <div className="register">
           <div className="register--banner">

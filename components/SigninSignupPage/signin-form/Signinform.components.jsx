@@ -27,26 +27,35 @@ const SigninForm = () => {
       <div className="title">Login to your Account</div>
       {error && <h1>{error}</h1>}
       <form>
-        <div className="form-group">
-          <label htmlFor="email">Email Address:</label>
+        <div class="input-group">
           <input
+            class="input"
             type="text"
-            className="input"
-            placeholder="Enter your email address"
             onChange={(e) => setEmail(e.target.value)}
+            required
           />
+          <span class="highlight"></span>
+          <span class="bar"></span>
+          <label class="label">Email Address</label>
         </div>
-        <div className="form-group">
-          <label htmlFor="password">Password:</label>
+
+        <div class="input-group">
           <input
-            type="password"
-            className="input"
-            placeholder="Enter your password"
+            class="input"
+            type="text"
             onChange={(e) => setPassword(e.target.value)}
+            required
           />
+          <span class="highlight"></span>
+          <span class="bar"></span>
+          <label class="label">Password</label>
         </div>
         <div className="mt-4">
-          <a href="#" className="btn btn--primary mr-2" onClick={submitHandler}>
+          <a
+            href="#"
+            className="btn btn--primary-simple mr-2"
+            onClick={submitHandler}
+          >
             login to account
           </a>
           <a href="#" className="btn btn--font mr-2">

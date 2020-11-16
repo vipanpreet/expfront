@@ -3,62 +3,8 @@ import { addItem } from "../../../redux/cart/cart.actions";
 import { connect } from "react-redux";
 import Productadditional from "../Details-product-additional/Productadditional.components";
 import { useEffect, useRef, useLayoutEffect, useState } from "react";
-import { motion } from "framer-motion";
 
-let easing = [0.6, -0.05, 0.01, 0.99];
-
-const stagger = {
-  animate: {
-    transition: {
-      staggerChildren: 0.05,
-    },
-  },
-};
-
-const fadeInUp = {
-  initial: {
-    y: 60,
-    opacity: 0,
-    transition: { duration: 0.6, ease: easing },
-  },
-  animate: {
-    y: 0,
-    opacity: 1,
-    transition: {
-      duration: 0.6,
-      ease: easing,
-    },
-  },
-};
-
-const fadeInRight = {
-  initial: {
-    x: 60,
-    opacity: 0,
-    transition: { duration: 0.8, ease: easing },
-  },
-  animate: {
-    x: 0,
-    opacity: 1,
-    transition: {
-      duration: 1.6,
-      delay: 0.2,
-      ease: easing,
-    },
-  },
-};
 const DetailsProduct = ({ addItem, singleProduct }) => {
-  const [width, setWidth] = useState(null);
-  const imgref = useRef(null);
-
-  console.log(singleProduct);
-  useLayoutEffect(() => {
-    // setTimeout(() => {
-    //   setWidth(imgref.current.offsetWidth);
-    //   document.getElementById("pdetails__body").style.marginLeft = `${width}px`;
-    // }, 50);
-  }, [width, imgref.current]);
-
   const handleAddToCart = () => {
     if (singleProduct) {
       addItem({ singleProduct });
@@ -66,15 +12,15 @@ const DetailsProduct = ({ addItem, singleProduct }) => {
   };
 
   return (
-    <motion.div initial="initial" animate="animate" exit={{ opacity: 0 }}>
+    <div initial="initial" animate="animate" exit={{ opacity: 0 }}>
       <div className="pdetails">
-        <motion.div ref={imgref} className="pdetails__img">
-          <motion.div
+        <div ref={imgref} className="pdetails__img">
+          <div
             animate={{ opacity: 1 }}
             initial={{ opacity: 0 }}
             className="pdetails__img--img"
           >
-            <motion.img
+            <img
               className="imgrr"
               src="/assets/products/2M8A9308small - Copy.jpg"
               alt=""
@@ -83,30 +29,26 @@ const DetailsProduct = ({ addItem, singleProduct }) => {
               exit={{ opacity: 0 }}
               transition={{ delay: 0.2 }}
             />
-          </motion.div>
-        </motion.div>
-        <motion.div
-          variants={stagger}
-          id="pdetails__body"
-          className="pdetails__body"
-        >
+          </div>
+        </div>
+        <div variants={stagger} id="pdetails__body" className="pdetails__body">
           <Link href="/">
-            <motion.a
+            <a
               style={{ cursor: "pointer" }}
               variants={fadeInUp}
               className="pdetails__body--back"
             >
               <ion-icon name="arrow-back-outline"></ion-icon> Back to Shirts
-            </motion.a>
+            </a>
           </Link>
 
-          <motion.div variants={fadeInUp} className="pdetails__body--brand">
+          <div variants={fadeInUp} className="pdetails__body--brand">
             {singleProduct.brand}
-          </motion.div>
-          <motion.div variants={fadeInUp} className="pdetails__body--name">
+          </div>
+          <div variants={fadeInUp} className="pdetails__body--name">
             {singleProduct.name}
-          </motion.div>
-          <motion.div variants={fadeInUp} className="pdetails__body--rating">
+          </div>
+          <div variants={fadeInUp} className="pdetails__body--rating">
             <span className="pdetails__body--rating--stars">
               <ion-icon name="star"></ion-icon>
               <ion-icon name="star"></ion-icon>
@@ -117,12 +59,12 @@ const DetailsProduct = ({ addItem, singleProduct }) => {
             <span className="pdetails__body--rating--count">
               4.5 (3 Reviews)
             </span>
-          </motion.div>
+          </div>
 
-          <motion.div variants={fadeInUp} className="pdetails__body--price">
+          <div variants={fadeInUp} className="pdetails__body--price">
             <s>AUD {singleProduct.defaultPrice}</s> AUD {singleProduct.price}
-          </motion.div>
-          <motion.div variants={fadeInUp} className="pdetails__body--btns">
+          </div>
+          <div variants={fadeInUp} className="pdetails__body--btns">
             <h4>Select Color</h4>
             <input type="radio" id="grey" name="color" value="grey" checked />
             <label htmlFor="grey">Grey</label>
@@ -132,8 +74,8 @@ const DetailsProduct = ({ addItem, singleProduct }) => {
 
             <input type="radio" id="white" name="color" value="white" />
             <label htmlFor="white">White</label>
-          </motion.div>
-          <motion.div variants={fadeInUp} className="pdetails__body--btns">
+          </div>
+          <div variants={fadeInUp} className="pdetails__body--btns">
             <h4>Select Size</h4>
             <input
               type="radio"
@@ -152,41 +94,41 @@ const DetailsProduct = ({ addItem, singleProduct }) => {
 
             <input type="radio" id="xxl" name="size" value="xxl" />
             <label htmlFor="xxl">XX Large</label>
-          </motion.div>
-          <motion.div variants={fadeInUp} className="pdetails__body--category">
+          </div>
+          <div variants={fadeInUp} className="pdetails__body--category">
             Category: <span>{singleProduct.category}</span> <a href=""></a>
-          </motion.div>
+          </div>
 
-          <motion.div variants={fadeInRight} className="paddtocart">
-            <div class="paddtocart__share">
+          <div variants={fadeInRight} className="paddtocart">
+            <div className="paddtocart__share">
               <div>
                 <a href="#">
                   <ion-icon name="share-social"></ion-icon>
                 </a>
               </div>
             </div>
-            <div class="paddtocart__quantity">
+            <div className="paddtocart__quantity">
               <span>Quantity:</span>
               <div>1</div>
-              <div class="paddtocart__quantity--btn">+</div>
+              <div className="paddtocart__quantity--btn">+</div>
             </div>
-            <div class="paddtocart__buy">
-              <div class="paddtocart__buy--buy">
-                <button class="paddtocart__buy--buy--wish">
+            <div className="paddtocart__buy">
+              <div className="paddtocart__buy--buy">
+                <button className="paddtocart__buy--buy--wish">
                   <ion-icon name="heart"></ion-icon>
                 </button>
-                <button class="paddtocart__buy--buy--cart">
-                  <span class="paddtocart__buy--buy--cart--span">
+                <button className="paddtocart__buy--buy--cart">
+                  <span className="paddtocart__buy--buy--cart--span">
                     Add to cart
                   </span>
                   <ion-icon name="bag"></ion-icon>
                 </button>
               </div>
             </div>
-          </motion.div>
+          </div>
 
           {/* Product Others */}
-          <motion.div variants={fadeInUp} className="pothers mt-6">
+          <div variants={fadeInUp} className="pothers mt-6">
             <div className="pothers__menu">
               <li className="pothers__menu--item pothers__menu--desc active">
                 Description
@@ -333,10 +275,10 @@ const DetailsProduct = ({ addItem, singleProduct }) => {
                 </div>
               </div>
             </div>
-          </motion.div>
-        </motion.div>
+          </div>
+        </div>
       </div>
-    </motion.div>
+    </div>
   );
 };
 

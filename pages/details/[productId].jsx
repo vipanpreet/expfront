@@ -1,9 +1,6 @@
 import React, { useState } from "react";
-import Navbar from "../../components/Layout/nav-bar/Navbar.components";
-import Breadcrum from "../../components/ReusableComponents/breadcrum/Breadcrum.components";
 import DetailsProduct from "../../components/DetailsPage/Details-product/DetailsProduct.components";
 import Productadditional from "../../components/DetailsPage/Details-product-additional/Productadditional.components";
-import Footer from "../../components/ReusableComponents/footer/Footer.components";
 
 // This is Detail Page for the single product
 const Details = (props) => {
@@ -11,11 +8,9 @@ const Details = (props) => {
 
   return (
     <div>
-      <Navbar />
       <main>
         <DetailsProduct singleProduct={singleProduct} />
       </main>
-      <Footer />
     </div>
   );
 };

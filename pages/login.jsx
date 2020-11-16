@@ -1,10 +1,8 @@
-import Navbar from "../components/Layout/nav-bar/Navbar.components";
 import Signinform from "../components/SigninSignupPage/signin-form/Signinform.components";
 
 export default function Login(props) {
   return (
     <>
-      <Navbar />
       <main>
         <div className="register">
           <div className="register--banner">
