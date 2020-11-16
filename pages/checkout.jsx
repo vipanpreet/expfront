@@ -5,7 +5,7 @@ export default function Login(props) {
   return (
     <>
       <main>
-        <div class="bg-cream h-100">
+        <div class="checkout-wrapper">
           <div class="row">
             <div class="col-lg-2 mt-7">
               <div class="heading text-center">Checkout</div>
@@ -13,7 +13,7 @@ export default function Login(props) {
             <div class="col-lg-7 mt-6 pl-3">
               <CheckoutAddress />
             </div>
-            <div class="col-lg-3 bg-white h-100">
+            <div class="col-lg-3 bg-white">
               <CheckoutCart />
             </div>
           </div>

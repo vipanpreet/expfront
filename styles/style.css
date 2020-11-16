@@ -2926,7 +2926,8 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  height: 90%; }
+  height: 96vh;
+  background: #fff; }
   .cart__container {
     padding-top: 2rem;
     flex: 1; }
@@ -2966,6 +2967,16 @@ body {
       font-size: 1.5rem;
       font-weight: 500;
       padding-left: 2rem; }
+
+@media only screen and (max-width: 1024px) {
+  .cart {
+    padding: 4rem 2rem;
+    justify-content: flex-start;
+    height: auto; }
+    .cart__container {
+      padding-top: 2rem; }
+    .cart__footer {
+      margin-top: 4rem; } }
 
 .themecard {
   width: 100%;
@@ -3971,6 +3982,10 @@ body {
   font-size: 2.6rem;
   font-weight: 500;
   color: #38222c; }
+
+.checkout-wrapper {
+  height: auto;
+  background: #e4e4e4; }
 
 :root {
   --delay: 0;
