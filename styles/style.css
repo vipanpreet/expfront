@@ -3779,15 +3779,13 @@ body {
 .trend {
   display: flex;
   justify-content: space-between;
-  position: relative;
-  overflow: hidden;
-  width: 100vw; }
+  position: relative; }
   .trend--btn {
     position: absolute;
     bottom: 80px;
     left: 50%; }
   .trend__main {
-    width: 22%; }
+    width: 20%; }
     .trend__main--img {
       width: 100%;
       height: auto; }
@@ -3799,7 +3797,7 @@ body {
       font-size: 1.8rem;
       letter-spacing: 2px; }
   .trend__category {
-    width: 20%;
+    width: 16%;
     position: relative; }
     .trend__category--btns {
       position: absolute;
@@ -3847,7 +3845,7 @@ body {
         .trend__category__other--name:nth-of-type(4) {
           left: 60px; }
   .trend__extras {
-    width: 50%;
+    width: 40%;
     display: flex;
     justify-content: space-between; }
     .trend__extras--img1 {
@@ -3890,20 +3888,19 @@ body {
 
 @media only screen and (max-width: 1024px) {
   .trend {
-    flex-direction: column;
-    justify-content: flex-start;
-    position: relative; }
+    justify-content: flex-start; }
     .trend--btn {
       position: absolute;
-      bottom: -50px;
+      bottom: -30px;
       left: 10px; }
     .trend__main {
-      width: 40%; }
+      display: none; }
+      .trend__main--img {
+        display: none; }
+      .trend__main--link {
+        display: none; }
     .trend__category {
-      position: absolute;
-      top: 0;
-      width: 100%;
-      left: 31%;
+      width: 30%;
       text-align: center; }
       .trend__category--btns {
         display: none; }
@@ -3911,10 +3908,11 @@ body {
         display: none; }
       .trend__category--name {
         transform: rotate(0deg);
-        font-size: 2.8rem;
-        margin-top: 2.8rem;
+        font-size: 1.4rem;
         text-align: left;
-        left: 40px; }
+        position: relative;
+        top: 0px;
+        left: 0px; }
       .trend__category__other {
         position: static;
         width: 50%; }
@@ -3925,14 +3923,20 @@ body {
           font-size: 1.4rem;
           transform: rotate(0deg); }
     .trend__extras {
-      position: absolute;
-      top: 26%;
-      width: 70%;
-      left: 32%;
-      display: flex;
-      justify-content: space-between; }
+      width: 70%; }
+      .trend__extras * {
+        font-size: 1.2rem !important;
+        line-height: 1.3; }
+      .trend__extras--img1 {
+        width: 36%;
+        padding-right: 5px; }
       .trend__extras--img2 {
-        margin-top: 100px; }
+        margin-top: 0px;
+        padding-right: 5px;
+        width: 36%; }
+      .trend__extras--img3 {
+        width: 40%;
+        margin-top: 0px; }
   .section-dealoftheday {
     padding: 4rem 0;
     margin-top: 2rem; }
