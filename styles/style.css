@@ -3699,7 +3699,8 @@ body {
 .section-dealoftheday {
   padding: 8rem 0;
   margin-top: 10rem;
-  position: relative; }
+  position: relative;
+  overflow: hidden; }
   .section-dealoftheday::before {
     position: absolute;
     content: "";
@@ -3771,6 +3772,7 @@ body {
     margin-right: auto;
     width: auto;
     height: 40%;
+    text-align: center;
     display: block; }
     .section-topbrands .topbrand img {
       width: auto;
@@ -3919,7 +3921,7 @@ body {
         width: 50%; }
         .trend__category__other--name {
           position: static;
-          display: inline;
+          display: block;
           margin-right: 5px;
           font-size: 1.4rem;
           transform: rotate(0deg); }
