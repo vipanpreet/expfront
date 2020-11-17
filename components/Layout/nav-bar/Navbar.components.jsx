@@ -430,16 +430,20 @@ const Navbar = ({ cartItemsCount }) => {
 
         {/* { showing the info of user who logged in the website} */}
         {userInfo.firstName ? (
-          <div style={{ display: "flex", paddingLeft: "10px" }}>
-            <h2>Hello, {userInfo.firstName}</h2>
-            <div className="nav__icons--list">
+          <div class="nav__icons--list">
+            <span class="nav__icons--user">
+              {userInfo.firstName}{" "}
               <a
-                style={{ textDecoration: "none", cursor: "pointer" }}
+                style={{
+                  textDecoration: "underline",
+                  fontSize: "10px",
+                  cursor: "pointer",
+                }}
                 onClick={handleLogoutBtn}
               >
                 Logout
               </a>
-            </div>
+            </span>
           </div>
         ) : (
           <div className="nav__icons--list">
