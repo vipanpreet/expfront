@@ -2140,7 +2140,6 @@ body {
   font-weight: 400;
   letter-spacing: 3px;
   overflow: hidden;
-  display: inline-block;
   cursor: pointer !important;
   padding: 12.5px 35px; }
   .btn-block {
