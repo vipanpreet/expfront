@@ -1,6 +1,6 @@
 import Head from "next/head";
 import HomeHeader from "../components/HomePage/home-header/HomeHeader.component";
-import HomeSection from "../components/HomePage/home-section/HomeSection.component";
+import HomeSection from "../components/HomePage/Home-section/HomeSection.component";
 import HomeDealSection from "../components/HomePage/home-deal-section/HomeDealSection.components";
 import HomeRecommendationBox from "../components/HomePage/home-recommendations/HomeRecommendation.components";
 import HomeTrendingSection from "../components/HomePage/home-trending-section/HomeTrendingSection.components";
