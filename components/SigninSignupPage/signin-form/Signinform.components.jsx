@@ -53,16 +53,18 @@ const SigninForm = () => {
         <div className="mt-4">
           <a
             href="#"
-            className="btn btn--primary-simple mr-2"
+            className="btn btn--primary-simple btn-block-mobile mr-2"
             onClick={submitHandler}
           >
             login to account
           </a>
-          <a href="#" className="btn btn--font mr-2">
+          <a href="#" className="btn btn--font btn-block-mobile  mr-2">
             Forgot
           </a>
-          <Link className="text-font subheading" href="/register">
-            Not Registered ?
+          <Link href="/register">
+            <div style={{ cursor: "pointer" }} className="subheading">
+              Not Registered?
+            </div>
           </Link>
         </div>
       </form>

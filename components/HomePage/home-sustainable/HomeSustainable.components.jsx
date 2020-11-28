@@ -7,7 +7,7 @@ const HomeSustainable = () => {
         <div className="title">EXPLORE SUSTAINABLE BRANDS</div>
         <div className="subtitle">DO YOUR BIT IN SAVING THE EARTH</div>
         <div className="mt-3">
-          <a href="#" class="btn btn--simple">
+          <a href="#" className="btn btn--simple">
             Explore more
           </a>
         </div>

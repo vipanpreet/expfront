@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import DetailsProduct from "../../components/DetailsPage/Details-product/DetailsProduct.components";
-import Productadditional from "../../components/DetailsPage/Details-product-additional/Productadditional.components";
+// import Productadditional from "../../components/DetailsPage/Details-product-additional/Productadditional.components";
 
 // This is Detail Page for the single product
 const Details = (props) => {

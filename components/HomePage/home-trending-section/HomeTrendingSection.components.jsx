@@ -1,6 +1,24 @@
 import Card from "../../ReusableComponents/single-card/card.components";
+// import Carousel from "react-multi-carousel";
 
-const HomeTrendingSection = ({ products }) => {
+const HomeTrendingSection = (props) => {
+  // const responsive = {
+  //   desktop: {
+  //     breakpoint: { max: 3000, min: 1024 },
+  //     items: 3,
+  //     slidesToSlide: 1, // optional, default to 1.
+  //   },
+  //   tablet: {
+  //     breakpoint: { max: 1024, min: 464 },
+  //     items: 3,
+  //     slidesToSlide: 1, // optional, default to 1.
+  //   },
+  //   mobile: {
+  //     breakpoint: { max: 1024, min: 450 },
+  //     items: 1,
+  //     slidesToSlide: 1, // optional, default to 1.
+  //   },
+  // };
   return (
     <section className="section-trending mt">
       <div className="container-xlarge">
@@ -44,7 +62,27 @@ const HomeTrendingSection = ({ products }) => {
               </a>
             </div>
           </div>
+
           <div className="trend__extras">
+            {/* <Carousel
+              additionalTransfrom={0}
+              swipeable={false}
+              draggable={false}
+              showDots={true}
+              focusOnSelect={false}
+              responsive={responsive}
+              ssr={true} // means to render carousel on server-side.
+              infinite={false}
+              autoPlay={false}
+              autoPlaySpeed={3000}
+              keyBoardControl={true}
+              containerclassName="carousel-container"
+              removeArrowOnDeviceType={[""]}
+              deviceType={props.deviceType}
+              dotListclassName="custom-dot-list-style"
+              itemclassName="carousel-item-padding-40-px"
+              arrows={true}
+            > */}
             <div className="trend__extras--img1">
               <img src="/assets/theme-active.jpg" alt="" />
               <a href="#" className="subheading text-upper">
@@ -63,6 +101,7 @@ const HomeTrendingSection = ({ products }) => {
                 shirt for women{" "}
               </a>
             </div>
+            {/* </Carousel> */}
           </div>
         </div>
       </div>

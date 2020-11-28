@@ -102,12 +102,12 @@ const SignupForm = () => {
               </p>
             </div>
             <div className="mt-4">
-              <button className="btn btn--primary-simple mr-2">
+              <button className="btn btn--primary-simple btn-block-mobile mr-2">
                 Register Account
               </button>
-              <a href="#" className="btn btn--font">
+              <button className="btn btn--font btn-block-mobile">
                 Forgot?
-              </a>
+              </button>
             </div>
           </form>
         </>

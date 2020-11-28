@@ -26,7 +26,10 @@ const HomeRecommendationBox = (props) => {
       carouselState: { currentSlide },
     } = rest;
     return (
-      <div className="carousel-button-group">
+      <div
+        className="carousel-button-group"
+        style={{ position: "absolute", top: 0, right: 95 }}
+      >
         <span className="recommended-prev">
           <ion-icon
             name="arrow-back-outline"
@@ -43,25 +46,18 @@ const HomeRecommendationBox = (props) => {
 
   return (
     <div>
-      <section className="section-recommendation ">
+      <section
+        className="section-recommendation"
+        style={{ position: "relative" }}
+      >
         <div className="container-xlarge mt-6 ">
-          <div className="d-flex justify-space">
-            <div className="title mb-2 ml-2">Recommendations</div>
-            <div>
-              <span className="recommended-prev">
-                <ion-icon name="arrow-back-outline"></ion-icon>
-              </span>
-              <span className="recommended-next">
-                <ion-icon name="arrow-forward-outline"></ion-icon>
-              </span>
-            </div>
-          </div>
+          <div className="title mb-2 ml-2">Recommendations</div>
 
           {/* <div className="row">   Commented buz CSS causing issue */}
           <Carousel
             additionalTransfrom={0}
-            swipeable={false}
-            draggable={false}
+            swipeable={true}
+            draggable={true}
             showDots={false}
             focusOnSelect={false}
             responsive={responsive}
@@ -70,7 +66,7 @@ const HomeRecommendationBox = (props) => {
             autoPlay={false}
             autoPlaySpeed={3000}
             keyBoardControl={true}
-            containerclassName="carousel-container"
+            containerclassName="section-recommendation"
             removeArrowOnDeviceType={[""]}
             deviceType={props.deviceType}
             dotListclassName="custom-dot-list-style"

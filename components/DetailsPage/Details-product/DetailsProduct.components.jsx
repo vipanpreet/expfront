@@ -14,14 +14,13 @@ const DetailsProduct = ({ addItem, singleProduct }) => {
   return (
     <div initial="initial" animate="animate" exit={{ opacity: 0 }}>
       <div className="pdetails">
-        <div ref={imgref} className="pdetails__img">
+        <div className="pdetails__img">
           <div
             animate={{ opacity: 1 }}
             initial={{ opacity: 0 }}
             className="pdetails__img--img"
           >
             <img
-              className="imgrr"
               src="/assets/products/2M8A9308small - Copy.jpg"
               alt=""
               animate={{ x: 0, opacity: 1 }}
@@ -31,24 +30,16 @@ const DetailsProduct = ({ addItem, singleProduct }) => {
             />
           </div>
         </div>
-        <div variants={stagger} id="pdetails__body" className="pdetails__body">
+        <div id="pdetails__body" className="pdetails__body">
           <Link href="/">
-            <a
-              style={{ cursor: "pointer" }}
-              variants={fadeInUp}
-              className="pdetails__body--back"
-            >
+            <a style={{ cursor: "pointer" }} className="pdetails__body--back">
               <ion-icon name="arrow-back-outline"></ion-icon> Back to Shirts
             </a>
           </Link>
 
-          <div variants={fadeInUp} className="pdetails__body--brand">
-            {singleProduct.brand}
-          </div>
-          <div variants={fadeInUp} className="pdetails__body--name">
-            {singleProduct.name}
-          </div>
-          <div variants={fadeInUp} className="pdetails__body--rating">
+          <div className="pdetails__body--brand">{singleProduct.brand}</div>
+          <div className="pdetails__body--name">{singleProduct.name}</div>
+          <div className="pdetails__body--rating">
             <span className="pdetails__body--rating--stars">
               <ion-icon name="star"></ion-icon>
               <ion-icon name="star"></ion-icon>
@@ -61,10 +52,10 @@ const DetailsProduct = ({ addItem, singleProduct }) => {
             </span>
           </div>
 
-          <div variants={fadeInUp} className="pdetails__body--price">
+          <div className="pdetails__body--price">
             <s>AUD {singleProduct.defaultPrice}</s> AUD {singleProduct.price}
           </div>
-          <div variants={fadeInUp} className="pdetails__body--btns">
+          <div className="pdetails__body--btns">
             <h4>Select Color</h4>
             <input type="radio" id="grey" name="color" value="grey" checked />
             <label htmlFor="grey">Grey</label>
@@ -75,7 +66,7 @@ const DetailsProduct = ({ addItem, singleProduct }) => {
             <input type="radio" id="white" name="color" value="white" />
             <label htmlFor="white">White</label>
           </div>
-          <div variants={fadeInUp} className="pdetails__body--btns">
+          <div className="pdetails__body--btns">
             <h4>Select Size</h4>
             <input
               type="radio"
@@ -95,11 +86,11 @@ const DetailsProduct = ({ addItem, singleProduct }) => {
             <input type="radio" id="xxl" name="size" value="xxl" />
             <label htmlFor="xxl">XX Large</label>
           </div>
-          <div variants={fadeInUp} className="pdetails__body--category">
+          <div className="pdetails__body--category">
             Category: <span>{singleProduct.category}</span> <a href=""></a>
           </div>
 
-          <div variants={fadeInRight} className="paddtocart">
+          <div className="paddtocart">
             <div className="paddtocart__share">
               <div>
                 <a href="#">
@@ -128,7 +119,7 @@ const DetailsProduct = ({ addItem, singleProduct }) => {
           </div>
 
           {/* Product Others */}
-          <div variants={fadeInUp} className="pothers mt-6">
+          <div className="pothers mt-6">
             <div className="pothers__menu">
               <li className="pothers__menu--item pothers__menu--desc active">
                 Description

@@ -42,12 +42,6 @@ const Navbar = ({ cartItemsCount }) => {
   let [open, setOpen] = useState(false);
 
   useEffect(() => {
-    TweenMax.from(nav, 1.4, {
-      top: -60,
-      ease: Power3.easeInOut,
-      delay: 4,
-    });
-
     $(".search--trigger").on("click", (e) => {
       $(".searchbar").toggleClass("isactive");
       $(e.currentTarget).toggleClass("isactive");
@@ -431,19 +425,9 @@ const Navbar = ({ cartItemsCount }) => {
         {/* { showing the info of user who logged in the website} */}
         {userInfo.firstName ? (
           <div class="nav__icons--list">
-            <span class="nav__icons--user">
-              {userInfo.firstName}{" "}
-              <a
-                style={{
-                  textDecoration: "underline",
-                  fontSize: "10px",
-                  cursor: "pointer",
-                }}
-                onClick={handleLogoutBtn}
-              >
-                Logout
-              </a>
-            </span>
+            <Link href="/profile" class="nav__icons--user">
+              Profile
+            </Link>
           </div>
         ) : (
           <div className="nav__icons--list">
