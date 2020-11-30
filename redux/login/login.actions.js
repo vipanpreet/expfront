@@ -24,7 +24,7 @@ export const login = (email, password) => async (dispatch) => {
       },
     };
     const { data } = await axios.post(
-      "https://arktasticbackend.herokuapp.com/api/auth/login",
+      "http://localhost:5000/api/auth/login",
       { email, password },
       config
     );
@@ -34,6 +34,7 @@ export const login = (email, password) => async (dispatch) => {
       type: USER_LOGIN_SUCCESS,
       payload: data,
     });
+    localStorage.setItem("userInfo", JSON.stringify(data));
   } catch (error) {
     dispatch({
       type: USER_LOGIN_FAIL,
@@ -52,7 +53,7 @@ export const confirmUser = (token) => async (dispatch) => {
     });
 
     const { data } = await axios.get(
-      `https://arktasticbackend.herokuapp.com/api/auth/confirmation/${token}`
+      `http://localhost:5000/api/auth/confirmation/${token}`
     );
     dispatch({
       type: TOKEN_VERIFIED,

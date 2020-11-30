@@ -1,3 +1,6 @@
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+
 import Head from "next/head";
 import HomeHeader from "../components/HomePage/home-header/HomeHeader.component";
 import HomeSection from "../components/HomePage/Home-section/HomeSection.component";
@@ -8,8 +11,15 @@ import HomeBarginSection from "../components/HomePage/home-bargin-section/HomeBa
 import HomeFeaturesSection from "../components/HomePage/home-features-section/HomeFeaturesSection.components";
 import HomeTopBrands from "../components/HomePage/home-top-brands/HomeTopBrands.component";
 import HomeSustainable from "../components/HomePage/home-sustainable/HomeSustainable.components";
+import { getProfile } from "../redux/profile/profile.actions";
 // this is Home page
+
 function Home({ products }) {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getProfile());
+  }, []);
   return (
     <>
       <Head>
@@ -31,9 +41,7 @@ function Home({ products }) {
 // fetching the products form backend in server side
 export async function getStaticProps() {
   // Fetch data from external API
-  const res = await fetch(
-    `https://arktasticbackend.herokuapp.com/api/products`
-  );
+  const res = await fetch(`http://localhost:5000/api/products/recommended`);
   const products = await res.json();
   // Pass data to the page via props
   return { props: { products } };

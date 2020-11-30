@@ -14,7 +14,7 @@ const HomeSection = (props) => {
       slidesToSlide: 1, // optional, default to 1.
     },
     mobile: {
-      breakpoint: { max: 1024, min: 450 },
+      breakpoint: { max: 464, min: 0 },
       items: 1,
       slidesToSlide: 1, // optional, default to 1.
     },
@@ -48,7 +48,16 @@ const HomeSection = (props) => {
                 <div className="category__img">
                   <img src="/assets/cat/uppers.jpg" alt="" />
                 </div>
-                <Link href="/products/upperwear">
+                <Link
+                  href={{
+                    pathname: "/products/upperwear",
+                    query: {
+                      pagenumber: "1",
+                      sortby: "relevance",
+                      sortdirection: "desc",
+                    },
+                  }}
+                >
                   <div className="category__body">
                     <a className="category__body--link" href="#">
                       Upperwear
@@ -69,7 +78,16 @@ const HomeSection = (props) => {
                 <div className="category__img">
                   <img src="/assets/cat/accessorie.jpg" alt="" />
                 </div>
-                <Link href="/products/accessories">
+                <Link
+                  href={{
+                    pathname: "/products/accessories",
+                    query: {
+                      pagenumber: "1",
+                      sortby: "relevance",
+                      sortdirection: "desc",
+                    },
+                  }}
+                >
                   <div className="category__body">
                     <a className="category__body--link" href="#">
                       Accessories
@@ -90,7 +108,16 @@ const HomeSection = (props) => {
                 <div className="category__img">
                   <img src="/assets/cat/lowers.jpg" alt="" />
                 </div>
-                <Link href="/products/lowers">
+                <Link
+                  href={{
+                    pathname: "/products/lowers",
+                    query: {
+                      pagenumber: "1",
+                      sortby: "relevance",
+                      sortdirection: "desc",
+                    },
+                  }}
+                >
                   <div className="category__body">
                     <a className="category__body--link" href="#">
                       Lowers
@@ -111,7 +138,16 @@ const HomeSection = (props) => {
                 <div className="category__img">
                   <img src="/assets/cat/accessorie.jpg" alt="" />
                 </div>
-                <Link href="/products/footwear">
+                <Link
+                  href={{
+                    pathname: "/products/footwear",
+                    query: {
+                      pagenumber: "1",
+                      sortby: "relevance",
+                      sortdirection: "desc",
+                    },
+                  }}
+                >
                   <div className="category__body">
                     <a className="category__body--link" href="#">
                       Footwear

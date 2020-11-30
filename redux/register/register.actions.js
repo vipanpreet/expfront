@@ -23,7 +23,7 @@ export const register = (email, firstName, lastName, password) => async (
     };
 
     const { data } = await axios.post(
-      "https://arktasticbackend.herokuapp.com/api/auth/register",
+      "http://localhost:5000/api/auth/register",
       { email, firstName, lastName, password },
       config
     );

@@ -1,12 +1,20 @@
 import loginActionTypes from "./login.types";
 
+if (typeof window !== "undefined") {
+  var userInfoFromStorage = localStorage.getItem("userInfo")
+    ? JSON.parse(localStorage.getItem("userInfo"))
+    : null;
+}
+
 const INITIAL_STATE = {
   loading: false,
   userInfo: {},
   error: "",
   message: "",
 };
-
+if (userInfoFromStorage) {
+  INITIAL_STATE.userInfo = userInfoFromStorage;
+}
 export const userLoginReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case loginActionTypes.USER_LOGIN_REQUEST:

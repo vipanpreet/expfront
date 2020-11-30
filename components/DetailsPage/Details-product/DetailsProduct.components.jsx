@@ -15,18 +15,10 @@ const DetailsProduct = ({ addItem, singleProduct }) => {
     <div initial="initial" animate="animate" exit={{ opacity: 0 }}>
       <div className="pdetails">
         <div className="pdetails__img">
-          <div
-            animate={{ opacity: 1 }}
-            initial={{ opacity: 0 }}
-            className="pdetails__img--img"
-          >
+          <div className="pdetails__img--img">
             <img
-              src="/assets/products/2M8A9308small - Copy.jpg"
+              src={singleProduct.images[0] && singleProduct.images[0].url}
               alt=""
-              animate={{ x: 0, opacity: 1 }}
-              initial={{ x: -200, opacity: 0 }}
-              exit={{ opacity: 0 }}
-              transition={{ delay: 0.2 }}
             />
           </div>
         </div>

@@ -5,15 +5,15 @@ export default function Login(props) {
   return (
     <>
       <main>
-        <div class="checkout-wrapper">
-          <div class="row">
-            <div class="col-lg-2 mt-7">
-              <div class="heading text-center">Checkout</div>
+        <div className="checkout-wrapper">
+          <div className="row">
+            <div className="col-lg-2 mt-7">
+              <div className="heading text-center">Checkout</div>
             </div>
-            <div class="col-lg-7 mt-6 pl-3">
+            <div className="col-lg-7 mt-6 pl-3">
               <CheckoutAddress />
             </div>
-            <div class="col-lg-3 bg-white">
+            <div className="col-lg-3 bg-white">
               <CheckoutCart />
             </div>
           </div>

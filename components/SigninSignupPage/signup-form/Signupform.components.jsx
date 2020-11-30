@@ -43,52 +43,52 @@ const SignupForm = () => {
         <>
           <div className="title">Create a new Account</div>
           <form onSubmit={submitHandler}>
-            <div class="input-group">
+            <div className="input-group">
               <input
-                class="input"
+                className="input"
                 type="text"
                 onChange={(e) => setEmail(e.target.value)}
                 required
               />
-              <span class="highlight"></span>
-              <span class="bar"></span>
-              <label class="label">Email Address</label>
+              <span className="highlight"></span>
+              <span className="bar"></span>
+              <label className="label">Email Address</label>
             </div>
 
-            <div class="input-group">
+            <div className="input-group">
               <input
-                class="input"
+                className="input"
                 type="text"
                 onChange={(e) => setUsername(e.target.value)}
                 required
               />
-              <span class="highlight"></span>
-              <span class="bar"></span>
-              <label class="label">Username</label>
+              <span className="highlight"></span>
+              <span className="bar"></span>
+              <label className="label">Username</label>
             </div>
 
-            <div class="input-group">
+            <div className="input-group">
               <input
-                class="input"
+                className="input"
                 type="password"
                 onChange={(e) => setPassword(e.target.value)}
                 required
               />
-              <span class="highlight"></span>
-              <span class="bar"></span>
-              <label class="label">Password</label>
+              <span className="highlight"></span>
+              <span className="bar"></span>
+              <label className="label">Password</label>
             </div>
 
-            <div class="input-group">
+            <div className="input-group">
               <input
-                class="input"
+                className="input"
                 type="password"
                 onChange={(e) => setConfirmPassword(e.target.value)}
                 required
               />
-              <span class="highlight"></span>
-              <span class="bar"></span>
-              <label class="label">Confirm Password</label>
+              <span className="highlight"></span>
+              <span className="bar"></span>
+              <label className="label">Confirm Password</label>
             </div>
 
             <div className="form-group">

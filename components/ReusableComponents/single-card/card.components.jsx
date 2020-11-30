@@ -12,32 +12,36 @@ const Card = ({ singleProduct, addItem }) => {
     addItem({ singleProduct });
   };
   return (
-    <Link href="/details/[productId]" as={`/details/${singleProduct._id}`}>
-      <div className="card">
-        <div className="card--img">
-          <img
-            src={singleProduct.images[0] && singleProduct.images[0].url}
-            alt=""
-          />
-          <a href="#!" className="card--img--cart">
-            <ion-icon name="heart-outline"></ion-icon>
-          </a>
-        </div>
-        <div className="card__body">
-          <div className="card__body--align">
-            <div className="card__body--left">
-              <div className="card__body--cat">T shirts</div>
-              <a href="#" className="card__body--name">
-                {singleProduct.name}
-              </a>
-            </div>
-            <div className="card__body--right">
-              <div className="card__body--price">${singleProduct.price}</div>
-            </div>
+    <div className="card">
+      <div className="card--img">
+        <img
+          src={singleProduct.images[0] && singleProduct.images[0].url}
+          alt=""
+        />
+        <a href="#!" className="card--img--cart">
+          <ion-icon name="heart-outline"></ion-icon>
+        </a>
+      </div>
+      <div className="card__body">
+        <div className="card__body--align">
+          <div className="card__body--left">
+            <div className="card__body--cat">{singleProduct.brand}</div>
+            <a
+              className="card__body--name"
+              href={`/details/${singleProduct._id}`}
+              target="_blank"
+              as={`/details/${singleProduct._id}`}
+            >
+              {singleProduct.name}
+            </a>
+          </div>
+          <div className="card__body--right">
+            <div className="card__body--price">${singleProduct.price}</div>
           </div>
         </div>
       </div>
-    </Link>
+    </div>
+
     // <div className="card">
     //   <div className="card--img">
     //     <img src="/assets/products/shirt3.jpg" alt="" />

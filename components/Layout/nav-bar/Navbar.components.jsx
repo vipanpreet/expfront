@@ -173,8 +173,8 @@ const Navbar = ({ cartItemsCount }) => {
   };
 
   const dispatch = useDispatch();
-  const loginReducerState = useSelector((state) => state.login);
-  const { userInfo } = loginReducerState;
+  const login = useSelector((state) => state.login);
+  const { userInfo } = login;
 
   const handleAccountBtn = () => {
     // checking if the object is not empty
@@ -190,8 +190,6 @@ const Navbar = ({ cartItemsCount }) => {
   const handleLogoutBtn = () => {
     dispatch(logout());
   };
-
-  console.log("hello");
 
   return (
     <div ref={(el) => (nav = el)} className="nav">

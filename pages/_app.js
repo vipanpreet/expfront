@@ -15,7 +15,7 @@ function MyApp({ Component, pageProps }) {
   return (
     <Provider store={store}>
       <PersistGate persistor={persistor}>
-        <Overlay />
+        {/* <Overlay /> */}
         <Navbar />
         <Component {...pageProps} />
         {/* // do not render the footer if the cart page is opened */}

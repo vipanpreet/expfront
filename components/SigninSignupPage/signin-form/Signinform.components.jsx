@@ -27,28 +27,28 @@ const SigninForm = () => {
       <div className="title">Login to your Account</div>
       {error && <h1>{error}</h1>}
       <form>
-        <div class="input-group">
+        <div className="input-group">
           <input
-            class="input"
+            className="input"
             type="email"
             onChange={(e) => setEmail(e.target.value)}
             required
           />
-          <span class="highlight"></span>
-          <span class="bar"></span>
-          <label class="label">Email Address</label>
+          <span className="highlight"></span>
+          <span className="bar"></span>
+          <label className="label">Email Address</label>
         </div>
 
-        <div class="input-group">
+        <div className="input-group">
           <input
-            class="input"
+            className="input"
             type="password"
             onChange={(e) => setPassword(e.target.value)}
             required
           />
-          <span class="highlight"></span>
-          <span class="bar"></span>
-          <label class="label">Password</label>
+          <span className="highlight"></span>
+          <span className="bar"></span>
+          <label className="label">Password</label>
         </div>
         <div className="mt-4">
           <a

@@ -1,7 +1,56 @@
-import { useRef } from "react";
-import { TweenMax, TimelineMax, Power3 } from "gsap";
+import { useRef, useEffect, useState } from "react";
+import { createProfile } from "../../../redux/profile/profile.actions";
+import { useDispatch, useSelector } from "react-redux";
+import { TweenMax } from "gsap";
 
 const ProfileMain = () => {
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [country, setCountry] = useState("australia");
+  const [state, setState] = useState("");
+  const [suburb, setSuburb] = useState("");
+  const [street, setStreet] = useState("");
+  const [zipcode, setZipcode] = useState("");
+  const [locality, setLocality] = useState("");
+
+  const dispatch = useDispatch();
+
+  const login = useSelector((state) => state.login);
+  const { userInfo } = login;
+
+  const profileCreate = useSelector((state) => state.profileCreate);
+  const { message, error, loading } = profileCreate;
+
+  const profileGet = useSelector((state) => state.profileGet);
+  const { profile, error: getError, loading: getLoading } = profileGet;
+
+  useEffect(() => {
+    if (profile) {
+      setPhoneNumber(profile.phoneNumber);
+      setCountry(profile.country);
+      setState(profile.state);
+      setSuburb(profile.suburb);
+      setStreet(profile.street);
+      setZipcode(profile.zipcode);
+      setLocality(profile.locality);
+    }
+  }, [message]);
+
+  const submitHandler = (e) => {
+    e.preventDefault();
+    const profile = {
+      phoneNumber,
+      country: "australia",
+      state,
+      suburb,
+      street,
+      street,
+      zipcode,
+      locality,
+    };
+    dispatch(createProfile(profile));
+  };
+
+  // UI
   let profileMenu = useRef(null);
   let ordersMenu = useRef(null);
   let securityMenu = useRef(null);
@@ -97,52 +146,92 @@ const ProfileMain = () => {
         </li>
       </div>
       <div class="profile-main">
+        {getError && <h1 className="heading">{getError}</h1>}
+        {message && <h1 className="heading">{message}</h1>}
         <div class="profile-main--profile" ref={(el) => (profileBody = el)}>
           <div class="subtitle mb-4">Your Profile</div>
+          <form onSubmit={submitHandler}>
+            <div class="form-group">
+              <label for="address">Phone number:</label>
+              <input
+                type="text"
+                class="input"
+                value={phoneNumber}
+                onChange={(e) => setPhoneNumber(e.target.value)}
+                placeholder="(02) 8060 1294"
+              />
+            </div>
 
-          <div class="form-group">
-            <label for="address">Phone number:</label>
-            <input type="text" class="input" placeholder="(02) 8060 1294" />
-          </div>
+            <div class="form-group">
+              <label for="locality">Country:</label>
+              <input
+                type="text"
+                class="input"
+                value={country}
+                onChange={(e) => setCountry(e.target.value)}
+                readonly
+              />
+            </div>
 
-          <div class="form-group">
-            <label for="locality">Country:</label>
-            <input type="text" class="input" value="Australia" readonly />
-          </div>
+            <div class="form-group">
+              <label for="state">State:</label>
+              <input
+                type="text"
+                class="input"
+                value={state}
+                onChange={(e) => setState(e.target.value)}
+                placeholder="New South Wales"
+              />
+            </div>
 
-          <div class="form-group">
-            <label for="state">State:</label>
-            <input type="text" class="input" placeholder="New South Wales" />
-          </div>
+            <div class="form-group">
+              <label for="state">Suburb:</label>
+              <input
+                type="text"
+                class="input"
+                value={suburb}
+                onChange={(e) => setSuburb(e.target.value)}
+                placeholder="FOREST GLEN"
+              />
+            </div>
 
-          <div class="form-group">
-            <label for="state">Suburb:</label>
-            <input type="text" class="input" placeholder="FOREST GLEN" />
-          </div>
+            <div class="form-group">
+              <label for="street">Street:</label>
+              <input
+                type="text"
+                class="input"
+                value={street}
+                onChange={(e) => setStreet(e.target.value)}
+                placeholder="36 Woodlands Avenue"
+              />
+            </div>
 
-          <div class="form-group">
-            <label for="street">Street:</label>
-            <input
-              type="text"
-              class="input"
-              placeholder="36 Woodlands Avenue"
-            />
-          </div>
+            <div class="form-group">
+              <label for="address">Zip Code:</label>
+              <input
+                type="text"
+                class="input"
+                value={zipcode}
+                onChange={(e) => setZipcode(e.target.value)}
+                placeholder="2157"
+              />
+            </div>
 
-          <div class="form-group">
-            <label for="address">Zip Code:</label>
-            <input type="text" class="input" placeholder="2157" />
-          </div>
-
-          <div class="form-group">
-            <label for="locality">Locality / Landmark:</label>
-            <input type="text" class="input" placeholder="abc" />
-          </div>
-          <div class="mt-2">
-            <button class="btn btn--primary-simple">Update</button>
-          </div>
+            <div class="form-group">
+              <label for="locality">Locality / Landmark:</label>
+              <input
+                type="text"
+                class="input"
+                value={locality}
+                onChange={(e) => setLocality(e.target.value)}
+                placeholder="abc"
+              />
+            </div>
+            <div class="mt-2">
+              <button class="btn btn--primary-simple">Update</button>
+            </div>
+          </form>
         </div>
-
         <div class="profile-main--active" ref={(el) => (ordersBody = el)}>
           <div class="subtitle mb-4">Your Orders</div>
           <div class="title mb-2">Currently Active</div>
