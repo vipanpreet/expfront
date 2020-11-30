@@ -129,7 +129,7 @@ const Products = () => {
 
 // export async function getStaticProps(context) {
 //   const res = await fetch(
-//     `http://localhost:5000/api/products/${context.params.subcategory}`
+//     `https://arktasticbackend.herokuapp.com/api/products/${context.params.subcategory}`
 //   );
 //   const products = await res.json();
 //   // Pass data to the page via props

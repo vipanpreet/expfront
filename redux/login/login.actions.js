@@ -24,7 +24,7 @@ export const login = (email, password) => async (dispatch) => {
       },
     };
     const { data } = await axios.post(
-      "http://localhost:5000/api/auth/login",
+      "https://arktasticbackend.herokuapp.com/api/auth/login",
       { email, password },
       config
     );
@@ -53,7 +53,7 @@ export const confirmUser = (token) => async (dispatch) => {
     });
 
     const { data } = await axios.get(
-      `http://localhost:5000/api/auth/confirmation/${token}`
+      `https://arktasticbackend.herokuapp.com/api/auth/confirmation/${token}`
     );
     dispatch({
       type: TOKEN_VERIFIED,

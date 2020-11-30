@@ -29,11 +29,11 @@ export const productList = (
 
     if (subcategory != undefined && !isSub) {
       response = await axios.get(
-        `http://localhost:5000/api/products/all/${category}/${subcategory}?pagenumber=${pageNumber}&sortby=${sortBy}&sortdirection=${sortDirection}`
+        `https://arktasticbackend.herokuapp.com/api/products/all/${category}/${subcategory}?pagenumber=${pageNumber}&sortby=${sortBy}&sortdirection=${sortDirection}`
       );
     } else {
       response = await axios.get(
-        `http://localhost:5000/api/products/all/${category}?pagenumber=${pageNumber}&sortby=${sortBy}&sortdirection=${sortDirection}`
+        `https://arktasticbackend.herokuapp.com/api/products/all/${category}?pagenumber=${pageNumber}&sortby=${sortBy}&sortdirection=${sortDirection}`
       );
     }
 
