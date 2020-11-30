@@ -4124,7 +4124,15 @@ body {
     color: rgba(62, 62, 62, 0.85); }
 
 .section-products {
-  display: flex; }
+  display: flex;
+  position: relative; }
+
+.options {
+  position: absolute;
+  right: 10px;
+  display: none; }
+  .options * {
+    font-size: 2rem; }
 
 .sidebar {
   width: 100%;
@@ -4164,6 +4172,30 @@ body {
 
 .product-list {
   flex: 1; }
+
+@media only screen and (max-width: 1024px) {
+  .custom-select {
+    max-width: 200px;
+    min-width: 120px;
+    margin-right: 4px; }
+    .custom-select::before {
+      right: 4px; }
+    .custom-select select {
+      padding: 12px 15px 15px 10px; }
+  .options {
+    display: block; }
+  .sidebar {
+    width: 60%;
+    left: -60%;
+    top: 60px;
+    padding-left: 30px;
+    padding-top: 20px;
+    height: 100vh;
+    z-index: 110;
+    background: #fff;
+    position: absolute;
+    position: fixed;
+    overflow-y: scroll; } }
 
 .cat {
   width: 100%;

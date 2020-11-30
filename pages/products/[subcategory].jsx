@@ -1,10 +1,11 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import ProductSidebar from "../../components/ProductsPage/products-sidebar/ProductsSidebar.components";
 import Card from "../../components/ReusableComponents/single-card/card.components";
 import { useDispatch, useSelector } from "react-redux";
 import productList from "../../redux/products/products.actions";
 import { useRouter } from "next/router";
 import ProductPaginate from "../../components/ProductsPage/product-paginate/ProductPaginate";
+import { removeSubCategoryState } from "../../redux/category/category.actions";
 
 const Products = () => {
   const dispatch = useDispatch();
@@ -17,7 +18,7 @@ const Products = () => {
 
   // getting the list of products from the store
   const productsList = useSelector((state) => state.productsList);
-  const { products, page, pages } = productsList;
+  const { products, page, pages, loading } = productsList;
 
   //  getting the selected category from the store
   const categoriesList = useSelector((state) => state.categoryList);
@@ -49,6 +50,9 @@ const Products = () => {
     );
   }, [dispatch, sortBy, category, subCategory, sortDirection, pageNumber]);
 
+  const removeSubcat = (e) => {
+    dispatch(removeSubCategoryState(e));
+  };
   return (
     <div>
       <main>
@@ -94,9 +98,40 @@ const Products = () => {
             <ProductSidebar />
 
             <div className="products-list">
-              <div className="heading">30 Products</div>
+              {!loading && pages ? (
+                <div className="heading" style={{ marginBottom: 10 }}>
+                  {pages * 30} Products
+                </div>
+              ) : null}
+
+              {!loading && subCategory ? (
+                <span style={{ fontSize: "16px", fontWeight: 400 }}>
+                  {subCategory && subCategory}
+                  <span
+                    style={{
+                      cursor: "pointer",
+                      paddingLeft: 5,
+                      fontWeight: 400,
+                    }}
+                    onClick={(e) => removeSubcat(subCategory)}
+                  >
+                    x
+                  </span>
+                </span>
+              ) : null}
+
               <div className="row row-cols-2 mt-5">
-                {products ? (
+                {loading ? (
+                  <h2
+                    style={{
+                      position: "absolute",
+                      left: "50%",
+                    }}
+                  >
+                    Loading
+                  </h2>
+                ) : (
+                  products &&
                   products.map((product) => {
                     return (
                       <div className="col-lg-2">
@@ -104,8 +139,6 @@ const Products = () => {
                       </div>
                     );
                   })
-                ) : (
-                  <div></div>
                 )}
               </div>
             </div>
@@ -129,7 +162,7 @@ const Products = () => {
 
 // export async function getStaticProps(context) {
 //   const res = await fetch(
-//     `https://arktasticbackend.herokuapp.com/api/products/${context.params.subcategory}`
+//     `http://localhost:5000/api/products/${context.params.subcategory}`
 //   );
 //   const products = await res.json();
 //   // Pass data to the page via props

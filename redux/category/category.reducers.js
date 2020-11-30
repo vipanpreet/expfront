@@ -8,6 +8,7 @@ import {
   SUBCATEGORY_LIST_FAIL,
   SUBCATEGORY_STATE_SAVE,
   CATEGORY_STATE_SAVE,
+  SUBCATEGORY_STATE_REMOVE,
 } from "./category.types";
 
 export const categoryListReducer = (
@@ -45,6 +46,8 @@ export const subCategoryListReducer = (
       return { loading: false, error: action.payload };
     case SUBCATEGORY_STATE_SAVE:
       return { ...state, subCategory: action.payload };
+    case SUBCATEGORY_STATE_REMOVE:
+      return { ...state, subCategory: "" };
     default:
       return state;
   }

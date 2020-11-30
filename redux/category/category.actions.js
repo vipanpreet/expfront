@@ -8,14 +8,13 @@ import {
   SUBCATEGORY_LIST_FAIL,
   CATEGORY_STATE_SAVE,
   SUBCATEGORY_STATE_SAVE,
+  SUBCATEGORY_STATE_REMOVE,
 } from "./category.types";
 
 export const listCategories = () => async (dispatch) => {
   try {
     dispatch({ type: CATEGORY_LIST_REQUEST });
-    const { data } = await axios.get(
-      `https://arktasticbackend.herokuapp.com/api/category/`
-    );
+    const { data } = await axios.get(`http://localhost:5000/api/category/`);
     dispatch({
       type: CATEGORY_LIST_SUCCESS,
       payload: data,
@@ -35,7 +34,7 @@ export const listSubCategories = (slug) => async (dispatch) => {
   try {
     dispatch({ type: SUBCATEGORY_LIST_REQUEST });
     const { data } = await axios.get(
-      `https://arktasticbackend.herokuapp.com/api/category/subcategories/${slug}`
+      `http://localhost:5000/api/category/subcategories/${slug}`
     );
     dispatch({
       type: SUBCATEGORY_LIST_SUCCESS,
@@ -60,4 +59,7 @@ export const saveCategoryState = (category) => ({
 export const saveSubCategoryState = (subCategory) => ({
   type: SUBCATEGORY_STATE_SAVE,
   payload: subCategory,
+});
+export const removeSubCategoryState = () => ({
+  type: SUBCATEGORY_STATE_REMOVE,
 });

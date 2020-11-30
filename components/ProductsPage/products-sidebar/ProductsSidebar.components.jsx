@@ -5,11 +5,15 @@ import {
   saveCategoryState,
   saveSubCategoryState,
 } from "../../../redux/category/category.actions";
-import { useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { TweenMax, Power3 } from "gsap";
 
 const ProductSidebar = () => {
+  let sideBar = useRef(null);
+  let [isOpen, setIsOpen] = useState(false);
+
   const dispatch = useDispatch();
   const router = useRouter();
   //  getting the list of categories from the store
@@ -42,10 +46,28 @@ const ProductSidebar = () => {
     // save the selected subcategory in the store
     category && dispatch(saveSubCategoryState(subcategory.slug));
   };
+  const openSideBar = () => {
+    TweenMax.to(sideBar, 0.6, {
+      left: "0px",
+      ease: Power3.easeOut,
+    });
+    setIsOpen(true);
+  };
+  const closeSideBar = () => {
+    TweenMax.to(sideBar, 0.6, {
+      left: "-60%",
+      ease: Power3.easeOut,
+    });
+    setIsOpen(false);
+  };
 
   return (
-    <div>
-      <div className="sidebar">
+    <>
+      <div
+        style={{ paddingRight: 60 }}
+        className="sidebar"
+        ref={(el) => (sideBar = el)}
+      >
         <div className="sidebar--group">
           <div className="title">Explore</div>
           <div className="mt-2">
@@ -97,7 +119,12 @@ const ProductSidebar = () => {
           </div>
         </div>
       </div>
-    </div>
+      <div class="options" onClick={isOpen ? closeSideBar : openSideBar}>
+        <a style={{ cursor: "pointer" }}>
+          <ion-icon name="options-outline"></ion-icon>
+        </a>
+      </div>
+    </>
   );
 };
 
