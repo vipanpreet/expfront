@@ -4202,7 +4202,8 @@ body {
     width: 95%;
     text-align: center; }
   .section-bargains {
-    flex-direction: column; }
+    flex-direction: column;
+    padding: 1.5rem; }
     .section-bargains .a {
       width: 100% !important;
       margin-right: 0;
