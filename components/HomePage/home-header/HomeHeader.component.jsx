@@ -36,7 +36,7 @@ const HomeHeader = (props) => {
       deviceType={props.deviceType}
       dotListclassName="custom-dot-list-style"
       itemclassName="carousel-item-padding-40-px"
-      arrows={true}
+      arrows={false}
     >
       <header className="header">
         <div className="header__container">
