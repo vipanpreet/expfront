@@ -3343,7 +3343,7 @@ body {
   width: 100vw;
   height: 80vh;
   position: relative;
-  background: url("/assets/sections/header-1.jpg");
+  background: url("/assets/sections/header-1.png");
   background-position: top right;
   background-size: cover; }
   .header__container {
@@ -3926,7 +3926,7 @@ body {
   .section-dealoftheday::before {
     position: absolute;
     content: "";
-    background: rgba(14, 175, 148, 0.08);
+    background: rgba(228, 228, 228, 0.8);
     width: 85%;
     height: 80%;
     top: 150px;
@@ -3987,7 +3987,7 @@ body {
       margin: 0 5px; }
 
 .section-topbrands {
-  background: rgba(14, 175, 148, 0.12);
+  background: #e4e4e4;
   margin-top: 120px;
   padding: 15rem 0 6.5rem 0;
   width: 100vw;
