@@ -3341,7 +3341,7 @@ body {
   background-size: cover;
   background-position: top;
   width: 100vw;
-  height: 80vh;
+  height: 100vh;
   position: relative;
   background: url("/assets/sections/header-1.png");
   background-position: top right;
@@ -3405,8 +3405,7 @@ body {
 
 @media only screen and (max-width: 1024px) {
   .header {
-    background-position: right;
-    height: 60vh; }
+    height: 80vh; }
     .header__container {
       position: absolute;
       left: 50%;
