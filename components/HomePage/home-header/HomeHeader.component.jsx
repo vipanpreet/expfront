@@ -39,52 +39,51 @@ const HomeHeader = (props) => {
       arrows={false}
     >
       <header className="header">
-        <div className="header__container">
-          {/* <div className="header--title">New collection</div>
-          <div className="header--subtitle">
-            Find the best <br />
-            clothing for you.
+        <div class="header__container">
+          <div class="header--title">New collection</div>
+          <div class="header--subtitle">Find the best clothing for you.</div>
+          <div class="header--text">
+            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cum
+            nesciunt omnis aperiam non doloremque qui sint distinctio corporis
+            cupiditate odio esse sunt.
           </div>
-          <div className="header--text">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
-          </div>
-          <div className="mt-3">
-            <a href="#" className="btn btn--white-simple">
+          <div class="mt-3">
+            <a href="#" class="btn btn--dark-simple">
               Read more
             </a>
-          </div> */}
+          </div>
         </div>
       </header>
       <header className="header">
-        <div className="header__container">
-          {/* <div className="header--title">New collection</div>
-          <div className="header--subtitle">
-            jasdfijiojafi <br />
-            jadsfiojifasdj.
+        <div class="header__container">
+          <div class="header--title">New collection</div>
+          <div class="header--subtitle">Find the best clothing for you.</div>
+          <div class="header--text">
+            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cum
+            nesciunt omnis aperiam non doloremque qui sint distinctio corporis
+            cupiditate odio esse sunt.
           </div>
-          <div className="header--text">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
-          </div>
-          <div className="mt-3">
-            <a href="#" className="btn btn--white">
+          <div class="mt-3">
+            <a href="#" class="btn btn--dark-simple">
               Read more
             </a>
-          </div> */}
+          </div>
         </div>
       </header>
       <header className="header">
-        <div className="header__container">
-          {/* <div className="header--title">New collection</div>
-          <div className="header--subtitle">
-            Find the best <br />
-            clothing for you.
+        <div class="header__container">
+          <div class="header--title">New collection</div>
+          <div class="header--subtitle">Find the best clothing for you.</div>
+          <div class="header--text">
+            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cum
+            nesciunt omnis aperiam non doloremque qui sint distinctio corporis
+            cupiditate odio esse sunt.
           </div>
-          <div className="header--text">jasidfojisfjio</div>
-          <div className="mt-3">
-            <a href="#" className="btn btn--white-simple">
+          <div class="mt-3">
+            <a href="#" class="btn btn--dark-simple">
               Read more
             </a>
-          </div> */}
+          </div>
         </div>
       </header>
     </Carousel>
