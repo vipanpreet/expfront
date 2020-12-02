@@ -6,6 +6,7 @@ const {
   USER_REGISTER_SUCCESS,
   USER_REGISTER_FAIL,
 } = registerActionTypes;
+import { setAlert, removeAlert } from "../Alert/alert.actions";
 
 export const register = (email, firstName, lastName, password) => async (
   dispatch
@@ -15,7 +16,7 @@ export const register = (email, firstName, lastName, password) => async (
     dispatch({
       type: USER_REGISTER_REQUEST,
     });
-
+    dispatch(setAlert(" ", "loading"));
     const config = {
       headers: {
         "Content-Type": "application/json",
@@ -23,7 +24,7 @@ export const register = (email, firstName, lastName, password) => async (
     };
 
     const { data } = await axios.post(
-      "https://arktasticbackend.herokuapp.com/api/auth/register",
+      "http://localhost:5000/api/auth/register",
       { email, firstName, lastName, password },
       config
     );
@@ -33,6 +34,7 @@ export const register = (email, firstName, lastName, password) => async (
       type: USER_REGISTER_SUCCESS,
       payload: data.message,
     });
+    dispatch(setAlert("Registeration Done", "success", 4500));
   } catch (error) {
     dispatch({
       type: USER_REGISTER_FAIL,

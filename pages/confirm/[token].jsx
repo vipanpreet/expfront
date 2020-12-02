@@ -10,9 +10,11 @@ export default function Confirm(props) {
   const loginReducerState = useSelector((state) => state.login);
   const { error, message } = loginReducerState;
   useEffect(() => {
-    dispatch(confirmUser(token));
-    if (message) {
-      Router.push("/login");
+    if (token) {
+      dispatch(confirmUser(token));
+      if (message) {
+        Router.push("/login");
+      }
     }
   }, [error, message, token]);
 

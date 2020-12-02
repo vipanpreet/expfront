@@ -1,5 +1,8 @@
 import { useRef, useEffect, useState } from "react";
-import { createProfile } from "../../../redux/profile/profile.actions";
+import {
+  createProfile,
+  getProfile,
+} from "../../../redux/profile/profile.actions";
 import { useDispatch, useSelector } from "react-redux";
 import { TweenMax } from "gsap";
 
@@ -11,6 +14,8 @@ const ProfileMain = () => {
   const [street, setStreet] = useState("");
   const [zipcode, setZipcode] = useState("");
   const [locality, setLocality] = useState("");
+
+  const [alert, setAlert] = useState("");
 
   const dispatch = useDispatch();
 
@@ -24,16 +29,17 @@ const ProfileMain = () => {
   const { profile, error: getError, loading: getLoading } = profileGet;
 
   useEffect(() => {
-    if (profile) {
-      setPhoneNumber(profile.phoneNumber);
-      setCountry(profile.country);
-      setState(profile.state);
-      setSuburb(profile.suburb);
-      setStreet(profile.street);
-      setZipcode(profile.zipcode);
-      setLocality(profile.locality);
+    setPhoneNumber(profile.phoneNumber);
+    setCountry(profile.country);
+    setState(profile.state);
+    setSuburb(profile.suburb);
+    setStreet(profile.street);
+    setZipcode(profile.zipcode);
+    setLocality(profile.locality);
+    if (!getLoading) {
+      dispatch(getProfile());
     }
-  }, [message]);
+  }, [userInfo, getLoading, message]);
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -147,9 +153,9 @@ const ProfileMain = () => {
       </div>
       <div class="profile-main">
         {getError && <h1 className="heading">{getError}</h1>}
-        {message && <h1 className="heading">{message}</h1>}
+        {message && <h1 className="heading">{alert}</h1>}
         <div class="profile-main--profile" ref={(el) => (profileBody = el)}>
-          <div class="subtitle mb-4">Your Profile</div>
+          <div class="subtitle mb-2">Your Profile</div>
           <form onSubmit={submitHandler}>
             <div class="form-group">
               <label for="address">Phone number:</label>

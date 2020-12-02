@@ -6,10 +6,12 @@ import productList from "../../redux/products/products.actions";
 import { useRouter } from "next/router";
 import ProductPaginate from "../../components/ProductsPage/product-paginate/ProductPaginate";
 import { removeSubCategoryState } from "../../redux/category/category.actions";
+import { setAlert } from "../../redux/Alert/alert.actions";
 
 const Products = () => {
   const dispatch = useDispatch();
   const router = useRouter();
+  const [isAlertShown, setIsAlertShown] = useState(false);
   const [sort, setSort] = useState("");
   const [sortBy, setSortBy] = useState("counter");
   const [sortDirection, setSortDirection] = useState("desc");
@@ -39,6 +41,10 @@ const Products = () => {
   };
 
   useEffect(() => {
+    if (isAlertShown === false) {
+      dispatch(setAlert("Personalising Fashion for you", "loading", 1500));
+      setIsAlertShown(true);
+    }
     dispatch(
       productList(
         category,
@@ -48,7 +54,15 @@ const Products = () => {
         sortDirection && sortDirection
       )
     );
-  }, [dispatch, sortBy, category, subCategory, sortDirection, pageNumber]);
+  }, [
+    dispatch,
+    setAlert,
+    sortBy,
+    category,
+    subCategory,
+    sortDirection,
+    pageNumber,
+  ]);
 
   const removeSubcat = (e) => {
     dispatch(removeSubCategoryState(e));
@@ -162,7 +176,7 @@ const Products = () => {
 
 // export async function getStaticProps(context) {
 //   const res = await fetch(
-//     `https://arktasticbackend.herokuapp.com/api/products/${context.params.subcategory}`
+//     `http://localhost:5000/api/products/${context.params.subcategory}`
 //   );
 //   const products = await res.json();
 //   // Pass data to the page via props

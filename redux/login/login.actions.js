@@ -10,6 +10,7 @@ const {
   TOKEN_VERIFIED,
   TOKEN_NOTVERIFIED,
 } = loginActionTypes;
+import { removeAlert, setAlert } from "../Alert/alert.actions";
 
 export const login = (email, password) => async (dispatch) => {
   try {
@@ -17,6 +18,7 @@ export const login = (email, password) => async (dispatch) => {
     dispatch({
       type: USER_LOGIN_REQUEST,
     });
+    dispatch(setAlert("Getting into your Account", "loading"));
 
     const config = {
       headers: {
@@ -24,7 +26,7 @@ export const login = (email, password) => async (dispatch) => {
       },
     };
     const { data } = await axios.post(
-      "https://arktasticbackend.herokuapp.com/api/auth/login",
+      "http://localhost:5000/api/auth/login",
       { email, password },
       config
     );
@@ -35,7 +37,10 @@ export const login = (email, password) => async (dispatch) => {
       payload: data,
     });
     localStorage.setItem("userInfo", JSON.stringify(data));
+    dispatch(removeAlert());
   } catch (error) {
+    dispatch(removeAlert());
+
     dispatch({
       type: USER_LOGIN_FAIL,
       payload:
@@ -53,7 +58,7 @@ export const confirmUser = (token) => async (dispatch) => {
     });
 
     const { data } = await axios.get(
-      `https://arktasticbackend.herokuapp.com/api/auth/confirmation/${token}`
+      `http://localhost:5000/api/auth/confirmation/${token}`
     );
     dispatch({
       type: TOKEN_VERIFIED,
@@ -72,4 +77,5 @@ export const confirmUser = (token) => async (dispatch) => {
 
 export const logout = () => (dispatch) => {
   dispatch({ type: USER_LOGOUT });
+  localStorage.removeItem("userInfo");
 };

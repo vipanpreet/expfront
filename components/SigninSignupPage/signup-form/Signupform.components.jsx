@@ -2,13 +2,14 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Router from "next/router";
 import { register } from "../../../redux/register/register.actions";
-import Alert from "../../Layout/Alert/Alert";
+import Alert from "../../Layout/Alert/Alert.module";
 
 const SignupForm = () => {
   const [passmatch, setPassmatch] = useState("");
 
   const [email, setEmail] = useState("");
-  const [username, setUsername] = useState("");
+  const [firstname, setFirstname] = useState("");
+  const [lastname, setLastname] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
@@ -19,20 +20,18 @@ const SignupForm = () => {
   const submitHandler = (e) => {
     e.preventDefault();
     if (password !== confirmPassword) {
-      // return <Alert>{"Passwords Does not match"}</Alert>;
       setPassmatch("Passwords Does not match");
     } else {
-      dispatch(register(email, username, username, password));
+      dispatch(register(email, firstname, lastname, password));
     }
   };
-  useEffect(() => {}, [message, error]);
 
   return (
     <>
       {loading && <h4>loading</h4>}
 
       {error && <Alert>{error}</Alert>}
-      {passmatch && <Alert>{passmatch}</Alert>}
+      {passmatch && { passmatch }}
       {message ? (
         <>
           <div className="title">Email Sent</div>
@@ -47,6 +46,7 @@ const SignupForm = () => {
               <input
                 className="input"
                 type="text"
+                value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
               />
@@ -54,17 +54,30 @@ const SignupForm = () => {
               <span className="bar"></span>
               <label className="label">Email Address</label>
             </div>
+            <div className="input-group">
+              <input
+                className="input"
+                type="text"
+                value={firstname}
+                onChange={(e) => setFirstname(e.target.value)}
+                required
+              />
+              <span className="highlight"></span>
+              <span className="bar"></span>
+              <label className="label">First name</label>
+            </div>
 
             <div className="input-group">
               <input
                 className="input"
                 type="text"
-                onChange={(e) => setUsername(e.target.value)}
+                value={lastname}
+                onChange={(e) => setLastname(e.target.value)}
                 required
               />
               <span className="highlight"></span>
               <span className="bar"></span>
-              <label className="label">Username</label>
+              <label className="label">Last name</label>
             </div>
 
             <div className="input-group">
@@ -78,7 +91,6 @@ const SignupForm = () => {
               <span className="bar"></span>
               <label className="label">Password</label>
             </div>
-
             <div className="input-group">
               <input
                 className="input"
@@ -90,7 +102,6 @@ const SignupForm = () => {
               <span className="bar"></span>
               <label className="label">Confirm Password</label>
             </div>
-
             <div className="form-group">
               <input className="d-inline" type="checkbox" name="terms" id="" />
               <p className="d-inline para">

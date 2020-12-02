@@ -49,7 +49,7 @@ const HomeHeader = (props) => {
             Lorem ipsum dolor sit amet consectetur adipisicing elit.
           </div>
           <div className="mt-3">
-            <a href="#" className="btn btn--white">
+            <a href="#" className="btn btn--white-simple">
               Read more
             </a>
           </div>
@@ -81,7 +81,7 @@ const HomeHeader = (props) => {
           </div>
           <div className="header--text">jasidfojisfjio</div>
           <div className="mt-3">
-            <a href="#" className="btn btn--white">
+            <a href="#" className="btn btn--white-simple">
               Read more
             </a>
           </div>

@@ -39,7 +39,10 @@ const Navbar = ({ cartItemsCount }) => {
   let cartSummary = useRef(null);
   let cartX = useRef(null);
 
+  let accountCard = useRef(null);
+
   let [open, setOpen] = useState(false);
+  let [accOpen, setAccOpen] = useState(false);
 
   useEffect(() => {
     $(".search--trigger").on("click", (e) => {
@@ -170,6 +173,23 @@ const Navbar = ({ cartItemsCount }) => {
       right: "-30px",
       ease: Power3.easeOut,
     });
+  };
+
+  const openAccount = () => {
+    TweenMax.to(accountCard, 0.4, {
+      opacity: 1,
+      visibility: "visible",
+      ease: Power3.easeOut,
+    });
+    setAccOpen(true);
+  };
+  const closeAccount = () => {
+    TweenMax.to(accountCard, 1, {
+      opacity: 0,
+      visibility: "hidden",
+      ease: Power3.easeOut,
+    });
+    setAccOpen(false);
   };
 
   const dispatch = useDispatch();
@@ -392,9 +412,9 @@ const Navbar = ({ cartItemsCount }) => {
       </div>
       <div onClick={open ? closeNav : openNav} className="nav__hamburger">
         <div className="hamburger" id="hamburger">
-          <span className="line"></span>
-          <span className="line"></span>
-          <span className="line"></span>
+          <span className="dot"></span>
+          <span className="dot"></span>
+          <span className="dot"></span>
         </div>
         <div className="nav__hamburger--menu">
           <a href="#">men</a>
@@ -404,7 +424,10 @@ const Navbar = ({ cartItemsCount }) => {
       </div>
       <Link href="/">
         <div className="nav__logo">
-          <a style={{ cursor: "pointer" }}>Arktastic</a>
+          <div>
+            <img src="/assets/lifestyle-logo.svg" alt="" />
+          </div>
+          <span>ARKTASTIC</span>
         </div>
       </Link>
       <div className="nav__icons">
@@ -413,30 +436,66 @@ const Navbar = ({ cartItemsCount }) => {
             <ion-icon id="searchicon" name="search-outline"></ion-icon>
           </a>
         </div>
-        <div className="nav__icons--list">
+        <div className="nav__icons--list" style={{ zIndex: 904 }}>
           <a onClick={openCart} className="nav__icons--link cart--trigger">
             <ion-icon name="bag-outline"></ion-icon>
             <span>{cartItemsCount}</span>
           </a>
         </div>
 
-        {/* { showing the info of user who logged in the website} */}
-        {userInfo.firstName ? (
-          <div class="nav__icons--list">
-            <Link href="/profile" class="nav__icons--user">
-              Profile
-            </Link>
+        <div
+          class="nav__icons--list account--trigger"
+          onClick={accOpen ? closeAccount : openAccount}
+        >
+          <a class="nav__icons--link">
+            <ion-icon name="person-outline"></ion-icon>
+          </a>
+          <div class="account-card" ref={(el) => (accountCard = el)}>
+            {userInfo.firstName ? (
+              <>
+                <li>
+                  <Link href="/profile">
+                    <a href="/profile">
+                      <ion-icon name="cube-outline"></ion-icon> Profile
+                    </a>
+                  </Link>
+                </li>
+                <li>
+                  <a href="#">
+                    <ion-icon name="bookmark-outline"></ion-icon> Address
+                  </a>
+                </li>
+                <li>
+                  <a href="#">
+                    <ion-icon name="heart-outline"></ion-icon> Wishlist
+                  </a>
+                </li>
+                <li>
+                  <a href="#" onClick={handleLogoutBtn}>
+                    <ion-icon name="log-out-outline"></ion-icon> Logout
+                  </a>
+                </li>
+              </>
+            ) : (
+              <>
+                <li>
+                  <Link href="/register">
+                    <a href="/register">
+                      <ion-icon name="people-outline"></ion-icon> Register
+                    </a>
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/login">
+                    <a href="/login">
+                      <ion-icon name="key-outline"></ion-icon> Login
+                    </a>
+                  </Link>
+                </li>
+              </>
+            )}
           </div>
-        ) : (
-          <div className="nav__icons--list">
-            <a
-              onClick={handleAccountBtn}
-              className="nav__icons--link cart--trigger"
-            >
-              <ion-icon name="person-outline"></ion-icon>
-            </a>
-          </div>
-        )}
+        </div>
       </div>
     </div>
   );

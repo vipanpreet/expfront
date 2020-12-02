@@ -9,6 +9,7 @@ import {
   PROFILE_CREATE_SUCCESS,
   PROFILE_CREATE_FAIL,
 } from "./profile.types";
+import { setAlert } from "../Alert/alert.actions";
 
 export const getProfile = () => async (dispatch, getState) => {
   try {
@@ -24,7 +25,7 @@ export const getProfile = () => async (dispatch, getState) => {
     };
     console.log(userInfo);
     const { data } = await axios.get(
-      `https://arktasticbackend.herokuapp.com/api/user/profile/`,
+      `http://localhost:5000/api/user/profile/`,
       config
     );
     dispatch({
@@ -56,15 +57,16 @@ export const createProfile = (profile) => async (dispatch, getState) => {
     };
 
     const { data } = await axios.post(
-      `https://arktasticbackend.herokuapp.com/api/user/profile/`,
+      `http://localhost:5000/api/user/profile/`,
       profile,
       config
     );
-    console.log(profile);
+
     dispatch({
       type: PROFILE_CREATE_SUCCESS,
       payload: data.message,
     });
+    dispatch(setAlert("Profile Updated", "success", 4500));
   } catch (error) {
     dispatch({
       type: PROFILE_CREATE_FAIL,

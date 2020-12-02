@@ -4,6 +4,7 @@ import {
   PRODUCTS_LIST_SUCCESS,
   PRODUCTS_LIST_FAIL,
 } from "./products.types";
+import { removeAlert, setAlert } from "../Alert/alert.actions";
 
 export const productList = (
   category,
@@ -24,16 +25,15 @@ export const productList = (
     if (subcategory > 3 && subcategory < 18) {
       isSub = true;
     }
-
     dispatch({ type: PRODUCTS_LIST_REQUEST });
 
     if (subcategory != undefined && !isSub) {
       response = await axios.get(
-        `https://arktasticbackend.herokuapp.com/api/products/all/${category}/${subcategory}?pagenumber=${pageNumber}&sortby=${sortBy}&sortdirection=${sortDirection}`
+        `http://localhost:5000/api/products/all/${category}/${subcategory}?pagenumber=${pageNumber}&sortby=${sortBy}&sortdirection=${sortDirection}`
       );
     } else {
       response = await axios.get(
-        `https://arktasticbackend.herokuapp.com/api/products/all/${category}?pagenumber=${pageNumber}&sortby=${sortBy}&sortdirection=${sortDirection}`
+        `http://localhost:5000/api/products/all/${category}?pagenumber=${pageNumber}&sortby=${sortBy}&sortdirection=${sortDirection}`
       );
     }
 
@@ -42,6 +42,8 @@ export const productList = (
       payload: response.data,
     });
   } catch (error) {
+    dispatch(removeAlert());
+
     dispatch({
       type: PRODUCTS_LIST_FAIL,
       payload:

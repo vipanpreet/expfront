@@ -25,6 +25,7 @@ function Home({ products }) {
       <Head>
         <title>Arktastic</title>
       </Head>
+
       <HomeHeader />
       <HomeSection />
       <HomeDealSection />
@@ -41,9 +42,7 @@ function Home({ products }) {
 // fetching the products form backend in server side
 export async function getStaticProps() {
   // Fetch data from external API
-  const res = await fetch(
-    `https://arktasticbackend.herokuapp.com/api/products/recommended`
-  );
+  const res = await fetch(`http://localhost:5000/api/products/recommended`);
   const products = await res.json();
   // Pass data to the page via props
   return { props: { products } };
