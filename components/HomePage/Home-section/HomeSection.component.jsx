@@ -21,7 +21,7 @@ const HomeSection = (props) => {
   };
   return (
     <section className="section-categories mt-2">
-      <div className="container-fluid">
+    
         <div className="category--wrapper">
           <Carousel
             additionalTransfrom={0}
@@ -166,7 +166,7 @@ const HomeSection = (props) => {
             {/* </div> */}
           </Carousel>
         </div>
-      </div>
+     
     </section>
   );
 };
