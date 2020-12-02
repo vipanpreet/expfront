@@ -25,7 +25,7 @@ export const getProfile = () => async (dispatch, getState) => {
     };
     console.log(userInfo);
     const { data } = await axios.get(
-      `http://localhost:5000/api/user/profile/`,
+      `https://arktasticbackend.herokuapp.com/api/user/profile/`,
       config
     );
     dispatch({
@@ -57,7 +57,7 @@ export const createProfile = (profile) => async (dispatch, getState) => {
     };
 
     const { data } = await axios.post(
-      `http://localhost:5000/api/user/profile/`,
+      `https://arktasticbackend.herokuapp.com/api/user/profile/`,
       profile,
       config
     );
