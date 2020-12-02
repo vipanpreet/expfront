@@ -45,6 +45,10 @@ const Navbar = ({ cartItemsCount }) => {
   let [accOpen, setAccOpen] = useState(false);
 
   useEffect(() => {
+    TweenMax.to(nav, 0.4, {
+      background: "transparent",
+      ease: Power3.easeInOut,
+    });
     $(".search--trigger").on("click", (e) => {
       $(".searchbar").toggleClass("isactive");
       $(e.currentTarget).toggleClass("isactive");
@@ -54,6 +58,19 @@ const Navbar = ({ cartItemsCount }) => {
         $("#searchicon").attr("name", "close");
       }
     });
+    window.onscroll = function () {
+      if (window.pageYOffset > 5) {
+        TweenMax.to(nav, 0.4, {
+          background: "#fff",
+          ease: Power3.easeInOut,
+        });
+      } else {
+        TweenMax.to(nav, 0.4, {
+          background: "transparent",
+          ease: Power3.easeInOut,
+        });
+      }
+    };
   }, []);
 
   // open nav

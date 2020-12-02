@@ -29,7 +29,7 @@ const HomeHeader = (props) => {
       ssr={true} // means to render carousel on server-side.
       infinite={true}
       autoPlay={true}
-      autoPlaySpeed={3000}
+      autoPlaySpeed={6000}
       keyBoardControl={false}
       containerclassName="carousel-container"
       removeArrowOnDeviceType={[""]}
