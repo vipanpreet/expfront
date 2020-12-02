@@ -3406,7 +3406,8 @@ body {
 
 @media only screen and (max-width: 1024px) {
   .header {
-    height: 80vh; }
+    height: 80vh;
+    background-position: centers; }
     .header__container {
       position: absolute;
       left: 50%;
