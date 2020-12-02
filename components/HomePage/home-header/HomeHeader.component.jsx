@@ -40,7 +40,7 @@ const HomeHeader = (props) => {
     >
       <header className="header">
         <div className="header__container">
-          <div className="header--title">New collection</div>
+          {/* <div className="header--title">New collection</div>
           <div className="header--subtitle">
             Find the best <br />
             clothing for you.
@@ -52,12 +52,12 @@ const HomeHeader = (props) => {
             <a href="#" className="btn btn--white-simple">
               Read more
             </a>
-          </div>
+          </div> */}
         </div>
       </header>
       <header className="header">
         <div className="header__container">
-          <div className="header--title">New collection</div>
+          {/* <div className="header--title">New collection</div>
           <div className="header--subtitle">
             jasdfijiojafi <br />
             jadsfiojifasdj.
@@ -69,12 +69,12 @@ const HomeHeader = (props) => {
             <a href="#" className="btn btn--white">
               Read more
             </a>
-          </div>
+          </div> */}
         </div>
       </header>
       <header className="header">
         <div className="header__container">
-          <div className="header--title">New collection</div>
+          {/* <div className="header--title">New collection</div>
           <div className="header--subtitle">
             Find the best <br />
             clothing for you.
@@ -84,7 +84,7 @@ const HomeHeader = (props) => {
             <a href="#" className="btn btn--white-simple">
               Read more
             </a>
-          </div>
+          </div> */}
         </div>
       </header>
     </Carousel>
