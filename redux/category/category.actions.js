@@ -14,7 +14,9 @@ import {
 export const listCategories = () => async (dispatch) => {
   try {
     dispatch({ type: CATEGORY_LIST_REQUEST });
-    const { data } = await axios.get(`http://localhost:5000/api/category/`);
+    const { data } = await axios.get(
+      `https://arktasticbackend.herokuapp.com/api/category/`
+    );
     dispatch({
       type: CATEGORY_LIST_SUCCESS,
       payload: data,
@@ -34,7 +36,7 @@ export const listSubCategories = (slug) => async (dispatch) => {
   try {
     dispatch({ type: SUBCATEGORY_LIST_REQUEST });
     const { data } = await axios.get(
-      `http://localhost:5000/api/category/subcategories/${slug}`
+      `https://arktasticbackend.herokuapp.com/api/category/subcategories/${slug}`
     );
     dispatch({
       type: SUBCATEGORY_LIST_SUCCESS,

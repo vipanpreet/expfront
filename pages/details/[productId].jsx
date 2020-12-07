@@ -18,7 +18,7 @@ const Details = (props) => {
 // fetching the products form backend in server side
 export async function getServerSideProps(context) {
   const res = await fetch(
-    `http://localhost:5000/api/products/single/${context.query.productId}`
+    `https://arktasticbackend.herokuapp.com/api/products/single/${context.query.productId}`
   );
   const singleProduct = await res.json();
   return { props: { singleProduct } };
