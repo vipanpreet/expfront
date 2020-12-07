@@ -572,7 +572,7 @@ const Navbar = () => {
                   </a>
                 </li>
                 <li>
-                  <a href="#">
+                  <a onClick={handleLogoutBtn}>
                     <ion-icon name="log-out-outline"></ion-icon> Logout
                   </a>
                 </li>
