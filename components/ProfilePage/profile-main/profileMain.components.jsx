@@ -5,6 +5,7 @@ import {
 } from "../../../redux/profile/profile.actions";
 import { useDispatch, useSelector } from "react-redux";
 import { TweenMax } from "gsap";
+import { PROFILE_CREATE_RESET } from "../../../redux/profile/profile.types";
 
 const ProfileMain = () => {
   const [phoneNumber, setPhoneNumber] = useState("");
@@ -23,23 +24,34 @@ const ProfileMain = () => {
   const { userInfo } = login;
 
   const profileCreate = useSelector((state) => state.profileCreate);
-  const { message, error, loading } = profileCreate;
+  const { message, error, success, loading } = profileCreate;
 
   const profileGet = useSelector((state) => state.profileGet);
   const { profile, error: getError, loading: getLoading } = profileGet;
 
   useEffect(() => {
-    setPhoneNumber(profile.phoneNumber);
-    setCountry(profile.country);
-    setState(profile.state);
-    setSuburb(profile.suburb);
-    setStreet(profile.street);
-    setZipcode(profile.zipcode);
-    setLocality(profile.locality);
-    if (!getLoading) {
-      dispatch(getProfile());
+    if (!loading) {
+      setPhoneNumber(profile.phoneNumber);
+      setCountry(profile.country);
+      setState(profile.state);
+      setSuburb(profile.suburb);
+      setStreet(profile.street);
+      setZipcode(profile.zipcode);
+      setLocality(profile.locality);
+<<<<<<< HEAD
+    }
+  }, [userInfo, success]);
+=======
+      if (message) {
+        dispatch(getProfile());
+      }
     }
   }, [userInfo, getLoading, message]);
+<<<<<<< HEAD
+>>>>>>> 2b4505e (navbar transparent updated)
+=======
+>>>>>>> 2b4505ee0785104e49aa15e0c1691aed88522c36
+>>>>>>> bff1bdd6b336d7b47fc7a2f1544c31350b079cd9
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -54,15 +66,18 @@ const ProfileMain = () => {
       locality,
     };
     dispatch(createProfile(profile));
+    dispatch(getProfile());
   };
 
   // UI
   let profileMenu = useRef(null);
   let ordersMenu = useRef(null);
   let securityMenu = useRef(null);
+  let wishlistMenu = useRef(null);
   let profileBody = useRef(null);
   let ordersBody = useRef(null);
   let securityBody = useRef(null);
+  let wishlistBody = useRef(null);
 
   const openOrders = () => {
     TweenMax.to(profileMenu, 0.1, {
@@ -74,6 +89,9 @@ const ProfileMain = () => {
     TweenMax.to(ordersMenu, 0.1, {
       css: { className: "+=profile-navigation--list is-active" },
     });
+    TweenMax.to(wishlistMenu, 0.1, {
+      css: { className: "+=profile-navigation--list" },
+    });
     TweenMax.to(profileBody, 0.1, {
       display: "none",
     });
@@ -81,6 +99,37 @@ const ProfileMain = () => {
       display: "none",
     });
     TweenMax.to(ordersBody, 0.1, {
+      display: "block",
+    });
+    TweenMax.to(wishlistBody, 0.1, {
+      display: "none",
+    });
+  };
+
+  const openWishlist = () => {
+    TweenMax.to(profileMenu, 0.1, {
+      css: { className: "+=profile-navigation--list" },
+    });
+    TweenMax.to(securityMenu, 0.1, {
+      css: { className: "+=profile-navigation--list" },
+    });
+    TweenMax.to(ordersMenu, 0.1, {
+      css: { className: "+=profile-navigation--list" },
+    });
+    TweenMax.to(wishlistMenu, 0.1, {
+      css: { className: "+=profile-navigation--list is-active" },
+    });
+
+    TweenMax.to(profileBody, 0.1, {
+      display: "none",
+    });
+    TweenMax.to(securityBody, 0.1, {
+      display: "none",
+    });
+    TweenMax.to(ordersBody, 0.1, {
+      display: "none",
+    });
+    TweenMax.to(wishlistBody, 0.1, {
       display: "block",
     });
   };
@@ -95,6 +144,9 @@ const ProfileMain = () => {
     TweenMax.to(ordersMenu, 0.1, {
       css: { className: "+=profile-navigation--list" },
     });
+    TweenMax.to(wishlistMenu, 0.1, {
+      css: { className: "+=profile-navigation--list" },
+    });
     TweenMax.to(profileBody, 0.1, {
       display: "block",
     });
@@ -102,6 +154,9 @@ const ProfileMain = () => {
       display: "none",
     });
     TweenMax.to(ordersBody, 0.1, {
+      display: "none",
+    });
+    TweenMax.to(wishlistBody, 0.1, {
       display: "none",
     });
   };
@@ -116,6 +171,9 @@ const ProfileMain = () => {
     TweenMax.to(ordersMenu, 0.1, {
       css: { className: "+=profile-navigation--list" },
     });
+    TweenMax.to(wishlistMenu, 0.1, {
+      css: { className: "+=profile-navigation--list" },
+    });
     TweenMax.to(profileBody, 0.1, {
       display: "none",
     });
@@ -124,6 +182,9 @@ const ProfileMain = () => {
     });
     TweenMax.to(securityBody, 0.1, {
       display: "block",
+    });
+    TweenMax.to(wishlistBody, 0.1, {
+      display: "none",
     });
   };
   return (
@@ -142,6 +203,13 @@ const ProfileMain = () => {
           class="profile-navigation--list"
         >
           <a href="#">Your Orders</a>
+        </li>
+        <li
+          onClick={openWishlist}
+          ref={(el) => (wishlistMenu = el)}
+          class="profile-navigation--list"
+        >
+          <a href="#">Your wishlist</a>
         </li>
         <li
           onClick={openSecurity}
@@ -238,6 +306,7 @@ const ProfileMain = () => {
             </div>
           </form>
         </div>
+
         <div class="profile-main--active" ref={(el) => (ordersBody = el)}>
           <div class="subtitle mb-4">Your Orders</div>
           <div class="title mb-2">Currently Active</div>
@@ -301,6 +370,59 @@ const ProfileMain = () => {
               </div>
             </div>
           </div>
+        </div>
+
+        <div class="profile-main--active" ref={(el) => (wishlistBody = el)}>
+          <div class="subtitle mb-4">Your Wishlist</div>
+
+          {profile.wishlist ? (
+            profile.wishlist.map((product) => {
+              return (
+                <div class="orderslist" style={{ marginBottom: 20 }}>
+                  <div class="orderslist--img">
+                    <img src={product.images[0].url} alt="" />
+                  </div>
+                  <div class="orderslist__body" style={{ paddingTop: 0 }}>
+                    <div
+                      class="orderslist__body--title"
+                      style={{ lineHeight: 1 }}
+                    >
+                      {product.name}
+                    </div>
+                    <div class="orderslist__body--desc">
+                      Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                      Vel maxime fugiat sapiente odit veritatis quis incidunt
+                      quasi provident possimus, ab quibusdam accusamus animi
+                      optio atque tenetur deleniti expedita distinctio placeat.
+                    </div>
+                    <div class="mt-2">
+                      <button class="btn btn--primary-simple">Order</button>
+                    </div>
+                  </div>
+                </div>
+              );
+            })
+          ) : (
+            <div>Wishlist is empty</div>
+          )}
+
+          {/* <div class="orderslist--img">
+              <img
+                src="https://res.cloudinary.com/arktastic-pty-ltd/image/upload/v1606501309/kzd91ynr0wg1cbdfg2pf.jpg"
+                alt=""
+              />
+            </div>
+            <div class="orderslist__body">
+              <div class="orderslist__body--title">Hot durable black cap</div>
+              <div class="orderslist__body--desc">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Reiciendis iure laborum eveniet ipsam, expedita exercitationem
+                enim quaerat magnam excepturi...
+              </div>
+              <div class="mt-2">
+                <button class="btn btn--primary-simple">Order</button>
+              </div>
+            </div> */}
         </div>
 
         <div class="profile-main--security" ref={(el) => (securityBody = el)}>

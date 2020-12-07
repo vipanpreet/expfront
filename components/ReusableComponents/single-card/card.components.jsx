@@ -1,92 +1,73 @@
-import Link from "next/link";
-import { addItem } from "../../../redux/cart/cart.actions";
-import { connect } from "react-redux";
-import { useState } from "react";
+import { useEffect } from "react";
+import { addItemWishlist } from "../../../redux/profile/profile.actions";
+import { useDispatch } from "react-redux";
+import "animate.css";
 
-const mapDispatchToProps = (dispatch) => ({
-  addItem: (item) => dispatch(addItem(item)),
-});
+const Card = ({ singleProduct, col12 }) => {
+  const dispatch = useDispatch();
 
-const Card = ({ singleProduct, addItem }) => {
-  const handleButton = () => {
-    addItem({ singleProduct });
+  const handleWishlist = (id) => {
+    dispatch(addItemWishlist(id));
   };
+
   return (
-    <div className="card">
-      <div className="card--img">
-        <img
-          src={singleProduct.images[0] && singleProduct.images[0].url}
-          alt=""
-        />
-        <a href="#!" className="card--img--cart">
-          <ion-icon name="heart-outline"></ion-icon>
-        </a>
-      </div>
-      <div className="card__body">
-        <div className="card__body--align">
-          <div className="card__body--left">
-            <div className="card__body--cat">{singleProduct.brand}</div>
-            <a
-              className="card__body--name"
-              href={`/details/${singleProduct._id}`}
-              target="_blank"
-              as={`/details/${singleProduct._id}`}
-            >
-              {singleProduct.name}
-            </a>
+    <div className="card animate__animated animate__fadeIn">
+      <div class="card--inner">
+        <div className="card__img">
+          <img
+            src={singleProduct.images[0] && singleProduct.images[0].url}
+            alt=""
+          />
+          <div class="card__img--type">L</div>
+        </div>
+
+        <div class="card__body">
+          <div class="card__body--brand">{singleProduct.brand}</div>
+          <div class="card__body--name">{singleProduct.name}</div>
+          <div class="card__hover">
+            <div class="card__hover--wrapper">
+              <div class="card__hover--desc">
+                {col12
+                  ? singleProduct.description
+                  : singleProduct.description.slice(0, 140)}
+              </div>
+              <div class="card__hover__btns">
+                <a
+                  onClick={() => handleWishlist(singleProduct._id)}
+                  href="#!"
+                  class="card__hover__btns--wishlist"
+                >
+                  <ion-icon name="heart-outline"></ion-icon>
+                </a>
+                <a
+                  href={`/details/${singleProduct._id}`}
+                  target="_blank"
+                  as={`/details/${singleProduct._id}`}
+                  class="card__hover__btns--showproduct"
+                >
+                  {col12 ? (
+                    <a
+                      style={{ marginLeft: 0, paddingLeft: 0 }}
+                      className="btn btn--primary"
+                    >
+                      Show this product
+                    </a>
+                  ) : (
+                    "View"
+                  )}
+                </a>
+                <a href="#" class="card__hover__btns--options">
+                  <ion-icon name="options-outline"></ion-icon>
+                </a>
+              </div>
+            </div>
           </div>
-          <div className="card__body--right">
-            <div className="card__body--price">${singleProduct.price}</div>
-          </div>
+          <div class="card__body--price">AUD {singleProduct.price}</div>
         </div>
       </div>
     </div>
-
-    // <div className="card">
-    //   <div className="card--img">
-    //     <img src="/assets/products/shirt3.jpg" alt="" />
-    //   </div>
-    //   <div className="card__hover">
-    //     <a
-    //       className="card__hover--item card__hover--cart"
-    //       onClick={handleButton}
-    //     >
-    //       <ion-icon name="cart-outline"></ion-icon>
-    //     </a>
-    //     <a href="#!" className="card__hover--item card__hover--wish">
-    //       <ion-icon name="heart"></ion-icon>
-    //     </a>
-
-    //     <a href="#!" className="card__hover--item card__hover--delivery">
-    //       <ion-icon name="flash"></ion-icon>
-    //       {/* <!-- <ion-icon name="flash-off"></ion-icon> --> */}
-    //     </a>
-    //   </div>
-
-    //   <div className="card__body">
-    //     <div className="card--view">
-    //       <Link
-    //         href="/details/[productId]"
-    //         as={`/details/${singleProduct._id}`}
-    //       >
-    //         <a>View Item</a>
-    //       </Link>
-    //     </div>
-    //     <div className="card__body--align">
-    //       <div className="card__body--left">
-    //         <div className="card__body--cat">{singleProduct.brand}</div>
-    //         <a href="#" className="card__body--name">
-    //           {singleProduct.name}
-    //         </a>
-    //       </div>
-    //       <a className="card__body--right">
-    //         <div className="card__body--price">${singleProduct.price}</div>
-    //       </a>
-    //     </div>
-    //   </div>
-    // </div>
   );
 };
 
 // export default Card;
-export default connect(null, mapDispatchToProps)(Card);
+export default Card;

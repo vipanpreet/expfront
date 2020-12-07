@@ -1,37 +1,50 @@
 import Link from "next/link";
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
-import { connect } from "react-redux";
-import { createStructuredSelector } from "reselect";
-import { selectCartItemsCount } from "../../../redux/cart/cart.selectors";
-import $ from "jquery";
+import { useEffect, useRef, useState } from "react";
+// import { selectCartItemsCount } from "../../../redux/cart/cart.selectors";
 import { useDispatch, useSelector } from "react-redux";
-import Router from "next/router";
 import { logout } from "../../../redux/login/login.actions";
 
 // Animation GSAP
-import { TweenMax, TimelineMax, Power3 } from "gsap";
+import { Expo, TimelineMax } from "gsap";
 
-const mapStateToProps = createStructuredSelector({
-  cartItemsCount: selectCartItemsCount,
-});
+// const mapStateToProps = createStructuredSelector({
+//   cartItemsCount: selectCartItemsCount,
+// });
 
-const Navbar = ({ cartItemsCount }) => {
-  // BAR
-  let nav = useRef(null);
-  let navBar = useRef(null);
-  let navBarContainer = useRef(null);
-  let navBarContainerImage = useRef(null);
-  let navBarContainerImageContainer = useRef(null);
+const Navbar = () => {
+  const [isOpenNav, setIsOpenNav] = useState(false);
+  const [isOpenSearch, setIsOpenSearch] = useState(false);
+  let [accOpen, setAccOpen] = useState(false);
 
+  let one = useRef(null);
+  let two = useRef(null);
+  let menu = useRef(null);
+  let menuItems = useRef(null);
+
+  // social
+  let menuSocials = useRef(null);
+  let menuSocial1 = useRef(null);
+  let menuSocial2 = useRef(null);
+  let menuSocial3 = useRef(null);
+
+  // items
   let menuItem1 = useRef(null);
   let menuItem2 = useRef(null);
   let menuItem3 = useRef(null);
   let menuItem4 = useRef(null);
   let menuItem5 = useRef(null);
-  let menuItem6 = useRef(null);
-  let menuItem7 = useRef(null);
-  let menuItem8 = useRef(null);
-  let menuItem9 = useRef(null);
+
+  // Images
+  let imagesWrapper = useRef(null);
+  let im1 = useRef(null);
+  let im2 = useRef(null);
+  let im3 = useRef(null);
+  let im4 = useRef(null);
+  let im5 = useRef(null);
+
+  // Search
+  let searchWrapper = useRef(null);
+  let searchBar = useRef(null);
 
   // CART
   let cart = useRef(null);
@@ -39,172 +52,463 @@ const Navbar = ({ cartItemsCount }) => {
   let cartSummary = useRef(null);
   let cartX = useRef(null);
 
+  // account
   let accountCard = useRef(null);
 
-  let [open, setOpen] = useState(false);
-  let [accOpen, setAccOpen] = useState(false);
+  // const changeNavBackground = () => {
+  //   if (window.scrollY >= 80) {
+  //     setNavBg(true);
+  //   } else {
+  //     setNavBg(false);
+  //   }
+  // };
+  // window.addEventListener("scroll", changeNavBackground);
 
-  useEffect(() => {
-    TweenMax.to(nav, 0.4, {
-      background: "transparent",
-      ease: Power3.easeInOut,
-    });
-    $(".search--trigger").on("click", (e) => {
-      $(".searchbar").toggleClass("isactive");
-      $(e.currentTarget).toggleClass("isactive");
-      if ($("#searchicon").attr("name") === "close") {
-        $("#searchicon").attr("name", "search");
-      } else {
-        $("#searchicon").attr("name", "close");
-      }
-    });
-    window.onscroll = function () {
-      if (window.pageYOffset > 5) {
-        TweenMax.to(nav, 0.4, {
-          background: "#fff",
-          ease: Power3.easeInOut,
-        });
-      } else {
-        TweenMax.to(nav, 0.4, {
-          background: "transparent",
-          ease: Power3.easeInOut,
-        });
-      }
-    };
-  }, []);
-
-  // open nav
   const openNav = () => {
     var isMobile;
-    window.innerWidth < 1024 ? (isMobile = "100vw") : (isMobile = "45vw");
+    window.innerWidth < 1024 ? (isMobile = "100vw") : (isMobile = "50vw");
+    var t1 = new TimelineMax();
 
-    TweenMax.to(navBar, 1.4, {
+    t1.to(menu, {
+      width: "90%",
+      duration: 1.4,
+      opacity: 1,
+      ease: Expo.easeInOut,
+      delay: -0.5,
+    });
+    t1.to(menu, {
       width: isMobile,
-      ease: Power3.easeInOut,
+      duration: 1,
+      ease: Expo.easeOut,
+      delay: 0,
     });
-    TweenMax.to(navBarContainer, 0.8, {
-      opacity: 1,
+    t1.to(menuItems, {
       visibility: "visible",
-      ease: Power3.easeOut,
-      delay: 1,
-    });
-    TweenMax.from(navBarContainerImageContainer, 1.8, {
-      x: -200,
-      scale: 1.2,
       opacity: 1,
-      delay: 1,
-      ease: Power3.easeOut,
+      duration: 0.4,
+      ease: Expo.easeInOut,
+      delay: -1.4,
     });
-    TweenMax.to(navBarContainerImage, 1.2, {
-      scale: 1.2,
+    t1.to(menuSocials, {
+      visibility: "visible",
       opacity: 1,
-      delay: 1.1,
+      duration: 0.4,
+      ease: Expo.easeInOut,
+      delay: -1.4,
     });
-    TweenMax.staggerFrom(
-      [
-        menuItem1,
-        menuItem2,
-        menuItem3,
-        menuItem4,
-        menuItem5,
-        menuItem6,
-        menuItem7,
-        menuItem8,
-        menuItem9,
-      ],
-      0.8,
-      { opacity: 0, ease: Power3.easeOut, delay: 0.8 },
-      0.1
+    t1.to(imagesWrapper, {
+      width: "50%",
+      duration: 0.8,
+      ease: Expo.easeOut,
+      delay: -1,
+    });
+
+    t1.staggerFrom(
+      [menuItem1, menuItem2, menuItem3, menuItem4, menuItem5],
+      0.6,
+      { y: "15", opacity: 0, delay: -0.8 },
+      0.2
     );
-    $(".hamburger").on("click", (e) => {
-      $(e.currentTarget).removeClass("is-active");
+
+    t1.staggerFrom(
+      [menuSocial1, menuSocial2, menuSocial3],
+      0.6,
+      { y: "15", opacity: 0, delay: -0.5 },
+      0.2
+    );
+    t1.to(one, {
+      top: "47%",
+      rotation: 45,
+      duration: 0.8,
+      delay: -1.4,
+      ease: Expo.easeInOut,
     });
-    setOpen(true);
+    t1.to(two, {
+      top: "47%",
+      rotation: -45,
+      duration: 0.8,
+      delay: -1.4,
+      ease: Expo.easeInOut,
+    });
+    setIsOpenNav(true);
   };
 
   const closeNav = () => {
-    TweenMax.to(navBar, 1.2, { width: 0, ease: Power3.easeInOut });
-    TweenMax.to(navBarContainerImage, 0.8, {
-      scale: 1.0,
-      opacity: 0,
+    var t1 = new TimelineMax();
+
+    t1.to(one, {
+      top: "38%",
+      rotation: 0,
+      duration: 0.8,
+      ease: Expo.easeInOut,
     });
-    TweenMax.to(navBarContainer, 0.8, {
+    t1.to(two, {
+      top: "56%",
+
+      rotation: 0,
+      duration: 0.8,
+      delay: -0.8,
+      ease: Expo.easeInOut,
+    });
+
+    t1.to(menu, {
+      width: "100%",
+      duration: 1.2,
+      ease: Expo.easeInOut,
+      delay: -1,
+    });
+    t1.to(menu, {
+      width: "0",
+      opacity: 0,
+      duration: 0.2,
+      ease: Expo.easeInOut,
+      delay: -0.1,
+    });
+    t1.to(menuItems, {
       opacity: 0,
       visibility: "hidden",
-      ease: Power3.easeOut,
+      duration: 0.2,
+      ease: Expo.easeInOut,
+      delay: -1.4,
     });
-    $(".hamburger").on("click", (e) => {
-      $(e.currentTarget).addClass("is-active");
+    t1.to(menuItems, {
+      opacity: 0,
+      visibility: "hidden",
+      duration: 0.2,
+      ease: Expo.easeInOut,
+      delay: -1.4,
     });
-    setOpen(false);
+    t1.to(menuSocials, {
+      opacity: 0,
+      visibility: "hidden",
+      duration: 0.2,
+      ease: Expo.easeInOut,
+      delay: -1.4,
+    });
+
+    t1.to(imagesWrapper, {
+      width: "0",
+      duration: 1.2,
+      ease: Expo.easeInOut,
+      delay: -2.6,
+    });
+    setIsOpenNav(false);
   };
 
+  // Images Transactions
+  const m1Enter = () => {
+    var m1 = new TimelineMax();
+    m1.to(im1, {
+      opacity: 1,
+      scale: 1.1,
+      duration: 0.8,
+      ease: Expo.easeInOut,
+    });
+    m1.to(im2, {
+      opacity: 0,
+      delay: -0.8,
+      scale: 1,
+      duration: 0.8,
+      ease: Expo.easeInOut,
+    });
+    m1.to(im3, {
+      opacity: 0,
+      delay: -0.8,
+      scale: 1,
+      duration: 0.8,
+      ease: Expo.easeInOut,
+    });
+    m1.to(im4, {
+      opacity: 0,
+      delay: -0.8,
+      scale: 1,
+      duration: 0.8,
+      ease: Expo.easeInOut,
+    });
+    m1.to(im5, {
+      opacity: 0,
+      delay: -0.8,
+      scale: 1,
+      duration: 0.8,
+      ease: Expo.easeInOut,
+    });
+  };
+  const m2Enter = () => {
+    var m1 = new TimelineMax();
+    m1.to(im1, {
+      opacity: 0,
+      scale: 1,
+      duration: 0.8,
+      ease: Expo.easeInOut,
+    });
+    m1.to(im2, {
+      opacity: 1,
+      delay: -0.8,
+      scale: 1.1,
+      duration: 0.8,
+      ease: Expo.easeInOut,
+    });
+    m1.to(im3, {
+      opacity: 0,
+      delay: -0.8,
+      scale: 1,
+      duration: 0.8,
+      ease: Expo.easeInOut,
+    });
+    m1.to(im4, {
+      opacity: 0,
+      delay: -0.8,
+      scale: 1,
+      duration: 0.8,
+      ease: Expo.easeInOut,
+    });
+    m1.to(im5, {
+      opacity: 0,
+      delay: -0.8,
+      scale: 1,
+      duration: 0.8,
+      ease: Expo.easeInOut,
+    });
+  };
+  const m3Enter = () => {
+    var m1 = new TimelineMax();
+    m1.to(im1, {
+      opacity: 0,
+      scale: 1,
+      duration: 0.8,
+      ease: Expo.easeInOut,
+    });
+    m1.to(im2, {
+      opacity: 0,
+      delay: -0.8,
+      scale: 1,
+      duration: 0.8,
+      ease: Expo.easeInOut,
+    });
+    m1.to(im3, {
+      opacity: 1,
+      delay: -0.8,
+      scale: 1.1,
+      duration: 0.8,
+      ease: Expo.easeInOut,
+    });
+    m1.to(im4, {
+      opacity: 0,
+      delay: -0.8,
+      scale: 1,
+      duration: 0.8,
+      ease: Expo.easeInOut,
+    });
+    m1.to(im5, {
+      opacity: 0,
+      delay: -0.8,
+      scale: 1,
+      duration: 0.8,
+      ease: Expo.easeInOut,
+    });
+  };
+  const m4Enter = () => {
+    var m1 = new TimelineMax();
+    m1.to(im1, {
+      opacity: 0,
+      scale: 1,
+      duration: 0.8,
+      ease: Expo.easeInOut,
+    });
+    m1.to(im2, {
+      opacity: 0,
+      delay: -0.8,
+      scale: 1,
+      duration: 0.8,
+      ease: Expo.easeInOut,
+    });
+    m1.to(im3, {
+      opacity: 0,
+      delay: -0.8,
+      scale: 1,
+      duration: 0.8,
+      ease: Expo.easeInOut,
+    });
+    m1.to(im4, {
+      opacity: 1,
+      delay: -0.8,
+      scale: 1.1,
+      duration: 0.8,
+      ease: Expo.easeInOut,
+    });
+    m1.to(im5, {
+      opacity: 0,
+      delay: -0.8,
+      scale: 1,
+      duration: 0.8,
+      ease: Expo.easeInOut,
+    });
+  };
+  const m5Enter = () => {
+    var m1 = new TimelineMax();
+    m1.to(im1, {
+      opacity: 0,
+      scale: 1,
+      duration: 0.8,
+      ease: Expo.easeInOut,
+    });
+    m1.to(im2, {
+      opacity: 0,
+      delay: -0.8,
+      scale: 1,
+      duration: 0.8,
+      ease: Expo.easeInOut,
+    });
+    m1.to(im3, {
+      opacity: 0,
+      scale: 1,
+      delay: -0.8,
+      duration: 0.8,
+      ease: Expo.easeInOut,
+    });
+    m1.to(im4, {
+      opacity: 0,
+      delay: -0.8,
+      scale: 1,
+      duration: 0.8,
+      ease: Expo.easeInOut,
+    });
+    m1.to(im5, {
+      opacity: 1,
+      delay: -0.8,
+      scale: 1.1,
+      duration: 0.8,
+      ease: Expo.easeInOut,
+    });
+  };
+
+  // search
+  const openSearch = () => {
+    var s1 = new TimelineMax();
+
+    s1.to(searchWrapper, {
+      width: "100%",
+      duration: 0.4,
+      ease: Expo.easeOut,
+    });
+    s1.to(searchBar, {
+      top: "60px",
+      opacity: 1,
+      visibility: "visible",
+      duration: 0.4,
+      ease: Expo.easeOut,
+    });
+    setIsOpenSearch(true);
+  };
+  const closeSearch = () => {
+    var s1 = new TimelineMax();
+    s1.to(searchBar, {
+      top: "0",
+      duration: 0.4,
+      ease: Expo.easeOut,
+    });
+    s1.to(searchBar, {
+      opacity: 0,
+      visibility: "hidden",
+      duration: 0.4,
+      delay: -0.3,
+      ease: Expo.easeOut,
+    });
+    s1.to(searchWrapper, {
+      width: "0",
+      duration: 0.4,
+      ease: Expo.easeOut,
+    });
+    setIsOpenSearch(false);
+  };
+
+  // cart
   const openCart = () => {
     var isMobileCart;
     window.innerWidth < 1024
       ? (isMobileCart = "100vw")
       : (isMobileCart = "80vw");
-    TweenMax.to(cart, 1, {
+    var c1 = new TimelineMax();
+
+    c1.to(cart, {
       width: isMobileCart,
-      ease: Power3.easeInOut,
+      duration: 1,
+      ease: Expo.easeInOut,
     });
-    TweenMax.to(cartDetails, 1.5, {
+    c1.to(cartDetails, {
       opacity: 1,
       visibility: "visible",
-      ease: Power3.easeOut,
-      delay: 0.8,
+      duration: 1,
+      ease: Expo.easeInOut,
     });
-    TweenMax.to(cartSummary, 2, {
+    c1.to(cartSummary, {
       opacity: 1,
       visibility: "visible",
-      ease: Power3.easeOut,
-      delay: 0.8,
+      duration: 2,
+      ease: Expo.easeOut,
+      delay: -1,
     });
-    TweenMax.to(cartX, 0.8, {
+    c1.to(cartX, {
       right: "30px",
-      ease: Power3.easeOut,
-      delay: 0.8,
+      duration: 0.8,
+      ease: Expo.easeOut,
+      delay: -1.8,
     });
   };
   const closeCart = () => {
-    TweenMax.to(cart, 1, { width: 0, ease: Power3.easeInOut, delay: 0.1 });
-    TweenMax.to(cartDetails, 0.8, {
+    var c1 = new TimelineMax();
+
+    c1.to(cartDetails, {
+      duration: 0.8,
       opacity: 0,
-      ease: Power3.easeOut,
+      ease: Expo.easeOut,
     });
-    TweenMax.to(cartSummary, 0.8, {
+    c1.to(cartSummary, {
+      duration: 0.8,
       opacity: 0,
-      ease: Power3.easeOut,
+      delay: -0.6,
+      ease: Expo.easeOut,
     });
-    TweenMax.to(cartDetails, 0.8, {
+    c1.to(cartDetails, {
+      duration: 0.8,
       visibility: "hidden",
-      delay: 0.8,
-      ease: Power3.easeOut,
+      delay: -0.6,
+      ease: Expo.easeOut,
     });
-    TweenMax.to(cartSummary, 0.8, {
+    c1.to(cartSummary, {
+      duration: 0.8,
       visibility: "hidden",
-      delay: 0.8,
-      ease: Power3.easeOut,
+
+      ease: Expo.easeOut,
     });
-    TweenMax.to(cartX, 0.8, {
+    c1.to(cartX, {
+      duration: 0.8,
       right: "-30px",
-      ease: Power3.easeOut,
+      ease: Expo.easeOut,
     });
+    c1.to(cart, { width: 0, duration: 1, ease: Expo.easeInOut, delay: -2.4 });
   };
 
+  // account
   const openAccount = () => {
-    TweenMax.to(accountCard, 0.4, {
+    var a1 = new TimelineMax();
+
+    a1.to(accountCard, {
+      duration: 0.4,
       opacity: 1,
       visibility: "visible",
-      ease: Power3.easeOut,
+      ease: Expo.easeOut,
     });
     setAccOpen(true);
   };
   const closeAccount = () => {
-    TweenMax.to(accountCard, 1, {
+    var a1 = new TimelineMax();
+
+    a1.to(accountCard, {
       opacity: 0,
+      duration: 1,
       visibility: "hidden",
-      ease: Power3.easeOut,
+      ease: Expo.easeOut,
     });
     setAccOpen(false);
   };
@@ -213,260 +517,40 @@ const Navbar = ({ cartItemsCount }) => {
   const login = useSelector((state) => state.login);
   const { userInfo } = login;
 
-  const handleAccountBtn = () => {
-    // checking if the object is not empty
-    if (Object.keys(userInfo).length !== 0 && userInfo.constructor === Object) {
-      // if logged in then show the profile page
-      // Router.push("/auth");
-    } else {
-      // if the user if not logged in show the login path
-      Router.push("/login");
-    }
-  };
-
   const handleLogoutBtn = () => {
     dispatch(logout());
   };
 
   return (
-    <div ref={(el) => (nav = el)} className="nav">
-      <div ref={(el) => (cart = el)} className="nav-cart">
-        <div
-          onClick={closeCart}
-          ref={(el) => (cartX = el)}
-          className="nav-cart--x"
-        >
-          <ion-icon name="close-outline"></ion-icon>
-        </div>
-        <div ref={(el) => (cartDetails = el)} className="nav-cart__details">
-          <span
-            onClick={closeCart}
-            className="text-upper text-cream pdetails__body--back"
-          >
-            <ion-icon name="arrow-back-outline"></ion-icon> Back to Store
-          </span>
-          <div className="d-flex justify-content-between align-content-center">
-            <div className="nav-cart__details--title">Shopping cart</div>
-            <div className="title">2 items</div>
-          </div>
-          <table className="nav-cart__table">
-            <tr>
-              <th>Item</th>
-              <th>Size</th>
-              <th>Quantity</th>
-              <th>Price</th>
-              <th></th>
-            </tr>
-            <tr className="nav-cart__table--data">
-              <td className="d-flex">
-                <div className="nav-cart__table--img">
-                  <img src="/assets/products/customizable-mug.jpg" alt="" />
-                </div>
-                <div className="nav-cart__table--name">
-                  <h2>Picàs Scent women</h2>
-                  <h5>SiQo</h5>
-                </div>
-              </td>
-              <td>250ml</td>
-              <td>
-                <div className="nav-cart__table--quantity">
-                  <span>
-                    <ion-icon name="remove-circle-outline"></ion-icon>
-                  </span>
-                  <span>1</span>
-                  <span>
-                    <ion-icon name="add-circle-outline"></ion-icon>
-                  </span>
-                </div>
-              </td>
-              <td className="nav-cart__table--price">$80</td>
-              <td className="nav-cart__table--delete">
-                <ion-icon name="close-outline"></ion-icon>
-              </td>
-            </tr>
-            <tr className="nav-cart__table--data">
-              <td className="d-flex">
-                <div className="nav-cart__table--img">
-                  <img
-                    src="/assets/products/mountain-fox-notebook.jpg"
-                    alt=""
-                  />
-                </div>
-                <div className="nav-cart__table--name">
-                  <h2>Picàs Scent women</h2>
-                  <h5>SiQo</h5>
-                </div>
-              </td>
-              <td>250ml</td>
-              <td>
-                <div className="nav-cart__table--quantity">
-                  <span>
-                    <ion-icon name="remove-circle-outline"></ion-icon>
-                  </span>
-                  <span>1</span>
-                  <span>
-                    <ion-icon name="add-circle-outline"></ion-icon>
-                  </span>
-                </div>
-              </td>
-              <td className="nav-cart__table--price">$80</td>
-              <td className="nav-cart__table--delete">
-                <ion-icon name="close-outline"></ion-icon>
-              </td>
-            </tr>
-          </table>
-        </div>
-        <div ref={(el) => (cartSummary = el)} className="nav-cart__summary">
-          <div className="nav-cart__summary--top">
-            <div className="heading mb-6">Summary</div>
-
-            <div className="d-flex justify-content-between align-content-center">
-              <div className="subheading __500">Subtotal</div>
-              <div className="subheading __500 text-right">$330</div>
-            </div>
-            <div className="d-flex justify-content-between align-content-center">
-              <div className="subheading __500">Shipping</div>
-              <div className="subheading __500 text-right">$5</div>
-            </div>
-            <div className="d-flex justify-content-between align-content-center">
-              <div className="subheading __500">Tax</div>
-              <div className="subheading __500 text-right">$0</div>
-            </div>
-          </div>
-          <div className="nav-cart__summary--bottom pb-8">
-            <div className="d-flex justify-content-between mt-2">
-              <div className="title __600 text-capitalize">Total</div>
-              <div className="heading">$330</div>
-            </div>
-            <div className="mt-3">
-              <Link href="/checkout">
-                <a onClick={closeCart} className="btn btn-block">
-                  Checkout
-                </a>
-              </Link>
-            </div>
-          </div>
-        </div>
+    <div className="navigation">
+      {/* Toggle */}
+      <div
+        className="toggle"
+        id="toggle"
+        onClick={isOpenNav ? closeNav : openNav}
+      >
+        <span ref={(el) => (one = el)}></span>
+        <span ref={(el) => (two = el)}></span>
       </div>
-
-      <div className="searchbar">
-        <div className="searchbar--input">
-          <input type="text" placeholder="Type to search" />
-        </div>
-        <div className="searchbar__result">
-          <div className="searchbar__result--item">
-            <a href="#">White shirt in colors</a>
-            <h5>
-              in <span>Shirts</span>
-            </h5>
-          </div>
-        </div>
+      {/* Logo */}
+      <div className="logo">
+        <Link href="/">
+          <div>arktastic</div>
+        </Link>
       </div>
-      <div ref={(el) => (navBar = el)} className="nav__bar">
-        {/* <div className="title">MENU</div> */}
-        <div
-          ref={(el) => (navBarContainer = el)}
-          className="nav__bar__container"
-        >
-          <div
-            ref={(el) => (navBarContainerImageContainer = el)}
-            className="nav__bar__container--image"
-          >
-            <img
-              ref={(el) => (navBarContainerImage = el)}
-              src="/assets/sections/navigation-woman.jpg"
-              alt=""
-            />
-          </div>
-          <div className="nav__bar__container--menu">
-            <div className="nav__bar__container--title __800 text-primary mb-2">
-              <span>Catalogue</span>
-            </div>
-            <li ref={(el) => (menuItem1 = el)}>
-              <Link href="/">
-                <a id="nav-home">Home</a>
-              </Link>
-            </li>
-            <li ref={(el) => (menuItem2 = el)}>
-              <a id="nav-accessories" href="/products">
-                accessories
-              </a>
-            </li>
-            <li ref={(el) => (menuItem3 = el)}>
-              <a id="nav-uppers" href="/products">
-                Uppers
-              </a>
-            </li>
-            <li ref={(el) => (menuItem4 = el)}>
-              <a id="nav-footwear" href="/products">
-                footwear
-              </a>
-            </li>
-            <li ref={(el) => (menuItem5 = el)}>
-              <a id="nav-health" href="/products">
-                Health &amp; Beauty
-              </a>
-            </li>
-            <div
-              ref={(el) => (menuItem6 = el)}
-              className="nav__bar__container--title __800 text-primary mt-3 mb-2"
-            >
-              <span>Navigate</span>
-            </div>
-            <li ref={(el) => (menuItem7 = el)}>
-              <a className="__800" href="/products">
-                Shop in Luxury
-              </a>
-            </li>
-            <li ref={(el) => (menuItem8 = el)}>
-              <Link href="/categories">Our categories</Link>
-            </li>
-            <li ref={(el) => (menuItem9 = el)}>
-              <a href="#">About us</a>
-            </li>
-          </div>
-        </div>
-      </div>
-      <div onClick={open ? closeNav : openNav} className="nav__hamburger">
-        <div className="hamburger" id="hamburger">
-          <span className="dot"></span>
-          <span className="dot"></span>
-          <span className="dot"></span>
-        </div>
-        <div className="nav__hamburger--menu">
-          <a href="#">men</a>
-          <a href="#">women</a>
-          <a href="#">Luxury</a>
-        </div>
-      </div>
-      <Link href="/">
-        <div className="nav__logo">
-          <div>
-            <img src="/assets/lifestyle-logo.svg" alt="" />
-          </div>
-          <span>ARKTASTIC</span>
-        </div>
-      </Link>
-      <div className="nav__icons">
-        <div className="nav__icons--list search--trigger">
-          <a className="nav__icons--link">
-            <ion-icon id="searchicon" name="search-outline"></ion-icon>
-          </a>
-        </div>
-        <div className="nav__icons--list" style={{ zIndex: 904 }}>
-          <a onClick={openCart} className="nav__icons--link cart--trigger">
-            <ion-icon name="bag-outline"></ion-icon>
-            <span>{cartItemsCount}</span>
-          </a>
-        </div>
-
-        <div
-          class="nav__icons--list account--trigger"
+      {/* Actions */}
+      <div className="actions">
+        <span onClick={isOpenSearch ? closeSearch : openSearch}>
+          <img src="/assets/icons/search.svg" alt="" />
+        </span>
+        <span onClick={openCart}>
+          <img src="/assets/icons/shopping-bag.svg" alt="" />
+        </span>
+        <span
+          className="account--trigger"
           onClick={accOpen ? closeAccount : openAccount}
         >
-          <a class="nav__icons--link">
-            <ion-icon name="person-outline"></ion-icon>
-          </a>
+          <img src="/assets/icons/user.svg" alt="" />
           <div class="account-card" ref={(el) => (accountCard = el)}>
             {userInfo.firstName ? (
               <>
@@ -488,7 +572,7 @@ const Navbar = ({ cartItemsCount }) => {
                   </a>
                 </li>
                 <li>
-                  <a href="#" onClick={handleLogoutBtn}>
+                  <a href="#">
                     <ion-icon name="log-out-outline"></ion-icon> Logout
                   </a>
                 </li>
@@ -512,11 +596,238 @@ const Navbar = ({ cartItemsCount }) => {
               </>
             )}
           </div>
+        </span>
+      </div>
+      {/* Search */}
+      <div className="wrapper-search" ref={(el) => (searchWrapper = el)}>
+        <input
+          type="text"
+          placeholder="type to search"
+          ref={(el) => (searchBar = el)}
+        />
+      </div>
+
+      {/* Cart */}
+
+      <div ref={(el) => (cart = el)} className="wrapper-cart">
+        <div
+          onClick={closeCart}
+          ref={(el) => (cartX = el)}
+          className="wrapper-cart--x"
+        >
+          <ion-icon name="close-outline"></ion-icon>
+        </div>
+        <div ref={(el) => (cartDetails = el)} className="wrapper-cart__details">
+          <span
+            onClick={closeCart}
+            className="text-upper text-cream pdetails__body--back"
+          >
+            <ion-icon name="arrow-back-outline"></ion-icon> Back to Store
+          </span>
+          <div className="d-flex justify-content-between align-content-center">
+            <div className="wrapper-cart__details--title">Shopping cart</div>
+            <div className="title">2 items</div>
+          </div>
+          <table className="wrapper-cart__table">
+            <tr>
+              <th>Item</th>
+              <th>Size</th>
+              <th>Quantity</th>
+              <th>Price</th>
+              <th></th>
+            </tr>
+            <tr className="wrapper-cart__table--data">
+              <td className="d-flex">
+                <div className="wrapper-cart__table--img">
+                  <img src="/assets/products/customizable-mug.jpg" alt="" />
+                </div>
+                <div className="wrapper-cart__table--name">
+                  <h2>Picàs Scent women</h2>
+                  <h5>SiQo</h5>
+                </div>
+              </td>
+              <td>250ml</td>
+              <td>
+                <div className="wrapper-cart__table--quantity">
+                  <span>
+                    <ion-icon name="remove-circle-outline"></ion-icon>
+                  </span>
+                  <span>1</span>
+                  <span>
+                    <ion-icon name="add-circle-outline"></ion-icon>
+                  </span>
+                </div>
+              </td>
+              <td className="wrapper-cart__table--price">$80</td>
+              <td className="wrapper-cart__table--delete">
+                <ion-icon name="close-outline"></ion-icon>
+              </td>
+            </tr>
+            <tr className="wrapper-cart__table--data">
+              <td className="d-flex">
+                <div className="wrapper-cart__table--img">
+                  <img
+                    src="/assets/products/mountain-fox-notebook.jpg"
+                    alt=""
+                  />
+                </div>
+                <div className="wrapper-cart__table--name">
+                  <h2>Picàs Scent women</h2>
+                  <h5>SiQo</h5>
+                </div>
+              </td>
+              <td>250ml</td>
+              <td>
+                <div className="wrapper-cart__table--quantity">
+                  <span>
+                    <ion-icon name="remove-circle-outline"></ion-icon>
+                  </span>
+                  <span>1</span>
+                  <span>
+                    <ion-icon name="add-circle-outline"></ion-icon>
+                  </span>
+                </div>
+              </td>
+              <td className="wrapper-cart__table--price">$80</td>
+              <td className="wrapper-cart__table--delete">
+                <ion-icon name="close-outline"></ion-icon>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <div ref={(el) => (cartSummary = el)} className="wrapper-cart__summary">
+          <div className="wrapper-cart__summary--top">
+            <div className="heading mb-6">Summary</div>
+
+            <div className="d-flex justify-content-between align-content-center">
+              <div className="subheading __500">Subtotal</div>
+              <div className="subheading __500 text-right">$330</div>
+            </div>
+            <div className="d-flex justify-content-between align-content-center">
+              <div className="subheading __500">Shipping</div>
+              <div className="subheading __500 text-right">$5</div>
+            </div>
+            <div className="d-flex justify-content-between align-content-center">
+              <div className="subheading __500">Tax</div>
+              <div className="subheading __500 text-right">$0</div>
+            </div>
+          </div>
+          <div className="wrapper-cart__summary--bottom pb-8">
+            <div className="d-flex justify-content-between mt-2">
+              <div className="title __600 text-capitalize">Total</div>
+              <div className="heading">$330</div>
+            </div>
+            <div className="mt-3">
+              <Link href="/checkout">
+                <a onClick={closeCart} className="btn btn-block">
+                  Checkout
+                </a>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* WRAPPERS */}
+      {/* Wrapper menu */}
+      <div className="wrapper-menu" ref={(el) => (menu = el)}>
+        <div className="menu" ref={(el) => (menuItems = el)}>
+          <ul>
+            <Link
+              href={{
+                pathname: "/products/upperwear",
+              }}
+            >
+              <li onMouseEnter={m1Enter} ref={(el) => (menuItem1 = el)}>
+                <span id="count">01</span>
+                <span id="menu">&nbsp;Upperwear</span>
+              </li>
+            </Link>
+            <Link
+              href={{
+                pathname: "/products/lowers",
+              }}
+            >
+              <li onMouseEnter={m2Enter} ref={(el) => (menuItem2 = el)}>
+                <span id="count">02</span>
+                <span id="menu">&nbsp;Lowers</span>
+              </li>
+            </Link>
+            <Link
+              href={{
+                pathname: "/products/accessories",
+              }}
+            >
+              <li onMouseEnter={m3Enter} ref={(el) => (menuItem3 = el)}>
+                <span id="count">03</span>
+                <span id="menu">&nbsp;Accessories</span>
+              </li>
+            </Link>
+            <Link
+              href={{
+                pathname: "/products/footwear",
+              }}
+            >
+              <li onMouseEnter={m4Enter} ref={(el) => (menuItem4 = el)}>
+                <span id="count">04</span>
+                <span id="menu">&nbsp;Footwear</span>
+              </li>
+            </Link>
+            <Link
+              href={{
+                pathname: "/products/health-and-beauty",
+              }}
+            >
+              <li onMouseEnter={m5Enter} ref={(el) => (menuItem5 = el)}>
+                <span id="count">05</span>
+                <span id="menu">&nbsp;Health & Beauty</span>
+              </li>
+            </Link>
+          </ul>
+        </div>
+
+        <div className="social" ref={(el) => (menuSocials = el)}>
+          <li ref={(el) => (menuSocial1 = el)}>
+            <a href="#">
+              <ion-icon name="logo-facebook"></ion-icon>
+            </a>
+          </li>
+          <li ref={(el) => (menuSocial2 = el)}>
+            <a href="#">
+              <ion-icon name="logo-instagram"></ion-icon>
+            </a>
+          </li>
+          <li ref={(el) => (menuSocial3 = el)}>
+            <a href="#">
+              <ion-icon name="logo-twitter"></ion-icon>
+            </a>
+          </li>
+        </div>
+      </div>
+
+      {/* Wrapper Images */}
+      <div className="wrapper-images" ref={(el) => (imagesWrapper = el)}>
+        <div className="images">
+          <span className="image im1" ref={(el) => (im1 = el)}>
+            <img src="/assets/sections/nav-upper.jpg" alt="" />
+          </span>
+          <span className="image im2" ref={(el) => (im2 = el)}>
+            <img src="/assets/sections/nav-lowers.jpg" alt="" />
+          </span>
+          <span className="image im3" ref={(el) => (im3 = el)}>
+            <img src="/assets/sections/nav-accessories.jpg" alt="" />
+          </span>
+          <span className="image im4" ref={(el) => (im4 = el)}>
+            <img src="/assets/sections/nav-foot.jpg" alt="" />
+          </span>
+          <span className="image im5" ref={(el) => (im5 = el)}>
+            <img src="/assets/sections/nav-health.jpg" alt="" />
+          </span>
         </div>
       </div>
     </div>
   );
 };
 
-// export default Navbar;
-export default connect(mapStateToProps, null)(Navbar);
+export default Navbar;
+// export default connect(mapStateToProps, null)(Navbar);

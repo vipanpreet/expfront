@@ -20,153 +20,94 @@ const HomeSection = (props) => {
     },
   };
   return (
-    <section className="section-categories mt-2">
-    
-        <div className="category--wrapper">
-          <Carousel
-            additionalTransfrom={0}
-            swipeable={true}
-            draggable={true}
-            showDots={false}
-            focusOnSelect={false}
-            responsive={responsive}
-            ssr={true} // means to render carousel on server-side.
-            infinite={false}
-            autoPlay={false}
-            autoPlaySpeed={3000}
-            keyBoardControl={false}
-            containerclassName="carousel-container"
-            removeArrowOnDeviceType={[""]}
-            deviceType={props.deviceType}
-            dotListclassName="custom-dot-list-style"
-            itemclassName="carousel-item-padding-40-px"
-            arrows={false}
-          >
-            {/* <div className="row"> */}
-            <div className="col">
-              <div className="category">
-                <div className="category__img">
-                  <img src="/assets/cat/uppers.jpg" alt="" />
-                </div>
+    <section className="section-categories mt-3">
+      <div className="category--wrapper">
+        <Carousel
+          additionalTransfrom={0}
+          swipeable={true}
+          draggable={true}
+          showDots={false}
+          focusOnSelect={false}
+          responsive={responsive}
+          ssr={true} // means to render carousel on server-side.
+          infinite={false}
+          autoPlay={false}
+          autoPlaySpeed={3000}
+          keyBoardControl={false}
+          containerclassName="carousel-container"
+          removeArrowOnDeviceType={[""]}
+          deviceType={props.deviceType}
+          dotListclassName="custom-dot-list-style"
+          itemclassName="carousel-item-padding-40-px"
+          arrows={false}
+        >
+          {/* <div className="row"> */}
+          <div className="col">
+            <div class="category">
+              <div class="category__img">
+                <img src="/assets/cat/uppers.jpg" alt="" />
                 <Link
                   href={{
                     pathname: "/products/upperwear",
-                    query: {
-                      pagenumber: "1",
-                      sortby: "relevance",
-                      sortdirection: "desc",
-                    },
                   }}
                 >
-                  <div className="category__body">
-                    <a className="category__body--link" href="#">
-                      Upperwear
-                    </a>
-                    <h1>Visit Collection</h1>
-                    <div>
-                      <span>T shirt</span>
-                      <span>Polos</span>
-                      <span>Shirts</span>
-                      <span>Hoodies</span> and more..
-                    </div>
-                  </div>
+                  <a class="category__img--link" href="#">
+                    Upperwear
+                  </a>
                 </Link>
               </div>
             </div>
-            <div className="col">
-              <div className="category">
-                <div className="category__img">
-                  <img src="/assets/cat/accessorie.jpg" alt="" />
-                </div>
-                <Link
-                  href={{
-                    pathname: "/products/accessories",
-                    query: {
-                      pagenumber: "1",
-                      sortby: "relevance",
-                      sortdirection: "desc",
-                    },
-                  }}
-                >
-                  <div className="category__body">
-                    <a className="category__body--link" href="#">
-                      Accessories
-                    </a>
-                    <h1>Curated Products</h1>
-                    <div>
-                      <span>Jewellery</span>
-                      <span>Wallets</span>
-                      <span>Watches</span>
-                      <span>Belts</span> and more..
-                    </div>
-                  </div>
-                </Link>
-              </div>
-            </div>
-            <div className="col">
-              <div className="category">
-                <div className="category__img">
-                  <img src="/assets/cat/lowers.jpg" alt="" />
-                </div>
+          </div>
+          <div className="col">
+            <div class="category">
+              <div class="category__img">
+                <img src="/assets/cat/lowers.jpg" alt="" />
                 <Link
                   href={{
                     pathname: "/products/lowers",
-                    query: {
-                      pagenumber: "1",
-                      sortby: "relevance",
-                      sortdirection: "desc",
-                    },
                   }}
                 >
-                  <div className="category__body">
-                    <a className="category__body--link" href="#">
-                      Lowers
-                    </a>
-                    <h1>Cute Pants shop</h1>
-                    <div>
-                      <span>Jeans</span>
-                      <span>Pants</span>
-                      <span>Shorts</span>
-                      <span>Skirts</span> and more..
-                    </div>
-                  </div>
+                  <a class="category__img--link" href="#">
+                    Lowers
+                  </a>
                 </Link>
               </div>
             </div>
-            <div className="col">
-              <div className="category">
-                <div className="category__img">
-                  <img src="/assets/cat/accessorie.jpg" alt="" />
-                </div>
+          </div>
+          <div className="col">
+            <div class="category">
+              <div class="category__img">
+                <img src="/assets/cat/accessorie.jpg" alt="" />
+                <Link
+                  href={{
+                    pathname: "/products/accessories",
+                  }}
+                >
+                  <a class="category__img--link" href="#">
+                    Accessories
+                  </a>
+                </Link>
+              </div>
+            </div>
+          </div>
+          <div className="col">
+            <div class="category">
+              <div class="category__img">
+                <img src="/assets/cat/shoes.jpg" alt="" />
                 <Link
                   href={{
                     pathname: "/products/footwear",
-                    query: {
-                      pagenumber: "1",
-                      sortby: "relevance",
-                      sortdirection: "desc",
-                    },
                   }}
                 >
-                  <div className="category__body">
-                    <a className="category__body--link" href="#">
-                      Footwear
-                    </a>
-                    <h1>Everything you want</h1>
-                    <div>
-                      <span>Jewellery</span>
-                      <span>Wallets</span>
-                      <span>Watches</span>
-                      <span>Belts</span> and more..
-                    </div>
-                  </div>
+                  <a class="category__img--link" href="#">
+                    Footwear
+                  </a>
                 </Link>
               </div>
             </div>
-            {/* </div> */}
-          </Carousel>
-        </div>
-     
+          </div>
+        </Carousel>
+      </div>
     </section>
   );
 };

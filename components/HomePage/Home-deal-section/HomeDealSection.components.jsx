@@ -1,26 +1,33 @@
+import Link from "next/link";
 const HomeDealSection = () => {
   return (
-    <section className="section-dealoftheday">
-      <div className="container-fluid">
-        <div className="dealoftheday">
-          <div className="dealoftheday--img">
-            <img src="/assets/sections/section-deal.jpg" alt="" />
+    <section class="section-dealoftheday">
+      <div class="container-xlarge">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="img-res">
+              <img src="/assets/sections/dealoftheday.jpg" alt="" />
+            </div>
           </div>
-          <div className="dealoftheday__body">
-            <div className="title">Deal of the day</div>
-            <div className="dealoftheday__body--name">
-              the perfect complete set of clothing
+          <div class="col-md-6 section-dealoftheday--p">
+            <div class="title-special">
+              Deal <br />
+              of the day
             </div>
-            <div className="para mt-2">
-              Designed with our most technical fabrication, DO Os products are
-              made to keep you warm and dry in harsh weather conditions. From
-              lightweight windbreakers to heavier shells, explore the collection
-              of weather-resistant jackets & more.
-            </div>
-            <div className="mt-3">
-              <a className="btn btn--primary" href="#">
-                Check out
-              </a>
+            <div class="subtitle mt-3">Premium shirt for women</div>
+            <p class="para">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus
+              nisi repellat non quod adipisci libero reiciendis ut suscipit?
+              Sapiente voluptatum pariatur dolorem accusantium consectetur iusto
+              veniam totam reprehenderit, debitis perferendis.
+            </p>
+
+            <div class="mt-3">
+              <Link href="/details/5fca9754acf6bf3558a1dc01">
+                <a href="#" class="btn btn--female">
+                  Explore the deal
+                </a>
+              </Link>
             </div>
           </div>
         </div>

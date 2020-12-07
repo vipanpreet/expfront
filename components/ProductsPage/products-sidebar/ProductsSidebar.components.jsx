@@ -10,9 +10,10 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { TweenMax, Power3 } from "gsap";
 
-const ProductSidebar = () => {
+const ProductSidebar = ({ setItems, setPg, products }) => {
   let sideBar = useRef(null);
   let [isOpen, setIsOpen] = useState(false);
+  let [isClicked, setIsClicked] = useState(false);
 
   const dispatch = useDispatch();
   const router = useRouter();
@@ -34,17 +35,23 @@ const ProductSidebar = () => {
     // getting the list of subcategories using cateogory Id and showing on the UI
     dispatch(listSubCategories(category.slug));
     // filtering the products by passing category
-    dispatch(saveCategoryState(category.name));
+    dispatch(saveCategoryState(category.slug));
+    setIsClicked(true);
+    setItems(products);
+    setPg(1);
   };
 
   const handleSubCategoryClick = (subcategory) => {
     // to filter products based on subcategory we need slug of category
+
     const category = categories.find(
       (category) => category.slug === subcategory.parent
     );
 
     // save the selected subcategory in the store
     category && dispatch(saveSubCategoryState(subcategory.slug));
+    setItems(products);
+    setPg(1);
   };
   const openSideBar = () => {
     TweenMax.to(sideBar, 0.6, {
@@ -63,11 +70,7 @@ const ProductSidebar = () => {
 
   return (
     <>
-      <div
-        style={{ paddingRight: 60 }}
-        className="sidebar"
-        ref={(el) => (sideBar = el)}
-      >
+      <div className="sidebar" ref={(el) => (sideBar = el)}>
         <div className="sidebar--group">
           <div className="title">Explore</div>
           <div className="mt-2">
@@ -78,7 +81,7 @@ const ProductSidebar = () => {
               <a href="#">Newly Added</a>
             </li>
             <li className="sidebar--item">
-              <a href="#">Recommended Products</a>
+              <a href="#">Recommended </a>
             </li>
           </div>
         </div>
@@ -89,7 +92,7 @@ const ProductSidebar = () => {
             {categories.map((category) => {
               return (
                 <li className="sidebar--item" key={category._id}>
-                  <Link href={`/products/${category.name}`}>
+                  <Link href={`/products/${category.slug}`}>
                     <a
                       value={category}
                       onClick={() => handleCategoryClick(category)}
@@ -103,7 +106,7 @@ const ProductSidebar = () => {
           </div>
         </div>
         <div className="sidebar--group">
-          <div className="title">SubCategories</div>
+          {isClicked && <div className="title">SubCategories</div>}
           <div className="mt-2">
             {subcategories.map((subcategory) => {
               return (
@@ -119,7 +122,11 @@ const ProductSidebar = () => {
           </div>
         </div>
       </div>
-      <div class="options" onClick={isOpen ? closeSideBar : openSideBar}>
+      <div
+        class="options"
+        style={{ position: "absolute", top: "46%", right: 50 }}
+        onClick={isOpen ? closeSideBar : openSideBar}
+      >
         <a style={{ cursor: "pointer" }}>
           <ion-icon name="options-outline"></ion-icon>
         </a>

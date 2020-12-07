@@ -1,107 +1,167 @@
 import Card from "../../ReusableComponents/single-card/card.components";
-// import Carousel from "react-multi-carousel";
 
 const HomeTrendingSection = (props) => {
-  // const responsive = {
-  //   desktop: {
-  //     breakpoint: { max: 3000, min: 1024 },
-  //     items: 3,
-  //     slidesToSlide: 1, // optional, default to 1.
-  //   },
-  //   tablet: {
-  //     breakpoint: { max: 1024, min: 464 },
-  //     items: 3,
-  //     slidesToSlide: 1, // optional, default to 1.
-  //   },
-  //   mobile: {
-  //     breakpoint: { max: 1024, min: 450 },
-  //     items: 1,
-  //     slidesToSlide: 1, // optional, default to 1.
-  //   },
-  // };
   return (
-    <section className="section-trending mt">
-      <div className="container-xlarge">
-        <div className="trend">
-          <div className="trend--btn">
-            <a href="#" className="btn btn--primary">
-              Check All
+    <section class="section-trending">
+      <div class="container-xlarge">
+        <div class="title text-center">Trending</div>
+        <div class="para text-center mb-5 mt-2 __400">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta,
+          dicta! Numquam architecto aspernatur.
+        </div>
+        <div class="row row-cols-2">
+          <div class="col-lg-3">
+            <div class="card">
+              <div class="card--inner">
+                <div class="card__img">
+                  <img src="assets/products/shirt1.jpg" alt="" />
+                  <div class="card__img--type">L</div>
+                </div>
+                <div class="card__body">
+                  <div class="card__body--brand">Gucci</div>
+                  <div class="card__body--name">Classic shirt for men</div>
+                  <div class="card__hover">
+                    <div class="card__hover--wrapper">
+                      <div class="card__hover--desc">
+                        Lorem, ipsum dolor sit amet consectetur adipisicing
+                        elit. Temporibus ullam libero eligendi tempora, nulla
+                        excepturi consectetur.
+                      </div>
+                      <div class="card__hover__btns">
+                        <a href="#" class="card__hover__btns--wishlist">
+                          <ion-icon name="heart-outline"></ion-icon>
+                        </a>
+                        <a href="#" class="card__hover__btns--showproduct">
+                          View
+                        </a>
+                        <a href="" class="card__hover__btns--options">
+                          <ion-icon name="options-outline"></ion-icon>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card__body--price">$399</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-3">
+            <div class="card">
+              <div class="card--inner">
+                <div class="card__img">
+                  <img
+                    src="assets/products/Striped_Funnelneck_Pullover_1_edb4c6e5-a27d-44a7-a4e1-80e167eabb7a_600x.jpg"
+                    alt=""
+                  />
+                  <div class="card__img--type">L</div>
+                </div>
+                <div class="card__body">
+                  <div class="card__body--brand">Gucci</div>
+                  <div class="card__body--name">Classic shirt for men</div>
+                  <div class="card__hover">
+                    <div class="card__hover--wrapper">
+                      <div class="card__hover--desc">
+                        Lorem, ipsum dolor sit amet consectetur adipisicing
+                        elit. Temporibus ullam libero eligendi tempora, nulla
+                        excepturi consectetur.
+                      </div>
+                      <div class="card__hover__btns">
+                        <a href="#" class="card__hover__btns--wishlist">
+                          <ion-icon name="heart-outline"></ion-icon>
+                        </a>
+                        <a href="#" class="card__hover__btns--showproduct">
+                          View
+                        </a>
+                        <a href="" class="card__hover__btns--options">
+                          <ion-icon name="options-outline"></ion-icon>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card__body--price">$399</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-3">
+            <div class="card">
+              <div class="card--inner">
+                <div class="card__img">
+                  <img
+                    src="assets/products/Striped_Cap-Sleeve_Polo_3_8943040d-947f-4bd2-9c56-41b7a6bdb76a_600x.jpg"
+                    alt=""
+                  />
+                  <div class="card__img--type">L</div>
+                </div>
+                <div class="card__body">
+                  <div class="card__body--brand">Gucci</div>
+                  <div class="card__body--name">Classic shirt for men</div>
+                  <div class="card__hover">
+                    <div class="card__hover--wrapper">
+                      <div class="card__hover--desc">
+                        Lorem, ipsum dolor sit amet consectetur adipisicing
+                        elit. Temporibus ullam libero eligendi tempora, nulla
+                        excepturi consectetur.
+                      </div>
+                      <div class="card__hover__btns">
+                        <a href="#" class="card__hover__btns--wishlist">
+                          <ion-icon name="heart-outline"></ion-icon>
+                        </a>
+                        <a href="#" class="card__hover__btns--showproduct">
+                          View
+                        </a>
+                        <a href="" class="card__hover__btns--options">
+                          <ion-icon name="options-outline"></ion-icon>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card__body--price">$399</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-3">
+            <div class="card">
+              <div class="card--inner">
+                <div class="card__img">
+                  <img src="assets/products/shirt3.jpg" alt="" />
+                  <div class="card__img--type">L</div>
+                </div>
+                <div class="card__body">
+                  <div class="card__body--brand">Gucci</div>
+                  <div class="card__body--name">Classic shirt for men</div>
+                  <div class="card__hover">
+                    <div class="card__hover--wrapper">
+                      <div class="card__hover--desc">
+                        Lorem, ipsum dolor sit amet consectetur adipisicing
+                        elit. Temporibus ullam libero eligendi tempora, nulla
+                        excepturi consectetur.
+                      </div>
+                      <div class="card__hover__btns">
+                        <a href="#" class="card__hover__btns--wishlist">
+                          <ion-icon name="heart-outline"></ion-icon>
+                        </a>
+                        <a href="#" class="card__hover__btns--showproduct">
+                          View
+                        </a>
+                        <a href="" class="card__hover__btns--options">
+                          <ion-icon name="options-outline"></ion-icon>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card__body--price">$399</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="mt-3 text-center">
+          <div class="relative">
+            <a href="#" class="btn btn--female">
+              See More
             </a>
-          </div>
-          <div className="trend__main">
-            <div className="trend__main--img">
-              <img src="/assets/sections/nav-upper.jpg" alt="" />
-            </div>
-            <a href="#" className="trend__main--link text-upper">
-              women shirt modern 2020
-            </a>
-          </div>
-          <div className="trend__category">
-            <div className="trend__category--btns">
-              <a href="#">
-                <ion-icon name="chevron-back-outline"></ion-icon>
-              </a>
-              <a href="#">
-                <ion-icon name="chevron-forward-outline"></ion-icon>
-              </a>
-            </div>
-            <div className="trend__category--small">Trending</div>
-            <div className="trend__category--name">Upperwear</div>
-            <div className="trend__category__other">
-              <a href="#" className="trend__category__other--name">
-                lowers
-              </a>
-              <a href="#" className="trend__category__other--name">
-                accessories
-              </a>
-              <a href="#" className="trend__category__other--name">
-                footwear
-              </a>
-              <a href="#" className="trend__category__other--name">
-                health
-              </a>
-            </div>
-          </div>
-
-          <div className="trend__extras">
-            {/* <Carousel
-              additionalTransfrom={0}
-              swipeable={false}
-              draggable={false}
-              showDots={true}
-              focusOnSelect={false}
-              responsive={responsive}
-              ssr={true} // means to render carousel on server-side.
-              infinite={false}
-              autoPlay={false}
-              autoPlaySpeed={3000}
-              keyBoardControl={true}
-              containerclassName="carousel-container"
-              removeArrowOnDeviceType={[""]}
-              deviceType={props.deviceType}
-              dotListclassName="custom-dot-list-style"
-              itemclassName="carousel-item-padding-40-px"
-              arrows={true}
-            > */}
-            <div className="trend__extras--img1">
-              <img src="/assets/theme-active.jpg" alt="" />
-              <a href="#" className="subheading text-upper">
-                women active top
-              </a>
-            </div>
-            <div className="trend__extras--img2">
-              <img src="/assets/theme-office.jpg" alt="" />
-              <a href="#" className="subheading text-upper">
-                women top clean
-              </a>
-            </div>
-            <div className="trend__extras--img3">
-              <img src="/assets/theme-party.jpg" alt="" />
-              <a href="#" className="subheading text-upper">
-                shirt for women{" "}
-              </a>
-            </div>
-            {/* </Carousel> */}
           </div>
         </div>
       </div>

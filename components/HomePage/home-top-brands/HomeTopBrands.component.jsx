@@ -1,32 +1,38 @@
 const HomeTopBrands = () => {
   return (
-    <section className="section-topbrands">
-      <div className="container-large">
-        <div className="row">
-          <div className="col">
-            <a href="#" className="topbrand">
-              <img src="/assets/brands/armani logo-(grey).png" alt="" />
+    <section class="section-topbrands">
+      <div class="title text-center __600">TOP BRANDS</div>
+      <div class="para text-center mb-5 mt-2 __400">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta, dicta!
+        Numquam architecto aspernatur.
+      </div>
+
+      <div class="container-large">
+        <div class="row">
+          <div class="col">
+            <a href="#">
+              <img src="/assets/brands/new1.webp" alt="" />
             </a>
           </div>
 
-          <div className="col">
-            <a href="#" className="topbrand">
-              <img src="/assets/brands/Chanel logo-(grey).png" alt="" />
+          <div class="col">
+            <a href="#">
+              <img src="/assets/brands/new2.webp" alt="" />
             </a>
           </div>
-          <div className="col">
-            <a href="#" className="topbrand">
-              <img src="/assets/brands/Versace logo-(grey).png" alt="" />
+          <div class="col">
+            <a href="#">
+              <img src="/assets/brands/new3.webp" alt="" />
             </a>
           </div>
-          <div className="col">
-            <a href="#" className="topbrand">
-              <img src="/assets/brands/D&G logo-(grey).png" alt="" />
+          <div class="col">
+            <a href="#">
+              <img src="/assets/brands/new4.webp" alt="" />
             </a>
           </div>
-          <div className="col">
-            <a href="#" className="topbrand">
-              <img src="/assets/brands/Dior logo-(grey).png" alt="" />
+          <div class="col">
+            <a href="#">
+              <img src="/assets/brands/new5.webp" alt="" />
             </a>
           </div>
         </div>
