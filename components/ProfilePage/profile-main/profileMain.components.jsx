@@ -38,20 +38,8 @@ const ProfileMain = () => {
       setStreet(profile.street);
       setZipcode(profile.zipcode);
       setLocality(profile.locality);
-<<<<<<< HEAD
     }
   }, [userInfo, success]);
-=======
-      if (message) {
-        dispatch(getProfile());
-      }
-    }
-  }, [userInfo, getLoading, message]);
-<<<<<<< HEAD
->>>>>>> 2b4505e (navbar transparent updated)
-=======
->>>>>>> 2b4505ee0785104e49aa15e0c1691aed88522c36
->>>>>>> bff1bdd6b336d7b47fc7a2f1544c31350b079cd9
 
   const submitHandler = (e) => {
     e.preventDefault();
