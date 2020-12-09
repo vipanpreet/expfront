@@ -10,10 +10,9 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { TweenMax, Power3 } from "gsap";
 
-const ProductSidebar = ({ setItems, setPg, products }) => {
+const ProductSidebar = () => {
   let sideBar = useRef(null);
   let [isOpen, setIsOpen] = useState(false);
-  let [isClicked, setIsClicked] = useState(false);
 
   const dispatch = useDispatch();
   const router = useRouter();
@@ -25,34 +24,35 @@ const ProductSidebar = ({ setItems, setPg, products }) => {
   const subCategoryList = useSelector((state) => state.subCategoryList);
   const { subcategories } = subCategoryList;
 
+  var { category, subcategory, sortby, sortdirection, page, q } = router.query;
+
+  var queryList = {};
+  q && (queryList.q = q);
+  category && (queryList.category = category);
+  subcategory && (queryList.subcategory = subcategory);
+  page && (queryList.page = 1);
+
   useEffect(() => {
+    window.scrollTo({ top: 500, behavior: "smooth" });
+
     // fetching the categories list on render.
-    dispatch(listCategories());
-    dispatch(saveCategoryState(router.query.subcategory));
-  }, [dispatch]);
+    if (categories.length < 2) {
+      dispatch(listCategories());
+    }
+    if (category) {
+      dispatch(listSubCategories(router.query.category));
+    }
+  }, [dispatch, category]);
 
-  const handleCategoryClick = (category) => {
-    // getting the list of subcategories using cateogory Id and showing on the UI
-    dispatch(listSubCategories(category.slug));
-    // filtering the products by passing category
-    dispatch(saveCategoryState(category.slug));
-    setIsClicked(true);
-    setItems(products);
-    setPg(1);
+  const handleCategory = (e) => {
+    queryList.category = e;
+    const { subcategory, ...newQuery } = queryList;
+    router.push({
+      pathname: "/products",
+      query: newQuery,
+    });
   };
 
-  const handleSubCategoryClick = (subcategory) => {
-    // to filter products based on subcategory we need slug of category
-
-    const category = categories.find(
-      (category) => category.slug === subcategory.parent
-    );
-
-    // save the selected subcategory in the store
-    category && dispatch(saveSubCategoryState(subcategory.slug));
-    setItems(products);
-    setPg(1);
-  };
   const openSideBar = () => {
     TweenMax.to(sideBar, 0.6, {
       left: "0px",
@@ -89,34 +89,48 @@ const ProductSidebar = ({ setItems, setPg, products }) => {
         <div className="sidebar--group">
           <div className="title">Categories</div>
           <div className="mt-2">
-            {categories.map((category) => {
-              return (
-                <li className="sidebar--item" key={category._id}>
-                  <Link href={`/products/${category.slug}`}>
-                    <a
-                      value={category}
-                      onClick={() => handleCategoryClick(category)}
+            {categories &&
+              categories.map((category) => {
+                return (
+                  <li
+                    className="sidebar--item"
+                    style={{ cursor: "pointer" }}
+                    key={category._id}
+                  >
+                    <button
+                      onClick={(e) => handleCategory(category.slug)}
+                      style={{ cursor: "pointer" }}
                     >
                       {category.name}
-                    </a>
-                  </Link>
-                </li>
-              );
-            })}
+                    </button>
+                  </li>
+                );
+              })}
           </div>
         </div>
         <div className="sidebar--group">
-          {isClicked && <div className="title">SubCategories</div>}
+          {subcategories.length > 2 && (
+            <div className="title">SubCategories</div>
+          )}
           <div className="mt-2">
             {subcategories.map((subcategory) => {
               return (
-                <li
-                  className="sidebar--item"
-                  key={subcategory._id}
-                  onClick={() => handleSubCategoryClick(subcategory)}
+                <Link
+                  href={{
+                    pathname: "/products",
+                    query: { ...queryList, subcategory: subcategory.slug },
+                  }}
                 >
-                  <a href="#">{subcategory.name}</a>
-                </li>
+                  <li
+                    className="sidebar--item"
+                    style={{ cursor: "pointer" }}
+                    key={subcategory._id}
+                  >
+                    <button style={{ cursor: "pointer" }}>
+                      {subcategory.name}
+                    </button>
+                  </li>
+                </Link>
               );
             })}
           </div>

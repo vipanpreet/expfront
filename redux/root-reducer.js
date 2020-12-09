@@ -14,7 +14,10 @@ import {
   categoryListReducer,
   subCategoryListReducer,
 } from "./category/category.reducers";
-import productsListReducer from "./products/products.reducer";
+import {
+  productsListReducer,
+  searchListReducer,
+} from "./products/products.reducer";
 
 const persistConfig = {
   key: "root",
@@ -33,6 +36,7 @@ const rootReducer = combineReducers({
   categoryList: categoryListReducer,
   subCategoryList: subCategoryListReducer,
   productsList: productsListReducer,
+  searchList: searchListReducer,
 });
 
 export default persistReducer(persistConfig, rootReducer);

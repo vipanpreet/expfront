@@ -52,16 +52,3 @@ export const listSubCategories = (slug) => async (dispatch) => {
     });
   }
 };
-
-export const saveCategoryState = (category) => ({
-  type: CATEGORY_STATE_SAVE,
-  payload: category,
-});
-
-export const saveSubCategoryState = (subCategory) => ({
-  type: SUBCATEGORY_STATE_SAVE,
-  payload: subCategory,
-});
-export const removeSubCategoryState = () => ({
-  type: SUBCATEGORY_STATE_REMOVE,
-});

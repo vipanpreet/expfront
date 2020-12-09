@@ -1,20 +1,28 @@
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
+import { useRouter } from "next/router";
+
 // import { selectCartItemsCount } from "../../../redux/cart/cart.selectors";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../../redux/login/login.actions";
+import { SEARCH_LIST_CLEAR } from "../../../redux/products/products.types";
 
 // Animation GSAP
 import { Expo, TimelineMax } from "gsap";
+import { getSearchList } from "../../../redux/products/products.actions";
+import "animate.css";
 
 // const mapStateToProps = createStructuredSelector({
 //   cartItemsCount: selectCartItemsCount,
 // });
 
 const Navbar = () => {
+  const router = useRouter();
+
   const [isOpenNav, setIsOpenNav] = useState(false);
   const [isOpenSearch, setIsOpenSearch] = useState(false);
   let [accOpen, setAccOpen] = useState(false);
+  const [searchKeyword, setSearchKeyword] = useState("");
 
   let one = useRef(null);
   let two = useRef(null);
@@ -54,7 +62,30 @@ const Navbar = () => {
 
   // account
   let accountCard = useRef(null);
+  const dispatch = useDispatch();
 
+  const login = useSelector((state) => state.login);
+  const { userInfo } = login;
+
+  const searchList = useSelector((state) => state.searchList);
+  const { search } = searchList;
+
+  useEffect(() => {
+    if (searchKeyword.length >= 3) {
+      dispatch(getSearchList(searchKeyword));
+    } else {
+      dispatch({ type: SEARCH_LIST_CLEAR });
+    }
+  }, [dispatch, searchKeyword]);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    router.push({
+      pathname: "/products",
+      query: { q: encodeURI(searchKeyword) },
+    });
+    closeAll();
+  };
   // const changeNavBackground = () => {
   //   if (window.scrollY >= 80) {
   //     setNavBg(true);
@@ -63,6 +94,11 @@ const Navbar = () => {
   //   }
   // };
   // window.addEventListener("scroll", changeNavBackground);
+  const closeAll = () => {
+    closeNav();
+    closeSearch();
+    setSearchKeyword("");
+  };
 
   const openNav = () => {
     var isMobile;
@@ -105,8 +141,8 @@ const Navbar = () => {
 
     t1.staggerFrom(
       [menuItem1, menuItem2, menuItem3, menuItem4, menuItem5],
-      0.6,
-      { y: "15", opacity: 0, delay: -0.8 },
+      0.4,
+      { y: "15", opacity: 0, delay: -0.9 },
       0.2
     );
 
@@ -513,10 +549,6 @@ const Navbar = () => {
     setAccOpen(false);
   };
 
-  const dispatch = useDispatch();
-  const login = useSelector((state) => state.login);
-  const { userInfo } = login;
-
   const handleLogoutBtn = () => {
     dispatch(logout());
   };
@@ -534,7 +566,7 @@ const Navbar = () => {
       </div>
       {/* Logo */}
       <div className="logo">
-        <Link href="/">
+        <Link style={{ cursor: "pointer" }} href="/">
           <div>arktastic</div>
         </Link>
       </div>
@@ -572,7 +604,7 @@ const Navbar = () => {
                   </a>
                 </li>
                 <li>
-                  <a onClick={handleLogoutBtn}>
+                  <a href="#">
                     <ion-icon name="log-out-outline"></ion-icon> Logout
                   </a>
                 </li>
@@ -600,11 +632,36 @@ const Navbar = () => {
       </div>
       {/* Search */}
       <div className="wrapper-search" ref={(el) => (searchWrapper = el)}>
-        <input
-          type="text"
-          placeholder="type to search"
-          ref={(el) => (searchBar = el)}
-        />
+        <form onSubmit={(e) => handleSubmit(e)}>
+          <input
+            type="text"
+            placeholder="type to search"
+            ref={(el) => (searchBar = el)}
+            value={searchKeyword}
+            onChange={(e) => setSearchKeyword(e.target.value)}
+          />
+        </form>
+
+        <div className={searchKeyword.length >= 3 ? "autolist" : null}>
+          {search && search.length > 0
+            ? search.map((autocomplete) => {
+                return (
+                  <li>
+                    <Link
+                      href={{
+                        pathname: "/products",
+                        query: {
+                          q: searchKeyword,
+                        },
+                      }}
+                    >
+                      <a onClick={closeAll}>{autocomplete.name}</a>
+                    </Link>
+                  </li>
+                );
+              })
+            : null}
+        </div>
       </div>
 
       {/* Cart */}
@@ -735,50 +792,85 @@ const Navbar = () => {
           <ul>
             <Link
               href={{
-                pathname: "/products/upperwear",
+                pathname: "/products",
+                query: {
+                  category: "upperwear",
+                },
               }}
             >
-              <li onMouseEnter={m1Enter} ref={(el) => (menuItem1 = el)}>
+              <li
+                onClick={closeAll}
+                onMouseEnter={m1Enter}
+                ref={(el) => (menuItem1 = el)}
+              >
                 <span id="count">01</span>
                 <span id="menu">&nbsp;Upperwear</span>
               </li>
             </Link>
             <Link
               href={{
-                pathname: "/products/lowers",
+                pathname: "/products",
+                query: {
+                  category: "lowers",
+                },
               }}
             >
-              <li onMouseEnter={m2Enter} ref={(el) => (menuItem2 = el)}>
+              <li
+                onClick={closeAll}
+                onMouseEnter={m2Enter}
+                ref={(el) => (menuItem2 = el)}
+              >
                 <span id="count">02</span>
                 <span id="menu">&nbsp;Lowers</span>
               </li>
             </Link>
             <Link
               href={{
-                pathname: "/products/accessories",
+                pathname: "/products",
+                query: {
+                  category: "accessories",
+                },
               }}
             >
-              <li onMouseEnter={m3Enter} ref={(el) => (menuItem3 = el)}>
+              <li
+                onClick={closeAll}
+                onMouseEnter={m3Enter}
+                ref={(el) => (menuItem3 = el)}
+              >
                 <span id="count">03</span>
                 <span id="menu">&nbsp;Accessories</span>
               </li>
             </Link>
             <Link
               href={{
-                pathname: "/products/footwear",
+                pathname: "/products",
+                query: {
+                  category: "footwear",
+                },
               }}
             >
-              <li onMouseEnter={m4Enter} ref={(el) => (menuItem4 = el)}>
+              <li
+                onClick={closeAll}
+                onMouseEnter={m4Enter}
+                ref={(el) => (menuItem4 = el)}
+              >
                 <span id="count">04</span>
                 <span id="menu">&nbsp;Footwear</span>
               </li>
             </Link>
             <Link
               href={{
-                pathname: "/products/health-and-beauty",
+                pathname: "/products",
+                query: {
+                  category: "health-and-beauty",
+                },
               }}
             >
-              <li onMouseEnter={m5Enter} ref={(el) => (menuItem5 = el)}>
+              <li
+                onClick={closeAll}
+                onMouseEnter={m5Enter}
+                ref={(el) => (menuItem5 = el)}
+              >
                 <span id="count">05</span>
                 <span id="menu">&nbsp;Health & Beauty</span>
               </li>

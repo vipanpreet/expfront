@@ -42,69 +42,85 @@ const HomeSection = (props) => {
           arrows={false}
         >
           {/* <div className="row"> */}
-          <div className="col">
-            <div class="category">
-              <div class="category__img">
-                <img src="/assets/cat/uppers.jpg" alt="" />
-                <Link
-                  href={{
-                    pathname: "/products/upperwear",
-                  }}
-                >
+          <div className="col" style={{ cursor: "pointer" }}>
+            <Link
+              href={{
+                pathname: "/products",
+                query: {
+                  category: "upperwear",
+                },
+              }}
+            >
+              <div class="category">
+                <div class="category__img">
+                  <img src="/assets/cat/uppers.jpg" alt="" />
+
                   <a class="category__img--link" href="#">
                     Upperwear
                   </a>
-                </Link>
+                </div>
               </div>
-            </div>
+            </Link>
           </div>
-          <div className="col">
-            <div class="category">
-              <div class="category__img">
-                <img src="/assets/cat/lowers.jpg" alt="" />
-                <Link
-                  href={{
-                    pathname: "/products/lowers",
-                  }}
-                >
+          <div className="col" style={{ cursor: "pointer" }}>
+            <Link
+              href={{
+                pathname: "/products",
+                query: {
+                  category: "lowers",
+                },
+              }}
+            >
+              <div class="category">
+                <div class="category__img">
+                  <img src="/assets/cat/lowers.jpg" alt="" />
+
                   <a class="category__img--link" href="#">
                     Lowers
                   </a>
-                </Link>
+                </div>
               </div>
-            </div>
+            </Link>
           </div>
-          <div className="col">
-            <div class="category">
-              <div class="category__img">
-                <img src="/assets/cat/accessorie.jpg" alt="" />
-                <Link
-                  href={{
-                    pathname: "/products/accessories",
-                  }}
-                >
+          <div className="col" style={{ cursor: "pointer" }}>
+            <Link
+              href={{
+                pathname: "/products",
+                query: {
+                  category: "accessories",
+                },
+              }}
+            >
+              <div class="category">
+                <div class="category__img">
+                  <img src="/assets/cat/accessorie.jpg" alt="" />
+
                   <a class="category__img--link" href="#">
                     Accessories
                   </a>
-                </Link>
+                </div>
               </div>
-            </div>
+            </Link>
           </div>
-          <div className="col">
-            <div class="category">
-              <div class="category__img">
-                <img src="/assets/cat/shoes.jpg" alt="" />
-                <Link
-                  href={{
-                    pathname: "/products/footwear",
-                  }}
-                >
+          <div className="col" style={{ cursor: "pointer" }}>
+            <Link
+              href={{
+                pathname: "/products",
+                query: {
+                  category: "footwear",
+                },
+              }}
+            >
+              <div class="category">
+                <div class="category__img">
+                  <img src="/assets/cat/shoes.jpg" alt="" />
+
                   <a class="category__img--link" href="#">
                     Footwear
                   </a>
-                </Link>
+                </div>
               </div>
-            </div>
+            </Link>
           </div>
         </Carousel>
       </div>

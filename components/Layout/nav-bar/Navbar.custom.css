@@ -153,13 +153,15 @@
   height: 100vh;
   background: #fff;
   z-index: 1001;
+  overflow: hidden;
 }
 .images {
   position: relative;
-  top: 12%;
-  left: 23%;
-  width: 350px;
-  height: 550px;
+  top: 42%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 300px;
+  height: 500px;
   overflow: hidden;
   /* overflow: hidden; */
 }
@@ -200,7 +202,7 @@
   height: 60px;
 }
 
-.wrapper-search > input {
+.wrapper-search > form > input {
   position: absolute;
   right: 0;
   top: 0;
@@ -217,7 +219,32 @@
   letter-spacing: 1px;
   font-weight: 100;
 }
-
+.wrapper-search > .autolist {
+  padding: 0 140px;
+  position: absolute;
+  left: 0;
+  top: 120px;
+  width: 100%;
+  background: #fff;
+  height: 210px;
+  border: 1px solid #eee;
+  transition: all 0.3s ease-out;
+}
+.wrapper-search > .autolist > li {
+  padding: 8px 0;
+  font-size: 1.4rem;
+  font-family: "Roboto", sans-serif;
+  list-style: none;
+}
+.wrapper-search > .autolist > li:not(:nth-of-type(1)) {
+  border-top: 1px solid #eee;
+}
+.wrapper-search > .autolist > li > a {
+  color: rgba(107, 107, 107, 0.5);
+}
+.wrapper-search > .autolist > li > a:hover {
+  color: #0eaf94;
+}
 /* CART */
 /* .wrapper-cart {
     position: absolute;
@@ -419,6 +446,7 @@
   .wrapper-search > input {
     padding: 0 20px;
   }
+
   .account--trigger .account-card::before {
     left: 80%;
   }
