@@ -11,6 +11,14 @@ import { SEARCH_LIST_CLEAR } from "../redux/products/products.types";
 import { setAlert } from "../redux/Alert/alert.actions";
 import Spinner from "../components/Layout/Spinner/Spinner";
 
+function getWindowDimensions() {
+  const { innerWidth: width, innerHeight: height } = window;
+  return {
+    width,
+    height,
+  };
+}
+
 const Products = () => {
   const dispatch = useDispatch();
   const router = useRouter();
@@ -109,8 +117,17 @@ const Products = () => {
         sortdirection && sortdirection
       )
     );
+    function handleResize() {
+      setWindowDimensions(getWindowDimensions());
+    }
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, [dispatch, sortby, sortdirection, page, category, q, subcategory]);
 
+  const [windowDimensions, setWindowDimensions] = useState(
+    getWindowDimensions()
+  );
   return (
     <div>
       <main>
@@ -144,13 +161,15 @@ const Products = () => {
               <div className="filters--wrapper">
                 <div class="filters">
                   <div class="views">
-                    <div
-                      style={{ cursor: "pointer" }}
-                      class="views--icon"
-                      onClick={(e) => setViewOption(3)}
-                    >
-                      <ion-icon name="apps-outline"></ion-icon>
-                    </div>
+                    {windowDimensions.width >= 1025 && (
+                      <div
+                        style={{ cursor: "pointer" }}
+                        class="views--icon"
+                        onClick={(e) => setViewOption(3)}
+                      >
+                        <ion-icon name="apps-outline"></ion-icon>
+                      </div>
+                    )}
                     <div
                       style={{ cursor: "pointer" }}
                       class="views--icon"
@@ -294,6 +313,7 @@ const Products = () => {
                         <Card
                           col12={viewOption === 12 ? true : false}
                           singleProduct={product}
+                          windowDimensions={windowDimensions}
                           key={product._id}
                         />
                       </div>
