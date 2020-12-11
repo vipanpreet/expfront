@@ -1,8 +1,22 @@
 /*  ------------------------------------------------NAVIGATION-------------------------------------------- */
+.active.navigation {
+  transition: height 0.3s ease-out;
+  height: 60px;
+}
+.active.navigation .logo > div {
+  flex-direction: row;
+}
+.active.navigation .logo > div > span {
+  letter-spacing: 1px !important;
+  font-size: 1.65rem;
+}
+.active.navigation .logo > div > span:nth-child(3) {
+  margin-left: 0px;
+}
 
 .navigation {
   width: 100%;
-  height: 60px;
+  height: 80px;
   position: relative;
   display: flex;
   justify-content: space-between;
@@ -11,6 +25,7 @@
   z-index: 1000 !important;
   position: fixed;
   background: #fff;
+  transition: height 0.3s ease-out;
 }
 /* TOGGLE */
 .navigation .toggle {
@@ -36,12 +51,47 @@
 .navigation .logo {
   position: relative;
   z-index: 1002;
+  width: 100px;
 }
-.navigation .logo div {
+
+.navigation .logo > div > span {
+  font-family: "Roboto", sans-serif;
+  font-size: 1.8rem;
+  line-height: 1.1;
+  font-weight: 800;
+  color: var(--font);
+  text-transform: uppercase;
+}
+.navigation .logo > div > span:nth-child(1) {
+  letter-spacing: 6.5px;
+}
+.navigation .logo > div > span:nth-child(2) {
+  letter-spacing: 6.5px;
+}
+.navigation .logo > div > span:nth-child(3) {
+  letter-spacing: 9.5px;
+  margin-left: 3.5px;
+}
+.navigation .logo > div {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+.logo-img {
+  width: auto;
+  height: 25px;
+  margin-right: 4px;
+}
+.logo-img img {
+  width: auto;
+  height: 25px;
+}
+.logo-text {
   color: #3e3e3e;
-  font-size: 1.6rem;
+  font-size: 2rem;
   text-transform: uppercase;
   font-weight: 400;
+  letter-spacing: 2px;
   font-family: "Roboto", sans-serif;
 }
 
@@ -55,11 +105,12 @@
   display: inline-block;
   z-index: 1008;
 }
+
 .navigation > .actions > span > img {
-  width: 100%;
-  height: 100%;
+  width: 25px;
+  height: 25px;
   position: relative;
-  z-index: 1008;
+  z-index: 1009;
 }
 
 /* ------------ wrapper menu ---------- */
@@ -71,7 +122,7 @@
   height: 100vh;
   mix-blend-mode: screen;
   z-index: 1001;
-  background: #f9fafc;
+  background: #ffc2b6;
   opacity: 0;
 }
 .wrapper-menu::after {
@@ -97,7 +148,7 @@
 }
 
 .wrapper-menu .menu ul li {
-  font-weight: 300;
+  font-weight: 900;
   font-size: 40px;
   line-height: 70px;
   letter-spacing: 1px;
@@ -109,7 +160,7 @@
 }
 
 #menu {
-  background: linear-gradient(#3e3e3e, #3e3e3e) left no-repeat, #afafaf;
+  background: linear-gradient(#3e3e3e, #3e3e3e) left no-repeat, #fff;
   background-size: 0% 100%;
   background-clip: text;
   -webkit-background-clip: text;
@@ -392,7 +443,7 @@
     padding: 0 10px 0 10px;
   }
   .navigation .toggle {
-    width: 100px;
+    width: 80px;
   }
   .wrapper-menu .menu ul li {
     font-size: 3.4rem;

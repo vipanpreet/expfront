@@ -1,5 +1,7 @@
 import "../styles/style.css";
 import "react-multi-carousel/lib/styles.css";
+import "swiper/swiper.scss";
+import 'swiper/components/navigation/navigation.scss';
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import Overlay from "../components/Layout/Overlay/Overlay.module";

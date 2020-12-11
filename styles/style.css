@@ -4877,7 +4877,7 @@ body {
   .custom-select {
     max-width: 140px;
     min-width: 100px;
-    margin-right: 4px;
+    margin-right: 0px !important;
   }
   .custom-select::before {
     right: 4px;
@@ -4965,10 +4965,24 @@ body {
 }
 
 /*  ------------------------------------------------NAVIGATION-------------------------------------------- */
+.active.navigation {
+  transition: height 0.3s ease-out;
+  height: 60px;
+}
+.active.navigation .logo > div {
+  flex-direction: row;
+}
+.active.navigation .logo > div > span {
+  letter-spacing: 1px !important;
+  font-size: 1.65rem;
+}
+.active.navigation .logo > div > span:nth-child(3) {
+  margin-left: 0px;
+}
 
 .navigation {
   width: 100%;
-  height: 60px;
+  height: 80px;
   position: relative;
   display: flex;
   justify-content: space-between;
@@ -4977,6 +4991,7 @@ body {
   z-index: 1000 !important;
   position: fixed;
   background: #fff;
+  transition: height 0.3s ease-out;
 }
 /* TOGGLE */
 .navigation .toggle {
@@ -5002,10 +5017,31 @@ body {
 .navigation .logo {
   position: relative;
   z-index: 1002;
+  width: 100px;
+}
+
+.navigation .logo > div > span {
+  font-family: "Roboto", sans-serif;
+  font-size: 1.8rem;
+  line-height: 1.1;
+  font-weight: 800;
+  color: var(--font);
+  text-transform: uppercase;
+}
+.navigation .logo > div > span:nth-child(1) {
+  letter-spacing: 6.5px;
+}
+.navigation .logo > div > span:nth-child(2) {
+  letter-spacing: 6.5px;
+}
+.navigation .logo > div > span:nth-child(3) {
+  letter-spacing: 9.5px;
+  margin-left: 3.5px;
 }
 .navigation .logo > div {
   display: flex;
   align-items: center;
+  flex-direction: column;
 }
 .logo-img {
   width: auto;
@@ -5035,11 +5071,12 @@ body {
   display: inline-block;
   z-index: 1008;
 }
+
 .navigation > .actions > span > img {
-  width: 100%;
-  height: 100%;
+  width: 25px;
+  height: 25px;
   position: relative;
-  z-index: 1008;
+  z-index: 1009;
 }
 
 /* ------------ wrapper menu ---------- */

@@ -1,16 +1,16 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3152 3809" width="3152" height="3809">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 630 754" width="630" height="754">
 	<defs>
 		<clipPath clipPathUnits="userSpaceOnUse" id="cp1">
-			<path d="M-416 -61L3584 -61L3584 3939L-416 3939Z" />
+			<path d="M-216 -91L784 -91L784 909L-216 909Z" />
 		</clipPath>
 	</defs>
 	<style>
 		tspan { white-space:pre }
-		.shp0 { fill: none;stroke: #3e3e3e;stroke-width: 30 } 
-		.shp1 { fill: none;stroke: #3e3e3e;stroke-linecap:round;stroke-width: 30 } 
+		.shp0 { fill: none;stroke: #3e3e3e;stroke-width: 40 } 
+		.shp1 { fill: none;stroke: #3e3e3e;stroke-linecap:round;stroke-width: 40 } 
 	</style>
 	<g id="Page 1" clip-path="url(#cp1)">
-		<path id="Path 1" class="shp0" d="M3136.4 2233.21C3136.4 3094.96 2437.79 3793.57 1576.01 3793.57C714.25 3793.57 15.65 3094.96 15.65 2233.21C15.65 1371.43 714.25 672.82 1576.01 672.82C2437.79 672.82 3136.4 1371.43 3136.4 2233.21Z" />
-		<path id="Path 2" class="shp1" d="M970.52 1094.65L970.52 624.58C970.52 301.72 1221.55 26.09 1544.23 15.32C1881.6 4.06 2158.63 274.18 2158.63 609.02L2158.63 1094.65" />
+		<path id="Path 1" class="shp0" d="M610 438.76C610 601.48 478.08 733.4 315.35 733.4C152.63 733.4 20.71 601.48 20.71 438.76C20.71 276.03 152.63 144.11 315.35 144.11C478.08 144.11 610 276.03 610 438.76Z" />
+		<path id="Path 2" class="shp1" d="M201.02 223.77L201.02 135C201.02 74.04 248.42 21.99 309.35 19.96C373.06 17.83 425.37 68.84 425.37 132.06L425.37 223.77" />
 	</g>
 </svg>

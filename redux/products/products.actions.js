@@ -29,11 +29,11 @@ export const productList = (
 
     if (subcategory && subcategory.length > 3) {
       response = await axios.get(
-        `https://arktasticbackend.herokuapp.com/api/products/all/${category}/${subcategory}?q=${q}&pagenumber=${pageNumber}&sortby=${sortBy}&sortdirection=${sortDirection}`
+        `http://localhost:5000/api/products/all/${category}/${subcategory}?q=${q}&pagenumber=${pageNumber}&sortby=${sortBy}&sortdirection=${sortDirection}`
       );
     } else {
       response = await axios.get(
-        `https://arktasticbackend.herokuapp.com/api/products/all/${category}?q=${q}&pagenumber=${pageNumber}&sortby=${sortBy}&sortdirection=${sortDirection}`
+        `http://localhost:5000/api/products/all/${category}?q=${q}&pagenumber=${pageNumber}&sortby=${sortBy}&sortdirection=${sortDirection}`
       );
     }
 
@@ -58,7 +58,7 @@ export const getSearchList = (query) => async (dispatch) => {
   try {
     dispatch({ type: SEARCH_LIST_REQUEST });
     const { data } = await axios.get(
-      `https://arktasticbackend.herokuapp.com/api/search/${query}`
+      `http://localhost:5000/api/search/${query}`
     );
 
     dispatch({

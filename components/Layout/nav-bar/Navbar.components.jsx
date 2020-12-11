@@ -8,7 +8,7 @@ import { logout } from "../../../redux/login/login.actions";
 import { SEARCH_LIST_CLEAR } from "../../../redux/products/products.types";
 
 // Animation GSAP
-import { Expo, TimelineMax } from "gsap";
+import { Expo, TimelineMax, TweenMax } from "gsap";
 import { getSearchList } from "../../../redux/products/products.actions";
 import "animate.css";
 
@@ -23,6 +23,10 @@ const Navbar = () => {
   const [isOpenSearch, setIsOpenSearch] = useState(false);
   let [accOpen, setAccOpen] = useState(false);
   const [searchKeyword, setSearchKeyword] = useState("");
+  const [NavHeight, setNavHeight] = useState(false);
+
+  // Navigation
+  let nav = useRef(null);
 
   let one = useRef(null);
   let two = useRef(null);
@@ -79,12 +83,21 @@ const Navbar = () => {
       dispatch({ type: SEARCH_LIST_CLEAR });
     }
 
-    document.addEventListener("mousedown", handleAccount);
     // return function to be called when unmounted
     return () => {
       document.removeEventListener("mousedown", handleAccount);
     };
   }, [dispatch, searchKeyword]);
+
+  const changeNav = () => {
+    if (window.scrollY >= 80) {
+      setNavHeight(true);
+    } else {
+      setNavHeight(false);
+    }
+  };
+
+  window.addEventListener("scroll", changeNav);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -547,7 +560,10 @@ const Navbar = () => {
   };
 
   return (
-    <div className="navigation">
+    <div
+      className={`navigation ${NavHeight ? "active" : ""}`}
+      ref={(el) => (nav = el)}
+    >
       {/* Toggle */}
       <div
         className="toggle"
@@ -562,10 +578,13 @@ const Navbar = () => {
       <div style={{ cursor: "pointer" }} className="logo">
         <Link href="/">
           <div>
-            <div className="logo-img">
+            {/* <div className="logo-img">
               <img src="/assets/icons/logo.svg" alt="" />
             </div>
-            <h1 className="logo-text">arktastic</h1>
+            <h1 className="logo-text">arktastic</h1> */}
+            <span>ARK</span>
+            <span>TAS</span>
+            <span>TIC</span>
           </div>
         </Link>
       </div>

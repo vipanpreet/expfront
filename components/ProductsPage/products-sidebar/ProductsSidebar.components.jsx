@@ -136,7 +136,7 @@ const ProductSidebar = () => {
       </div>
       <div
         class="options"
-        style={{ position: "absolute", top: "540px", right: 50 }}
+        style={{ position: "absolute", top: "540px", right: 25 }}
         onClick={isOpen ? closeSideBar : openSideBar}
       >
         <a style={{ cursor: "pointer" }}>
