@@ -3,7 +3,7 @@ import { addItemWishlist } from "../../../redux/profile/profile.actions";
 import { useDispatch } from "react-redux";
 import "animate.css";
 
-const Card = ({ singleProduct, col12, windowDimensions }) => {
+const Card = ({ singleProduct, col12, col3, windowDimensions }) => {
   const dispatch = useDispatch();
 
   const handleWishlist = (id) => {
@@ -29,9 +29,9 @@ const Card = ({ singleProduct, col12, windowDimensions }) => {
               <div class="card__hover--desc">
                 {col12
                   ? windowDimensions.width <= 1025
-                    ? singleProduct.description.slice(0, 80)
+                    ? singleProduct.description.slice(0, 50)
                     : singleProduct.description.slice(0, 240)
-                  : singleProduct.description.slice(0, 140)}
+                  : singleProduct.description.slice(0, 120)}
               </div>
               <div class="card__hover__btns">
                 <a

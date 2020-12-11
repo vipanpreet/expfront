@@ -5216,7 +5216,7 @@ body {
   top: 0;
   background: #f9fafc;
   width: 0;
-  height: 60px;
+  height: 100%;
 }
 
 .wrapper-search > form > input {
@@ -5230,14 +5230,14 @@ body {
   opacity: 0;
   visibility: hidden;
   background: #fff;
-  padding: 0 140px;
+  padding: 0 60px;
   font-size: 1.2rem;
   text-transform: uppercase;
   letter-spacing: 1px;
   font-weight: 100;
 }
 .wrapper-search > .autolist {
-  padding: 0 140px;
+  padding: 0 60px;
   position: absolute;
   left: 0;
   top: 120px;
@@ -5252,6 +5252,9 @@ body {
   font-size: 1.4rem;
   font-family: "Roboto", sans-serif;
   list-style: none;
+}
+.wrapper-search > .autolist > li.active {
+  background: var(--cream);
 }
 .wrapper-search > .autolist > li:not(:nth-of-type(1)) {
   border-top: 1px solid #eee;
@@ -5405,8 +5408,20 @@ body {
   color: #6b6b6b;
 }
 @media only screen and (max-width: 1024px) {
+  .navigation .logo > div {
+    flex-direction: row;
+  }
+  .navigation .logo > div > span {
+    letter-spacing: 1px !important;
+    font-size: 1.65rem;
+  }
+  .navigation .logo > div > span:nth-child(3) {
+    margin-left: 0px;
+  }
+
   .navigation {
     padding: 0 10px 0 10px;
+    height: 60px;
   }
   .navigation .toggle {
     width: 80px;
@@ -5427,7 +5442,10 @@ body {
     top: 55px;
     padding: 1rem 1rem;
   }
-  .wrapper-search > input {
+  .wrapper-search > form > input {
+    padding: 0 20px;
+  }
+  .wrapper-search > .autolist {
     padding: 0 20px;
   }
   .account--trigger .account-card::before {

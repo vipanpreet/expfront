@@ -24,10 +24,9 @@ const Navbar = () => {
   let [accOpen, setAccOpen] = useState(false);
   const [searchKeyword, setSearchKeyword] = useState("");
   const [NavHeight, setNavHeight] = useState(false);
+  const [cursor, setCursor] = useState(0);
 
   // Navigation
-  let nav = useRef(null);
-
   let one = useRef(null);
   let two = useRef(null);
   let menu = useRef(null);
@@ -67,7 +66,6 @@ const Navbar = () => {
   let cartX = useRef(null);
 
   // account
-  let accountCard = useRef(null);
   const dispatch = useDispatch();
 
   const login = useSelector((state) => state.login);
@@ -83,6 +81,7 @@ const Navbar = () => {
       dispatch({ type: SEARCH_LIST_CLEAR });
     }
 
+    document.addEventListener("mousedown", handleAccount);
     // return function to be called when unmounted
     return () => {
       document.removeEventListener("mousedown", handleAccount);
@@ -107,6 +106,15 @@ const Navbar = () => {
     });
     closeAll();
   };
+
+  const handleKeyDown = (e) => {
+    if (e.keyCode === 38 && cursor > 0) {
+      setCursor(cursor - 1);
+    } else if (e.keyCode === 40 && cursor < search.length - 1) {
+      setCursor(cursor + 1);
+    }
+  };
+
   // const changeNavBackground = () => {
   //   if (window.scrollY >= 80) {
   //     setNavBg(true);
@@ -455,8 +463,12 @@ const Navbar = () => {
       duration: 0.4,
       ease: Expo.easeOut,
     });
+
+    searchBar.focus();
+    console.log(input);
     setIsOpenSearch(true);
   };
+
   const closeSearch = () => {
     var s1 = new TimelineMax();
     s1.to(searchBar, {
@@ -477,6 +489,8 @@ const Navbar = () => {
       ease: Expo.easeOut,
     });
     setIsOpenSearch(false);
+    dispatch({ type: SEARCH_LIST_CLEAR });
+    setSearchKeyword("");
   };
 
   // cart
@@ -560,10 +574,7 @@ const Navbar = () => {
   };
 
   return (
-    <div
-      className={`navigation ${NavHeight ? "active" : ""}`}
-      ref={(el) => (nav = el)}
-    >
+    <div className={`navigation ${NavHeight ? "active" : ""}`}>
       {/* Toggle */}
       <div
         className="toggle"
@@ -604,7 +615,7 @@ const Navbar = () => {
         >
           <img src="/assets/icons/user.svg" alt="" />
 
-          {accOpen && (
+          {accOpen === true ? (
             <div class="account-card" ref={(el) => (accountCard = el)}>
               {userInfo.firstName ? (
                 <>
@@ -650,7 +661,7 @@ const Navbar = () => {
                 </>
               )}
             </div>
-          )}
+          ) : null}
         </span>
       </div>
 
@@ -660,22 +671,25 @@ const Navbar = () => {
           <input
             type="text"
             placeholder="type to search"
+            id="input"
             ref={(el) => (searchBar = el)}
             value={searchKeyword}
             onChange={(e) => setSearchKeyword(e.target.value)}
+            autoFocus
+            onKeyDown={(e) => handleKeyDown(e)}
           />
         </form>
 
         <div className={searchKeyword.length >= 3 ? "autolist" : null}>
           {search && search.length > 0
-            ? search.map((autocomplete) => {
+            ? search.map((autocomplete, i) => {
                 return (
-                  <li>
+                  <li className={cursor === i ? "active" : null}>
                     <Link
                       href={{
                         pathname: "/products",
                         query: {
-                          q: searchKeyword,
+                          q: autocomplete.name,
                         },
                       }}
                     >

@@ -43,6 +43,7 @@ const Products = () => {
   sortdirection && (queryList.sortdirection = sortdirection);
   page && (queryList.page = 1);
 
+  // Function to handle all queries
   const handleQuery = (newQuery, type) => {
     window.scrollTo({ top: 500, behavior: "smooth" });
 
