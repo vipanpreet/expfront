@@ -29,6 +29,8 @@ const Navbar = () => {
   let menu = useRef(null);
   let menuItems = useRef(null);
 
+  let node = useRef(null);
+
   // social
   let menuSocials = useRef(null);
   let menuSocial1 = useRef(null);
@@ -76,6 +78,12 @@ const Navbar = () => {
     } else {
       dispatch({ type: SEARCH_LIST_CLEAR });
     }
+
+    document.addEventListener("mousedown", handleAccount);
+    // return function to be called when unmounted
+    return () => {
+      document.removeEventListener("mousedown", handleAccount);
+    };
   }, [dispatch, searchKeyword]);
 
   const handleSubmit = (e) => {
@@ -525,29 +533,14 @@ const Navbar = () => {
     c1.to(cart, { width: 0, duration: 1, ease: Expo.easeInOut, delay: -2.4 });
   };
 
-  // account
-  const openAccount = () => {
-    var a1 = new TimelineMax();
-
-    a1.to(accountCard, {
-      duration: 0.4,
-      opacity: 1,
-      visibility: "visible",
-      ease: Expo.easeOut,
-    });
-    setAccOpen(true);
-  };
-  const closeAccount = () => {
-    var a1 = new TimelineMax();
-
-    a1.to(accountCard, {
-      opacity: 0,
-      duration: 1,
-      visibility: "hidden",
-      ease: Expo.easeOut,
-    });
+  const handleAccount = (e) => {
+    if (node.current.contains(e.target)) {
+      return;
+    }
     setAccOpen(false);
   };
+
+  // account
 
   const handleLogoutBtn = () => {
     dispatch(logout());
@@ -564,12 +557,19 @@ const Navbar = () => {
         <span ref={(el) => (one = el)}></span>
         <span ref={(el) => (two = el)}></span>
       </div>
+
       {/* Logo */}
-      <div className="logo">
-        <Link style={{ cursor: "pointer" }} href="/">
-          <div>arktastic</div>
+      <div style={{ cursor: "pointer" }} className="logo">
+        <Link href="/">
+          <div>
+            <div className="logo-img">
+              <img src="/assets/icons/logo.svg" alt="" />
+            </div>
+            <h1 className="logo-text">arktastic</h1>
+          </div>
         </Link>
       </div>
+
       {/* Actions */}
       <div className="actions">
         <span onClick={isOpenSearch ? closeSearch : openSearch}>
@@ -580,56 +580,61 @@ const Navbar = () => {
         </span>
         <span
           className="account--trigger"
-          onClick={accOpen ? closeAccount : openAccount}
+          ref={node}
+          onClick={(e) => setAccOpen(!accOpen)}
         >
           <img src="/assets/icons/user.svg" alt="" />
-          <div class="account-card" ref={(el) => (accountCard = el)}>
-            {userInfo.firstName ? (
-              <>
-                <li>
-                  <Link href="/profile">
-                    <a href="/profile">
-                      <ion-icon name="cube-outline"></ion-icon> Profile
+
+          {accOpen && (
+            <div class="account-card" ref={(el) => (accountCard = el)}>
+              {userInfo.firstName ? (
+                <>
+                  <li>
+                    <Link href="/profile">
+                      <a href="/profile">
+                        <ion-icon name="cube-outline"></ion-icon> Profile
+                      </a>
+                    </Link>
+                  </li>
+                  <li>
+                    <a href="#">
+                      <ion-icon name="bookmark-outline"></ion-icon> Address
                     </a>
-                  </Link>
-                </li>
-                <li>
-                  <a href="#">
-                    <ion-icon name="bookmark-outline"></ion-icon> Address
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-                    <ion-icon name="heart-outline"></ion-icon> Wishlist
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-                    <ion-icon name="log-out-outline"></ion-icon> Logout
-                  </a>
-                </li>
-              </>
-            ) : (
-              <>
-                <li>
-                  <Link href="/register">
-                    <a href="/register">
-                      <ion-icon name="people-outline"></ion-icon> Register
+                  </li>
+                  <li>
+                    <a href="#">
+                      <ion-icon name="heart-outline"></ion-icon> Wishlist
                     </a>
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/login">
-                    <a href="/login">
-                      <ion-icon name="key-outline"></ion-icon> Login
+                  </li>
+                  <li>
+                    <a href="#">
+                      <ion-icon name="log-out-outline"></ion-icon> Logout
                     </a>
-                  </Link>
-                </li>
-              </>
-            )}
-          </div>
+                  </li>
+                </>
+              ) : (
+                <>
+                  <li>
+                    <Link href="/register">
+                      <a href="/register">
+                        <ion-icon name="people-outline"></ion-icon> Register
+                      </a>
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/login">
+                      <a href="/login">
+                        <ion-icon name="key-outline"></ion-icon> Login
+                      </a>
+                    </Link>
+                  </li>
+                </>
+              )}
+            </div>
+          )}
         </span>
       </div>
+
       {/* Search */}
       <div className="wrapper-search" ref={(el) => (searchWrapper = el)}>
         <form onSubmit={(e) => handleSubmit(e)}>
@@ -665,7 +670,6 @@ const Navbar = () => {
       </div>
 
       {/* Cart */}
-
       <div ref={(el) => (cart = el)} className="wrapper-cart">
         <div
           onClick={closeCart}
@@ -898,7 +902,11 @@ const Navbar = () => {
       </div>
 
       {/* Wrapper Images */}
-      <div className="wrapper-images" ref={(el) => (imagesWrapper = el)}>
+      <div
+        className="wrapper-images"
+        onClick={closeNav}
+        ref={(el) => (imagesWrapper = el)}
+      >
         <div className="images">
           <span className="image im1" ref={(el) => (im1 = el)}>
             <img src="/assets/sections/nav-upper.jpg" alt="" />

@@ -5,6 +5,7 @@ import ProductSidebar from "../components/ProductsPage/products-sidebar/Products
 // redux
 import { productList } from "../redux/products/products.actions";
 import { useDispatch, useSelector } from "react-redux";
+import { SEARCH_LIST_CLEAR } from "../redux/products/products.types";
 
 // Animations
 import { setAlert } from "../redux/Alert/alert.actions";
@@ -15,6 +16,7 @@ const Products = () => {
   const router = useRouter();
 
   const [isAlertShown, setIsAlertShown] = useState(false);
+  const [isDirection, setIsDirection] = useState(false);
 
   // View Options
   const [viewOption, setViewOption] = useState(3);
@@ -34,16 +36,26 @@ const Products = () => {
   page && (queryList.page = 1);
 
   const handleQuery = (newQuery, type) => {
+    window.scrollTo({ top: 500, behavior: "smooth" });
+
     if (type === "sortby") {
       router.push({
         pathname: "/products",
         query: { ...queryList, sortby: newQuery },
       });
     } else if (type === "sortdirection") {
-      router.push({
-        pathname: "/products",
-        query: { ...queryList, sortdirection: newQuery },
-      });
+      setIsDirection(!isDirection);
+      if (isDirection) {
+        router.push({
+          pathname: "/products",
+          query: { ...queryList, sortdirection: "desc" },
+        });
+      } else {
+        router.push({
+          pathname: "/products",
+          query: { ...queryList, sortdirection: "asc" },
+        });
+      }
     } else if (type === "removecategory") {
       const { category, subcategory, ...newQuery } = queryList;
       router.push({
@@ -80,13 +92,13 @@ const Products = () => {
       dispatch(setAlert("Personalising Fashion for you", "loading", 1500));
       setIsAlertShown(true);
     }
+
     if (!router.query.page) {
       router.push({
         pathname: "/products",
         query: { ...queryList, page: 1 },
       });
     }
-    window.scrollTo({ top: 500, behavior: "smooth" });
     dispatch(
       productList(
         category && category,
@@ -102,6 +114,7 @@ const Products = () => {
   return (
     <div>
       <main>
+        {/* Container */}
         <div className="container-xlarge">
           <section className="wrapper">
             <ProductSidebar products={products} />
@@ -127,7 +140,7 @@ const Products = () => {
                 </div>
                 <hr />
               </>
-              {/* FILTERS AND SORT AND VIEW */}
+              {/* ------------------------------- FILTERS AND SORT AND VIEW  --------------------------- */}
               <div className="filters--wrapper">
                 <div class="filters">
                   <div class="views">
@@ -153,7 +166,19 @@ const Products = () => {
                       <ion-icon name="list-outline"></ion-icon>
                     </div>
                   </div>
-                  <div>
+                  <div className="sort">
+                    <button
+                      className="sortdirection"
+                      onClick={(e) => {
+                        handleQuery(e.target.value, "sortdirection");
+                      }}
+                    >
+                      {isDirection === true ? (
+                        <ion-icon name="arrow-up-outline"></ion-icon>
+                      ) : (
+                        <ion-icon name="arrow-down-outline"></ion-icon>
+                      )}
+                    </button>
                     <label
                       className="custom-select"
                       style={{ marginRight: "25px" }}
@@ -168,28 +193,6 @@ const Products = () => {
                         <option value="name">Alphabetically</option>
                         <option value="price">Price</option>
                         <option value="brand">Brand</option>
-                      </select>
-                    </label>
-                    <label
-                      className="custom-select"
-                      style={{ marginRight: "25px" }}
-                    >
-                      <select
-                        name="options"
-                        onChange={(e) => {
-                          handleQuery(e.target.value, "sortdirection");
-                        }}
-                      >
-                        {router.query.sortby === "counter" ? (
-                          <>
-                            <option value="desc">DESC</option>
-                          </>
-                        ) : (
-                          <>
-                            <option value="desc">DESC</option>
-                            <option value="asc">ASC</option>
-                          </>
-                        )}
                       </select>
                     </label>
                   </div>
@@ -276,7 +279,7 @@ const Products = () => {
                     <h2
                       style={{
                         position: "absolute",
-                        left: "50%",
+                        left: "45%",
                         transform: "translate(-50%)",
                       }}
                     >

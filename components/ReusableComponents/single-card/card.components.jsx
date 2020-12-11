@@ -39,7 +39,7 @@ const Card = ({ singleProduct, col12 }) => {
                 >
                   <ion-icon name="heart-outline"></ion-icon>
                 </a>
-                <a
+                <div
                   href={`/details/${singleProduct._id}`}
                   target="_blank"
                   as={`/details/${singleProduct._id}`}
@@ -55,7 +55,7 @@ const Card = ({ singleProduct, col12 }) => {
                   ) : (
                     "View"
                   )}
-                </a>
+                </div>
                 <a href="#" class="card__hover__btns--options">
                   <ion-icon name="options-outline"></ion-icon>
                 </a>

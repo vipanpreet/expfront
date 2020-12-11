@@ -7,7 +7,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 100px 0 100px;
+  padding: 0 60px 0 60px;
   z-index: 1000 !important;
   position: fixed;
   background: #fff;
@@ -215,7 +215,7 @@
   background: #fff;
   padding: 0 140px;
   font-size: 1.2rem;
-  text-transform: capitalize;
+  text-transform: uppercase;
   letter-spacing: 1px;
   font-weight: 100;
 }
@@ -246,41 +246,7 @@
   color: #0eaf94;
 }
 /* CART */
-/* .wrapper-cart {
-    position: absolute;
-    top: 0;
-    right: 0;
-    display: flex;
-    height: 100vh;
-    width: 100%;
-    background: #f9fafc;
-    z-index: 1500;
-  }
-  .cart-details {
-    opacity: 0;
-    visibility: hidden;
-    flex: 1;
-    background: #fff;
-    padding-top: 7rem;
-    padding-left: 3rem;
-    padding-right: 1rem;
-  }
-  .cart-details .cart-details--title {
-    font-size: 3.6rem;
-    color: rgba(62, 62, 62, 0.808);
-  }
-  
-  .cart-summary {
-    opacity: 0;
-    visibility: hidden;
-    width: 25%;
-    padding-top: 9.5rem;
-    padding-left: 3rem;
-    padding-right: 3rem;
-    display: flex;
-    justify-content: space-between;
-    flex-direction: column;
-  } */
+
 .wrapper-cart {
   position: fixed;
   position: absolute;
@@ -393,9 +359,7 @@
   min-width: 150px;
   max-width: 200px;
   border-radius: 2px;
-  opacity: 0;
-  visibility: hidden;
-  box-shadow: 3px 0 12px rgba(62, 62, 62, 0.1);
+  box-shadow: 3px 0 12px rgba(62, 62, 62, 0.15);
 }
 .account--trigger .account-card::before {
   position: absolute;
@@ -425,11 +389,14 @@
 }
 @media only screen and (max-width: 1024px) {
   .navigation {
-    padding: 0 20px 0 20px;
+    padding: 0 10px 0 10px;
+  }
+  .navigation .toggle {
+    width: 100px;
   }
   .wrapper-menu .menu ul li {
-    font-size: 2.4rem;
-    line-height: 4rem;
+    font-size: 3.4rem;
+    line-height: 6rem;
   }
   .navigation .actions > span {
     width: 20px;
@@ -446,7 +413,6 @@
   .wrapper-search > input {
     padding: 0 20px;
   }
-
   .account--trigger .account-card::before {
     left: 80%;
   }

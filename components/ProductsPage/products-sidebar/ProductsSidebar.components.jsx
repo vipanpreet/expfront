@@ -2,8 +2,6 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   listCategories,
   listSubCategories,
-  saveCategoryState,
-  saveSubCategoryState,
 } from "../../../redux/category/category.actions";
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
@@ -138,7 +136,7 @@ const ProductSidebar = () => {
       </div>
       <div
         class="options"
-        style={{ position: "absolute", top: "46%", right: 50 }}
+        style={{ position: "absolute", top: "540px", right: 50 }}
         onClick={isOpen ? closeSideBar : openSideBar}
       >
         <a style={{ cursor: "pointer" }}>
