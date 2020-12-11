@@ -26,7 +26,7 @@ export const getProfile = () => async (dispatch, getState) => {
     };
 
     const { data } = await axios.get(
-      `http://localhost:5000/api/user/profile/`,
+      `https://arktasticbackend.herokuapp.com/api/user/profile/`,
       config
     );
     dispatch({
@@ -60,7 +60,7 @@ export const createProfile = (profile) => async (dispatch, getState) => {
     };
 
     const { data } = await axios.post(
-      `http://localhost:5000/api/user/profile/`,
+      `https://arktasticbackend.herokuapp.com/api/user/profile/`,
       profile,
       config
     );
@@ -94,7 +94,7 @@ export const addItemWishlist = (id) => async (dispatch, getState) => {
       },
     };
     const { data } = await axios.post(
-      `http://localhost:5000/api/user/wishlist`,
+      `https://arktasticbackend.herokuapp.com/api/user/wishlist`,
       { productId: id },
       config
     );
@@ -135,7 +135,7 @@ export const deleteItemWishlist = (id) => async (dispatch, getState) => {
     };
 
     const { data } = await axios.post(
-      `http://localhost:5000/api/user/wishlist/${id}`,
+      `https://arktasticbackend.herokuapp.com/api/user/wishlist/${id}`,
       config
     );
     dispatch({
