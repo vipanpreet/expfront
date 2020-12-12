@@ -67,6 +67,7 @@ const Navbar = () => {
 
   // account
   const dispatch = useDispatch();
+  let accountCard = useRef(null);
 
   const login = useSelector((state) => state.login);
   const { userInfo } = login;
