@@ -1,0 +1,27 @@
+{
+  "name": "frontend",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "animate.css": "^4.1.1",
+    "axios": "^0.21.0",
+    "classnames": "^2.2.6",
+    "gsap": "^3.5.1",
+    "next": "9.5.5",
+    "react": "16.13.1",
+    "react-dom": "16.13.1",
+    "react-lottie": "^1.2.3",
+    "react-redux": "^7.2.1",
+    "redux": "^4.0.5",
+    "redux-devtools-extension": "^2.13.8",
+    "redux-thunk": "^2.3.0",
+    "sass": "^1.28.0",
+    "swiper": "^6.4.1",
+    "uuid": "^8.3.1"
+  }
+}

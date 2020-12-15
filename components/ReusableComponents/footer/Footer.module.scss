@@ -1,0 +1,75 @@
+$margintop: 20px;
+
+.foot-entries {
+  display: flex;
+  justify-content: space-around;
+  background-color: #0b094d;
+  .help {
+    margin-top: $margintop;
+    h3 {
+      color: white;
+    }
+    a {
+      color: white;
+    }
+  }
+  .about {
+    margin-top: $margintop;
+    h3 {
+      color: white;
+    }
+    a {
+      color: white;
+    }
+  }
+  .gift {
+    margin-top: $margintop;
+    h3 {
+      color: white;
+    }
+    a {
+      color: white;
+    }
+  }
+  .social {
+    margin-top: $margintop;
+    h3 {
+      color: white;
+      font-size: 25px;
+      margin-left: 20px;
+    }
+    .entries-list-social {
+      padding-left: 0px;
+      list-style-type: none;
+      width: 100px;
+      img {
+        width: 30%;
+        height: 30%;
+        margin-left: 20px;
+      }
+    }
+  }
+}
+
+.bottom-line {
+  border: 2px solid #0b094d;
+  background-color: #0b094d;
+  text-align: center;
+  .payement {
+    img {
+      width: 50px;
+    }
+  }
+  p {
+    color: white;
+    font-size: 20px;
+  }
+}
+
+.entries-list {
+  padding-left: 0px;
+  list-style-type: none;
+  li {
+    color: white;
+  }
+}
