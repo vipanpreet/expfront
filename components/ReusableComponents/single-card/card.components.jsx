@@ -52,7 +52,7 @@ const Card = ({ singleProduct, col12, col3, windowDimensions }) => {
                   {col12 ? (
                     <a
                       style={{ marginLeft: 0, paddingLeft: 0 }}
-                      className="btn btn--primary"
+                      className="btn btn--primary btn--underline"
                     >
                       Show this product
                     </a>
@@ -60,9 +60,11 @@ const Card = ({ singleProduct, col12, col3, windowDimensions }) => {
                     "View"
                   )}
                 </div>
-                <a href="#" class="card__hover__btns--options">
-                  <ion-icon name="options-outline"></ion-icon>
-                </a>
+                {col12 ? null : (
+                  <a href="#" class="card__hover__btns--options">
+                    <ion-icon name="options-outline"></ion-icon>
+                  </a>
+                )}
               </div>
             </div>
           </div>

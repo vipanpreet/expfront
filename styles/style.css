@@ -128,15 +128,16 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  cursor: none !important;
 }
 
 html {
   font-size: 62.5%;
-  cursor: none;
+  cursor: none !important;
 }
 
 body {
-  cursor: none;
+  cursor: none !important;
   overflow-x: hidden;
 }
 
@@ -147,6 +148,7 @@ main {
 a {
   color: var(--font);
   text-decoration: none;
+  cursor: none !important;
 }
 
 hr {
@@ -5034,33 +5036,4 @@ body {
 .section-mentions {
   padding: 120px 0;
   border-top: 1px solid var(--cream-d);
-}
-
-/* CURSOR */
-.cursor {
-  width: 40px;
-  height: 40px;
-  border: 2px solid var(--font-l);
-  border-radius: 100%;
-  position: fixed;
-  transform: translate(-50%, -50%);
-  pointer-events: none;
-  transition: all 250ms ease;
-  transition-property: background-color, opacity, transform, mix-blend-mode;
-  mix-blend-mode: difference !important;
-  z-index: 9999 !important;
-}
-
-.cursor--hidden {
-  opacity: 0;
-}
-
-.cursor--link-hovered {
-  transform: translate(-50%, -50%) scale(1.25);
-  background-color: var(--font-l);
-}
-
-.cursor--clicked {
-  transform: translate(-50%, -50%) scale(0.9);
-  background-color: var(--font-l);
 }

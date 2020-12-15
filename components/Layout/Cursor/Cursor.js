@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useRouter } from "next/router";
 import classNames from "classnames";
 const isMobile = () => {
   const ua = navigator.userAgent;
@@ -6,18 +7,21 @@ const isMobile = () => {
 };
 
 const Cursor = () => {
+  const router = useRouter();
   if (typeof navigator !== "undefined" && isMobile()) return null;
 
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [clicked, setClicked] = useState(false);
   const [linkHovered, setLinkHovered] = useState(false);
+  const [selectHovered, setSelectHovered] = useState(false);
   const [hidden, setHidden] = useState(false);
 
   useEffect(() => {
     addEventListeners();
     handleLinkHoverEvents();
+    handleSelectHoverEvents();
     return () => removeEventListeners();
-  }, []);
+  }, [router]);
 
   const addEventListeners = () => {
     document.addEventListener("mousemove", onMouseMove);
@@ -56,16 +60,22 @@ const Cursor = () => {
   };
 
   const handleLinkHoverEvents = () => {
-    document.querySelectorAll("a").forEach((el) => {
+    document.querySelectorAll("a,Link").forEach((el) => {
       el.addEventListener("mouseover", () => setLinkHovered(true));
       el.addEventListener("mouseout", () => setLinkHovered(false));
     });
   };
-
+  const handleSelectHoverEvents = () => {
+    document.querySelectorAll("li,input,select,ion-icon").forEach((el) => {
+      el.addEventListener("mouseover", () => setSelectHovered(true));
+      el.addEventListener("mouseout", () => setSelectHovered(false));
+    });
+  };
   const cursorClasses = classNames("cursor", {
     "cursor--clicked": clicked,
     "cursor--hidden": hidden,
     "cursor--link-hovered": linkHovered,
+    "cursor--select-hovered": selectHovered,
   });
 
   return (

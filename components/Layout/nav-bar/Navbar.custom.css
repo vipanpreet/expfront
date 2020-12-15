@@ -505,3 +505,34 @@
     padding-right: 3rem;
   }
 }
+/* CURSOR */
+.cursor {
+  width: 40px;
+  height: 40px;
+  border: 2px solid var(--font-l);
+  border-radius: 100%;
+  position: fixed;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  transition: all 250ms ease;
+  transition-property: background-color, opacity, transform, mix-blend-mode;
+  mix-blend-mode: difference !important;
+  z-index: 9999 !important;
+}
+
+.cursor--hidden {
+  opacity: 0;
+}
+
+.cursor--link-hovered {
+  transform: translate(-50%, -50%) scale(1.25);
+  background-color: var(--font-l);
+}
+.cursor--select-hovered {
+  transform: translate(-50%, -50%) scale(0.55);
+  background-color: var(--font-vd);
+}
+.cursor--clicked {
+  transform: translate(-50%, -50%) scale(0.9);
+  background-color: var(--font-l);
+}
