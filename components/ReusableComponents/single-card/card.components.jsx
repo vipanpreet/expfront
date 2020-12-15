@@ -1,17 +1,19 @@
 import { useEffect } from "react";
 import { addItemWishlist } from "../../../redux/profile/profile.actions";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import "animate.css";
 
 const Card = ({ singleProduct, col12, col3, windowDimensions }) => {
   const dispatch = useDispatch();
+  const lifestyleState = useSelector((state) => state.lifestyleState);
+  const { storeType, department } = lifestyleState; // will be used somewhere else
 
   const handleWishlist = (id) => {
     dispatch(addItemWishlist(id));
   };
 
   return (
-    <div className="card animate__animated animate__fadeIn">
+    <div className={`card animate__animated animate__fadeIn ${department}`}>
       <div class="card--inner">
         <div className="card__img">
           <img

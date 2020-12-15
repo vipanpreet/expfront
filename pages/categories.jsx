@@ -1,12 +1,14 @@
-import CategoriesHeader from "../components/CategoriesPage/Categories-header/CategoriesHeader.component";
-import CategoriesList from "../components/CategoriesPage/Categories-list/CategoriesList.component";
+import CategoriesHeader from "../components/CategoriesPage/categories-header/categoriesHeader.component";
+import CategoriesList from "../components/CategoriesPage/categories-list/CategoriesList.component";
 
 const Categories = () => {
   return (
-    <div>
-      <CategoriesHeader />
-      <CategoriesList />
-    </div>
+    <>
+      <main>
+        <CategoriesHeader />
+        <CategoriesList />
+      </main>
+    </>
   );
 };
 

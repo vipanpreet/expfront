@@ -31,13 +31,13 @@ const ProfileMain = () => {
 
   useEffect(() => {
     if (!loading) {
-      setPhoneNumber(profile.phoneNumber);
-      setCountry(profile.country);
-      setState(profile.state);
-      setSuburb(profile.suburb);
-      setStreet(profile.street);
-      setZipcode(profile.zipcode);
-      setLocality(profile.locality);
+      setPhoneNumber(profile && profile.phoneNumber);
+      setCountry(profile && profile.country);
+      setState(profile && profile.state);
+      setSuburb(profile && profile.suburb);
+      setStreet(profile && profile.street);
+      setZipcode(profile && profile.zipcode);
+      setLocality(profile && profile.locality);
     }
   }, [userInfo, success]);
 
@@ -363,31 +363,34 @@ const ProfileMain = () => {
         <div class="profile-main--active" ref={(el) => (wishlistBody = el)}>
           <div class="subtitle mb-4">Your Wishlist</div>
 
-          {profile.wishlist ? (
+          {profile !== undefined ? (
             profile.wishlist.map((product) => {
               return (
-                <div class="orderslist" style={{ marginBottom: 20 }}>
-                  <div class="orderslist--img">
-                    <img src={product.images[0].url} alt="" />
+                <>
+                  <div class="orderslist" style={{ marginBottom: 20 }}>
+                    <div class="orderslist--img">
+                      <img src={product.images[0].url} alt="" />
+                    </div>
+                    <div class="orderslist__body" style={{ paddingTop: 0 }}>
+                      <div
+                        class="orderslist__body--title"
+                        style={{ lineHeight: 1 }}
+                      >
+                        {product.name}
+                      </div>
+                      <div class="orderslist__body--desc">
+                        Lorem ipsum dolor sit amet, consectetur adipisicing
+                        elit. Vel maxime fugiat sapiente odit veritatis quis
+                        incidunt quasi provident possimus, ab quibusdam
+                        accusamus animi optio atque tenetur deleniti expedita
+                        distinctio placeat.
+                      </div>
+                      <div class="mt-2">
+                        <button class="btn btn--primary-simple">Order</button>
+                      </div>
+                    </div>
                   </div>
-                  <div class="orderslist__body" style={{ paddingTop: 0 }}>
-                    <div
-                      class="orderslist__body--title"
-                      style={{ lineHeight: 1 }}
-                    >
-                      {product.name}
-                    </div>
-                    <div class="orderslist__body--desc">
-                      Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                      Vel maxime fugiat sapiente odit veritatis quis incidunt
-                      quasi provident possimus, ab quibusdam accusamus animi
-                      optio atque tenetur deleniti expedita distinctio placeat.
-                    </div>
-                    <div class="mt-2">
-                      <button class="btn btn--primary-simple">Order</button>
-                    </div>
-                  </div>
-                </div>
+                </>
               );
             })
           ) : (

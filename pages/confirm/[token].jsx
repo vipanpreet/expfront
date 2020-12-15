@@ -2,18 +2,21 @@ import { useEffect } from "react";
 import Navbar from "../../components/Layout/nav-bar/Navbar.components";
 import { useDispatch, useSelector } from "react-redux";
 import { confirmUser } from "../../redux/login/login.actions";
-import Router from "next/router";
+import { useRouter } from "next/router";
 
 export default function Confirm(props) {
-  const { token } = Router.query;
+  const router = useRouter();
+
   const dispatch = useDispatch();
+  const { token } = router.query;
+
   const loginReducerState = useSelector((state) => state.login);
   const { error, message } = loginReducerState;
   useEffect(() => {
     if (token) {
       dispatch(confirmUser(token));
       if (message) {
-        Router.push("/login");
+        router.push("/login");
       }
     }
   }, [error, message, token]);

@@ -5,14 +5,16 @@ import ProductSidebar from "../components/ProductsPage/products-sidebar/Products
 // redux
 import { productList } from "../redux/products/products.actions";
 import { useDispatch, useSelector } from "react-redux";
-import { SEARCH_LIST_CLEAR } from "../redux/products/products.types";
 
 // Animations
 import { setAlert } from "../redux/Alert/alert.actions";
 import Spinner from "../components/Layout/Spinner/Spinner";
 
 function getWindowDimensions() {
-  const { innerWidth: width, innerHeight: height } = window;
+  if (typeof window !== "undefined") {
+    var { innerWidth: width, innerHeight: height } = window;
+  }
+  //
   return {
     width,
     height,
@@ -143,7 +145,7 @@ const Products = () => {
               <>
                 <section class="section-newcomer">
                   <div class="newcomer">
-                    <img src="/assets/sections/trendingproduct.webp" alt="" />
+                    <img src="/assets/offers/trendingproduct.webp" alt="" />
                   </div>
                 </section>
 

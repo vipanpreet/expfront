@@ -81,7 +81,7 @@ const Navbar = () => {
     } else {
       dispatch({ type: SEARCH_LIST_CLEAR });
     }
-
+    window.addEventListener("scroll", changeNav);
     document.addEventListener("mousedown", handleAccount);
     // return function to be called when unmounted
     return () => {
@@ -96,8 +96,6 @@ const Navbar = () => {
       setNavHeight(false);
     }
   };
-
-  window.addEventListener("scroll", changeNav);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -638,7 +636,7 @@ const Navbar = () => {
                     </a>
                   </li>
                   <li>
-                    <a href="#">
+                    <a onClick={handleLogoutBtn} href="#">
                       <ion-icon name="log-out-outline"></ion-icon> Logout
                     </a>
                   </li>

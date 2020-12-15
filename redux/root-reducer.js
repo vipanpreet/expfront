@@ -1,6 +1,6 @@
 import { combineReducers } from "redux";
-import { persistReducer } from "redux-persist";
-import storage from "redux-persist/lib/storage";
+// import { persistReducer } from "redux-persist";
+// import storage from "redux-persist/lib/storage";
 
 import { alertReducer } from "./Alert/alert.reducers";
 import cartReducer from "./cart/cart.reducer";
@@ -18,13 +18,14 @@ import {
   productsListReducer,
   searchListReducer,
 } from "./products/products.reducer";
+import lifestyleReducer from "./lifestyle/lifestyle.reducers";
 
-const persistConfig = {
-  key: "root",
-  storage,
-  // whitelist - slices of the store that are persisted
-  whitelist: ["cart"],
-};
+// const persistConfig = {
+//   key: "root",
+//   storage,
+//   // whitelist - slices of the store that are persisted
+//   whitelist: ["cart"],
+// };
 
 const rootReducer = combineReducers({
   alertShow: alertReducer,
@@ -37,6 +38,8 @@ const rootReducer = combineReducers({
   subCategoryList: subCategoryListReducer,
   productsList: productsListReducer,
   searchList: searchListReducer,
+  lifestyleState : lifestyleReducer
 });
 
-export default persistReducer(persistConfig, rootReducer);
+// export default persistReducer(persistConfig, rootReducer);
+export default rootReducer;

@@ -24,7 +24,7 @@ const SigninForm = () => {
   };
   return (
     <>
-      <div className="title">Login to your Account</div>
+      <div className="title mt-2">Login to your Account</div>
       {error && <h1>{error}</h1>}
       <form>
         <div className="input-group">

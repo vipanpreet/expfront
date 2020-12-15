@@ -1,0 +1,21 @@
+.gototop {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1.5rem;
+  font-size: 2rem;
+  background: var(--cream);
+  z-index: 900;
+  cursor: pointer;
+}
+@media only screen and (max-width: 1024px) {
+  .gototop {
+    bottom: 10px;
+    right: 10px;
+    padding: 1.2rem;
+    font-size: 1.6rem;
+  }
+}

@@ -40,7 +40,7 @@ const SignupForm = () => {
         </>
       ) : (
         <>
-          <div className="title">Create a new Account</div>
+          <div className="title mt-2">Create a new Account</div>
           <form onSubmit={submitHandler}>
             <div className="input-group">
               <input
