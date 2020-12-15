@@ -17,6 +17,8 @@ const Cursor = () => {
   const [hidden, setHidden] = useState(false);
 
   useEffect(() => {
+    setLinkHovered(false);
+    setSelectHovered(false);
     addEventListeners();
     handleLinkHoverEvents();
     handleSelectHoverEvents();
