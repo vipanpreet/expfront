@@ -15,9 +15,9 @@ import LifestyleWomenHeader from "../../components/LifestylePage/Women/lifestyle
 import LifestyleWomenDealSection from "../../components/LifestylePage/Women/lifestyle-women-deal-section/LifestyleWomenDealSection.components";
 import LifestyleWomenUpsellSection from "../../components/LifestylePage/Women/lifestyle-women-upsell-section/LifestyleWomenUpsellSection.components";
 // Men components
-import LifestyleMenHeader from "../../components/LifestylePage/men/lifestyle-men-header/LifestyleMenHeader.component";
-import LifestyleMenDealSection from "../../components/LifestylePage/men/lifestyle-men-deal-section/LifestyleMenDealSection.components";
-import LifestyleMenUpsellSection from "../../components/LifestylePage/men/lifestyle-men-upsell-section/LifestyleMenUpsellSection.components";
+import LifestyleMenHeader from "../../components/LifestylePage/Men/lifestyle-men-header/LifestyleMenHeader.component";
+import LifestyleMenDealSection from "../../components/LifestylePage/Men/lifestyle-men-deal-section/LifestyleMenDealSection.components";
+import LifestyleMenUpsellSection from "../../components/LifestylePage/Men/lifestyle-men-upsell-section/LifestyleMenUpsellSection.components";
 
 import { getProfile } from "../../redux/profile/profile.actions";
 import { saveLifestyleState } from "../../redux/lifestyle/lifestyle.actions";
