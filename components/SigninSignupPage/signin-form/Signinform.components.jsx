@@ -53,7 +53,7 @@ const SigninForm = () => {
         <div className="mt-4">
           <a
             href="#"
-            className="btn btn--primary-simple btn-block-mobile mr-2"
+            className="btn btn--primary btn-block-mobile mr-2"
             onClick={submitHandler}
           >
             login to account

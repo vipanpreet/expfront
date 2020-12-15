@@ -113,7 +113,7 @@ const SignupForm = () => {
               </p>
             </div>
             <div className="mt-4">
-              <button className="btn btn--primary-simple btn-block-mobile mr-2">
+              <button className="btn btn--primary  btn-block-mobile mr-2">
                 Register Account
               </button>
               <button className="btn btn--font btn-block-mobile">

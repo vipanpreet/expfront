@@ -20,8 +20,9 @@ const Cursor = () => {
     addEventListeners();
     handleLinkHoverEvents();
     handleSelectHoverEvents();
+
     return () => removeEventListeners();
-  }, [router]);
+  }, [router.pathname]);
 
   const addEventListeners = () => {
     document.addEventListener("mousemove", onMouseMove);
@@ -60,7 +61,7 @@ const Cursor = () => {
   };
 
   const handleLinkHoverEvents = () => {
-    document.querySelectorAll("a,Link").forEach((el) => {
+    document.querySelectorAll("a,Link,button").forEach((el) => {
       el.addEventListener("mouseover", () => setLinkHovered(true));
       el.addEventListener("mouseout", () => setLinkHovered(false));
     });
@@ -71,6 +72,7 @@ const Cursor = () => {
       el.addEventListener("mouseout", () => setSelectHovered(false));
     });
   };
+
   const cursorClasses = classNames("cursor", {
     "cursor--clicked": clicked,
     "cursor--hidden": hidden,

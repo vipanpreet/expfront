@@ -133,11 +133,9 @@
 
 html {
   font-size: 62.5%;
-  cursor: none !important;
 }
 
 body {
-  cursor: none !important;
   overflow-x: hidden;
 }
 
@@ -148,7 +146,6 @@ main {
 a {
   color: var(--font);
   text-decoration: none;
-  cursor: none !important;
 }
 
 hr {
@@ -2987,6 +2984,12 @@ body {
   color: var(--primary);
   border-bottom-color: var(--primary);
 }
+.btn--primary.btn--arrow:hover {
+  color: var(--primary);
+}
+.btn--primary.btn--arrow:hover:hover::before {
+  color: var(--primary);
+}
 .btn--female {
   background: var(--female);
   color: #fff;
@@ -2997,6 +3000,12 @@ body {
 .btn--female.btn--underline:hover {
   color: var(--female);
   border-bottom-color: var(--female);
+}
+.btn--female.btn--arrow:hover {
+  color: var(--female);
+}
+.btn--female.btn--arrow:hover:hover::before {
+  color: var(--female);
 }
 .btn--male {
   background: var(--male);
@@ -3009,6 +3018,12 @@ body {
   color: var(--male);
   border-bottom-color: var(--male);
 }
+.btn--male.btn--arrow:hover {
+  color: var(--male);
+}
+.btn--male.btn--arrow:hover:hover::before {
+  color: var(--male);
+}
 .btn--font {
   background: var(--font);
   color: #fff;
@@ -3020,12 +3035,24 @@ body {
   color: var(--font);
   border-bottom-color: var(--font);
 }
+.btn--font.btn--arrow:hover {
+  color: var(--font);
+}
+.btn--font.btn--arrow:hover:hover::before {
+  color: var(--font);
+}
 .btn--white {
   background: var(--white);
   color: var(--font);
 }
 .btn--white::before {
   background: var(--white);
+}
+.btn--white.btn--arrow:hover {
+  color: var(--primary);
+}
+.btn--white.btn--arrow:hover:hover::before {
+  color: var(--primary);
 }
 .btn--simple {
   background: transparent !important;
@@ -4143,12 +4170,7 @@ body {
   display: flex;
 }
 .register--banner {
-  background: linear-gradient(
-      to right,
-      rgba(var(--primary), 0.3),
-      rgba(var(--male), 0.4)
-    ),
-    url("/assets/sections/header-cat.jpg");
+  background: url("/assets/sections/header-cat.jpg");
   background-position: left;
   background-attachment: fixed;
   background-size: cover;
@@ -4511,6 +4533,15 @@ body {
   color: #fff;
   width: 50%;
   line-height: 1.4;
+}
+
+.header-luxury {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  background: url("/assets/sections/section-luxheader.jpg") no-repeat;
+  background-position: center;
+  background-size: cover;
 }
 
 @media only screen and (max-width: 1024px) {

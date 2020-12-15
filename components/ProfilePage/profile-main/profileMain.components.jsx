@@ -290,7 +290,7 @@ const ProfileMain = () => {
               />
             </div>
             <div class="mt-2">
-              <button class="btn btn--primary-simple">Update</button>
+              <button class="btn btn--primary">Update</button>
             </div>
           </form>
         </div>
@@ -314,7 +314,7 @@ const ProfileMain = () => {
               </div>
               <div class="orderslist__body--status">Out for Delivery</div>
               <div class="mt-2">
-                <button class="btn btn--primary-simple">Order Again</button>
+                <button class="btn btn--primary">Order Again</button>
               </div>
             </div>
           </div>
@@ -334,7 +334,7 @@ const ProfileMain = () => {
                 enim quaerat magnam excepturi...
               </div>
               <div class="mt-2">
-                <button class="btn btn--primary-simple">Order Again</button>
+                <button class="btn btn--primary">Order Again</button>
               </div>
             </div>
           </div>
@@ -354,7 +354,7 @@ const ProfileMain = () => {
                 enim quaerat magnam excepturi...
               </div>
               <div class="mt-2">
-                <button class="btn btn--primary-simple">Order Again</button>
+                <button class="btn btn--primary">Order Again</button>
               </div>
             </div>
           </div>
@@ -386,7 +386,7 @@ const ProfileMain = () => {
                         distinctio placeat.
                       </div>
                       <div class="mt-2">
-                        <button class="btn btn--primary-simple">Order</button>
+                        <button class="btn btn--primary">Order</button>
                       </div>
                     </div>
                   </div>
@@ -432,7 +432,7 @@ const ProfileMain = () => {
             <input type="text" class="input" />
           </div>
           <div class="mt-2">
-            <button class="btn btn--primary-dark">Change Password</button>
+            <button class="btn btn--font">Change Password</button>
           </div>
         </div>
       </div>

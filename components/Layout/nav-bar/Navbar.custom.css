@@ -141,7 +141,7 @@
   left: 40%;
   transform: translate(-50%, -50%);
   opacity: 0;
-  visibility: "hidden";
+  visibility: hidden;
 }
 .wrapper-menu .menu ul {
   list-style: none;
