@@ -11,7 +11,6 @@ const LifestyleRecommendationBox = (props) => {
         <div class="pl-2  title mb-4">Recommendations</div>
 
         <Swiper
-          style={{ overflow: "visible" }}
           spaceBetween={0}
           slidesPerView={4}
           // navigation
