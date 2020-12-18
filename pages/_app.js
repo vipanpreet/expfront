@@ -8,30 +8,16 @@ import { Provider } from "react-redux";
 import Overlay from "../components/Layout/Overlay/Overlay.module";
 import Navbar from "../components/Layout/nav-bar/Navbar.components";
 import Footer from "../components/ReusableComponents/footer/Footer.components";
-import { useEffect } from "react";
 import { useRouter } from "next/router";
 import Alert from "../components/Layout/Alert/Alert.module";
-import { getCartItems } from "../redux/cart/cart.actions";
-
-import { useDispatch, useSelector } from "react-redux";
 
 import { store, persistor } from "../redux/store";
 import GoToTop from "../components/Layout/go-to-top/GoToTop.module";
 import Cursor from "../components/Layout/Cursor/Cursor.js";
-
 // import { store} from '../redux/store';
 
 function MyApp({ Component, pageProps }) {
   const route = useRouter();
-
-  const dispatch = useDispatch();
-
-  const cartReducerState = useSelector((state) => state.cart);
-  const { error, cartList } = cartReducerState;
-  useEffect(() => {
-    dispatch(getCartItems);
-    localStorage.setItem("cart", JSON.stringify(cartList));
-  }, []);
   return (
     <Provider store={store}>
       {/* <PersistGate persistor={persistor}> */}
