@@ -8,6 +8,7 @@ import { Provider } from "react-redux";
 import Overlay from "../components/Layout/Overlay/Overlay.module";
 import Navbar from "../components/Layout/nav-bar/Navbar.components";
 import Footer from "../components/ReusableComponents/footer/Footer.components";
+import { useEffect } from "react";
 import { useRouter } from "next/router";
 import Alert from "../components/Layout/Alert/Alert.module";
 import { getCartItems } from "../redux/cart/cart.actions";
