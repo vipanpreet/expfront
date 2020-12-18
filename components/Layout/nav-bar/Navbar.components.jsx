@@ -87,7 +87,7 @@ const Navbar = () => {
   // const { cartLists } = cartState;
 
   useEffect(() => {
-    if (!localStorage.getItem("cart")) {
+    if (localStorage.getItem("cart") === null) {
       dispatch(getCartItems);
       localStorage.setItem("cart", JSON.stringify(cartList));
     } else {
