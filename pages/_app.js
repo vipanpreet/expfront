@@ -12,6 +12,8 @@ import { useRouter } from "next/router";
 import Alert from "../components/Layout/Alert/Alert.module";
 import { getCartItems } from "../redux/cart/cart.actions";
 
+import { useDispatch, useSelector } from "react-redux";
+
 import { store, persistor } from "../redux/store";
 import GoToTop from "../components/Layout/go-to-top/GoToTop.module";
 import Cursor from "../components/Layout/Cursor/Cursor.js";
