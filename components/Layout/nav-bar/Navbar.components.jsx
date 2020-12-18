@@ -4,7 +4,6 @@ import { useRouter } from "next/router";
 
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../../redux/login/login.actions";
-import { getCartItems } from "../../../redux/cart/cart.actions";
 import { SEARCH_LIST_CLEAR } from "../../../redux/products/products.types";
 
 // Animation GSAP
@@ -23,7 +22,7 @@ const Navbar = () => {
   const [cursor, setCursor] = useState(0);
   const [NavDark, setNavDark] = useState(false);
 
-  const [cartLists, setCartLists] = useState([]);
+  const [cartList, setCartList] = useState([]);
   var cartTotal = 0;
 
   // Navigation
@@ -81,17 +80,12 @@ const Navbar = () => {
   const lifestyleState = useSelector((state) => state.lifestyleState);
   const { storeType, department } = lifestyleState;
 
-  const cartReducerState = useSelector((state) => state.cart);
-  const { error, cartList } = cartReducerState;
   // const cartState = useSelector((state) => state.cart);
-  // const { cartLists } = cartState;
+  // const { cartList } = cartState;
 
   useEffect(() => {
     if (localStorage.getItem("cart")) {
-      setCartLists(JSON.parse(localStorage.getItem("cart")));
-    } else {
-      dispatch(getCartItems);
-      localStorage.setItem("cart", JSON.stringify(cartList));
+      setCartList(JSON.parse(localStorage.getItem("cart")));
     }
 
     if (searchKeyword.length >= 3) {
@@ -950,7 +944,7 @@ const Navbar = () => {
           </span>
           <div className="d-flex justify-content-between align-content-center">
             <div className="wrapper-cart__details--title">Shopping cart</div>
-            <div className="title">{cartLists.length} items</div>
+            <div className="title">{cartList.length} items</div>
           </div>
           <table className="wrapper-cart__table">
             <tr>
@@ -960,8 +954,8 @@ const Navbar = () => {
               <th>Price</th>
               <th></th>
             </tr>
-            {cartLists ? (
-              cartLists.map((cartItem) => {
+            {cartList ? (
+              cartList.map((cartItem) => {
                 cartTotal = cartTotal + cartItem.price;
                 return (
                   <tr className="wrapper-cart__table--data">
