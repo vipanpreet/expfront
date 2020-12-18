@@ -567,10 +567,11 @@ const Navbar = () => {
 
   // cart
   const openCart = () => {
-    closeNav();
     if (localStorage.getItem("cart")) {
       setCartList(JSON.parse(localStorage.getItem("cart")));
     }
+    closeNav();
+
     var isMobileCart;
     window.innerWidth < 1024
       ? (isMobileCart = "100vw")
