@@ -91,6 +91,7 @@ const Navbar = () => {
       setCartLists(JSON.parse(localStorage.getItem("cart")));
     } else {
       dispatch(getCartItems);
+      localStorage.setItem("cart", JSON.stringify(cartList));
     }
 
     if (searchKeyword.length >= 3) {
