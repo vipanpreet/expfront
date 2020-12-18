@@ -23,7 +23,7 @@ const Navbar = () => {
   const [cursor, setCursor] = useState(0);
   const [NavDark, setNavDark] = useState(false);
 
-  const [cartList, setCartList] = useState([]);
+  const [cartLists, setCartLists] = useState([]);
   var cartTotal = 0;
 
   // Navigation
@@ -84,11 +84,11 @@ const Navbar = () => {
   const cartReducerState = useSelector((state) => state.cart);
   const { error, cartList } = cartReducerState;
   // const cartState = useSelector((state) => state.cart);
-  // const { cartList } = cartState;
+  // const { cartLists } = cartState;
 
   useEffect(() => {
     if (!localStorage.getItem("cart")) {
-      setCartList(JSON.parse(localStorage.getItem("cart")));
+      setCartLists(JSON.parse(localStorage.getItem("cart")));
     } else {
       dispatch(getCartItems);
     }
@@ -949,7 +949,7 @@ const Navbar = () => {
           </span>
           <div className="d-flex justify-content-between align-content-center">
             <div className="wrapper-cart__details--title">Shopping cart</div>
-            <div className="title">{cartList.length} items</div>
+            <div className="title">{cartLists.length} items</div>
           </div>
           <table className="wrapper-cart__table">
             <tr>
@@ -959,8 +959,8 @@ const Navbar = () => {
               <th>Price</th>
               <th></th>
             </tr>
-            {cartList ? (
-              cartList.map((cartItem) => {
+            {cartLists ? (
+              cartLists.map((cartItem) => {
                 cartTotal = cartTotal + cartItem.price;
                 return (
                   <tr className="wrapper-cart__table--data">
