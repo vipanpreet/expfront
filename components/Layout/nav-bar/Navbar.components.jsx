@@ -84,6 +84,10 @@ const Navbar = () => {
   // const { cartList } = cartState;
 
   useEffect(() => {
+    if (localStorage.getItem("cart")) {
+      setCartList(JSON.parse(localStorage.getItem("cart")));
+    }
+
     if (searchKeyword.length >= 3) {
       dispatch(getSearchList(searchKeyword));
     } else {
@@ -567,9 +571,6 @@ const Navbar = () => {
 
   // cart
   const openCart = () => {
-    if (localStorage.getItem("cart")) {
-      setCartList(JSON.parse(localStorage.getItem("cart")));
-    }
     closeNav();
 
     var isMobileCart;
