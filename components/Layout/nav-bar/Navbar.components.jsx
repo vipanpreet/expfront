@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../../redux/login/login.actions";
 import { SEARCH_LIST_CLEAR } from "../../../redux/products/products.types";
+import { getCartItems } from "../../../redux/cart/cart.actions";
 
 // Animation GSAP
 import { Expo, TimelineMax, TweenMax } from "gsap";
