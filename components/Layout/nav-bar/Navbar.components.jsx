@@ -87,11 +87,11 @@ const Navbar = () => {
   // const { cartLists } = cartState;
 
   useEffect(() => {
-    if (localStorage.getItem("cart") === null) {
+    if (localStorage.getItem("cart")) {
+      setCartLists(JSON.parse(localStorage.getItem("cart")));
+    } else {
       dispatch(getCartItems);
       localStorage.setItem("cart", JSON.stringify(cartList));
-    } else {
-      setCartLists(JSON.parse(localStorage.getItem("cart")));
     }
 
     if (searchKeyword.length >= 3) {
