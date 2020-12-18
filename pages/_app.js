@@ -15,21 +15,11 @@ import { store, persistor } from "../redux/store";
 import GoToTop from "../components/Layout/go-to-top/GoToTop.module";
 import Cursor from "../components/Layout/Cursor/Cursor.js";
 
-import { useEffect } from "react";
-import { getCartItems } from "../redux/cart/cart.actions";
-import { useDispatch, useSelector } from "react-redux";
 // import { store} from '../redux/store';
 
 function MyApp({ Component, pageProps }) {
   const route = useRouter();
-  const dispatch = useDispatch();
-  const cartReducerState = useSelector((state) => state.cart);
-  const { error, cartList } = cartReducerState;
-  useEffect(() => {
-    if (!localStorage.getItem("cart")) {
-      dispatch(getCartItems);
-    }
-  }, []);
+
   return (
     <Provider store={store}>
       {/* <PersistGate persistor={persistor}> */}

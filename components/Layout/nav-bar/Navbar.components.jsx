@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../../redux/login/login.actions";
+import { getCartItems } from "../redux/cart/cart.actions";
 import { SEARCH_LIST_CLEAR } from "../../../redux/products/products.types";
 
 // Animation GSAP
@@ -80,12 +81,16 @@ const Navbar = () => {
   const lifestyleState = useSelector((state) => state.lifestyleState);
   const { storeType, department } = lifestyleState;
 
+  const cartReducerState = useSelector((state) => state.cart);
+  const { error, cartList } = cartReducerState;
   // const cartState = useSelector((state) => state.cart);
   // const { cartList } = cartState;
 
   useEffect(() => {
-    if (localStorage.getItem("cart")) {
+    if (!localStorage.getItem("cart")) {
       setCartList(JSON.parse(localStorage.getItem("cart")));
+    } else {
+      dispatch(getCartItems);
     }
 
     if (searchKeyword.length >= 3) {
