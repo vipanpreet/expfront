@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 const HomeLuxurySection = () => {
   return (
     <>
@@ -11,12 +13,16 @@ const HomeLuxurySection = () => {
             ipsa labore .
           </div>
           <div className="mt-4">
-            <a href="#" className="btn btn--arrow btn--primary mr-3">
-              Shop in Men
-            </a>
-            <a href="#" className="btn btn--arrow btn--primary">
-              Shop in Women
-            </a>
+            <Link href="/luxury/men">
+              <a href="#" className="btn btn--arrow btn--primary mr-3">
+                Shop in Men
+              </a>
+            </Link>
+            <Link href="/luxury/women">
+              <a href="#" className="btn btn--arrow btn--primary">
+                Shop in Women
+              </a>
+            </Link>
           </div>
         </div>
       </section>

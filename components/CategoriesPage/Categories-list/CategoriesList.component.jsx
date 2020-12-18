@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import Link from "next/link";
 
 const CategoriesList = () => {
   const [subCategories, setSubCategories] = useState([]);
@@ -32,9 +33,11 @@ const CategoriesList = () => {
       .filter((subcategory) => subcategory.parent == parent)
       .map((sub) => {
         return (
-          <li>
-            <a href="#">{sub.name}</a>
-          </li>
+          <Link href={`/products?category=${parent}&subcategory=${sub.slug}`}>
+            <li>
+              <a href="#">{sub.name}</a>
+            </li>
+          </Link>
         );
       });
   };
@@ -47,52 +50,98 @@ const CategoriesList = () => {
             <div className="row">
               <div className="col-md-6 mb-8">
                 <div className="text-center">
-                  <div className="img-res">
-                    <img src="/assets/cat/uppers.jpg" alt="" />
-                  </div>
-                  <a className="title display-block" href="#">
-                    Upperwear
-                  </a>
+                  <Link
+                    href={{
+                      pathname: "/products",
+                      query: { category: "upperwear" },
+                    }}
+                  >
+                    <a>
+                      <div className="img-res">
+                        <img src="/assets/cat/uppers.jpg" alt="" />
+                      </div>
+
+                      <a className="title display-block" href="#">
+                        Upperwear
+                      </a>
+                    </a>
+                  </Link>
                 </div>
               </div>
               <div className="col-md-6 mb-8">
                 <div className="text-center">
-                  <div className="img-res">
-                    <img src="/assets/cat/lowers.jpg" alt="" />
-                  </div>
-                  <a className="title display-block" href="#">
-                    Lowers
-                  </a>
+                  <Link
+                    href={{
+                      pathname: "/products",
+                      query: { category: "lowers" },
+                    }}
+                  >
+                    <a>
+                      <div className="img-res">
+                        <img src="/assets/cat/lowers.jpg" alt="" />
+                      </div>
+                      <a className="title display-block" href="#">
+                        Lowers
+                      </a>
+                    </a>
+                  </Link>
                 </div>
               </div>
               <div className="col-md-6 mb-8">
                 <div className="text-center">
-                  <div className="img-res">
-                    <img src="/assets/cat/accessorie.jpg" alt="" />
-                  </div>
-                  <a className="title display-block" href="#">
-                    Accessories
-                  </a>
+                  <Link
+                    href={{
+                      pathname: "/products",
+                      query: { category: "accessories" },
+                    }}
+                  >
+                    <a>
+                      <div className="img-res">
+                        <img src="/assets/cat/accessorie.jpg" alt="" />
+                      </div>
+                      <a className="title display-block" href="#">
+                        Accessories
+                      </a>
+                    </a>
+                  </Link>
                 </div>
               </div>
               <div className="col-md-6 mb-8">
                 <div className="text-center">
-                  <div className="img-res">
-                    <img src="/assets/cat/shoes.jpg" alt="" />
-                  </div>
-                  <a className="title display-block" href="#">
-                    Footwear
-                  </a>
+                  <Link
+                    href={{
+                      pathname: "/products",
+                      query: { category: "footwear" },
+                    }}
+                  >
+                    <a>
+                      <div className="img-res">
+                        <img src="/assets/cat/shoes.jpg" alt="" />
+                      </div>
+                      <a className="title display-block" href="#">
+                        Footwear
+                      </a>
+                    </a>
+                  </Link>
                 </div>
               </div>
               <div className="col-md-6 mb-8">
                 <div className="text-center">
-                  <div className="img-res">
-                    <img src="/assets/cat/lowers.jpg" alt="" />
-                  </div>
-                  <a className="title display-block" href="#">
-                    Lowers
-                  </a>
+                  <Link
+                    href={{
+                      pathname: "/products",
+                      query: { category: "health-and-beauty" },
+                    }}
+                  >
+                    <a>
+                      <div className="img-res">
+                        <img src="/assets/cat/lowers.jpg" alt="" />
+                      </div>
+                      <a className="title display-block" href="#">
+                        health & beauty
+                      </a>
+                    </a>
+                  </Link>
                 </div>
               </div>
             </div>

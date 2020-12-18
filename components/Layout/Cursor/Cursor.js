@@ -15,10 +15,16 @@ const Cursor = () => {
   const [linkHovered, setLinkHovered] = useState(false);
   const [selectHovered, setSelectHovered] = useState(false);
   const [hidden, setHidden] = useState(false);
+  const [dark, setDark] = useState(false);
 
   useEffect(() => {
     setLinkHovered(false);
     setSelectHovered(false);
+    if (router.pathname === "/luxury/[gender]") {
+      setDark(true);
+    } else {
+      setDark(false);
+    }
     addEventListeners();
     handleLinkHoverEvents();
     handleSelectHoverEvents();
@@ -69,10 +75,12 @@ const Cursor = () => {
     });
   };
   const handleSelectHoverEvents = () => {
-    document.querySelectorAll("li,input,select,ion-icon").forEach((el) => {
-      el.addEventListener("mouseover", () => setSelectHovered(true));
-      el.addEventListener("mouseout", () => setSelectHovered(false));
-    });
+    document
+      .querySelectorAll("li,input,select,ion-icon,.logo,.toggle,.actions,.link")
+      .forEach((el) => {
+        el.addEventListener("mouseover", () => setSelectHovered(true));
+        el.addEventListener("mouseout", () => setSelectHovered(false));
+      });
   };
 
   const cursorClasses = classNames("cursor", {
@@ -86,7 +94,9 @@ const Cursor = () => {
     <div
       className={cursorClasses}
       style={{ left: `${position.x}px`, top: `${position.y}px` }}
-    />
+    >
+      <span></span>
+    </div>
   );
 };
 export default Cursor;

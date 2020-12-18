@@ -1,6 +1,6 @@
-import { useEffect } from "react";
 import { addItemWishlist } from "../../../redux/profile/profile.actions";
 import { useDispatch, useSelector } from "react-redux";
+import Link from "next/link";
 import "animate.css";
 
 const Card = ({ singleProduct, col12, col3, windowDimensions }) => {
@@ -43,7 +43,7 @@ const Card = ({ singleProduct, col12, col3, windowDimensions }) => {
                 >
                   <ion-icon name="heart-outline"></ion-icon>
                 </a>
-                <div
+                <a
                   href={`/details/${singleProduct._id}`}
                   target="_blank"
                   as={`/details/${singleProduct._id}`}
@@ -59,7 +59,7 @@ const Card = ({ singleProduct, col12, col3, windowDimensions }) => {
                   ) : (
                     "View"
                   )}
-                </div>
+                </a>
                 {col12 ? null : (
                   <a href="#" class="card__hover__btns--options">
                     <ion-icon name="options-outline"></ion-icon>

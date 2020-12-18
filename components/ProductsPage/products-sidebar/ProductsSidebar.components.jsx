@@ -118,6 +118,7 @@ const ProductSidebar = () => {
                     pathname: "/products",
                     query: { ...queryList, subcategory: subcategory.slug },
                   }}
+                  className="link"
                 >
                   <li
                     className="sidebar--item"

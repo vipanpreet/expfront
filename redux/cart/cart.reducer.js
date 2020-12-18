@@ -1,27 +1,26 @@
-import cartActionTypes from './cart.types';
-import { addItemToCart, clearItemFromCart } from './cart.utils';
+import {
+  CART_ADD_REQUEST,
+  CART_ADD_SUCCESS,
+  CART_ADD_FAIL,
+  CART_GET_REQUEST,
+  CART_GET_SUCCESS,
+  CART_GET_FAIL
+} from './cart.types';
 
-const INITIAL_STATE = {
-  cartItems: [],
-};
-
-const cartReducer = (state = INITIAL_STATE, action) => {
+const cartReducer = (state = { cartList : []}, action) => {
   switch (action.type) {
-    case cartActionTypes.ADD_ITEM:
+    case CART_ADD_REQUEST:
       return {
-        ...state,
-        // cartItems : { ...state.cartItems, [Math.random()] : {...action.payload} }
-        cartItems: addItemToCart(state.cartItems, action.payload),
+        ...state,loading: true
       };
-    case cartActionTypes.CLEAR_ITEM_FROM_CART:
+    case CART_ADD_SUCCESS:
       return {
-        ...state,
-        cartItems: clearItemFromCart(state.cartItems, action.payload.product),
+        loading: false, cartList : action.payload
       };
-    case cartActionTypes.CLEAR_CART:
+    case CART_ADD_FAIL:
       return {
         ...state,
-        cartItems: {},
+        loading: false
       };
     default:
       return state;

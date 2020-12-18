@@ -1,5 +1,6 @@
 import "../styles/style.css";
 import "../components/Layout/nav-bar/Navbar.custom.css";
+import "../styles/luxury.css";
 import "swiper/swiper.scss";
 import "swiper/components/navigation/navigation.scss";
 import { Provider } from "react-redux";
@@ -27,7 +28,11 @@ function MyApp({ Component, pageProps }) {
       <Cursor />
       <Component {...pageProps} />
       {/* // do not render the footer if the cart page is opened */}
-      {route.pathname == "/cart" ? " " : <Footer />}
+      {route.pathname == "/cart" || route.pathname == "/luxury/[gender]" ? (
+        " "
+      ) : (
+        <Footer />
+      )}
       {/* </PersistGate> */}
     </Provider>
   );

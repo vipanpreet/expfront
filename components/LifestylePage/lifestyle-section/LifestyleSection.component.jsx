@@ -11,9 +11,11 @@ const LifestyleSection = (props) => {
         <div class="d-flex justify-content-between">
           <div class="ml-2 title mb-4">categories</div>
           <div class="mb-4">
-            <a href="#" class="btn btn--primary btn--arrow">
-              <span>See All</span>
-            </a>
+            <Link href="/categories">
+              <a href="#" class="btn btn--primary btn--arrow">
+                <span>See All</span>
+              </a>
+            </Link>
           </div>
         </div>
         <div className="category--wrapper mb-9">

@@ -69,7 +69,7 @@ export const createProfile = (profile) => async (dispatch, getState) => {
       type: PROFILE_CREATE_SUCCESS,
       payload: data.message,
     });
-    dispatch(setAlert("Profile Updated", "success", 4500));
+    dispatch(setAlert("Profile Updated", "success", 2500));
   } catch (error) {
     dispatch({
       type: PROFILE_CREATE_FAIL,
@@ -104,7 +104,7 @@ export const addItemWishlist = (id) => async (dispatch, getState) => {
     });
     dispatch(getProfile());
     // need to check the message as... message can be " product already exist"
-    dispatch(setAlert("Product Wishlisted", "success", 4500));
+    dispatch(setAlert("Product Wishlisted", "success", 2500));
   } catch (error) {
     {
       dispatch({

@@ -1,13 +1,33 @@
 import Link from "next/link";
 import { addItem } from "../../../redux/cart/cart.actions";
-import { connect } from "react-redux";
 import Productadditional from "../Details-product-additional/Productadditional.components";
 import { useEffect, useRef, useLayoutEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
-const DetailsProduct = ({ addItem, singleProduct }) => {
+const DetailsProduct = ({ singleProduct }) => {
+  const dispatch = useDispatch();
+
   const handleAddToCart = () => {
     if (singleProduct) {
-      addItem({ singleProduct });
+      let cart = [];
+      const cartLocal = JSON.parse(localStorage.getItem("cart"));
+      if (cartLocal) {
+        cart.push(...cartLocal);
+      }
+      // checking if the product is already in the localstorage
+      const index = cart.findIndex(
+        (element) => element._id == singleProduct._id
+      );
+      if (index >= 0) {
+        // if the product is there in the localstorage than increase its count
+        var newCount = cart[index].count + 1;
+        cart[index] = { ...cart[index], count: newCount };
+      } else {
+        singleProduct["count"] = 1;
+        cart.push(singleProduct);
+      }
+      // calling the action to add item to cart
+      dispatch(addItem(cart));
     }
   };
 
@@ -82,31 +102,20 @@ const DetailsProduct = ({ addItem, singleProduct }) => {
             Category: <span>{singleProduct.category}</span> <a href=""></a>
           </div>
 
-          <div className="paddtocart">
-            <div className="paddtocart__share">
-              <div>
-                <a href="#">
-                  <ion-icon name="share-social"></ion-icon>
-                </a>
-              </div>
+          <div class="pdetails__body__cart">
+            <div class="pdetails__body__cart--counter">
+              <span>+</span> 1 <span>-</span>
             </div>
-            <div className="paddtocart__quantity">
-              <span>Quantity:</span>
-              <div>1</div>
-              <div className="paddtocart__quantity--btn">+</div>
-            </div>
-            <div className="paddtocart__buy">
-              <div className="paddtocart__buy--buy">
-                <button className="paddtocart__buy--buy--wish">
-                  <ion-icon name="heart"></ion-icon>
-                </button>
-                <button className="paddtocart__buy--buy--cart">
-                  <span className="paddtocart__buy--buy--cart--span">
-                    Add to cart
-                  </span>
-                  <ion-icon name="bag"></ion-icon>
-                </button>
-              </div>
+            <div class="pdetails__body__cart--buttons">
+              <button
+                class="btn btn--primary btn--simple"
+                onClick={handleAddToCart}
+              >
+                Add to Bag
+              </button>
+              <button class="btn btn--female btn--simple">
+                Add to wishlist
+              </button>
             </div>
           </div>
 
@@ -265,9 +274,5 @@ const DetailsProduct = ({ addItem, singleProduct }) => {
   );
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  addItem: (item) => dispatch(addItem(item)),
-});
-
 // export default Productdetail;
-export default connect(null, mapDispatchToProps)(DetailsProduct);
+export default DetailsProduct;

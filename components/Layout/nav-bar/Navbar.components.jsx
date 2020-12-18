@@ -2,7 +2,6 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/router";
 
-// import { selectCartItemsCount } from "../../../redux/cart/cart.selectors";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../../redux/login/login.actions";
 import { SEARCH_LIST_CLEAR } from "../../../redux/products/products.types";
@@ -11,10 +10,6 @@ import { SEARCH_LIST_CLEAR } from "../../../redux/products/products.types";
 import { Expo, TimelineMax, TweenMax } from "gsap";
 import { getSearchList } from "../../../redux/products/products.actions";
 import "animate.css";
-
-// const mapStateToProps = createStructuredSelector({
-//   cartItemsCount: selectCartItemsCount,
-// });
 
 const Navbar = () => {
   const router = useRouter();
@@ -25,6 +20,10 @@ const Navbar = () => {
   const [searchKeyword, setSearchKeyword] = useState("");
   const [NavHeight, setNavHeight] = useState(false);
   const [cursor, setCursor] = useState(0);
+  const [NavDark, setNavDark] = useState(false);
+
+  const [cartList, setCartList] = useState([]);
+  var cartTotal = 0;
 
   // Navigation
   let one = useRef(null);
@@ -65,6 +64,9 @@ const Navbar = () => {
   let cartSummary = useRef(null);
   let cartX = useRef(null);
 
+  // STORE
+  let changeStoreUI = useRef(null);
+
   // account
   const dispatch = useDispatch();
   let accountCard = useRef(null);
@@ -75,19 +77,28 @@ const Navbar = () => {
   const searchList = useSelector((state) => state.searchList);
   const { search } = searchList;
 
+  const lifestyleState = useSelector((state) => state.lifestyleState);
+  const { storeType, department } = lifestyleState;
+
+  // const cartState = useSelector((state) => state.cart);
+  // const { cartList } = cartState;
+
   useEffect(() => {
     if (searchKeyword.length >= 3) {
       dispatch(getSearchList(searchKeyword));
     } else {
       dispatch({ type: SEARCH_LIST_CLEAR });
     }
+    router.pathname === "/luxury/[gender]"
+      ? setNavDark(true)
+      : setNavDark(false);
     window.addEventListener("scroll", changeNav);
     document.addEventListener("mousedown", handleAccount);
     // return function to be called when unmounted
     return () => {
       document.removeEventListener("mousedown", handleAccount);
     };
-  }, [dispatch, searchKeyword]);
+  }, [dispatch, searchKeyword, router.pathname]);
 
   const changeNav = () => {
     if (window.scrollY >= 80) {
@@ -128,19 +139,85 @@ const Navbar = () => {
     setSearchKeyword("");
   };
 
+  // const openNav = () => {
+  //   closeSearch();
+  //   closeCart();
+  //   var isMobile;
+  //   window.innerWidth < 1024 ? (isMobile = "100vw") : (isMobile = "50vw");
+  //   var t1 = new TimelineMax();
+
+  //   t1.to(menu, {
+  //     width: "100%",
+  //     duration: 1.4,
+  //     opacity: 1,
+  //     ease: Expo.easeInOut,
+  //     delay: -0.5,
+  //   });
+  //   t1.to(menu, {
+  //     width: isMobile,
+  //     duration: 1,
+  //     ease: Expo.easeOut,
+  //     delay: 0,
+  //   });
+  //   t1.to(menuItems, {
+  //     visibility: "visible",
+  //     opacity: 1,
+  //     duration: 0.4,
+  //     ease: Expo.easeInOut,
+  //     delay: -1.4,
+  //   });
+  //   t1.to(menuSocials, {
+  //     visibility: "visible",
+  //     opacity: 1,
+  //     duration: 0.4,
+  //     ease: Expo.easeInOut,
+  //     delay: -1.4,
+  //   });
+  //   t1.to(imagesWrapper, {
+  //     width: "50%",
+  //     duration: 1.2,
+  //     ease: Expo.easeOut,
+  //     delay: -1.3,
+  //   });
+
+  //   t1.staggerFrom(
+  //     [menuItem1, menuItem2, menuItem3, menuItem4, menuItem5],
+  //     0.4,
+  //     { y: "15", opacity: 0, delay: -0.9 },
+  //     0.2
+  //   );
+
+  //   t1.staggerFrom(
+  //     [menuSocial1, menuSocial2, menuSocial3],
+  //     0.6,
+  //     { y: "15", opacity: 0, delay: -0.5 },
+  //     0.2
+  //   );
+  //   t1.to(one, {
+  //     top: "47%",
+  //     rotation: 45,
+  //     duration: 0.8,
+  //     delay: -1.4,
+  //     ease: Expo.easeInOut,
+  //   });
+  //   t1.to(two, {
+  //     top: "47%",
+  //     rotation: -45,
+  //     duration: 0.8,
+  //     delay: -1.4,
+  //     ease: Expo.easeInOut,
+  //   });
+  //   setIsOpenNav(true);
+  // };
   const openNav = () => {
+    closeSearch();
+    closeCart();
     var isMobile;
     window.innerWidth < 1024 ? (isMobile = "100vw") : (isMobile = "50vw");
     var t1 = new TimelineMax();
 
     t1.to(menu, {
-      width: "90%",
-      duration: 1.4,
       opacity: 1,
-      ease: Expo.easeInOut,
-      delay: -0.5,
-    });
-    t1.to(menu, {
       width: isMobile,
       duration: 1,
       ease: Expo.easeOut,
@@ -162,9 +239,10 @@ const Navbar = () => {
     });
     t1.to(imagesWrapper, {
       width: "50%",
-      duration: 0.8,
+      left: "50%",
+      duration: 1.2,
       ease: Expo.easeOut,
-      delay: -1,
+      delay: -1.3,
     });
 
     t1.staggerFrom(
@@ -196,7 +274,6 @@ const Navbar = () => {
     });
     setIsOpenNav(true);
   };
-
   const closeNav = () => {
     var t1 = new TimelineMax();
 
@@ -216,17 +293,11 @@ const Navbar = () => {
     });
 
     t1.to(menu, {
-      width: "100%",
-      duration: 1.2,
-      ease: Expo.easeInOut,
-      delay: -1,
-    });
-    t1.to(menu, {
       width: "0",
       opacity: 0,
       duration: 0.2,
       ease: Expo.easeInOut,
-      delay: -0.1,
+      delay: -1,
     });
     t1.to(menuItems, {
       opacity: 0,
@@ -234,6 +305,14 @@ const Navbar = () => {
       duration: 0.2,
       ease: Expo.easeInOut,
       delay: -1.4,
+    });
+
+    t1.to(imagesWrapper, {
+      width: "0",
+      left: 0,
+      duration: 1,
+      ease: Expo.easeInOut,
+      delay: -1.8,
     });
     t1.to(menuItems, {
       opacity: 0,
@@ -250,12 +329,6 @@ const Navbar = () => {
       delay: -1.4,
     });
 
-    t1.to(imagesWrapper, {
-      width: "0",
-      duration: 1.2,
-      ease: Expo.easeInOut,
-      delay: -2.6,
-    });
     setIsOpenNav(false);
   };
 
@@ -449,14 +522,14 @@ const Navbar = () => {
   // search
   const openSearch = () => {
     var s1 = new TimelineMax();
-
+    closeNav();
     s1.to(searchWrapper, {
       width: "100%",
       duration: 0.4,
       ease: Expo.easeOut,
     });
     s1.to(searchBar, {
-      top: "60px",
+      top: NavHeight ? "60px" : "80px",
       opacity: 1,
       visibility: "visible",
       duration: 0.4,
@@ -494,6 +567,11 @@ const Navbar = () => {
 
   // cart
   const openCart = () => {
+    if (localStorage.getItem("cart")) {
+      setCartList(JSON.parse(localStorage.getItem("cart")));
+    }
+    closeNav();
+
     var isMobileCart;
     window.innerWidth < 1024
       ? (isMobileCart = "100vw")
@@ -508,7 +586,7 @@ const Navbar = () => {
     c1.to(cartDetails, {
       opacity: 1,
       visibility: "visible",
-      duration: 1,
+      duration: 1.2,
       ease: Expo.easeInOut,
     });
     c1.to(cartSummary, {
@@ -516,13 +594,14 @@ const Navbar = () => {
       visibility: "visible",
       duration: 2,
       ease: Expo.easeOut,
-      delay: -1,
+      delay: -1.2,
     });
     c1.to(cartX, {
       right: "30px",
-      duration: 0.8,
-      ease: Expo.easeOut,
-      delay: -1.8,
+      opacity: 1,
+      visibility: "visible",
+      duration: 0.2,
+      delay: -2.4,
     });
   };
   const closeCart = () => {
@@ -554,9 +633,34 @@ const Navbar = () => {
     c1.to(cartX, {
       duration: 0.8,
       right: "-30px",
+      opacity: 0,
+      visibility: "hidden",
       ease: Expo.easeOut,
+      delay: -2,
     });
     c1.to(cart, { width: 0, duration: 1, ease: Expo.easeInOut, delay: -2.4 });
+  };
+
+  // changestore
+  const openChangeStore = (e) => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    var c1 = new TimelineMax();
+    c1.to(changeStoreUI, {
+      opacity: 1,
+      visibility: "visible",
+      duration: 0.4,
+      ease: Expo.easeInOut,
+    });
+  };
+
+  const closeChangeStore = (e) => {
+    var c1 = new TimelineMax();
+    c1.to(changeStoreUI, {
+      opacity: 0,
+      visibility: "hidden",
+      duration: 0.2,
+      ease: Expo.easeInOut,
+    });
   };
 
   const handleAccount = (e) => {
@@ -572,8 +676,59 @@ const Navbar = () => {
     dispatch(logout());
   };
 
+  const goHome = (e) => {
+    if (department === "women" && storeType === "lifestyle") {
+      router.push({
+        pathname: `/lifestyle/${department}`,
+      });
+    } else if (department === "men" && storeType === "lifestyle") {
+      router.push({
+        pathname: `/lifestyle/${department}`,
+      });
+    } else if (department === "women" && storeType === "luxury") {
+      router.push({
+        pathname: `/luxury/${department}`,
+      });
+    } else if (department === "men" && storeType === "luxury") {
+      router.push({
+        pathname: `/luxury/${department}`,
+      });
+    } else {
+      changeStore();
+    }
+  };
+
+  const changeStore = (gender, store) => {
+    console.log(gender, store);
+    if (gender === "women" && store === "lifestyle") {
+      router.push({
+        pathname: `/lifestyle/${gender}`,
+      });
+      closeChangeStore();
+    } else if (gender === "men" && store === "lifestyle") {
+      router.push({
+        pathname: `/lifestyle/${gender}`,
+      });
+      closeChangeStore();
+    } else if (gender === "women" && store === "luxury") {
+      router.push({
+        pathname: `/luxury/${gender}`,
+      });
+      closeChangeStore();
+    } else if (gender === "men" && store === "luxury") {
+      router.push({
+        pathname: `/luxury/${gender}`,
+      });
+      closeChangeStore();
+    }
+  };
+
   return (
-    <div className={`navigation ${NavHeight ? "active" : ""}`}>
+    <div
+      className={`navigation ${NavHeight ? "active" : ""} ${
+        NavDark ? "dark" : ""
+      }`}
+    >
       {/* Toggle */}
       <div
         className="toggle"
@@ -584,35 +739,104 @@ const Navbar = () => {
         <span ref={(el) => (two = el)}></span>
       </div>
 
-      {/* Logo */}
-      <div style={{ cursor: "pointer" }} className="logo">
-        <Link href="/">
+      {/*  store change  */}
+      <div className="change-store-btn" onClick={openChangeStore}>
+        <li>Change Store</li>
+      </div>
+
+      {/* store UI */}
+
+      <div className="change-store-ui" ref={(el) => (changeStoreUI = el)}>
+        <div className="change-store-container">
+          {storeType !== null && (
+            <button
+              className="change-store-container--x"
+              onClick={closeChangeStore}
+            >
+              x
+            </button>
+          )}
           <div>
-            {/* <div className="logo-img">
+            <div>
+              <h1 className="subtitle __300 text-upper">lifestyle</h1>
+              <li onClick={(e) => changeStore("men", "lifestyle")}>Men</li>
+              <li onClick={(e) => changeStore("women", "lifestyle")}>Women</li>
+            </div>
+            <div className="mt-2">
+              <h1 className="subtitle __300 text-upper">luxury</h1>
+              <li onClick={(e) => changeStore("men", "luxury")}>Men</li>
+              <li onClick={(e) => changeStore("wmen", "luxury")}>Women</li>
+            </div>
+            <div className="mt-2">
+              <Link href="/">
+                <a
+                  className="btn btn--arrow btn--primary"
+                  href="#"
+                  onClick={closeChangeStore}
+                >
+                  Landing page
+                </a>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Logo */}
+      <div
+        style={{ cursor: "pointer" }}
+        onClick={(e) => goHome(e)}
+        className="logo"
+      >
+        <div>
+          {/* <div className="logo-img">
               <img src="/assets/icons/logo.svg" alt="" />
             </div>
             <h1 className="logo-text">arktastic</h1> */}
-            <span>ARK</span>
-            <span>TAS</span>
-            <span>TIC</span>
-          </div>
-        </Link>
+          <span>ARK</span>
+          <span>TAS</span>
+          <span>TIC</span>
+        </div>
       </div>
 
       {/* Actions */}
       <div className="actions">
+        {/* search */}
         <span onClick={isOpenSearch ? closeSearch : openSearch}>
-          <img src="/assets/icons/search.svg" alt="" />
+          <img
+            src={
+              NavDark
+                ? "/assets/icons/search-dark.svg"
+                : "/assets/icons/search.svg"
+            }
+            alt=""
+          />
         </span>
+
+        {/* cart */}
         <span onClick={openCart}>
-          <img src="/assets/icons/shopping-bag.svg" alt="" />
+          <img
+            src={
+              NavDark
+                ? "/assets/icons/shopping-bag-dark.svg"
+                : "/assets/icons/shopping-bag.svg"
+            }
+            alt=""
+          />
         </span>
+
+        {/* account */}
         <span
           className="account--trigger"
           ref={node}
           onClick={(e) => setAccOpen(!accOpen)}
         >
-          <img src="/assets/icons/user.svg" alt="" />
+          <img
+            src={
+              NavDark ? "/assets/icons/user-dark.svg" : "/assets/icons/user.svg"
+            }
+            alt=""
+          />
 
           {accOpen === true ? (
             <div class="account-card" ref={(el) => (accountCard = el)}>
@@ -713,13 +937,13 @@ const Navbar = () => {
         <div ref={(el) => (cartDetails = el)} className="wrapper-cart__details">
           <span
             onClick={closeCart}
-            className="text-upper text-cream pdetails__body--back"
+            className="text-upper text-font pdetails__body--back"
           >
             <ion-icon name="arrow-back-outline"></ion-icon> Back to Store
           </span>
           <div className="d-flex justify-content-between align-content-center">
             <div className="wrapper-cart__details--title">Shopping cart</div>
-            <div className="title">2 items</div>
+            <div className="title">{cartList.length} items</div>
           </div>
           <table className="wrapper-cart__table">
             <tr>
@@ -729,90 +953,73 @@ const Navbar = () => {
               <th>Price</th>
               <th></th>
             </tr>
-            <tr className="wrapper-cart__table--data">
-              <td className="d-flex">
-                <div className="wrapper-cart__table--img">
-                  <img src="/assets/products/customizable-mug.jpg" alt="" />
-                </div>
-                <div className="wrapper-cart__table--name">
-                  <h2>Picàs Scent women</h2>
-                  <h5>SiQo</h5>
-                </div>
-              </td>
-              <td>250ml</td>
-              <td>
-                <div className="wrapper-cart__table--quantity">
-                  <span>
-                    <ion-icon name="remove-circle-outline"></ion-icon>
-                  </span>
-                  <span>1</span>
-                  <span>
-                    <ion-icon name="add-circle-outline"></ion-icon>
-                  </span>
-                </div>
-              </td>
-              <td className="wrapper-cart__table--price">$80</td>
-              <td className="wrapper-cart__table--delete">
-                <ion-icon name="close-outline"></ion-icon>
-              </td>
-            </tr>
-            <tr className="wrapper-cart__table--data">
-              <td className="d-flex">
-                <div className="wrapper-cart__table--img">
-                  <img
-                    src="/assets/products/mountain-fox-notebook.jpg"
-                    alt=""
-                  />
-                </div>
-                <div className="wrapper-cart__table--name">
-                  <h2>Picàs Scent women</h2>
-                  <h5>SiQo</h5>
-                </div>
-              </td>
-              <td>250ml</td>
-              <td>
-                <div className="wrapper-cart__table--quantity">
-                  <span>
-                    <ion-icon name="remove-circle-outline"></ion-icon>
-                  </span>
-                  <span>1</span>
-                  <span>
-                    <ion-icon name="add-circle-outline"></ion-icon>
-                  </span>
-                </div>
-              </td>
-              <td className="wrapper-cart__table--price">$80</td>
-              <td className="wrapper-cart__table--delete">
-                <ion-icon name="close-outline"></ion-icon>
-              </td>
-            </tr>
+            {cartList ? (
+              cartList.map((cartItem) => {
+                cartTotal = cartTotal + cartItem.price;
+                return (
+                  <tr className="wrapper-cart__table--data">
+                    <td className="d-flex">
+                      <div className="wrapper-cart__table--img">
+                        <img src={cartItem.images[0].url} alt="" />
+                      </div>
+                      <div className="wrapper-cart__table--name">
+                        <h2>{cartItem.name}</h2>
+                        <h5>{cartItem.brand}</h5>
+                      </div>
+                    </td>
+                    <td>M</td>
+                    <td>
+                      <div className="wrapper-cart__table--quantity">
+                        <span>
+                          <ion-icon name="remove-circle-outline"></ion-icon>
+                        </span>
+                        <span>1</span>
+                        <span>
+                          <ion-icon name="add-circle-outline"></ion-icon>
+                        </span>
+                      </div>
+                    </td>
+                    <td className="wrapper-cart__table--price">
+                      ${cartItem.price}
+                    </td>
+                    <td className="wrapper-cart__table--delete">
+                      <ion-icon name="close-outline"></ion-icon>
+                    </td>
+                  </tr>
+                );
+              })
+            ) : (
+              <></>
+            )}
           </table>
         </div>
         <div ref={(el) => (cartSummary = el)} className="wrapper-cart__summary">
           <div className="wrapper-cart__summary--top">
-            <div className="heading mb-6">Summary</div>
+            <div className="heading inherit mb-6">Summary</div>
 
-            <div className="d-flex justify-content-between align-content-center">
-              <div className="subheading __500">Subtotal</div>
-              <div className="subheading __500 text-right">$330</div>
+            <div className="d-flex justify-content-between inherit align-content-center">
+              <div className="subheading inherit __500">Subtotal</div>
+              <div className="subheading inherit __500 text-right">
+                ${cartTotal}
+              </div>
             </div>
-            <div className="d-flex justify-content-between align-content-center">
-              <div className="subheading __500">Shipping</div>
-              <div className="subheading __500 text-right">$5</div>
+            <div className="d-flex justify-content-between inherit align-content-center">
+              <div className="subheading inherit __500">Shipping</div>
+              <div className="subheading inherit __500 text-right">$0</div>
             </div>
-            <div className="d-flex justify-content-between align-content-center">
-              <div className="subheading __500">Tax</div>
-              <div className="subheading __500 text-right">$0</div>
+            <div className="d-flex justify-content-between inherit align-content-center">
+              <div className="subheading inherit __500">Tax</div>
+              <div className="subheading inherit __500 text-right">$0</div>
             </div>
           </div>
-          <div className="wrapper-cart__summary--bottom pb-8">
-            <div className="d-flex justify-content-between mt-2">
-              <div className="title __600 text-capitalize">Total</div>
-              <div className="heading">$330</div>
+          <div className="wrapper-cart__summary--bottom  inherit pb-8">
+            <div className="d-flex justify-content-between inherit mt-2">
+              <div className="title __600  inherit text-capitalize">Total</div>
+              <div className="heading  inherit">${cartTotal}</div>
             </div>
             <div className="mt-3">
               <Link href="/checkout">
-                <a onClick={closeCart} className="btn btn-block">
+                <a onClick={closeCart} className="btn btn-block  inherit">
                   Checkout
                 </a>
               </Link>

@@ -33,7 +33,7 @@ const LifestyleMenHeader = (props) => {
         </header>
       </SwiperSlide>
       <SwiperSlide>
-        <header className="header header-male2">
+        <header className="header header-male1">
           <div class="header__container">
             <div class="header--title">Brillirant collections 2</div>
             <div class="header--subtitle">Find the best clothing for you.</div>
@@ -51,7 +51,7 @@ const LifestyleMenHeader = (props) => {
         </header>
       </SwiperSlide>
       <SwiperSlide>
-        <header className="header header-male2">
+        <header className="header header-male1">
           <div class="header__container">
             <div class="header--title">Brillirant collections</div>
             <div class="header--subtitle">Find the best clothing for you.</div>

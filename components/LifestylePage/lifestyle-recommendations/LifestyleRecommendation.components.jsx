@@ -28,7 +28,10 @@ const LifestyleRecommendationBox = (props) => {
               <div class="card male">
                 <div class="card--inner">
                   <div class="card__img">
-                    <img src="/assets/products/shirt1.jpg" alt="" />
+                    <img
+                      src="https://res.cloudinary.com/arktastic-pty-ltd/image/upload/v1607110031/customizable-mug_mwxzg9.jpg"
+                      alt=""
+                    />
                     <div class="card__img--type">L</div>
                   </div>
                   <div class="card__body">
@@ -67,7 +70,7 @@ const LifestyleRecommendationBox = (props) => {
                 <div class="card--inner">
                   <div class="card__img">
                     <img
-                      src="/assets/products/Striped_Funnelneck_Pullover_1_edb4c6e5-a27d-44a7-a4e1-80e167eabb7a_600x.jpg"
+                      src="https://res.cloudinary.com/arktastic-pty-ltd/image/upload/v1607110031/customizable-mug_mwxzg9.jpg"
                       alt=""
                     />
                     <div class="card__img--type">L</div>
@@ -107,7 +110,7 @@ const LifestyleRecommendationBox = (props) => {
                 <div class="card--inner">
                   <div class="card__img">
                     <img
-                      src="/assets/products/Striped_Cap-Sleeve_Polo_3_8943040d-947f-4bd2-9c56-41b7a6bdb76a_600x.jpg"
+                      src="https://res.cloudinary.com/arktastic-pty-ltd/image/upload/v1607110031/customizable-mug_mwxzg9.jpg"
                       alt=""
                     />
                     <div class="card__img--type">L</div>
@@ -146,7 +149,10 @@ const LifestyleRecommendationBox = (props) => {
               <div class="card male">
                 <div class="card--inner">
                   <div class="card__img">
-                    <img src="/assets/products/shirt3.jpg" alt="" />
+                    <img
+                      src="https://res.cloudinary.com/arktastic-pty-ltd/image/upload/v1607110031/customizable-mug_mwxzg9.jpg"
+                      alt=""
+                    />
                     <div class="card__img--type">L</div>
                   </div>
                   <div class="card__body">

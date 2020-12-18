@@ -26,8 +26,8 @@ const Alert = () => {
           <div className={styles.alertbody}>
             <Lottie
               options={defaultOptions}
-              height={window.innerWidth < 1024 ? 300 : 400}
-              width={window.innerWidth < 1024 ? 300 : 400}
+              height={window.innerWidth < 1024 ? 150 : 250}
+              width={window.innerWidth < 1024 ? 150 : 250}
             />
             <div className={styles.alerttitle}>{alertState.message}</div>
           </div>
