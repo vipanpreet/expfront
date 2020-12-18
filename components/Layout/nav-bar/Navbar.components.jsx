@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../../redux/login/login.actions";
-import { getCartItems } from "../redux/cart/cart.actions";
+import { getCartItems } from "../../../redux/cart/cart.actions";
 import { SEARCH_LIST_CLEAR } from "../../../redux/products/products.types";
 
 // Animation GSAP
