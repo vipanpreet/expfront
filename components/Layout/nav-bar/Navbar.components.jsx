@@ -568,7 +568,10 @@ const Navbar = () => {
 
   // cart
   const openCart = () => {
-    if (localStorage.getItem("cart").length > 0) {
+    if (
+      localStorage.getItem("cart") &&
+      localStorage.getItem("cart").length > 0
+    ) {
       setCartLists(JSON.parse(localStorage.getItem("cart")));
     } else {
       dispatch(getCartItems);
