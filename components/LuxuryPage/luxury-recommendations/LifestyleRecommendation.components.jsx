@@ -1,14 +1,23 @@
 import Card from "../../ReusableComponents/single-card/card.components";
+import { useRef } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore, { Navigation } from "swiper";
 
 SwiperCore.use([Navigation]);
 
-const LuxuryRecommendation = (props) => {
+const LuxuryRecommendation = () => {
+  let menu = useRef(null);
+
+  const hideText = () => {
+    menu.current.style.opacity = "0";
+  };
+  const revealText = () => {
+    menu.current.style.opacity = "1";
+  };
   return (
     <section class="section-luxury-recommendation">
       <div class="container-large mt-6">
-        <div className="section-luxury-recommendation--menu">
+        <div className="section-luxury-recommendation--menu" ref={menu}>
           <div class="subtitle __300 text-white">
             The <br /> Trending <br /> Products
           </div>
@@ -25,6 +34,7 @@ const LuxuryRecommendation = (props) => {
           spaceBetween={0}
           slidesPerView={4}
           centeredSlides={true}
+          onSlideChange={(e) => (e.activeIndex < 1 ? revealText() : hideText())}
           // navigation
           breakpoints={{
             0: {
