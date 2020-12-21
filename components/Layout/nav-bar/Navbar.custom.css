@@ -239,7 +239,7 @@ body {
   height: 100vh;
   mix-blend-mode: screen;
   z-index: 1001;
-  background: var(--cream);
+  background: #fff;
   opacity: 0;
 }
 /* .wrapper-menu::after {
@@ -254,22 +254,20 @@ body {
 } */
 .wrapper-menu > .menu {
   position: absolute;
-  top: 40%;
-  left: 40%;
-  transform: translate(-50%, -50%);
   opacity: 0;
   visibility: hidden;
+  padding: 6rem 4rem;
 }
 .wrapper-menu .menu ul {
   list-style: none;
 }
 
 .wrapper-menu .menu ul li {
-  font-weight: 900;
-  font-size: 40px;
-  line-height: 70px;
-  letter-spacing: 1px;
-  margin-left: 20px;
+  font-weight: 300;
+  font-size: 20px;
+  letter-spacing: 2px;
+  line-height: 1.5;
+  margin-left: 10px;
   cursor: default;
   display: flex;
   align-items: center;
@@ -300,7 +298,7 @@ body {
 .social {
   position: absolute;
   bottom: 25%;
-  left: 30%;
+  left: 16%;
   transform: translate(-50%, -50%);
   display: flex;
   list-style: none;
@@ -311,52 +309,6 @@ body {
 }
 .social > li > a {
   color: #3e3e3e;
-}
-/* ------------ wrapper menu ---------- */
-.wrapper-images {
-  position: absolute;
-  top: 80px;
-  left: 0;
-  width: 0;
-  height: 100vh;
-  background: #fff;
-  z-index: 1001;
-  overflow: hidden;
-}
-.images {
-  position: relative;
-  top: 42%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 300px;
-  height: 500px;
-  overflow: hidden;
-  /* overflow: hidden; */
-}
-.image {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-}
-
-.image img {
-  width: 100%;
-  height: auto;
-}
-.im2 {
-  opacity: 0;
-}
-.im3 {
-  opacity: 0;
-}
-.im4 {
-  opacity: 0;
-}
-.im5 {
-  opacity: 0;
 }
 
 /* wrapper-search */
@@ -577,9 +529,7 @@ body {
     width: 20px;
     height: 20px;
   }
-  .wrapper-images {
-    display: none;
-  }
+
   .account--trigger .account-card {
     right: -10px;
     top: 55px;
@@ -633,7 +583,7 @@ body {
 .cursor {
   width: 40px;
   height: 40px;
-  border: 2px solid var(--cream);
+  border: 2px solid var(--cream-d);
   border-radius: 100%;
   position: fixed;
   transform: translate(-50%, -50%);
@@ -643,15 +593,6 @@ body {
   mix-blend-mode: difference !important;
   z-index: 9999 !important;
 }
-.cursor > span {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: var(--font);
-  padding: 2px;
-  border-radius: 15px;
-}
 
 .cursor--hidden {
   opacity: 0;
@@ -659,7 +600,7 @@ body {
 
 .cursor--link-hovered {
   transform: translate(-50%, -50%) scale(1.25);
-  background-color: var(--cream);
+  background-color: var(--cream-d);
 }
 .cursor--select-hovered {
   transform: translate(-50%, -50%) scale(0.55);
@@ -667,5 +608,5 @@ body {
 }
 .cursor--clicked {
   transform: translate(-50%, -50%) scale(0.9);
-  background-color: var(--cream);
+  background-color: var(--cream-d);
 }

@@ -38,7 +38,7 @@ const rootReducer = combineReducers({
   subCategoryList: subCategoryListReducer,
   productsList: productsListReducer,
   searchList: searchListReducer,
-  lifestyleState : lifestyleReducer
+  lifestyleState: lifestyleReducer,
 });
 
 // export default persistReducer(persistConfig, rootReducer);

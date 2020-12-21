@@ -94,9 +94,7 @@ const Cursor = () => {
     <div
       className={cursorClasses}
       style={{ left: `${position.x}px`, top: `${position.y}px` }}
-    >
-      <span></span>
-    </div>
+    ></div>
   );
 };
 export default Cursor;

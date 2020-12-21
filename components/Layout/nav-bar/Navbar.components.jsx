@@ -5,7 +5,6 @@ import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../../redux/login/login.actions";
 import { SEARCH_LIST_CLEAR } from "../../../redux/products/products.types";
-import { getCartItems } from "../../../redux/cart/cart.actions";
 
 // Animation GSAP
 import { Expo, TimelineMax, TweenMax } from "gsap";
@@ -23,7 +22,7 @@ const Navbar = () => {
   const [cursor, setCursor] = useState(0);
   const [NavDark, setNavDark] = useState(false);
 
-  const [cartLists, setCartLists] = useState([]);
+  const [cartList, setCartList] = useState([]);
   var cartTotal = 0;
 
   // Navigation
@@ -46,14 +45,9 @@ const Navbar = () => {
   let menuItem3 = useRef(null);
   let menuItem4 = useRef(null);
   let menuItem5 = useRef(null);
-
-  // Images
-  let imagesWrapper = useRef(null);
-  let im1 = useRef(null);
-  let im2 = useRef(null);
-  let im3 = useRef(null);
-  let im4 = useRef(null);
-  let im5 = useRef(null);
+  let menuItem6 = useRef(null);
+  let menuItem7 = useRef(null);
+  let menuItem8 = useRef(null);
 
   // Search
   let searchWrapper = useRef(null);
@@ -81,8 +75,8 @@ const Navbar = () => {
   const lifestyleState = useSelector((state) => state.lifestyleState);
   const { storeType, department } = lifestyleState;
 
-  const cartState = useSelector((state) => state.cart);
-  const { cartList } = cartState;
+  // const cartState = useSelector((state) => state.cart);
+  // const { cartList } = cartState;
 
   useEffect(() => {
     if (searchKeyword.length >= 3) {
@@ -214,13 +208,13 @@ const Navbar = () => {
     closeSearch();
     closeCart();
     var isMobile;
-    window.innerWidth < 1024 ? (isMobile = "100vw") : (isMobile = "50vw");
+    window.innerWidth < 1024 ? (isMobile = "100vw") : (isMobile = "30vw");
     var t1 = new TimelineMax();
 
     t1.to(menu, {
       opacity: 1,
       width: isMobile,
-      duration: 1,
+      duration: 1.2,
       ease: Expo.easeOut,
       delay: 0,
     });
@@ -238,43 +232,46 @@ const Navbar = () => {
       ease: Expo.easeInOut,
       delay: -1.4,
     });
-    t1.to(imagesWrapper, {
-      width: "50%",
-      left: "50%",
-      duration: 1.2,
-      ease: Expo.easeOut,
-      delay: -1.3,
-    });
 
     t1.staggerFrom(
-      [menuItem1, menuItem2, menuItem3, menuItem4, menuItem5],
-      0.4,
-      { y: "15", opacity: 0, delay: -0.9 },
-      0.2
+      [
+        menuItem1,
+        menuItem2,
+        menuItem3,
+        menuItem4,
+        menuItem5,
+        menuItem6,
+        menuItem7,
+        menuItem8,
+      ],
+      0.2,
+      { opacity: 0, delay: -1.3 },
+      0.1
     );
 
     t1.staggerFrom(
       [menuSocial1, menuSocial2, menuSocial3],
-      0.6,
-      { y: "15", opacity: 0, delay: -0.5 },
+      0.1,
+      { y: "15", opacity: 0, delay: -1 },
       0.2
     );
     t1.to(one, {
       top: "47%",
       rotation: 45,
       duration: 0.8,
-      delay: -1.4,
-      ease: Expo.easeInOut,
+      delay: -1.8,
+      ease: Expo.easeOut,
     });
     t1.to(two, {
       top: "47%",
       rotation: -45,
       duration: 0.8,
-      delay: -1.4,
-      ease: Expo.easeInOut,
+      delay: -1.8,
+      ease: Expo.easeOut,
     });
     setIsOpenNav(true);
   };
+
   const closeNav = () => {
     var t1 = new TimelineMax();
 
@@ -292,36 +289,29 @@ const Navbar = () => {
       delay: -0.8,
       ease: Expo.easeInOut,
     });
+    t1.to(menuItems, {
+      opacity: 0,
+      visibility: "hidden",
+      duration: 0.2,
+      ease: Expo.easeInOut,
+      delay: -1.4,
+    });
 
+    t1.to(menuItems, {
+      opacity: 0,
+      visibility: "hidden",
+      duration: 0.2,
+      ease: Expo.easeInOut,
+      delay: -1.4,
+    });
     t1.to(menu, {
       width: "0",
       opacity: 0,
-      duration: 0.2,
+      duration: 1.2,
       ease: Expo.easeInOut,
       delay: -1,
     });
-    t1.to(menuItems, {
-      opacity: 0,
-      visibility: "hidden",
-      duration: 0.2,
-      ease: Expo.easeInOut,
-      delay: -1.4,
-    });
 
-    t1.to(imagesWrapper, {
-      width: "0",
-      left: 0,
-      duration: 1,
-      ease: Expo.easeInOut,
-      delay: -1.8,
-    });
-    t1.to(menuItems, {
-      opacity: 0,
-      visibility: "hidden",
-      duration: 0.2,
-      ease: Expo.easeInOut,
-      delay: -1.4,
-    });
     t1.to(menuSocials, {
       opacity: 0,
       visibility: "hidden",
@@ -331,193 +321,6 @@ const Navbar = () => {
     });
 
     setIsOpenNav(false);
-  };
-
-  // Images Transactions
-  const m1Enter = () => {
-    var m1 = new TimelineMax();
-    m1.to(im1, {
-      opacity: 1,
-      scale: 1.1,
-      duration: 0.8,
-      ease: Expo.easeInOut,
-    });
-    m1.to(im2, {
-      opacity: 0,
-      delay: -0.8,
-      scale: 1,
-      duration: 0.8,
-      ease: Expo.easeInOut,
-    });
-    m1.to(im3, {
-      opacity: 0,
-      delay: -0.8,
-      scale: 1,
-      duration: 0.8,
-      ease: Expo.easeInOut,
-    });
-    m1.to(im4, {
-      opacity: 0,
-      delay: -0.8,
-      scale: 1,
-      duration: 0.8,
-      ease: Expo.easeInOut,
-    });
-    m1.to(im5, {
-      opacity: 0,
-      delay: -0.8,
-      scale: 1,
-      duration: 0.8,
-      ease: Expo.easeInOut,
-    });
-  };
-  const m2Enter = () => {
-    var m1 = new TimelineMax();
-    m1.to(im1, {
-      opacity: 0,
-      scale: 1,
-      duration: 0.8,
-      ease: Expo.easeInOut,
-    });
-    m1.to(im2, {
-      opacity: 1,
-      delay: -0.8,
-      scale: 1.1,
-      duration: 0.8,
-      ease: Expo.easeInOut,
-    });
-    m1.to(im3, {
-      opacity: 0,
-      delay: -0.8,
-      scale: 1,
-      duration: 0.8,
-      ease: Expo.easeInOut,
-    });
-    m1.to(im4, {
-      opacity: 0,
-      delay: -0.8,
-      scale: 1,
-      duration: 0.8,
-      ease: Expo.easeInOut,
-    });
-    m1.to(im5, {
-      opacity: 0,
-      delay: -0.8,
-      scale: 1,
-      duration: 0.8,
-      ease: Expo.easeInOut,
-    });
-  };
-  const m3Enter = () => {
-    var m1 = new TimelineMax();
-    m1.to(im1, {
-      opacity: 0,
-      scale: 1,
-      duration: 0.8,
-      ease: Expo.easeInOut,
-    });
-    m1.to(im2, {
-      opacity: 0,
-      delay: -0.8,
-      scale: 1,
-      duration: 0.8,
-      ease: Expo.easeInOut,
-    });
-    m1.to(im3, {
-      opacity: 1,
-      delay: -0.8,
-      scale: 1.1,
-      duration: 0.8,
-      ease: Expo.easeInOut,
-    });
-    m1.to(im4, {
-      opacity: 0,
-      delay: -0.8,
-      scale: 1,
-      duration: 0.8,
-      ease: Expo.easeInOut,
-    });
-    m1.to(im5, {
-      opacity: 0,
-      delay: -0.8,
-      scale: 1,
-      duration: 0.8,
-      ease: Expo.easeInOut,
-    });
-  };
-  const m4Enter = () => {
-    var m1 = new TimelineMax();
-    m1.to(im1, {
-      opacity: 0,
-      scale: 1,
-      duration: 0.8,
-      ease: Expo.easeInOut,
-    });
-    m1.to(im2, {
-      opacity: 0,
-      delay: -0.8,
-      scale: 1,
-      duration: 0.8,
-      ease: Expo.easeInOut,
-    });
-    m1.to(im3, {
-      opacity: 0,
-      delay: -0.8,
-      scale: 1,
-      duration: 0.8,
-      ease: Expo.easeInOut,
-    });
-    m1.to(im4, {
-      opacity: 1,
-      delay: -0.8,
-      scale: 1.1,
-      duration: 0.8,
-      ease: Expo.easeInOut,
-    });
-    m1.to(im5, {
-      opacity: 0,
-      delay: -0.8,
-      scale: 1,
-      duration: 0.8,
-      ease: Expo.easeInOut,
-    });
-  };
-  const m5Enter = () => {
-    var m1 = new TimelineMax();
-    m1.to(im1, {
-      opacity: 0,
-      scale: 1,
-      duration: 0.8,
-      ease: Expo.easeInOut,
-    });
-    m1.to(im2, {
-      opacity: 0,
-      delay: -0.8,
-      scale: 1,
-      duration: 0.8,
-      ease: Expo.easeInOut,
-    });
-    m1.to(im3, {
-      opacity: 0,
-      scale: 1,
-      delay: -0.8,
-      duration: 0.8,
-      ease: Expo.easeInOut,
-    });
-    m1.to(im4, {
-      opacity: 0,
-      delay: -0.8,
-      scale: 1,
-      duration: 0.8,
-      ease: Expo.easeInOut,
-    });
-    m1.to(im5, {
-      opacity: 1,
-      delay: -0.8,
-      scale: 1.1,
-      duration: 0.8,
-      ease: Expo.easeInOut,
-    });
   };
 
   // search
@@ -568,15 +371,8 @@ const Navbar = () => {
 
   // cart
   const openCart = () => {
-    if (
-      localStorage.getItem("cart") &&
-      localStorage.getItem("cart").length > 0
-    ) {
-      setCartLists(JSON.parse(localStorage.getItem("cart")));
-    } else {
-      dispatch(getCartItems);
-      localStorage.setItem("cart", JSON.stringify(cartLists));
-      setCartLists(cartList);
+    if (localStorage.getItem("cart")) {
+      setCartList(JSON.parse(localStorage.getItem("cart")));
     }
     closeNav();
 
@@ -651,6 +447,7 @@ const Navbar = () => {
 
   // changestore
   const openChangeStore = (e) => {
+    closeNav();
     window.scrollTo({ top: 0, behavior: "smooth" });
     var c1 = new TimelineMax();
     c1.to(changeStoreUI, {
@@ -745,11 +542,6 @@ const Navbar = () => {
       >
         <span ref={(el) => (one = el)}></span>
         <span ref={(el) => (two = el)}></span>
-      </div>
-
-      {/*  store change  */}
-      <div className="change-store-btn" onClick={openChangeStore}>
-        <li>Change Store</li>
       </div>
 
       {/* store UI */}
@@ -951,7 +743,7 @@ const Navbar = () => {
           </span>
           <div className="d-flex justify-content-between align-content-center">
             <div className="wrapper-cart__details--title">Shopping cart</div>
-            <div className="title">{cartLists.length} items</div>
+            <div className="title">{cartList.length} items</div>
           </div>
           <table className="wrapper-cart__table">
             <tr>
@@ -961,8 +753,8 @@ const Navbar = () => {
               <th>Price</th>
               <th></th>
             </tr>
-            {cartLists ? (
-              cartLists.map((cartItem) => {
+            {cartList ? (
+              cartList.map((cartItem) => {
                 cartTotal = cartTotal + cartItem.price;
                 return (
                   <tr className="wrapper-cart__table--data">
@@ -1040,6 +832,7 @@ const Navbar = () => {
       {/* Wrapper menu */}
       <div className="wrapper-menu" ref={(el) => (menu = el)}>
         <div className="menu" ref={(el) => (menuItems = el)}>
+          <h2 className="title mb-2">Catalogue</h2>
           <ul>
             <Link
               href={{
@@ -1049,12 +842,7 @@ const Navbar = () => {
                 },
               }}
             >
-              <li
-                onClick={closeAll}
-                onMouseEnter={m1Enter}
-                ref={(el) => (menuItem1 = el)}
-              >
-                <span id="count">01</span>
+              <li onClick={closeAll} ref={(el) => (menuItem1 = el)}>
                 <span id="menu">&nbsp;Upperwear</span>
               </li>
             </Link>
@@ -1066,12 +854,7 @@ const Navbar = () => {
                 },
               }}
             >
-              <li
-                onClick={closeAll}
-                onMouseEnter={m2Enter}
-                ref={(el) => (menuItem2 = el)}
-              >
-                <span id="count">02</span>
+              <li onClick={closeAll} ref={(el) => (menuItem2 = el)}>
                 <span id="menu">&nbsp;Lowers</span>
               </li>
             </Link>
@@ -1083,12 +866,7 @@ const Navbar = () => {
                 },
               }}
             >
-              <li
-                onClick={closeAll}
-                onMouseEnter={m3Enter}
-                ref={(el) => (menuItem3 = el)}
-              >
-                <span id="count">03</span>
+              <li onClick={closeAll} ref={(el) => (menuItem3 = el)}>
                 <span id="menu">&nbsp;Accessories</span>
               </li>
             </Link>
@@ -1100,12 +878,7 @@ const Navbar = () => {
                 },
               }}
             >
-              <li
-                onClick={closeAll}
-                onMouseEnter={m4Enter}
-                ref={(el) => (menuItem4 = el)}
-              >
-                <span id="count">04</span>
+              <li onClick={closeAll} ref={(el) => (menuItem4 = el)}>
                 <span id="menu">&nbsp;Footwear</span>
               </li>
             </Link>
@@ -1117,13 +890,31 @@ const Navbar = () => {
                 },
               }}
             >
-              <li
-                onClick={closeAll}
-                onMouseEnter={m5Enter}
-                ref={(el) => (menuItem5 = el)}
-              >
-                <span id="count">05</span>
+              <li onClick={closeAll} ref={(el) => (menuItem5 = el)}>
                 <span id="menu">&nbsp;Health & Beauty</span>
+              </li>
+            </Link>
+            <h2 className="title mt-3 mb-2">Menu</h2>
+
+            <li onClick={openChangeStore} ref={(el) => (menuItem6 = el)}>
+              <span id="menu">&nbsp;Switch Store</span>
+            </li>
+            <Link
+              href={{
+                pathname: "/categories",
+              }}
+            >
+              <li onClick={closeAll} ref={(el) => (menuItem7 = el)}>
+                <span id="menu">&nbsp;Categories</span>
+              </li>
+            </Link>
+            <Link
+              href={{
+                pathname: "/categories",
+              }}
+            >
+              <li onClick={closeAll} ref={(el) => (menuItem8 = el)}>
+                <span id="menu">&nbsp;Home page</span>
               </li>
             </Link>
           </ul>
@@ -1145,31 +936,6 @@ const Navbar = () => {
               <ion-icon name="logo-twitter"></ion-icon>
             </a>
           </li>
-        </div>
-      </div>
-
-      {/* Wrapper Images */}
-      <div
-        className="wrapper-images"
-        onClick={closeNav}
-        ref={(el) => (imagesWrapper = el)}
-      >
-        <div className="images">
-          <span className="image im1" ref={(el) => (im1 = el)}>
-            <img src="/assets/sections/nav-upper.jpg" alt="" />
-          </span>
-          <span className="image im2" ref={(el) => (im2 = el)}>
-            <img src="/assets/sections/nav-lowers.jpg" alt="" />
-          </span>
-          <span className="image im3" ref={(el) => (im3 = el)}>
-            <img src="/assets/sections/nav-accessories.jpg" alt="" />
-          </span>
-          <span className="image im4" ref={(el) => (im4 = el)}>
-            <img src="/assets/sections/nav-foot.jpg" alt="" />
-          </span>
-          <span className="image im5" ref={(el) => (im5 = el)}>
-            <img src="/assets/sections/nav-health.jpg" alt="" />
-          </span>
         </div>
       </div>
     </div>

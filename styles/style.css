@@ -100,8 +100,7 @@
 * {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
-  cursor: default; }
+  box-sizing: border-box; }
 
 html {
   font-size: 62.5%; }
@@ -114,8 +113,7 @@ main {
 
 a {
   color: var(--font);
-  text-decoration: none;
-  cursor: default; }
+  text-decoration: none; }
 
 hr {
   border: 1px solid var(--cream-d); }
@@ -2342,13 +2340,15 @@ body {
         color: var(--font); }
   .btn--white {
     background: #fff;
-    color: var(--font) !important; }
+    color: var(--font); }
     .btn--white::before {
       background: var(--white); }
-    .btn--white.btn--arrow:hover {
-      color: var(--primary); }
-      .btn--white.btn--arrow:hover:hover::before {
-        color: var(--primary); }
+    .btn--white.btn--arrow {
+      color: #fff !important; }
+      .btn--white.btn--arrow:hover {
+        color: var(--font-l) !important; }
+        .btn--white.btn--arrow:hover:hover::before {
+          color: var(--font-l) !important; }
   .btn--simple {
     background: transparent !important;
     color: #fff;
@@ -2613,7 +2613,7 @@ body {
 
 .bg-luxury .card__body--name {
   color: rgba(255, 255, 255, 0.95);
-  border-bottom: 1px solid var(--font-d); }
+  border-bottom: none; }
 
 .bg-luxury .card__hover {
   z-index: 2;
