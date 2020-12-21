@@ -66,6 +66,8 @@ video {
   left: 24%;
   width: 24%;
   transform: translate(-50%);
+  transition: all 0.3s ease-out;
+  z-index: 3;
 }
 
 .section-luxury-recommendation .col {
@@ -152,7 +154,7 @@ video {
   padding: 1rem;
   display: flex;
   align-items: center;
-  height: 75vh;
+  height: 55vh;
   overflow: hidden;
 }
 .section-luxury-list--banner {
@@ -167,7 +169,7 @@ video {
 .collist {
   position: relative;
   width: 100%;
-  height: 75vh;
+  height: 55vh;
   outline: none;
   border-top: 1px solid var(--font-d);
   border-left: 1px solid var(--font-d);
@@ -178,26 +180,7 @@ video {
   outline: none;
   border: none;
 }
-.collist::before {
-  position: absolute;
-  content: "";
-  top: 0;
-  left: 0;
-  background: var(--font-vd);
-  width: 100%;
-  height: 100%;
-  opacity: 1;
-  transition: all 0.3s ease-out;
-}
-.collist:hover::before {
-  opacity: 0;
-}
-.collist:hover .collist--body {
-  color: var(--font-vd);
-}
-.collist:hover .collist--body a {
-  color: var(--font-vd);
-}
+
 .collist--img {
   width: 100%;
   height: 100%;
@@ -206,15 +189,35 @@ video {
   width: 100%;
   height: 100%;
 }
+.collist:hover .collist--body {
+  opacity: 1;
+  bottom: 20px;
+  visibility: visible;
+}
 .collist--body {
   position: absolute;
-  top: 40px;
-  left: 40px;
+  bottom: 10px;
+  left: 50%;
+  width: 90%;
+  transform: translate(-50%);
   color: #fff;
+  background: var(--font-vd);
+  padding: 1rem 1.5rem;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.4s ease-out;
 }
 .collist--body h1 {
-  font-size: 2.2rem;
+  font-size: 1.8rem;
   font-weight: 300;
   font-family: "Roboto", sans-serif;
   text-transform: uppercase;
+  color: #fff;
+}
+.collist--body h2 {
+  font-size: 1.2rem;
+  font-weight: 300;
+}
+.collist--body a {
+  font-size: 1.2rem;
 }
