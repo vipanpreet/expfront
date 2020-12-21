@@ -10,9 +10,11 @@ const LuxuryRecommendation = () => {
 
   const hideText = () => {
     menu.current.style.opacity = "0";
+    menu.current.style.visibility = "hidden";
   };
   const revealText = () => {
     menu.current.style.opacity = "1";
+    menu.current.style.visibility = "visible";
   };
   return (
     <section class="section-luxury-recommendation">
