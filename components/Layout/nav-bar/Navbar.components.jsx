@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../../redux/login/login.actions";
 import { SEARCH_LIST_CLEAR } from "../../../redux/products/products.types";
+import { addItem } from "../../../redux/cart/cart.actions";
 
 // Animation GSAP
 import { Expo, TimelineMax, TweenMax } from "gsap";
@@ -22,8 +23,8 @@ const Navbar = () => {
   const [cursor, setCursor] = useState(0);
   const [NavDark, setNavDark] = useState(false);
 
-  const [cartList, setCartList] = useState([]);
-  var cartTotal = 0;
+  const [cartItemsState, setCartList] = useState({});
+  // var cartTotal = 0;
 
   // Navigation
   let one = useRef(null);
@@ -72,11 +73,11 @@ const Navbar = () => {
   const searchList = useSelector((state) => state.searchList);
   const { search } = searchList;
 
+  const cartState = useSelector((state) => state.cart);
+  const { cartItems } = cartState;
+
   const lifestyleState = useSelector((state) => state.lifestyleState);
   const { storeType, department } = lifestyleState;
-
-  // const cartState = useSelector((state) => state.cart);
-  // const { cartList } = cartState;
 
   useEffect(() => {
     if (searchKeyword.length >= 3) {
@@ -84,6 +85,9 @@ const Navbar = () => {
     } else {
       dispatch({ type: SEARCH_LIST_CLEAR });
     }
+    // set the state on change of state in the store
+    setCartList(cartItems);
+
     router.pathname === "/luxury/[gender]"
       ? setNavDark(true)
       : setNavDark(false);
@@ -93,7 +97,66 @@ const Navbar = () => {
     return () => {
       document.removeEventListener("mousedown", handleAccount);
     };
-  }, [dispatch, searchKeyword, router.pathname]);
+  }, [dispatch, searchKeyword, router.pathname, cartItems]);
+
+  // method to increase quantity of the item in the cart
+  const handleAddQuantity = (cartProduct) => {
+    let cart = [];
+    if (cartItemsState) {
+      for (var i = 0; i < cartItemsState.products.length; i++) {
+        if (cartItemsState.products[i].product._id == cartProduct._id) {
+          cart.push({
+            ...cartItemsState.products[i].product,
+            count: cartItemsState.products[i].count + 1,
+          });
+        } else {
+          cart.push({
+            ...cartItemsState.products[i].product,
+            count: cartItemsState.products[i].count,
+          });
+        }
+      }
+      dispatch(addItem(cart));
+    }
+  };
+
+  // method to decrease the quantity of the item in the cart
+  const handleSubQuantity = (cartProduct) => {
+    if (cartProduct.count == 1) {
+      return; // return if the qty is 1
+    }
+    let cart = [];
+    if (cartItemsState) {
+      for (var i = 0; i < cartItemsState.products.length; i++) {
+        if (cartItemsState.products[i].product._id == cartProduct._id) {
+          cart.push({
+            ...cartItemsState.products[i].product,
+            count: cartItemsState.products[i].count - 1,
+          });
+        } else {
+          cart.push({
+            ...cartItemsState.products[i].product,
+            count: cartItemsState.products[i].count,
+          });
+        }
+      }
+      dispatch(addItem(cart));
+    }
+  };
+
+  // method to delete an item in the cart
+  const handleDeleteItem = (cartProduct) => {
+    let cart = [];
+    for (var i = 0; i < cartItemsState.products.length; i++) {
+      if (cartItemsState.products[i].product._id != cartProduct._id) {
+        cart.push({
+          ...cartItemsState.products[i].product,
+          count: cartItemsState.products[i].count,
+        });
+      }
+    }
+    dispatch(addItem(cart));
+  };
 
   const changeNav = () => {
     if (window.scrollY >= 80) {
@@ -371,11 +434,8 @@ const Navbar = () => {
 
   // cart
   const openCart = () => {
-    if (localStorage.getItem("cart")) {
-      setCartList(JSON.parse(localStorage.getItem("cart")));
-    }
+    setCartList(cartItems);
     closeNav();
-
     var isMobileCart;
     window.innerWidth < 1024
       ? (isMobileCart = "100vw")
@@ -643,21 +703,40 @@ const Navbar = () => {
               {userInfo.firstName ? (
                 <>
                   <li>
-                    <Link href="/profile">
+                    <Link
+                      href={{
+                        pathname: "/profile",
+                        query: { settings: "orders" },
+                      }}
+                    >
                       <a href="/profile">
-                        <ion-icon name="cube-outline"></ion-icon> Profile
+                        <ion-icon name="cube-outline"></ion-icon> Orders
                       </a>
                     </Link>
                   </li>
                   <li>
-                    <a href="#">
-                      <ion-icon name="bookmark-outline"></ion-icon> Address
-                    </a>
+                    <Link
+                      href={{
+                        pathname: "/profile",
+                        query: { settings: "address" },
+                      }}
+                    >
+                      <a href="#">
+                        <ion-icon name="bookmark-outline"></ion-icon> Address
+                      </a>
+                    </Link>
                   </li>
                   <li>
-                    <a href="#">
-                      <ion-icon name="heart-outline"></ion-icon> Wishlist
-                    </a>
+                    <Link
+                      href={{
+                        pathname: "/profile",
+                        query: { settings: "wishlist" },
+                      }}
+                    >
+                      <a href="#">
+                        <ion-icon name="heart-outline"></ion-icon> Wishlist
+                      </a>
+                    </Link>
                   </li>
                   <li>
                     <a onClick={handleLogoutBtn} href="#">
@@ -743,7 +822,12 @@ const Navbar = () => {
           </span>
           <div className="d-flex justify-content-between align-content-center">
             <div className="wrapper-cart__details--title">Shopping cart</div>
-            <div className="title">{cartList.length} items</div>
+            <div className="title">
+              {cartItemsState && cartItemsState.products
+                ? cartItemsState.products.length
+                : 0}
+              items
+            </div>
           </div>
           <table className="wrapper-cart__table">
             <tr>
@@ -753,29 +837,38 @@ const Navbar = () => {
               <th>Price</th>
               <th></th>
             </tr>
-            {cartList ? (
-              cartList.map((cartItem) => {
-                cartTotal = cartTotal + cartItem.price;
+            {cartItemsState && cartItemsState.products ? (
+              cartItemsState.products.map((cartItem) => {
                 return (
                   <tr className="wrapper-cart__table--data">
                     <td className="d-flex">
                       <div className="wrapper-cart__table--img">
-                        <img src={cartItem.images[0].url} alt="" />
+                        <img src={cartItem.product.images[0].url} alt="" />
                       </div>
                       <div className="wrapper-cart__table--name">
-                        <h2>{cartItem.name}</h2>
-                        <h5>{cartItem.brand}</h5>
+                        <h2>{cartItem.product.name}</h2>
+                        <h5>{cartItem.product.brand}</h5>
                       </div>
                     </td>
                     <td>M</td>
                     <td>
                       <div className="wrapper-cart__table--quantity">
                         <span>
-                          <ion-icon name="remove-circle-outline"></ion-icon>
+                          <ion-icon
+                            name="remove-circle-outline"
+                            onClick={() => {
+                              handleSubQuantity(cartItem.product);
+                            }}
+                          ></ion-icon>
                         </span>
-                        <span>1</span>
+                        <span>{cartItem.count}</span>
                         <span>
-                          <ion-icon name="add-circle-outline"></ion-icon>
+                          <ion-icon
+                            name="add-circle-outline"
+                            onClick={() => {
+                              handleAddQuantity(cartItem.product);
+                            }}
+                          ></ion-icon>
                         </span>
                       </div>
                     </td>
@@ -783,7 +876,12 @@ const Navbar = () => {
                       ${cartItem.price}
                     </td>
                     <td className="wrapper-cart__table--delete">
-                      <ion-icon name="close-outline"></ion-icon>
+                      <ion-icon
+                        name="close-outline"
+                        onClick={() => {
+                          handleDeleteItem(cartItem.product);
+                        }}
+                      ></ion-icon>
                     </td>
                   </tr>
                 );
@@ -800,7 +898,7 @@ const Navbar = () => {
             <div className="d-flex justify-content-between inherit align-content-center">
               <div className="subheading inherit __500">Subtotal</div>
               <div className="subheading inherit __500 text-right">
-                ${cartTotal}
+                ${cartItemsState && cartItemsState.cartTotal}
               </div>
             </div>
             <div className="d-flex justify-content-between inherit align-content-center">
@@ -815,7 +913,9 @@ const Navbar = () => {
           <div className="wrapper-cart__summary--bottom  inherit pb-8">
             <div className="d-flex justify-content-between inherit mt-2">
               <div className="title __600  inherit text-capitalize">Total</div>
-              <div className="heading  inherit">${cartTotal}</div>
+              <div className="heading  inherit">
+                ${cartItemsState && cartItemsState.cartTotal}
+              </div>
             </div>
             <div className="mt-3">
               <Link href="/checkout">
@@ -839,6 +939,8 @@ const Navbar = () => {
                 pathname: "/products",
                 query: {
                   category: "upperwear",
+                  type: storeType,
+                  department: department,
                 },
               }}
             >
@@ -863,6 +965,8 @@ const Navbar = () => {
                 pathname: "/products",
                 query: {
                   category: "accessories",
+                  type: storeType,
+                  department: department,
                 },
               }}
             >
@@ -875,6 +979,8 @@ const Navbar = () => {
                 pathname: "/products",
                 query: {
                   category: "footwear",
+                  type: storeType,
+                  department: department,
                 },
               }}
             >
@@ -887,6 +993,8 @@ const Navbar = () => {
                 pathname: "/products",
                 query: {
                   category: "health-and-beauty",
+                  type: storeType,
+                  department: department,
                 },
               }}
             >

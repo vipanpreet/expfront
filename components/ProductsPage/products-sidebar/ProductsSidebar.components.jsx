@@ -22,12 +22,23 @@ const ProductSidebar = () => {
   const subCategoryList = useSelector((state) => state.subCategoryList);
   const { subcategories } = subCategoryList;
 
-  var { category, subcategory, sortby, sortdirection, page, q } = router.query;
+  var {
+    category,
+    subcategory,
+    type,
+    department,
+    sortby,
+    sortdirection,
+    page,
+    q,
+  } = router.query;
 
   var queryList = {};
   q && (queryList.q = q);
   category && (queryList.category = category);
   subcategory && (queryList.subcategory = subcategory);
+  type && (queryList.type = type);
+  department && (queryList.department = department);
   page && (queryList.page = 1);
 
   useEffect(() => {

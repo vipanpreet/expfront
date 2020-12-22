@@ -7,7 +7,17 @@ import {
   CART_GET_FAIL,
 } from "./cart.types";
 
-const cartReducer = (state = { cartList: [] }, action) => {
+// getting the cart items from the local storage
+if (typeof window !== "undefined") {
+  var cartData = JSON.parse(localStorage.getItem("cart"));
+}
+
+const INITIAL_STATE = {
+  loading: false,
+  cartItems: cartData == "undefined" ? [] : cartData,
+};
+
+const cartReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case CART_ADD_REQUEST:
       return {
@@ -20,6 +30,21 @@ const cartReducer = (state = { cartList: [] }, action) => {
         cartList: action.payload,
       };
     case CART_ADD_FAIL:
+      return {
+        ...state,
+        loading: false,
+      };
+    case CART_GET_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
+    case CART_GET_SUCCESS:
+      return {
+        loading: false,
+        cartItems: action.payload,
+      };
+    case CART_GET_FAIL:
       return {
         ...state,
         loading: false,

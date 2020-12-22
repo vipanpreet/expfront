@@ -1,10 +1,14 @@
 import Link from "next/link";
+import { useDispatch, useSelector } from "react-redux";
 import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore, { Navigation } from "swiper";
 
 SwiperCore.use([Navigation]);
 
 const LifestyleSection = (props) => {
+  const lifestyleState = useSelector((state) => state.lifestyleState);
+  const { storeType, department } = lifestyleState;
+
   return (
     <section className="section-categories">
       <div className="contianer-fluid">
@@ -39,6 +43,8 @@ const LifestyleSection = (props) => {
                     pathname: "/products",
                     query: {
                       category: "upperwear",
+                      type: storeType,
+                      department: department,
                     },
                   }}
                 >
@@ -61,6 +67,8 @@ const LifestyleSection = (props) => {
                     pathname: "/products",
                     query: {
                       category: "lowers",
+                      type: storeType,
+                      department: department,
                     },
                   }}
                 >
@@ -83,6 +91,8 @@ const LifestyleSection = (props) => {
                     pathname: "/products",
                     query: {
                       category: "accessories",
+                      type: storeType,
+                      department: department,
                     },
                   }}
                 >
@@ -105,6 +115,8 @@ const LifestyleSection = (props) => {
                     pathname: "/products",
                     query: {
                       category: "footwear",
+                      type: storeType,
+                      department: department,
                     },
                   }}
                 >

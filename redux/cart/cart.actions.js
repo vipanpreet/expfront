@@ -12,6 +12,7 @@ import { setAlert } from "../Alert/alert.actions";
 export const addItem = (cart) => async (dispatch, getState) => {
   try {
     dispatch({ type: CART_ADD_REQUEST });
+    dispatch(setAlert("Updating Cart", "loading", 1500));
     const {
       login: { userInfo },
     } = getState();
@@ -21,21 +22,18 @@ export const addItem = (cart) => async (dispatch, getState) => {
         Authorization: userInfo.token,
       },
     };
-    const { data } = await axios.post(
+    await axios.post(
       `https://arktasticbackend.herokuapp.com/api/user/cart`,
       { cart },
       config
     );
+    // calling this action to get all the items saved in the DB
+    dispatch(getCartItems());
+
     dispatch({
       type: CART_ADD_SUCCESS,
-      payload: cart,
+      payload: data,
     });
-
-    // emptying the localstorage and then populating with new cart array
-    localStorage.removeItem("cart");
-    localStorage.setItem("cart", JSON.stringify(cart));
-
-    dispatch(setAlert("Product Added to Cart", "success", 2500));
   } catch (error) {
     dispatch({
       type: CART_ADD_FAIL,
@@ -47,7 +45,7 @@ export const addItem = (cart) => async (dispatch, getState) => {
   }
 };
 
-export const getCartItems = () => async (dispatch, useState) => {
+export const getCartItems = () => async (dispatch, getState) => {
   try {
     dispatch({ type: CART_GET_REQUEST });
     const {
@@ -65,10 +63,17 @@ export const getCartItems = () => async (dispatch, useState) => {
       `https://arktasticbackend.herokuapp.com/api/user/cart`,
       config
     );
+
     dispatch({
       type: CART_GET_SUCCESS,
       payload: data,
     });
+
+    // emptying the localstorage and then populating with new cart array
+    localStorage.removeItem("cart");
+    localStorage.setItem("cart", JSON.stringify(data));
+
+    // dispatch(setAlert("Product Added to Cart", "success", 4500));
   } catch (error) {
     dispatch({
       type: CART_GET_FAIL,

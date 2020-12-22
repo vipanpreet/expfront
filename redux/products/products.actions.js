@@ -13,6 +13,8 @@ export const productList = (
   category,
   subcategory,
   q,
+  type,
+  department,
   pageNumber,
   sortBy,
   sortDirection
@@ -25,15 +27,17 @@ export const productList = (
     !category && (category = "");
     !subcategory && (subcategory = "");
     !q && (q = "");
+    !type && (type = "");
+    !department && (department = "");
     dispatch({ type: PRODUCTS_LIST_REQUEST });
 
     if (subcategory && subcategory.length > 3) {
       response = await axios.get(
-        `https://arktasticbackend.herokuapp.com/api/products/all/${category}/${subcategory}?q=${q}&pagenumber=${pageNumber}&sortby=${sortBy}&sortdirection=${sortDirection}`
+        `https://arktasticbackend.herokuapp.com/api/products/all/${category}/${subcategory}?q=${q}&type=${type}&department=${department}&pagenumber=${pageNumber}&sortby=${sortBy}&sortdirection=${sortDirection}`
       );
     } else {
       response = await axios.get(
-        `https://arktasticbackend.herokuapp.com/api/products/all/${category}?q=${q}&pagenumber=${pageNumber}&sortby=${sortBy}&sortdirection=${sortDirection}`
+        `https://arktasticbackend.herokuapp.com/api/products/all/${category}?q=${q}&type=${type}&department=${department}&pagenumber=${pageNumber}&sortby=${sortBy}&sortdirection=${sortDirection}`
       );
     }
 

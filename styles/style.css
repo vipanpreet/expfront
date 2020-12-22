@@ -2349,6 +2349,9 @@ body {
         color: var(--font-l) !important; }
         .btn--white.btn--arrow:hover:hover::before {
           color: var(--font-l) !important; }
+    .btn--white.btn--simple {
+      background: #fff !important;
+      color: var(--font-d); }
   .btn--simple {
     background: transparent !important;
     color: #fff;
@@ -3824,6 +3827,21 @@ body {
   border: none;
   margin-right: 2px; }
 
+.tags {
+  display: flex;
+  align-items: center; }
+  .tags div {
+    font-family: "Roboto", sans-serif;
+    font-size: 1.15rem;
+    font-weight: 400;
+    margin-right: 10px;
+    padding: 0px 6px;
+    color: var(--font-vd);
+    background: var(--cream);
+    text-transform: uppercase; }
+    .tags div span {
+      cursor: pointer; }
+
 @media only screen and (max-width: 1024px) {
   .custom-select {
     max-width: 140px;
@@ -3897,16 +3915,11 @@ body {
   margin-top: 4rem; }
   .profile-main * {
     transition: all 0.3s ease-out; }
-  .profile-main--active {
-    display: none; }
-  .profile-main--security {
-    display: none; }
 
 .section-intro {
   height: 100vh;
   width: 100vw;
-  background: linear-gradient(rgba(214, 158, 158, 0.25), rgba(214, 158, 158, 0.25)), url("/assets/sections/section-intro.jpg") no-repeat;
-  background-attachment: fixed;
+  background: linear-gradient(rgba(50, 50, 50, 0.25), rgba(50, 50, 50, 0.25)), url("/assets/sections/section-intro.jpg") no-repeat;
   background-position: center;
   background-size: cover;
   position: relative; }
@@ -3937,27 +3950,142 @@ body {
       color: #fff; }
 
 .section-lifestyle {
-  height: 80vh;
+  height: 100vh;
   width: 100vw;
-  background: linear-gradient(rgba(214, 158, 158, 0.4), rgba(214, 158, 158, 0.4)), url("/assets/sections/section-lifestyle.jpg") no-repeat;
-  background-attachment: fixed;
-  background-position: center;
-  background-size: cover;
-  position: relative;
-  scroll-snap-type: block; }
+  display: flex;
+  align-items: center;
+  position: relative; }
+  .section-lifestyle--extra {
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    mix-blend-mode: color-dodge;
+    font-size: 10rem;
+    font-family: "Roboto", sans-serif;
+    font-weight: 200;
+    letter-spacing: 12px;
+    z-index: 2;
+    color: #ececec; }
+  .section-lifestyle--men {
+    width: 50%;
+    height: 100%;
+    background: url("/assets/sections/man.jpg");
+    background-position: center;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative; }
+    .section-lifestyle--men::before {
+      background: rgba(0, 0, 0, 0.6); }
+  .section-lifestyle--women {
+    height: 100%;
+    width: 50%;
+    background: url("/assets/sections/woman.jpg");
+    background-position: center;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    align-items: center; }
+    .section-lifestyle--women::before {
+      background: rgba(0, 0, 0, 0.6); }
+  .section-lifestyle--men::before, .section-lifestyle--women::before {
+    position: absolute;
+    content: "";
+    width: 100%;
+    height: 100%;
+    transition: all 0.3s ease-out; }
+  .section-lifestyle--men h1,
+  .section-lifestyle--women h1 {
+    font-size: 8rem;
+    mix-blend-mode: difference; }
+  .section-lifestyle--men:hover:before, .section-lifestyle--women:hover:before {
+    background: transparent; }
 
 .section-luxury {
   height: 80vh;
   width: 100vw;
-  background: linear-gradient(rgba(214, 158, 158, 0.4), rgba(214, 158, 158, 0.4)), url("/assets/sections/section-luxury.jpg") no-repeat;
-  background-attachment: fixed;
-  background-position: center;
-  background-size: cover;
+  display: flex;
+  align-items: center;
   position: relative; }
+  .section-luxury--extra {
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    mix-blend-mode: color-dodge;
+    font-size: 10rem;
+    font-family: "Roboto", sans-serif;
+    font-weight: 200;
+    letter-spacing: 12px;
+    z-index: 2;
+    text-transform: uppercase;
+    color: #ececec; }
+  .section-luxury--men {
+    width: 50%;
+    height: 100%;
+    background: url("/assets/sections/man-luxury.jpg");
+    background-position: center;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative; }
+    .section-luxury--men::before {
+      background: rgba(0, 0, 0, 0.6); }
+  .section-luxury--women {
+    height: 100%;
+    width: 50%;
+    background: url("/assets/sections/woman-luxury.jpg");
+    background-position: center;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    align-items: center; }
+    .section-luxury--women::before {
+      background: rgba(0, 0, 0, 0.6); }
+  .section-luxury--men::before, .section-luxury--women::before {
+    position: absolute;
+    content: "";
+    width: 100%;
+    height: 100%;
+    transition: all 0.3s ease-out; }
+  .section-luxury--men h1,
+  .section-luxury--women h1 {
+    font-size: 8rem;
+    mix-blend-mode: difference; }
+  .section-luxury--men:hover:before, .section-luxury--women:hover:before {
+    background: transparent; }
 
 .section-whoweare {
-  padding: 120px 0; }
+  padding: 10rem 0; }
 
 .section-mentions {
-  padding: 120px 0;
-  border-top: 1px solid var(--cream-d); }
+  padding: 10rem 0; }
+
+@media only screen and (max-width: 1024px) {
+  .section-lifestyle--extra {
+    font-size: 6rem;
+    font-weight: 400;
+    letter-spacing: 5px; }
+  .section-lifestyle--men {
+    width: 100%; }
+  .section-lifestyle--women {
+    width: 100%; }
+  .section-lifestyle--men h1,
+  .section-lifestyle--women h1 {
+    font-size: 3rem; }
+  .section-luxury--extra {
+    font-size: 6rem;
+    font-weight: 400;
+    letter-spacing: 5px; }
+  .section-luxury--men {
+    width: 100%; }
+  .section-luxury--women {
+    width: 100%; }
+  .section-luxury--men h1,
+  .section-luxury--women h1 {
+    font-size: 3rem; } }

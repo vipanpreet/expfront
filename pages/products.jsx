@@ -35,15 +35,36 @@ const Products = () => {
   const productsList = useSelector((state) => state.productsList);
   const { products, loading } = productsList;
 
-  var { category, subcategory, sortby, sortdirection, page, q } = router.query;
+  var {
+    category,
+    subcategory,
+    sortby,
+    sortdirection,
+    page,
+    q,
+    department,
+    type,
+  } = router.query;
 
   var queryList = {};
+
+  // Filters
+  department && (queryList.department = department);
+  type && (queryList.type = type);
+
+  // search
   q && (queryList.q = decodeURI(q));
+
+  // categorize
   category && (queryList.category = category);
   subcategory && (queryList.subcategory = subcategory);
+
+  // SORTING
   sortby && (queryList.sortby = sortby);
   sortdirection && (queryList.sortdirection = sortdirection);
-  page && (queryList.page = 1);
+
+  // pagination
+  !page && (queryList.page = 1);
 
   // Function to handle all queries
   const handleQuery = (newQuery, type) => {
@@ -85,6 +106,18 @@ const Products = () => {
         pathname: "/products",
         query: newQuery,
       });
+    } else if (type === "removetype") {
+      const { type, ...newQuery } = queryList;
+      router.push({
+        pathname: "/products",
+        query: newQuery,
+      });
+    } else if (type === "removedepartment") {
+      const { department, ...newQuery } = queryList;
+      router.push({
+        pathname: "/products",
+        query: newQuery,
+      });
     } else if (type === "nextpage") {
       router.push({
         pathname: "/products",
@@ -115,6 +148,8 @@ const Products = () => {
         category && category,
         subcategory && subcategory,
         q && q,
+        type && type,
+        department && department,
         (page && page) || 1,
         sortby && sortby,
         sortdirection && sortdirection
@@ -126,7 +161,7 @@ const Products = () => {
 
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
-  }, [dispatch, sortby, sortdirection, page, category, q, subcategory]);
+  }, [router.query]);
 
   const [windowDimensions, setWindowDimensions] = useState(
     getWindowDimensions()
@@ -221,73 +256,58 @@ const Products = () => {
                 </div>
               </div>
 
-              {/* Show subcategory on top with X */}
-              <div style={{ display: "flex" }}>
-                {!loading && category ? (
-                  <span
-                    style={{
-                      fontSize: "16px",
-                      fontWeight: 400,
-                      paddingRight: 20,
+              {/* removables */}
+              <div className="tags">
+                {!loading && category && (
+                  <div
+                    className="link"
+                    onClick={(e) => {
+                      handleQuery(e.target.value, "removecategory");
                     }}
                   >
-                    {category && category}
-                    <span
-                      style={{
-                        cursor: "pointer",
-                        paddingLeft: 5,
-                        fontWeight: 400,
-                      }}
-                      onClick={(e) => {
-                        handleQuery(e.target.value, "removecategory");
-                      }}
-                    >
-                      x
-                    </span>
-                  </span>
-                ) : null}
+                    {category && category} <span>x</span>
+                  </div>
+                )}
 
-                {!loading && subcategory ? (
-                  <span
-                    style={{
-                      fontSize: "16px",
-                      fontWeight: 400,
-                      paddingRight: 20,
+                {!loading && subcategory && (
+                  <div
+                    onClick={(e) => {
+                      handleQuery(e.target.value, "removesubcategory");
                     }}
                   >
-                    {subcategory && subcategory}
-                    <span
-                      style={{
-                        cursor: "pointer",
-                        paddingLeft: 5,
-                        fontWeight: 400,
-                      }}
-                      onClick={(e) => {
-                        handleQuery(e.target.value, "removesubcategory");
-                      }}
-                    >
-                      x
-                    </span>
-                  </span>
-                ) : null}
+                    {subcategory && subcategory} <span>x</span>
+                  </div>
+                )}
 
-                {!loading && q ? (
-                  <span style={{ fontSize: "16px", fontWeight: 400 }}>
-                    {q && q}
-                    <span
-                      style={{
-                        cursor: "pointer",
-                        paddingLeft: 5,
-                        fontWeight: 400,
-                      }}
-                      onClick={(e) => {
-                        handleQuery(e.target.value, "removeq");
-                      }}
-                    >
-                      x
-                    </span>
-                  </span>
-                ) : null}
+                {!loading && q && (
+                  <div
+                    onClick={(e) => {
+                      handleQuery(e.target.value, "removeq");
+                    }}
+                  >
+                    {q && q} <span>x</span>
+                  </div>
+                )}
+
+                {!loading && type && (
+                  <div
+                    onClick={(e) => {
+                      handleQuery(e.target.value, "removetype");
+                    }}
+                  >
+                    {type && type} <span>x</span>
+                  </div>
+                )}
+
+                {!loading && department && (
+                  <div
+                    onClick={(e) => {
+                      handleQuery(e.target.value, "removedepartment");
+                    }}
+                  >
+                    {department && department} <span>x</span>
+                  </div>
+                )}
               </div>
 
               <div

@@ -7,6 +7,7 @@ import LuxuryRecommendation from "../../components/LuxuryPage/luxury-recommendat
 import Footer from "../../components/ReusableComponents/footer/Footer.components";
 import LuxuryMenCollection from "../../components/LuxuryPage/Men/luxury-men-collection/LuxuryMenCollection.component";
 import LuxuryMenCollectionList from "../../components/LuxuryPage/Men/luxury-men-collection-list/LuxuryMenCollectionList.component";
+import LuxuryTopBrands from "../../components/LuxuryPage/luxury-top-brands/LuxuryTopBrands.component";
 
 const Lifestyle = () => {
   const dispatch = useDispatch();
@@ -21,8 +22,8 @@ const Lifestyle = () => {
       >
         <LuxuryMenCollection />
         <LuxuryMenCollectionList />
-
         <LuxuryRecommendation />
+        <LuxuryTopBrands />
         <Footer />
       </div>
     </main>

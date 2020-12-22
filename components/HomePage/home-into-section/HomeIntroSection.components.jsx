@@ -44,7 +44,7 @@ const HomeIntroSection = () => {
               voluptatibus laborum cum! Quas.
             </p>
             <div className="mt-4">
-              <a href="#" className="btn btn--white-simple">
+              <a href="#" className="btn btn--white btn--simple">
                 Shop now
               </a>
             </div>

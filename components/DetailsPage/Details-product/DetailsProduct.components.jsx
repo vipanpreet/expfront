@@ -12,7 +12,12 @@ const DetailsProduct = ({ singleProduct }) => {
       let cart = [];
       const cartLocal = JSON.parse(localStorage.getItem("cart"));
       if (cartLocal) {
-        cart.push(...cartLocal);
+        for (var i = 0; i < cartLocal.products.length; i++) {
+          cart.push({
+            ...cartLocal.products[i].product,
+            count: cartLocal.products[i].count,
+          });
+        }
       }
       // checking if the product is already in the localstorage
       const index = cart.findIndex(

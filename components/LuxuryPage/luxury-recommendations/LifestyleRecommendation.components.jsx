@@ -18,7 +18,7 @@ const LuxuryRecommendation = () => {
   };
   return (
     <section class="section-luxury-recommendation">
-      <div class="container-large mt-6">
+      <div class="container-xlarge mt-6">
         <div className="section-luxury-recommendation--menu" ref={menu}>
           <div class="subtitle __300 text-white">
             The <br /> Trending <br /> Products

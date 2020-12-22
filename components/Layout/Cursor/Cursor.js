@@ -69,14 +69,14 @@ const Cursor = () => {
   };
 
   const handleLinkHoverEvents = () => {
-    document.querySelectorAll("a,Link,button").forEach((el) => {
+    document.querySelectorAll("a,Link,button,.collist").forEach((el) => {
       el.addEventListener("mouseover", () => setLinkHovered(true));
       el.addEventListener("mouseout", () => setLinkHovered(false));
     });
   };
   const handleSelectHoverEvents = () => {
     document
-      .querySelectorAll("li,input,select,ion-icon,.logo,.toggle,.actions,.link")
+      .querySelectorAll("li,input,select,ion-icon,.logo,.toggle,.actions,span")
       .forEach((el) => {
         el.addEventListener("mouseover", () => setSelectHovered(true));
         el.addEventListener("mouseout", () => setSelectHovered(false));

@@ -47,7 +47,7 @@ const Card = ({ singleProduct, col12, col3, windowDimensions }) => {
                   href={`/details/${singleProduct._id}`}
                   target="_blank"
                   as={`/details/${singleProduct._id}`}
-                  class="card__hover__btns--showproduct"
+                  class="card__hover__btns--showproduct link"
                 >
                   {col12 ? (
                     <a
