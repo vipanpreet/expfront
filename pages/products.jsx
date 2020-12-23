@@ -247,6 +247,7 @@ const Products = () => {
                         }}
                       >
                         <option value="counter">Relevance</option>
+                        <option value="numReviews">Reviews</option>
                         <option value="name">Alphabetically</option>
                         <option value="price">Price</option>
                         <option value="brand">Brand</option>
