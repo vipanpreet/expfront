@@ -12,11 +12,11 @@ const LifestyleSection = (props) => {
   return (
     <section className="section-categories">
       <div className="contianer-fluid">
-        <div class="d-flex justify-content-between">
-          <div class="ml-2 title mb-4">categories</div>
-          <div class="mb-4">
+        <div className="d-flex justify-content-between">
+          <div className="ml-2 title mb-4">categories</div>
+          <div className="mb-4">
             <Link href="/categories">
-              <a href="#" class="btn btn--primary btn--arrow">
+              <a href="#" className="btn btn--primary btn--arrow">
                 <span>See All</span>
               </a>
             </Link>
@@ -48,11 +48,11 @@ const LifestyleSection = (props) => {
                     },
                   }}
                 >
-                  <div class="category">
-                    <div class="category__img">
+                  <div className="category">
+                    <div className="category__img">
                       <img src="/assets/cat/uppers.jpg" alt="" />
 
-                      <a class="category__img--link" href="#">
+                      <a className="category__img--link" href="#">
                         Upperwear
                       </a>
                     </div>
@@ -72,11 +72,11 @@ const LifestyleSection = (props) => {
                     },
                   }}
                 >
-                  <div class="category">
-                    <div class="category__img">
+                  <div className="category">
+                    <div className="category__img">
                       <img src="/assets/cat/lowers.jpg" alt="" />
 
-                      <a class="category__img--link" href="#">
+                      <a className="category__img--link" href="#">
                         Lowers
                       </a>
                     </div>
@@ -96,11 +96,11 @@ const LifestyleSection = (props) => {
                     },
                   }}
                 >
-                  <div class="category">
-                    <div class="category__img">
+                  <div className="category">
+                    <div className="category__img">
                       <img src="/assets/cat/accessorie.jpg" alt="" />
 
-                      <a class="category__img--link" href="#">
+                      <a className="category__img--link" href="#">
                         Accessories
                       </a>
                     </div>
@@ -120,11 +120,11 @@ const LifestyleSection = (props) => {
                     },
                   }}
                 >
-                  <div class="category">
-                    <div class="category__img">
+                  <div className="category">
+                    <div className="category__img">
                       <img src="/assets/cat/shoes.jpg" alt="" />
 
-                      <a class="category__img--link" href="#">
+                      <a className="category__img--link" href="#">
                         Footwear
                       </a>
                     </div>

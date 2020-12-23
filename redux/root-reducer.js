@@ -4,8 +4,7 @@ import { combineReducers } from "redux";
 
 import { alertReducer } from "./Alert/alert.reducers";
 import cartReducer from "./cart/cart.reducer";
-import loginReducer from "./login/login.reducer";
-import registerReducer from "./register/register.reducer";
+import authReducer from "./auth/auth.reducer";
 import {
   profileGetReducer,
   profileCreateReducer,
@@ -14,10 +13,7 @@ import {
   categoryListReducer,
   subCategoryListReducer,
 } from "./category/category.reducers";
-import {
-  productsListReducer,
-  searchListReducer,
-} from "./products/products.reducer";
+import { productsReducer } from "./products/products.reducer";
 import lifestyleReducer from "./lifestyle/lifestyle.reducers";
 
 // const persistConfig = {
@@ -30,14 +26,12 @@ import lifestyleReducer from "./lifestyle/lifestyle.reducers";
 const rootReducer = combineReducers({
   alertShow: alertReducer,
   cart: cartReducer,
-  login: loginReducer,
-  register: registerReducer,
+  auth: authReducer,
   profileCreate: profileCreateReducer,
   profileGet: profileGetReducer,
   categoryList: categoryListReducer,
   subCategoryList: subCategoryListReducer,
-  productsList: productsListReducer,
-  searchList: searchListReducer,
+  productsState: productsReducer,
   lifestyleState: lifestyleReducer,
 });
 

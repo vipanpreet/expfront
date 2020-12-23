@@ -17,10 +17,10 @@ const LuxuryRecommendation = () => {
     menu.current.style.visibility = "visible";
   };
   return (
-    <section class="section-luxury-recommendation">
-      <div class="container-xlarge mt-6">
+    <section className="section-luxury-recommendation">
+      <div className="container-xlarge mt-6">
         <div className="section-luxury-recommendation--menu" ref={menu}>
-          <div class="subtitle __300 text-white">
+          <div className="subtitle __300 text-white">
             The <br /> Trending <br /> Products
           </div>
           <div className="title mt-4 text-white">
@@ -48,40 +48,45 @@ const LuxuryRecommendation = () => {
           }}
         >
           <SwiperSlide>
-            <div class="col">
-              <div class="card male">
-                <div class="card--inner">
-                  <div class="card__img">
+            <div className="col">
+              <div className="card male">
+                <div className="card--inner">
+                  <div className="card__img">
                     <img
                       src="https://res.cloudinary.com/arktastic-pty-ltd/image/upload/v1607110031/customizable-mug_mwxzg9.jpg"
                       alt=""
                     />
-                    <div class="card__img--type">L</div>
+                    <div className="card__img--type">L</div>
                   </div>
-                  <div class="card__body">
-                    <div class="card__body--brand">Gucci</div>
-                    <div class="card__body--name">Classic shirt for men</div>
-                    <div class="card__hover">
-                      <div class="card__hover--wrapper">
-                        <div class="card__hover--desc">
+                  <div className="card__body">
+                    <div className="card__body--brand">Gucci</div>
+                    <div className="card__body--name">
+                      Classic shirt for men
+                    </div>
+                    <div className="card__hover">
+                      <div className="card__hover--wrapper">
+                        <div className="card__hover--desc">
                           Lorem, ipsum dolor sit amet consectetur adipisicing
                           elit. Temporibus ullam libero eligendi tempora, nulla
                           excepturi consectetur.
                         </div>
-                        <div class="card__hover__btns">
-                          <a href="#" class="card__hover__btns--wishlist">
+                        <div className="card__hover__btns">
+                          <a href="#" className="card__hover__btns--wishlist">
                             <ion-icon name="heart-outline"></ion-icon>
                           </a>
-                          <a href="#" class="card__hover__btns--showproduct">
+                          <a
+                            href="#"
+                            className="card__hover__btns--showproduct"
+                          >
                             View
                           </a>
-                          <a href="" class="card__hover__btns--options">
+                          <a href="" className="card__hover__btns--options">
                             <ion-icon name="options-outline"></ion-icon>
                           </a>
                         </div>
                       </div>
                     </div>
-                    <div class="card__body--price">$399</div>
+                    <div className="card__body--price">$399</div>
                   </div>
                 </div>
               </div>
@@ -89,120 +94,135 @@ const LuxuryRecommendation = () => {
           </SwiperSlide>
 
           <SwiperSlide>
-            <div class="col">
-              <div class="card male">
-                <div class="card--inner">
-                  <div class="card__img">
+            <div className="col">
+              <div className="card male">
+                <div className="card--inner">
+                  <div className="card__img">
                     <img
                       src="https://res.cloudinary.com/arktastic-pty-ltd/image/upload/v1607110031/customizable-mug_mwxzg9.jpg"
                       alt=""
                     />
-                    <div class="card__img--type">L</div>
+                    <div className="card__img--type">L</div>
                   </div>
-                  <div class="card__body">
-                    <div class="card__body--brand">Gucci</div>
-                    <div class="card__body--name">Classic shirt for men</div>
-                    <div class="card__hover">
-                      <div class="card__hover--wrapper">
-                        <div class="card__hover--desc">
+                  <div className="card__body">
+                    <div className="card__body--brand">Gucci</div>
+                    <div className="card__body--name">
+                      Classic shirt for men
+                    </div>
+                    <div className="card__hover">
+                      <div className="card__hover--wrapper">
+                        <div className="card__hover--desc">
                           Lorem, ipsum dolor sit amet consectetur adipisicing
                           elit. Temporibus ullam libero eligendi tempora, nulla
                           excepturi consectetur.
                         </div>
-                        <div class="card__hover__btns">
-                          <a href="#" class="card__hover__btns--wishlist">
+                        <div className="card__hover__btns">
+                          <a href="#" className="card__hover__btns--wishlist">
                             <ion-icon name="heart-outline"></ion-icon>
                           </a>
-                          <a href="#" class="card__hover__btns--showproduct">
+                          <a
+                            href="#"
+                            className="card__hover__btns--showproduct"
+                          >
                             View
                           </a>
-                          <a href="" class="card__hover__btns--options">
+                          <a href="" className="card__hover__btns--options">
                             <ion-icon name="options-outline"></ion-icon>
                           </a>
                         </div>
                       </div>
                     </div>
-                    <div class="card__body--price">$399</div>
+                    <div className="card__body--price">$399</div>
                   </div>
                 </div>
               </div>
             </div>
           </SwiperSlide>
           <SwiperSlide>
-            <div class="col">
-              <div class="card male">
-                <div class="card--inner">
-                  <div class="card__img">
+            <div className="col">
+              <div className="card male">
+                <div className="card--inner">
+                  <div className="card__img">
                     <img
                       src="https://res.cloudinary.com/arktastic-pty-ltd/image/upload/v1607110031/customizable-mug_mwxzg9.jpg"
                       alt=""
                     />
-                    <div class="card__img--type">L</div>
+                    <div className="card__img--type">L</div>
                   </div>
-                  <div class="card__body">
-                    <div class="card__body--brand">Gucci</div>
-                    <div class="card__body--name">Classic shirt for men</div>
-                    <div class="card__hover">
-                      <div class="card__hover--wrapper">
-                        <div class="card__hover--desc">
+                  <div className="card__body">
+                    <div className="card__body--brand">Gucci</div>
+                    <div className="card__body--name">
+                      Classic shirt for men
+                    </div>
+                    <div className="card__hover">
+                      <div className="card__hover--wrapper">
+                        <div className="card__hover--desc">
                           Lorem, ipsum dolor sit amet consectetur adipisicing
                           elit. Temporibus ullam libero eligendi tempora, nulla
                           excepturi consectetur.
                         </div>
-                        <div class="card__hover__btns">
-                          <a href="#" class="card__hover__btns--wishlist">
+                        <div className="card__hover__btns">
+                          <a href="#" className="card__hover__btns--wishlist">
                             <ion-icon name="heart-outline"></ion-icon>
                           </a>
-                          <a href="#" class="card__hover__btns--showproduct">
+                          <a
+                            href="#"
+                            className="card__hover__btns--showproduct"
+                          >
                             View
                           </a>
-                          <a href="" class="card__hover__btns--options">
+                          <a href="" className="card__hover__btns--options">
                             <ion-icon name="options-outline"></ion-icon>
                           </a>
                         </div>
                       </div>
                     </div>
-                    <div class="card__body--price">$399</div>
+                    <div className="card__body--price">$399</div>
                   </div>
                 </div>
               </div>
             </div>
           </SwiperSlide>
           <SwiperSlide>
-            <div class="col">
-              <div class="card male">
-                <div class="card--inner">
-                  <div class="card__img">
+            <div className="col">
+              <div className="card male">
+                <div className="card--inner">
+                  <div className="card__img">
                     <img
                       src="https://res.cloudinary.com/arktastic-pty-ltd/image/upload/v1607110031/customizable-mug_mwxzg9.jpg"
                       alt=""
                     />
-                    <div class="card__img--type">L</div>
+                    <div className="card__img--type">L</div>
                   </div>
-                  <div class="card__body">
-                    <div class="card__body--brand">Gucci</div>
-                    <div class="card__body--name">Classic shirt for men</div>
-                    <div class="card__hover">
-                      <div class="card__hover--wrapper">
-                        <div class="card__hover--desc">
+                  <div className="card__body">
+                    <div className="card__body--brand">Gucci</div>
+                    <div className="card__body--name">
+                      Classic shirt for men
+                    </div>
+                    <div className="card__hover">
+                      <div className="card__hover--wrapper">
+                        <div className="card__hover--desc">
                           Lorem, ipsum dolor sit amet consectetur adipisicing
                           elit. Temporibus ullam libero eligendi tempora, nulla
                           excepturi consectetur.
                         </div>
-                        <div class="card__hover__btns">
-                          <a href="#" class="card__hover__btns--wishlist">
+                        <div className="card__hover__btns">
+                          <a href="#" className="card__hover__btns--wishlist">
                             <ion-icon name="heart-outline"></ion-icon>
                           </a>
-                          <a href="#" class="card__hover__btns--showproduct">
+                          <a
+                            href="#"
+                            className="card__hover__btns--showproduct"
+                          >
                             View
                           </a>
-                          <a href="" class="card__hover__btns--options">
+                          <a href="" className="card__hover__btns--options">
                             <ion-icon name="options-outline"></ion-icon>
                           </a>
                         </div>
                       </div>
                     </div>
-                    <div class="card__body--price">$399</div>
+                    <div className="card__body--price">$399</div>
                   </div>
                 </div>
               </div>

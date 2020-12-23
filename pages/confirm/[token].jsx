@@ -1,7 +1,6 @@
 import { useEffect } from "react";
-import Navbar from "../../components/Layout/nav-bar/Navbar.components";
 import { useDispatch, useSelector } from "react-redux";
-import { confirmUser } from "../../redux/login/login.actions";
+import { confirmUser } from "../../redux/auth/auth.actions";
 import { useRouter } from "next/router";
 
 export default function Confirm(props) {
@@ -10,8 +9,8 @@ export default function Confirm(props) {
   const dispatch = useDispatch();
   const { token } = router.query;
 
-  const loginReducerState = useSelector((state) => state.login);
-  const { error, message } = loginReducerState;
+  const auth = useSelector((state) => state.auth);
+  const { error, message } = auth;
   useEffect(() => {
     if (token) {
       dispatch(confirmUser(token));
@@ -23,7 +22,6 @@ export default function Confirm(props) {
 
   return (
     <>
-      <Navbar />
       <main>
         <div className="register">
           <div className="register--banner">

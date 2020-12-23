@@ -2,10 +2,13 @@ import { useEffect, useState } from "react";
 import {
   createProfile,
   getProfile,
+  deleteItemWishlist,
 } from "../../../redux/profile/profile.actions";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router";
 import Link from "next/link";
+
+import Spinner from "../../../components/Layout/Spinner/Spinner";
 
 const ProfileMain = () => {
   const [phoneNumber, setPhoneNumber] = useState("");
@@ -20,14 +23,19 @@ const ProfileMain = () => {
 
   const dispatch = useDispatch();
 
-  const login = useSelector((state) => state.login);
-  const { userInfo } = login;
+  const auth = useSelector((state) => state.auth);
+  const { userInfo } = auth;
 
   const profileCreate = useSelector((state) => state.profileCreate);
   const { message, error, success, loading } = profileCreate;
 
   const profileGet = useSelector((state) => state.profileGet);
-  const { profile, error: getError, loading: getLoading } = profileGet;
+  const {
+    profile,
+    error: getError,
+    loading: getLoading,
+    messageWishlist,
+  } = profileGet;
 
   const router = useRouter();
   var { settings } = router.query;
@@ -42,7 +50,11 @@ const ProfileMain = () => {
       setZipcode(profile && profile.zipcode);
       setLocality(profile && profile.locality);
     }
-  }, [userInfo, success]);
+    dispatch(getProfile());
+    if (typeof window !== "undefined") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  }, [dispatch, userInfo, success, messageWishlist]);
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -60,10 +72,15 @@ const ProfileMain = () => {
     dispatch(getProfile());
   };
 
+  const handleRemoveBtn = (id) => {
+    dispatch(deleteItemWishlist(id));
+  };
+
   return (
-    <div class="container-large mt-6 mb-9">
-      <div class="profile-navigation">
-        <li class="profile-navigation--list">
+    <div className="container-large mt-6 mb-9" style={{ minHeight: "100vh" }}>
+      <div className="profile-navigation">
+        {/* MENU */}
+        <li className="profile-navigation--list">
           <Link
             href={{
               pathname: "/profile",
@@ -74,7 +91,7 @@ const ProfileMain = () => {
             <a href="#">Your Address</a>
           </Link>
         </li>
-        <li class="profile-navigation--list">
+        <li className="profile-navigation--list">
           <Link
             href={{
               pathname: "/profile",
@@ -85,7 +102,7 @@ const ProfileMain = () => {
             <a href="#">Orders</a>
           </Link>
         </li>
-        <li class="profile-navigation--list">
+        <li className="profile-navigation--list">
           <Link
             href={{
               pathname: "/profile",
@@ -96,7 +113,7 @@ const ProfileMain = () => {
             <a href="#">Wishlist</a>
           </Link>
         </li>
-        <li class="profile-navigation--list">
+        <li className="profile-navigation--list">
           <Link
             href={{
               pathname: "/profile",
@@ -108,193 +125,235 @@ const ProfileMain = () => {
           </Link>
         </li>
       </div>
-      <div class="profile-main">
+
+      <div className="profile-main">
         {getError && <h1 className="heading">{getError}</h1>}
         {message && <h1 className="heading">{alert}</h1>}
+        {/* ADDRESS PANEL */}
         {settings === "address" && (
-          <div class="profile-main--profile">
-            <div class="subtitle mb-2">Your Address</div>
+          <div className="profile-main--profile">
+            <div className="subtitle mb-2">Your Address</div>
             <form onSubmit={submitHandler}>
-              <div class="form-group">
+              <div className="form-group">
                 <label for="address">Phone number:</label>
                 <input
                   type="text"
-                  class="input"
+                  className="input"
                   value={phoneNumber}
                   onChange={(e) => setPhoneNumber(e.target.value)}
                   placeholder="(02) 8060 1294"
                 />
               </div>
 
-              <div class="form-group">
+              <div className="form-group">
                 <label for="locality">Country:</label>
                 <input
                   type="text"
-                  class="input"
+                  className="input"
                   value={country}
                   onChange={(e) => setCountry(e.target.value)}
                   readonly
                 />
               </div>
 
-              <div class="form-group">
+              <div className="form-group">
                 <label for="state">State:</label>
                 <input
                   type="text"
-                  class="input"
+                  className="input"
                   value={state}
                   onChange={(e) => setState(e.target.value)}
                   placeholder="New South Wales"
                 />
               </div>
 
-              <div class="form-group">
+              <div className="form-group">
                 <label for="state">Suburb:</label>
                 <input
                   type="text"
-                  class="input"
+                  className="input"
                   value={suburb}
                   onChange={(e) => setSuburb(e.target.value)}
                   placeholder="FOREST GLEN"
                 />
               </div>
 
-              <div class="form-group">
+              <div className="form-group">
                 <label for="street">Street:</label>
                 <input
                   type="text"
-                  class="input"
+                  className="input"
                   value={street}
                   onChange={(e) => setStreet(e.target.value)}
                   placeholder="36 Woodlands Avenue"
                 />
               </div>
 
-              <div class="form-group">
+              <div className="form-group">
                 <label for="address">Zip Code:</label>
                 <input
                   type="text"
-                  class="input"
+                  className="input"
                   value={zipcode}
                   onChange={(e) => setZipcode(e.target.value)}
                   placeholder="2157"
                 />
               </div>
 
-              <div class="form-group">
+              <div className="form-group">
                 <label for="locality">Locality / Landmark:</label>
                 <input
                   type="text"
-                  class="input"
+                  className="input"
                   value={locality}
                   onChange={(e) => setLocality(e.target.value)}
                   placeholder="abc"
                 />
               </div>
-              <div class="mt-2">
-                <button class="btn btn--primary">Update</button>
+              <div className="mt-2">
+                <button className="btn btn--primary">Update</button>
               </div>
             </form>
           </div>
         )}
 
+        {/* ORDERS PANEL */}
         {settings === "orders" && (
-          <div class="profile-main--active">
-            <div class="subtitle mb-4">Your Orders</div>
-            <div class="title mb-2">Currently Active</div>
-            <div class="orderslist">
-              <div class="orderslist--img">
+          <div className="profile-main--active">
+            <div className="subtitle mb-4">Your Orders</div>
+            <div className="title">No Orders Yet</div>
+            {/* <div className="title mb-2">Currently Active</div>
+            <div className="orderslist">
+              <div className="orderslist--img">
                 <img
                   src="https://res.cloudinary.com/arktastic-pty-ltd/image/upload/v1606500127/ebvz8svvs7bedcnfdnnv.jpg"
                   alt=""
                 />
               </div>
-              <div class="orderslist__body">
-                <div class="orderslist__body--title">Black shirt for men</div>
-                <div class="orderslist__body--desc">
+              <div className="orderslist__body">
+                <div className="orderslist__body--title">
+                  Black shirt for men
+                </div>
+                <div className="orderslist__body--desc">
                   Lorem ipsum dolor sit amet consectetur adipisicing elit.
                   Reiciendis iure laborum eveniet ipsam, expedita exercitationem
                   enim quaerat magnam excepturi...
                 </div>
-                <div class="orderslist__body--status">Out for Delivery</div>
-                <div class="mt-2">
-                  <button class="btn btn--primary">Order Again</button>
+                <div className="orderslist__body--status">Out for Delivery</div>
+                <div className="mt-2">
+                  <button className="btn btn--primary">Order Again</button>
                 </div>
               </div>
-            </div>
-            <div class="title mb-2 mt-8">Previous Orders</div>
-            <div class="orderslist">
-              <div class="orderslist--img">
+            </div> */}
+            {/* <div className="title mb-2 mt-8">Previous Orders</div> */}
+            {/* <div className="orderslist">
+              <div className="orderslist--img">
                 <img
                   src="https://res.cloudinary.com/arktastic-pty-ltd/image/upload/v1606501309/kzd91ynr0wg1cbdfg2pf.jpg"
                   alt=""
                 />
               </div>
-              <div class="orderslist__body">
-                <div class="orderslist__body--title">Hot durable black cap</div>
-                <div class="orderslist__body--desc">
+              <div className="orderslist__body">
+                <div className="orderslist__body--title">
+                  Hot durable black cap
+                </div>
+                <div className="orderslist__body--desc">
                   Lorem ipsum dolor sit amet consectetur adipisicing elit.
                   Reiciendis iure laborum eveniet ipsam, expedita exercitationem
                   enim quaerat magnam excepturi...
                 </div>
-                <div class="mt-2">
-                  <button class="btn btn--primary">Order Again</button>
+                <div className="mt-2">
+                  <button className="btn btn--primary">Order Again</button>
                 </div>
               </div>
-            </div>
-
-            <div class="orderslist">
-              <div class="orderslist--img">
+            </div> */}
+            {/* 
+            <div className="orderslist">
+              <div className="orderslist--img">
                 <img
                   src="https://res.cloudinary.com/arktastic-pty-ltd/image/upload/v1606500837/i4a34ocbmuamsvr6pbbc.jpg"
                   alt=""
                 />
               </div>
-              <div class="orderslist__body">
-                <div class="orderslist__body--title">Flexible women purse</div>
-                <div class="orderslist__body--desc">
+              <div className="orderslist__body">
+                <div className="orderslist__body--title">
+                  Flexible women purse
+                </div>
+                <div className="orderslist__body--desc">
                   Lorem ipsum dolor sit amet consectetur adipisicing elit.
                   Reiciendis iure laborum eveniet ipsam, expedita exercitationem
                   enim quaerat magnam excepturi...
                 </div>
-                <div class="mt-2">
-                  <button class="btn btn--primary">Order Again</button>
+                <div className="mt-2">
+                  <button className="btn btn--primary">Order Again</button>
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
         )}
         {settings === "wishlist" && (
-          <div class="profile-main--active">
-            <div class="subtitle mb-4">Your Wishlist</div>
+          <div className="profile-main--active">
+            <div className="subtitle mb-4">Your Wishlist</div>
 
             {profile !== undefined ? (
               profile.wishlist.map((product) => {
                 return (
                   <>
-                    <div class="orderslist" style={{ marginBottom: 20 }}>
-                      <div class="orderslist--img">
-                        <img src={product.images[0].url} alt="" />
-                      </div>
-                      <div class="orderslist__body" style={{ paddingTop: 0 }}>
-                        <div
-                          class="orderslist__body--title"
-                          style={{ lineHeight: 1 }}
+                    {getLoading ? (
+                      <>
+                        <h2
+                          style={{
+                            position: "absolute",
+                            left: "45%",
+                            transform: "translate(-50%)",
+                          }}
                         >
-                          {product.name}
+                          <Spinner />
+                        </h2>
+                      </>
+                    ) : (
+                      <div className="orderslist" style={{ marginBottom: 20 }}>
+                        <div className="orderslist--img">
+                          <img src={product.images[0].url} alt="" />
                         </div>
-                        <div class="orderslist__body--desc">
-                          Lorem ipsum dolor sit amet, consectetur adipisicing
-                          elit. Vel maxime fugiat sapiente odit veritatis quis
-                          incidunt quasi provident possimus, ab quibusdam
-                          accusamus animi optio atque tenetur deleniti expedita
-                          distinctio placeat.
-                        </div>
-                        <div class="mt-2">
-                          <button class="btn btn--primary">Order</button>
+                        <div
+                          className="orderslist__body"
+                          style={{ paddingTop: 0 }}
+                        >
+                          <div
+                            className="orderslist__body--title"
+                            style={{ lineHeight: 1 }}
+                          >
+                            {product.name}
+                          </div>
+                          <h4 style={{ paddingTop: "10px" }}>
+                            {product.brand}
+                          </h4>
+                          <div className="orderslist__body--desc">
+                            {product.description.slice(0, 250)}
+                          </div>
+                          <div className="mt-2">
+                            <a
+                              href={`/details/${product._id}`}
+                              target="_blank"
+                              className="btn btn--primary"
+                            >
+                              Order
+                            </a>
+
+                            <button
+                              className="btn btn--primary"
+                              style={{ marginLeft: "10px" }}
+                              onClick={() => {
+                                handleRemoveBtn(product._id);
+                              }}
+                            >
+                              Remove
+                            </button>
+                          </div>
                         </div>
                       </div>
-                    </div>
+                    )}
                   </>
                 );
               })
@@ -305,23 +364,23 @@ const ProfileMain = () => {
         )}
 
         {settings === "security" && (
-          <div class="profile-main--security">
-            <div class="subtitle mb-4">Security</div>
-            <div class="title mb-3">Change Password</div>
-            <div class="form-group">
+          <div className="profile-main--security">
+            <div className="subtitle mb-4">Security</div>
+            <div className="title mb-3">Change Password</div>
+            <div className="form-group">
               <label for="password">Current Password:</label>
-              <input type="text" class="input" />
+              <input type="text" className="input" />
             </div>
-            <div class="form-group pt-3">
+            <div className="form-group pt-3">
               <label for="password">New Password:</label>
-              <input type="text" class="input" />
+              <input type="text" className="input" />
             </div>
-            <div class="form-group">
+            <div className="form-group">
               <label for="password">Confirm Password:</label>
-              <input type="text" class="input" />
+              <input type="text" className="input" />
             </div>
-            <div class="mt-2">
-              <button class="btn btn--font">Change Password</button>
+            <div className="mt-2">
+              <button className="btn btn--font">Change Password</button>
             </div>
           </div>
         )}

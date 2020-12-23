@@ -1,7 +1,7 @@
 const LuxuryHeader = () => {
   return (
-    <div class="wrapperv">
-      <div class="gradient"></div>
+    <div className="wrapperv">
+      <div className="gradient"></div>
       <video loop autoPlay>
         <source src="/assets/luxury/luxurybg.mp4" type="video/mp4" />
         <source src="/assets/luxury/luxurybg.mp4" type="video/ogg" />

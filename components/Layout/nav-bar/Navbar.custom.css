@@ -1,9 +1,4 @@
 /*  ------------------------------------------------NAVIGATION-------------------------------------------- */
-*,
-html,
-body {
-  cursor: none !important;
-}
 
 .active.navigation {
   transition: height 0.3s ease-out;
@@ -240,6 +235,7 @@ body {
   mix-blend-mode: screen;
   z-index: 1001;
   background: #fff;
+  background: var(--cream-d);
   opacity: 0;
 }
 /* .wrapper-menu::after {
@@ -256,7 +252,7 @@ body {
   position: absolute;
   opacity: 0;
   visibility: hidden;
-  padding: 6rem 4rem;
+  padding: 6rem 8rem;
 }
 .wrapper-menu .menu ul {
   list-style: none;
@@ -271,6 +267,7 @@ body {
   cursor: default;
   display: flex;
   align-items: center;
+  text-transform: uppercase;
   font-family: "Roboto", sans-serif;
 }
 
@@ -521,9 +518,12 @@ body {
   .navigation .toggle {
     width: 80px;
   }
+  .wrapper-menu > .menu {
+    padding: 2rem;
+  }
   .wrapper-menu .menu ul li {
-    font-size: 3.4rem;
-    line-height: 6rem;
+    font-size: 2rem;
+    line-height: 2.4rem;
   }
   .navigation .actions > span {
     width: 20px;

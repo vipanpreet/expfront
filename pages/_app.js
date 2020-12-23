@@ -25,7 +25,7 @@ function MyApp({ Component, pageProps }) {
       <Navbar />
       <Alert />
       <GoToTop />
-      <Cursor />
+      {/* <Cursor /> */}
       <Component {...pageProps} />
       {/* // do not render the footer if the cart page is opened */}
       {route.pathname == "/cart" || route.pathname == "/luxury/[gender]" ? (

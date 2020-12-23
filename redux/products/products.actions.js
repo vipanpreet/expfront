@@ -6,6 +6,9 @@ import {
   SEARCH_LIST_REQUEST,
   SEARCH_LIST_SUCCESS,
   SEARCH_LIST_FAIL,
+  REVIEW_ADD_REQUEST,
+  REVIEW_ADD_FAIL,
+  REVIEW_ADD_SUCCESS,
 } from "./products.types";
 import { removeAlert, setAlert } from "../Alert/alert.actions";
 
@@ -72,6 +75,44 @@ export const getSearchList = (query) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: SEARCH_LIST_FAIL,
+      payload:
+        error.response && error.response.data.msg
+          ? error.response.data.msg
+          : error.msg,
+    });
+  }
+};
+
+export const addRating = (id, rating, comment) => async (
+  dispatch,
+  getState
+) => {
+  try {
+    dispatch({ type: REVIEW_ADD_REQUEST });
+
+    const {
+      auth: { userInfo },
+    } = getState();
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: userInfo.token,
+      },
+    };
+    const { data } = await axios.post(
+      `https://arktasticbackend.herokuapp.com/api/products/${id}/reviews`,
+      { rating, comment },
+      config
+    );
+    // calling this action to get all the items saved in the DB
+
+    dispatch({
+      type: REVIEW_ADD_SUCCESS,
+      payload: data.message,
+    });
+  } catch (error) {
+    dispatch({
+      type: REVIEW_ADD_FAIL,
       payload:
         error.response && error.response.data.msg
           ? error.response.data.msg

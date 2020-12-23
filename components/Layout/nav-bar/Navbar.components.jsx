@@ -3,14 +3,15 @@ import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/router";
 
 import { useDispatch, useSelector } from "react-redux";
-import { logout } from "../../../redux/login/login.actions";
+import { logout } from "../../../redux/auth/auth.actions";
 import { SEARCH_LIST_CLEAR } from "../../../redux/products/products.types";
-import { addItem } from "../../../redux/cart/cart.actions";
+import { addItem, getCartItems } from "../../../redux/cart/cart.actions";
 
 // Animation GSAP
 import { Expo, TimelineMax, TweenMax } from "gsap";
 import { getSearchList } from "../../../redux/products/products.actions";
 import "animate.css";
+import Spinner from "../Spinner/Spinner";
 
 const Navbar = () => {
   const router = useRouter();
@@ -22,9 +23,6 @@ const Navbar = () => {
   const [NavHeight, setNavHeight] = useState(false);
   const [cursor, setCursor] = useState(0);
   const [NavDark, setNavDark] = useState(false);
-
-  const [cartItemsState, setCartList] = useState({});
-  // var cartTotal = 0;
 
   // Navigation
   let one = useRef(null);
@@ -60,21 +58,18 @@ const Navbar = () => {
   let cartSummary = useRef(null);
   let cartX = useRef(null);
 
-  // STORE
-  let changeStoreUI = useRef(null);
-
   // account
   const dispatch = useDispatch();
   let accountCard = useRef(null);
 
-  const login = useSelector((state) => state.login);
-  const { userInfo } = login;
+  const auth = useSelector((state) => state.auth);
+  const { userInfo } = auth;
 
-  const searchList = useSelector((state) => state.searchList);
-  const { search } = searchList;
+  const productsState = useSelector((state) => state.productsState);
+  const { search } = productsState;
 
   const cartState = useSelector((state) => state.cart);
-  const { cartItems } = cartState;
+  const { cartItems, loading } = cartState;
 
   const lifestyleState = useSelector((state) => state.lifestyleState);
   const { storeType, department } = lifestyleState;
@@ -86,7 +81,6 @@ const Navbar = () => {
       dispatch({ type: SEARCH_LIST_CLEAR });
     }
     // set the state on change of state in the store
-    setCartList(cartItems);
 
     router.pathname === "/luxury/[gender]"
       ? setNavDark(true)
@@ -102,17 +96,17 @@ const Navbar = () => {
   // method to increase quantity of the item in the cart
   const handleAddQuantity = (cartProduct) => {
     let cart = [];
-    if (cartItemsState) {
-      for (var i = 0; i < cartItemsState.products.length; i++) {
-        if (cartItemsState.products[i].product._id == cartProduct._id) {
+    if (cartItems) {
+      for (var i = 0; i < cartItems.products.length; i++) {
+        if (cartItems.products[i].product._id == cartProduct._id) {
           cart.push({
-            ...cartItemsState.products[i].product,
-            count: cartItemsState.products[i].count + 1,
+            ...cartItems.products[i].product,
+            count: cartItems.products[i].count + 1,
           });
         } else {
           cart.push({
-            ...cartItemsState.products[i].product,
-            count: cartItemsState.products[i].count,
+            ...cartItems.products[i].product,
+            count: cartItems.products[i].count,
           });
         }
       }
@@ -126,17 +120,17 @@ const Navbar = () => {
       return; // return if the qty is 1
     }
     let cart = [];
-    if (cartItemsState) {
-      for (var i = 0; i < cartItemsState.products.length; i++) {
-        if (cartItemsState.products[i].product._id == cartProduct._id) {
+    if (cartItems) {
+      for (var i = 0; i < cartItems.products.length; i++) {
+        if (cartItems.products[i].product._id == cartProduct._id) {
           cart.push({
-            ...cartItemsState.products[i].product,
-            count: cartItemsState.products[i].count - 1,
+            ...cartItems.products[i].product,
+            count: cartItems.products[i].count - 1,
           });
         } else {
           cart.push({
-            ...cartItemsState.products[i].product,
-            count: cartItemsState.products[i].count,
+            ...cartItems.products[i].product,
+            count: cartItems.products[i].count,
           });
         }
       }
@@ -147,11 +141,11 @@ const Navbar = () => {
   // method to delete an item in the cart
   const handleDeleteItem = (cartProduct) => {
     let cart = [];
-    for (var i = 0; i < cartItemsState.products.length; i++) {
-      if (cartItemsState.products[i].product._id != cartProduct._id) {
+    for (var i = 0; i < cartItems.products.length; i++) {
+      if (cartItems.products[i].product._id != cartProduct._id) {
         cart.push({
-          ...cartItemsState.products[i].product,
-          count: cartItemsState.products[i].count,
+          ...cartItems.products[i].product,
+          count: cartItems.products[i].count,
         });
       }
     }
@@ -434,7 +428,9 @@ const Navbar = () => {
 
   // cart
   const openCart = () => {
-    setCartList(cartItems);
+    // setCartList(cartItems);
+    // call action to get the cart items from the DB
+    dispatch(getCartItems());
     closeNav();
     var isMobileCart;
     window.innerWidth < 1024
@@ -452,6 +448,7 @@ const Navbar = () => {
       visibility: "visible",
       duration: 1.2,
       ease: Expo.easeInOut,
+      delay: -0.6,
     });
     c1.to(cartSummary, {
       opacity: 1,
@@ -465,9 +462,10 @@ const Navbar = () => {
       opacity: 1,
       visibility: "visible",
       duration: 0.2,
-      delay: -2.4,
+      delay: -2,
     });
   };
+
   const closeCart = () => {
     var c1 = new TimelineMax();
 
@@ -505,29 +503,6 @@ const Navbar = () => {
     c1.to(cart, { width: 0, duration: 1, ease: Expo.easeInOut, delay: -2.4 });
   };
 
-  // changestore
-  const openChangeStore = (e) => {
-    closeNav();
-    window.scrollTo({ top: 0, behavior: "smooth" });
-    var c1 = new TimelineMax();
-    c1.to(changeStoreUI, {
-      opacity: 1,
-      visibility: "visible",
-      duration: 0.4,
-      ease: Expo.easeInOut,
-    });
-  };
-
-  const closeChangeStore = (e) => {
-    var c1 = new TimelineMax();
-    c1.to(changeStoreUI, {
-      opacity: 0,
-      visibility: "hidden",
-      duration: 0.2,
-      ease: Expo.easeInOut,
-    });
-  };
-
   const handleAccount = (e) => {
     if (node.current.contains(e.target)) {
       return;
@@ -559,32 +534,9 @@ const Navbar = () => {
         pathname: `/luxury/${department}`,
       });
     } else {
-      changeStore();
-    }
-  };
-
-  const changeStore = (gender, store) => {
-    console.log(gender, store);
-    if (gender === "women" && store === "lifestyle") {
       router.push({
-        pathname: `/lifestyle/${gender}`,
+        pathname: `/`,
       });
-      closeChangeStore();
-    } else if (gender === "men" && store === "lifestyle") {
-      router.push({
-        pathname: `/lifestyle/${gender}`,
-      });
-      closeChangeStore();
-    } else if (gender === "women" && store === "luxury") {
-      router.push({
-        pathname: `/luxury/${gender}`,
-      });
-      closeChangeStore();
-    } else if (gender === "men" && store === "luxury") {
-      router.push({
-        pathname: `/luxury/${gender}`,
-      });
-      closeChangeStore();
     }
   };
 
@@ -602,44 +554,6 @@ const Navbar = () => {
       >
         <span ref={(el) => (one = el)}></span>
         <span ref={(el) => (two = el)}></span>
-      </div>
-
-      {/* store UI */}
-
-      <div className="change-store-ui" ref={(el) => (changeStoreUI = el)}>
-        <div className="change-store-container">
-          {storeType !== null && (
-            <button
-              className="change-store-container--x"
-              onClick={closeChangeStore}
-            >
-              x
-            </button>
-          )}
-          <div>
-            <div>
-              <h1 className="subtitle __300 text-upper">lifestyle</h1>
-              <li onClick={(e) => changeStore("men", "lifestyle")}>Men</li>
-              <li onClick={(e) => changeStore("women", "lifestyle")}>Women</li>
-            </div>
-            <div className="mt-2">
-              <h1 className="subtitle __300 text-upper">luxury</h1>
-              <li onClick={(e) => changeStore("men", "luxury")}>Men</li>
-              <li onClick={(e) => changeStore("wmen", "luxury")}>Women</li>
-            </div>
-            <div className="mt-2">
-              <Link href="/">
-                <a
-                  className="btn btn--arrow btn--primary"
-                  href="#"
-                  onClick={closeChangeStore}
-                >
-                  Landing page
-                </a>
-              </Link>
-            </div>
-          </div>
-        </div>
       </div>
 
       {/* Logo */}
@@ -699,9 +613,20 @@ const Navbar = () => {
           />
 
           {accOpen === true ? (
-            <div class="account-card" ref={(el) => (accountCard = el)}>
+            <div className="account-card" ref={(el) => (accountCard = el)}>
               {userInfo.firstName ? (
                 <>
+                  <li>
+                    <h4
+                      style={{
+                        fontFamily: "Roboto",
+                        textTransform: "uppercase",
+                        paddingBottom: 10,
+                      }}
+                    >
+                      {userInfo.firstName}
+                    </h4>
+                  </li>
                   <li>
                     <Link
                       href={{
@@ -823,74 +748,89 @@ const Navbar = () => {
           <div className="d-flex justify-content-between align-content-center">
             <div className="wrapper-cart__details--title">Shopping cart</div>
             <div className="title">
-              {cartItemsState && cartItemsState.products
-                ? cartItemsState.products.length
-                : 0}
+              {cartItems && cartItems.products ? cartItems.products.length : 0}
               items
             </div>
           </div>
-          <table className="wrapper-cart__table">
-            <tr>
-              <th>Item</th>
-              <th>Size</th>
-              <th>Quantity</th>
-              <th>Price</th>
-              <th></th>
-            </tr>
-            {cartItemsState && cartItemsState.products ? (
-              cartItemsState.products.map((cartItem) => {
-                return (
-                  <tr className="wrapper-cart__table--data">
-                    <td className="d-flex">
-                      <div className="wrapper-cart__table--img">
-                        <img src={cartItem.product.images[0].url} alt="" />
-                      </div>
-                      <div className="wrapper-cart__table--name">
-                        <h2>{cartItem.product.name}</h2>
-                        <h5>{cartItem.product.brand}</h5>
-                      </div>
-                    </td>
-                    <td>M</td>
-                    <td>
-                      <div className="wrapper-cart__table--quantity">
-                        <span>
+          {loading ? (
+            <Spinner />
+          ) : (
+            <table className="wrapper-cart__table">
+              <thead>
+                <tr>
+                  <th>Item</th>
+                  <th>Size</th>
+                  <th>Quantity</th>
+                  <th>Price</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                {cartItems && cartItems.products.length > 0 ? (
+                  cartItems.products.map((cartItem) => {
+                    return (
+                      <tr
+                        key={cartItem.product._id}
+                        className="wrapper-cart__table--data animate__animated animate__fadeIn"
+                      >
+                        <td className="d-flex">
+                          <div className="wrapper-cart__table--img">
+                            <img src={cartItem.product.images[0].url} alt="" />
+                          </div>
+                          <div className="wrapper-cart__table--name">
+                            <h2>{cartItem.product.name}</h2>
+                            <h5>{cartItem.product.brand}</h5>
+                          </div>
+                        </td>
+                        <td>M</td>
+                        <td>
+                          <div className="wrapper-cart__table--quantity">
+                            <span>
+                              <ion-icon
+                                name="remove-circle-outline"
+                                onClick={() => {
+                                  handleSubQuantity(cartItem.product);
+                                }}
+                              ></ion-icon>
+                            </span>
+                            <span>{cartItem.count}</span>
+                            <span>
+                              <ion-icon
+                                name="add-circle-outline"
+                                onClick={() => {
+                                  handleAddQuantity(cartItem.product);
+                                }}
+                              ></ion-icon>
+                            </span>
+                          </div>
+                        </td>
+                        <td className="wrapper-cart__table--price">
+                          ${cartItem.price}
+                        </td>
+                        <td
+                          className="wrapper-cart__table--delete"
+                          style={{ cursor: "pointer" }}
+                        >
                           <ion-icon
-                            name="remove-circle-outline"
+                            name="close-outline"
                             onClick={() => {
-                              handleSubQuantity(cartItem.product);
+                              handleDeleteItem(cartItem.product);
                             }}
                           ></ion-icon>
-                        </span>
-                        <span>{cartItem.count}</span>
-                        <span>
-                          <ion-icon
-                            name="add-circle-outline"
-                            onClick={() => {
-                              handleAddQuantity(cartItem.product);
-                            }}
-                          ></ion-icon>
-                        </span>
-                      </div>
-                    </td>
-                    <td className="wrapper-cart__table--price">
-                      ${cartItem.price}
-                    </td>
-                    <td className="wrapper-cart__table--delete">
-                      <ion-icon
-                        name="close-outline"
-                        onClick={() => {
-                          handleDeleteItem(cartItem.product);
-                        }}
-                      ></ion-icon>
-                    </td>
+                        </td>
+                      </tr>
+                    );
+                  })
+                ) : (
+                  <tr>
+                    <td>CART IS EMPTY</td>
                   </tr>
-                );
-              })
-            ) : (
-              <></>
-            )}
-          </table>
+                )}
+              </tbody>
+            </table>
+          )}
         </div>
+
         <div ref={(el) => (cartSummary = el)} className="wrapper-cart__summary">
           <div className="wrapper-cart__summary--top">
             <div className="heading inherit mb-6">Summary</div>
@@ -898,7 +838,7 @@ const Navbar = () => {
             <div className="d-flex justify-content-between inherit align-content-center">
               <div className="subheading inherit __500">Subtotal</div>
               <div className="subheading inherit __500 text-right">
-                ${cartItemsState && cartItemsState.cartTotal}
+                ${cartItems ? cartItems.cartTotal : 0}
               </div>
             </div>
             <div className="d-flex justify-content-between inherit align-content-center">
@@ -914,7 +854,7 @@ const Navbar = () => {
             <div className="d-flex justify-content-between inherit mt-2">
               <div className="title __600  inherit text-capitalize">Total</div>
               <div className="heading  inherit">
-                ${cartItemsState && cartItemsState.cartTotal}
+                ${cartItems ? cartItems.cartTotal : 0}
               </div>
             </div>
             <div className="mt-3">
@@ -1003,10 +943,15 @@ const Navbar = () => {
               </li>
             </Link>
             <h2 className="title mt-3 mb-2">Menu</h2>
-
-            <li onClick={openChangeStore} ref={(el) => (menuItem6 = el)}>
-              <span id="menu">&nbsp;Switch Store</span>
-            </li>
+            <Link
+              href={{
+                pathname: "/",
+              }}
+            >
+              <li onClick={closeAll} ref={(el) => (menuItem6 = el)}>
+                <span id="menu">&nbsp;Change Store</span>
+              </li>
+            </Link>
             <Link
               href={{
                 pathname: "/categories",

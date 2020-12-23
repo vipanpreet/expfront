@@ -1,7 +1,8 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import Link from "next/link";
+
 import { useDispatch, useSelector } from "react-redux";
-import Router from "next/router";
-import { register } from "../../../redux/register/register.actions";
+import { register } from "../../../redux/auth/auth.actions";
 import Alert from "../../Layout/Alert/Alert.module";
 
 const SignupForm = () => {
@@ -14,8 +15,8 @@ const SignupForm = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
 
   const dispatch = useDispatch();
-  const registerReducerState = useSelector((state) => state.register);
-  const { loading, error, message } = registerReducerState;
+  const authReducerState = useSelector((state) => state.auth);
+  const { loading, error, message } = authReducerState;
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -30,7 +31,7 @@ const SignupForm = () => {
     <>
       {loading && <h4>loading</h4>}
 
-      {error && <Alert>{error}</Alert>}
+      {error && <h2>{error}</h2>}
       {passmatch && { passmatch }}
       {message ? (
         <>
@@ -113,12 +114,20 @@ const SignupForm = () => {
               </p>
             </div>
             <div className="mt-4">
-              <button className="btn btn--primary  btn-block-mobile mr-2">
+              <button
+                type="submit"
+                className="btn btn--primary  btn-block-mobile mr-2"
+              >
                 Register Account
               </button>
-              <button className="btn btn--font btn-block-mobile">
-                Forgot?
-              </button>
+              <Link href="forgot">
+                <button
+                  type="button"
+                  className="btn btn--font btn-block-mobile"
+                >
+                  Forgot?
+                </button>
+              </Link>
             </div>
           </form>
         </>

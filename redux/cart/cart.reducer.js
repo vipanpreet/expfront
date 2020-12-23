@@ -26,6 +26,7 @@ const cartReducer = (state = INITIAL_STATE, action) => {
       };
     case CART_ADD_SUCCESS:
       return {
+        ...state,
         loading: false,
         cartList: action.payload,
       };
@@ -41,6 +42,7 @@ const cartReducer = (state = INITIAL_STATE, action) => {
       };
     case CART_GET_SUCCESS:
       return {
+        ...state,
         loading: false,
         cartItems: action.payload,
       };

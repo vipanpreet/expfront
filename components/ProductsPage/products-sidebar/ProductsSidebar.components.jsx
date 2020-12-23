@@ -147,7 +147,7 @@ const ProductSidebar = () => {
         </div>
       </div>
       <div
-        class="options"
+        className="options"
         style={{ position: "absolute", top: "540px", right: 25 }}
         onClick={isOpen ? closeSideBar : openSideBar}
       >

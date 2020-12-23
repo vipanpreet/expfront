@@ -16,13 +16,13 @@ const LifestyleWomenHeader = (props) => {
     >
       <SwiperSlide>
         <header className="header header-female1">
-          <div class="header__container">
-            <div class="header--title">prefect vougue</div>
-            <div class="header--subtitle text-white text-upper">
+          <div className="header__container">
+            <div className="header--title">prefect vougue</div>
+            <div className="header--subtitle text-white text-upper">
               Shoes you will show off
             </div>
-            <div class="mt-3">
-              <a href="#" class="btn btn--dark-simple">
+            <div className="mt-3">
+              <a href="#" className="btn btn--dark-simple">
                 Read more
               </a>
             </div>
@@ -31,18 +31,18 @@ const LifestyleWomenHeader = (props) => {
       </SwiperSlide>
       <SwiperSlide>
         <header className="header header-female2">
-          <div class="header__container">
-            <div class="header--title roboto">The style edit</div>
-            <div class="header--subtitle text-female text-upper">
+          <div className="header__container">
+            <div className="header--title roboto">The style edit</div>
+            <div className="header--subtitle text-female text-upper">
               Feel the authentic peace
             </div>
-            <div class="header--text">
+            <div className="header--text">
               Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cum
               nesciunt omnis aperiam non doloremque qui sint distinctio corporis
               cupiditate odio esse sunt.
             </div>
-            <div class="mt-3">
-              <a href="#" class="btn btn--dark-simple">
+            <div className="mt-3">
+              <a href="#" className="btn btn--dark-simple">
                 Read more
               </a>
             </div>
@@ -51,16 +51,18 @@ const LifestyleWomenHeader = (props) => {
       </SwiperSlide>
       <SwiperSlide>
         <header className="header header-female3">
-          <div class="header__container">
-            <div class="header--title">New collection</div>
-            <div class="header--subtitle">Find the best clothing for you.</div>
-            <div class="header--text">
+          <div className="header__container">
+            <div className="header--title">New collection</div>
+            <div className="header--subtitle">
+              Find the best clothing for you.
+            </div>
+            <div className="header--text">
               Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cum
               nesciunt omnis aperiam non doloremque qui sint distinctio corporis
               cupiditate odio esse sunt.
             </div>
-            <div class="mt-3">
-              <a href="#" class="btn btn--dark-simple">
+            <div className="mt-3">
+              <a href="#" className="btn btn--dark-simple">
                 Read more
               </a>
             </div>

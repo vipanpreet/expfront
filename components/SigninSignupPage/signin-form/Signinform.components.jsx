@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import { login } from "../../../redux/login/login.actions";
+import { login } from "../../../redux/auth/auth.actions";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Router from "next/router";
@@ -10,8 +10,8 @@ const SigninForm = () => {
   const [password, setPassword] = useState("");
 
   const dispatch = useDispatch();
-  const loginReducerState = useSelector((state) => state.login);
-  const { error, userInfo } = loginReducerState;
+  const auth = useSelector((state) => state.auth);
+  const { error, userInfo } = auth;
 
   // checking if the object is not empty
   if (Object.keys(userInfo).length !== 0 && userInfo.constructor === Object) {
@@ -58,9 +58,11 @@ const SigninForm = () => {
           >
             login to account
           </a>
-          <a href="#" className="btn btn--font btn-block-mobile  mr-2">
-            Forgot
-          </a>
+          <Link href="forgot">
+            <a type="button" className="btn btn--font btn-block-mobile">
+              Forgot?
+            </a>
+          </Link>
           <Link href="/register">
             <div style={{ cursor: "pointer" }} className="subheading">
               Not Registered?

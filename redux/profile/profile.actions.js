@@ -9,6 +9,12 @@ import {
   WISHLIST_ADD_REQUEST,
   WISHLIST_ADD_SUCCESS,
   WISHLIST_ADD_FAIL,
+  WISHLIST_DELETE_REQUEST,
+  WISHLIST_DELETE_SUCCESS,
+  WISHLIST_DELETE_FAIL,
+  WISHLIST_GET_REQUEST,
+  WISHLIST_GET_SUCCESS,
+  WISHLIST_GET_FAIL,
 } from "./profile.types";
 import { setAlert } from "../Alert/alert.actions";
 
@@ -16,7 +22,7 @@ export const getProfile = () => async (dispatch, getState) => {
   try {
     dispatch({ type: GET_PROFILE_REQUEST });
     const {
-      login: { userInfo },
+      auth: { userInfo },
     } = getState();
     const config = {
       headers: {
@@ -50,7 +56,7 @@ export const createProfile = (profile) => async (dispatch, getState) => {
   try {
     dispatch({ type: PROFILE_CREATE_REQUEST });
     const {
-      login: { userInfo },
+      auth: { userInfo },
     } = getState();
     const config = {
       headers: {
@@ -85,7 +91,7 @@ export const addItemWishlist = (id) => async (dispatch, getState) => {
   try {
     dispatch({ type: WISHLIST_ADD_REQUEST });
     const {
-      login: { userInfo },
+      auth: { userInfo },
     } = getState();
     const config = {
       headers: {
@@ -93,15 +99,18 @@ export const addItemWishlist = (id) => async (dispatch, getState) => {
         Authorization: userInfo.token,
       },
     };
+
     const { data } = await axios.post(
       `https://arktasticbackend.herokuapp.com/api/user/wishlist`,
       { productId: id },
       config
     );
+
     dispatch({
       type: WISHLIST_ADD_SUCCESS,
       payload: data.msg,
     });
+    // dispatch(getItemWishlist());
     dispatch(getProfile());
     // need to check the message as... message can be " product already exist"
     dispatch(setAlert("Product Wishlisted", "success", 2500));
@@ -124,17 +133,15 @@ export const deleteItemWishlist = (id) => async (dispatch, getState) => {
       type: WISHLIST_DELETE_REQUEST,
     });
     const {
-      login: { userInfo },
+      auth: { userInfo },
     } = getState();
-
     const config = {
       headers: {
         "Content-Type": "application/json",
         Authorization: userInfo.token,
       },
     };
-
-    const { data } = await axios.post(
+    const { data } = await axios.delete(
       `https://arktasticbackend.herokuapp.com/api/user/wishlist/${id}`,
       config
     );

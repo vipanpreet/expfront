@@ -32,8 +32,8 @@ const Products = () => {
   const [viewOption, setViewOption] = useState(3);
 
   // getting the list of products from the store
-  const productsList = useSelector((state) => state.productsList);
-  const { products, loading } = productsList;
+  const productsState = useSelector((state) => state.productsState);
+  const { products, loading } = productsState;
 
   var {
     category,
@@ -178,16 +178,16 @@ const Products = () => {
               {/* Trending product */}
 
               <>
-                <section class="section-newcomer">
-                  <div class="newcomer">
+                <section className="section-newcomer">
+                  <div className="newcomer">
                     <img src="/assets/offers/trendingproduct.webp" alt="" />
                   </div>
                 </section>
 
-                <div class="title mt-3">
+                <div className="title mt-3">
                   <span> Women Page - {page} </span>
                 </div>
-                <div class="para mb-5 mt-2 __400">
+                <div className="para mb-5 mt-2 __400">
                   Lorem, ipsum dolor sit amet consectetur adipisicing elit.
                   Doloremque temporibus magni reiciendis rem quod sequi quos
                   quas nam nobis non! Eos porro commodi quaerat aliquam natus
@@ -197,12 +197,12 @@ const Products = () => {
               </>
               {/* ------------------------------- FILTERS AND SORT AND VIEW  --------------------------- */}
               <div className="filters--wrapper">
-                <div class="filters">
-                  <div class="views">
+                <div className="filters">
+                  <div className="views">
                     {windowDimensions.width >= 1025 && (
                       <div
                         style={{ cursor: "pointer" }}
-                        class="views--icon"
+                        className="views--icon"
                         onClick={(e) => setViewOption(3)}
                       >
                         <ion-icon name="apps-outline"></ion-icon>
@@ -210,14 +210,14 @@ const Products = () => {
                     )}
                     <div
                       style={{ cursor: "pointer" }}
-                      class="views--icon"
+                      className="views--icon"
                       onClick={(e) => setViewOption(4)}
                     >
                       <ion-icon name="apps-outline"></ion-icon>
                     </div>
                     <div
                       style={{ cursor: "pointer" }}
-                      class="views--icon"
+                      className="views--icon"
                       onClick={(e) => setViewOption(12)}
                     >
                       <ion-icon name="list-outline"></ion-icon>

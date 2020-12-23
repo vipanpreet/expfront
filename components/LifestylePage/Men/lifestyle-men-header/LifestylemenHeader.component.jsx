@@ -16,16 +16,18 @@ const LifestyleMenHeader = (props) => {
     >
       <SwiperSlide>
         <header className="header header-male1">
-          <div class="header__container">
-            <div class="header--title">Brillirant collections</div>
-            <div class="header--subtitle">Find the best clothing for you.</div>
-            <div class="header--text">
+          <div className="header__container">
+            <div className="header--title">Brillirant collections</div>
+            <div className="header--subtitle">
+              Find the best clothing for you.
+            </div>
+            <div className="header--text">
               Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cum
               nesciunt omnis aperiam non doloremque qui sint distinctio corporis
               cupiditate odio esse sunt.
             </div>
-            <div class="mt-3">
-              <a href="#" class="btn btn--dark-simple">
+            <div className="mt-3">
+              <a href="#" className="btn btn--dark-simple">
                 Read more
               </a>
             </div>
@@ -34,16 +36,18 @@ const LifestyleMenHeader = (props) => {
       </SwiperSlide>
       <SwiperSlide>
         <header className="header header-male1">
-          <div class="header__container">
-            <div class="header--title">Brillirant collections 2</div>
-            <div class="header--subtitle">Find the best clothing for you.</div>
-            <div class="header--text">
+          <div className="header__container">
+            <div className="header--title">Brillirant collections 2</div>
+            <div className="header--subtitle">
+              Find the best clothing for you.
+            </div>
+            <div className="header--text">
               Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cum
               nesciunt omnis aperiam non doloremque qui sint distinctio corporis
               cupiditate odio esse sunt.
             </div>
-            <div class="mt-3">
-              <a href="#" class="btn btn--dark-simple">
+            <div className="mt-3">
+              <a href="#" className="btn btn--dark-simple">
                 Read more
               </a>
             </div>
@@ -52,16 +56,18 @@ const LifestyleMenHeader = (props) => {
       </SwiperSlide>
       <SwiperSlide>
         <header className="header header-male1">
-          <div class="header__container">
-            <div class="header--title">Brillirant collections</div>
-            <div class="header--subtitle">Find the best clothing for you.</div>
-            <div class="header--text">
+          <div className="header__container">
+            <div className="header--title">Brillirant collections</div>
+            <div className="header--subtitle">
+              Find the best clothing for you.
+            </div>
+            <div className="header--text">
               Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cum
               nesciunt omnis aperiam non doloremque qui sint distinctio corporis
               cupiditate odio esse sunt.
             </div>
-            <div class="mt-3">
-              <a href="#" class="btn btn--dark-simple">
+            <div className="mt-3">
+              <a href="#" className="btn btn--dark-simple">
                 Read more
               </a>
             </div>

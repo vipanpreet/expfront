@@ -7,11 +7,11 @@ const Details = (props) => {
   const singleProduct = props.singleProduct;
 
   return (
-    <div>
+    <>
       <main>
         <DetailsProduct singleProduct={singleProduct} />
       </main>
-    </div>
+    </>
   );
 };
 

@@ -2836,15 +2836,20 @@ body {
 
 .pdetails {
   background: #fff;
-  display: flex; }
+  display: flex;
+  width: 100vw; }
   .pdetails--btn {
     font-size: 1.2rem;
     border: 1px solid var(--font-l);
     border-radius: 100px;
     padding: 8px 20px; }
   .pdetails__img {
+    min-width: 40%;
+    max-width: 60%;
+    overflow: hidden;
     position: sticky;
-    width: auto; }
+    height: 100%;
+    top: 0; }
     .pdetails__img--img {
       height: 100%;
       width: 100%; }
@@ -2969,7 +2974,6 @@ body {
       border-bottom: 2px solid var(--font-d); }
 
 .pothers__body > div {
-  display: none;
   padding: 2rem 0; }
 
 .pothers__body--desc {
@@ -2986,6 +2990,13 @@ body {
   .pothers__body--faq * {
     font-size: 1.4rem;
     color: rgba(var(--font), 0.7); }
+
+.pothers__body--rev select {
+  background: #fff;
+  border: none;
+  outline: none;
+  width: 100%;
+  padding: 1rem 2rem; }
 
 .preview {
   padding: 2rem 1rem; }
@@ -3019,12 +3030,14 @@ body {
         display: flex;
         align-items: center; }
         .preview-item__body--username span {
-          font-size: 1.45rem;
+          font-size: 1.35rem;
           font-weight: 400;
+          font-family: "Roboto", sans-serif;
           color: rgba(var(--font), 0.8); }
         .preview-item__body--username span:first-of-type {
           color: var(--font-d);
-          font-size: 1.55rem;
+          font-size: 1.45rem;
+          font-family: "Roboto", sans-serif;
           padding-right: 15px;
           font-weight: 600; }
 
@@ -3032,7 +3045,10 @@ body {
   .pdetails {
     flex-direction: column; }
     .pdetails__img {
-      position: static; }
+      position: static;
+      width: 100%;
+      min-width: 100%;
+      max-width: 100%; }
       .pdetails__img--img {
         width: 100%;
         height: auto; }
@@ -3241,29 +3257,21 @@ body {
   animation: inputHighlighter 0.3s ease; }
 
 .register {
-  display: flex; }
-  .register--banner {
-    background: url("/assets/sections/header-cat.jpg");
-    background-position: left;
-    background-attachment: fixed;
-    background-size: cover;
-    width: 30%;
-    height: 93.8vh;
-    position: relative; }
-    .register--banner__container {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%); }
+  position: relative;
+  height: 100vh; }
   .register--form {
-    padding: 4rem 8rem; }
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 4rem 8rem;
+    background: var(--cream); }
 
 @media only screen and (max-width: 1024px) {
-  .register--banner {
-    display: none; }
   .register--form {
-    flex: 1;
-    padding: 4rem 2rem; }
+    position: static;
+    transform: none;
+    width: 100%; }
   .input {
     width: 100% !important; } }
 
