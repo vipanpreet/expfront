@@ -32,7 +32,7 @@ const SignupForm = () => {
       {loading && <h4>loading</h4>}
 
       {error && <h2>{error}</h2>}
-      {passmatch && { passmatch }}
+      {passmatch && passmatch}
       {message ? (
         <>
           <div className="title">Email Sent</div>
