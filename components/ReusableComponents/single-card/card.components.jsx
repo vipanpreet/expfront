@@ -55,7 +55,7 @@ const Card = ({ singleProduct, col12, col3, windowDimensions }) => {
                 >
                   {col12 ? (
                     <a
-                      style={{ marginLeft: 0, paddingLeft: 0 }}
+                      style={{ margin: 0, paddingLeft: 0 }}
                       className="btn btn--primary btn--underline"
                     >
                       Show this product

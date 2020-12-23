@@ -2541,7 +2541,7 @@ body {
     bottom: -15px; }
 
 .col-lg-12 .card__img {
-  width: 14%; }
+  width: 16%; }
 
 .col-lg-12 .card__body {
   padding: 2rem 3rem;
@@ -2570,41 +2570,20 @@ body {
     top: 35px !important;
     width: 100%; }
   .col-lg-12 .card__hover--desc {
-    color: var(--font-l);
-    font-size: 1.35rem;
-    text-align: left;
-    line-height: 1.2;
+    font-size: 1.2rem;
     width: 80%; }
   .col-lg-12 .card__hover__btns {
-    display: block;
-    position: relative;
+    display: flex;
     padding-bottom: 3px;
     padding-top: 15px; }
     .col-lg-12 .card__hover__btns * {
+      background: transparent;
       border-radius: 3px; }
     .col-lg-12 .card__hover__btns--wishlist {
       display: inline-block;
       position: absolute;
-      top: 60px;
-      background: transparent; }
-    .col-lg-12 .card__hover__btns--showproduct {
-      background: #fff;
-      position: absolute;
-      display: block;
-      top: 10px;
-      margin: 0 5px;
-      font-size: 1.4rem;
-      text-align: center;
-      font-weight: 300;
-      line-height: 2; }
-      .col-lg-12 .card__hover__btns--showproduct:hover {
-        color: var(--female); }
-    .col-lg-12 .card__hover__btns--options {
-      display: inline-block;
-      position: absolute;
-      top: 60px;
-      left: 50px;
-      background: transparent; }
+      top: -100px;
+      right: 0; }
 
 .bg-luxury .card--inner::before {
   background: var(--font-d);
