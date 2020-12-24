@@ -9,6 +9,9 @@ import {
   REVIEW_ADD_REQUEST,
   REVIEW_ADD_FAIL,
   REVIEW_ADD_SUCCESS,
+  PRODUCT_GET_REQUEST,
+  PRODUCT_GET_SUCCESS,
+  PRODUCT_GET_FAIL,
 } from "./products.types";
 
 export const productsReducer = (state = { products: [] }, action) => {
@@ -52,6 +55,15 @@ export const productsReducer = (state = { products: [] }, action) => {
       };
     case REVIEW_ADD_FAIL:
       return { ...state, loading: false, error: action.payload };
+
+    case PRODUCT_GET_REQUEST:
+      return { ...state, loading: true }
+
+    case PRODUCT_GET_SUCCESS:
+      return { ...state, singleProduct : action.payload, loading: false}
+      
+    case PRODUCT_GET_FAIL:
+      return { ...state, loading:false}
 
     default:
       return state;

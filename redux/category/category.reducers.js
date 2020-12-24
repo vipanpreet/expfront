@@ -5,6 +5,7 @@ import {
   SUBCATEGORY_LIST_REQUEST,
   SUBCATEGORY_LIST_SUCCESS,
   SUBCATEGORY_LIST_FAIL,
+  SUBCATEGORY_STATE_REMOVE
 } from "./category.types";
 
 export const categoryListReducer = (state = { categories: [] }, action) => {
@@ -36,6 +37,9 @@ export const subCategoryListReducer = (
       };
     case SUBCATEGORY_LIST_FAIL:
       return { loading: false, error: action.payload };
+
+    case SUBCATEGORY_STATE_REMOVE:
+    return { ...state,subcategories: [] }
 
     default:
       return state;

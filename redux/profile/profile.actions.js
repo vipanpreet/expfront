@@ -1,4 +1,5 @@
 import axios from "axios";
+import { BACK_URI } from "../../config/keys";
 import {
   GET_PROFILE_REQUEST,
   GET_PROFILE_SUCCESS,
@@ -20,10 +21,15 @@ import { setAlert } from "../Alert/alert.actions";
 
 export const getProfile = () => async (dispatch, getState) => {
   try {
-    dispatch({ type: GET_PROFILE_REQUEST });
     const {
       auth: { userInfo },
     } = getState();
+    if (_.isEmpty(userInfo)) {
+      return;
+    }
+
+    dispatch({ type: GET_PROFILE_REQUEST });
+
     const config = {
       headers: {
         "Content-Type": "application/json",
@@ -31,10 +37,7 @@ export const getProfile = () => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.get(
-      `https://arktasticbackend.herokuapp.com/api/user/profile/`,
-      config
-    );
+    const { data } = await axios.get(`${BACK_URI}/api/user/profile/`, config);
     dispatch({
       type: GET_PROFILE_SUCCESS,
       payload: data,
@@ -54,10 +57,14 @@ export const getProfile = () => async (dispatch, getState) => {
 
 export const createProfile = (profile) => async (dispatch, getState) => {
   try {
-    dispatch({ type: PROFILE_CREATE_REQUEST });
     const {
       auth: { userInfo },
     } = getState();
+    if (_.isEmpty(userInfo)) {
+      return;
+    }
+    dispatch({ type: PROFILE_CREATE_REQUEST });
+
     const config = {
       headers: {
         "Content-Type": "application/json",
@@ -66,7 +73,7 @@ export const createProfile = (profile) => async (dispatch, getState) => {
     };
 
     const { data } = await axios.post(
-      `https://arktasticbackend.herokuapp.com/api/user/profile/`,
+      `${BACK_URI}/api/user/profile/`,
       profile,
       config
     );
@@ -89,10 +96,14 @@ export const createProfile = (profile) => async (dispatch, getState) => {
 
 export const addItemWishlist = (id) => async (dispatch, getState) => {
   try {
-    dispatch({ type: WISHLIST_ADD_REQUEST });
     const {
       auth: { userInfo },
     } = getState();
+    if (_.isEmpty(userInfo)) {
+      return;
+    }
+    dispatch({ type: WISHLIST_ADD_REQUEST });
+
     const config = {
       headers: {
         "Content-Type": "application/json",
@@ -101,7 +112,7 @@ export const addItemWishlist = (id) => async (dispatch, getState) => {
     };
 
     const { data } = await axios.post(
-      `https://arktasticbackend.herokuapp.com/api/user/wishlist`,
+      `${BACK_URI}/api/user/wishlist`,
       { productId: id },
       config
     );
@@ -129,12 +140,16 @@ export const addItemWishlist = (id) => async (dispatch, getState) => {
 
 export const deleteItemWishlist = (id) => async (dispatch, getState) => {
   try {
-    dispatch({
-      type: WISHLIST_DELETE_REQUEST,
-    });
     const {
       auth: { userInfo },
     } = getState();
+    if (_.isEmpty(userInfo)) {
+      return;
+    }
+    dispatch({
+      type: WISHLIST_DELETE_REQUEST,
+    });
+
     const config = {
       headers: {
         "Content-Type": "application/json",
@@ -142,7 +157,7 @@ export const deleteItemWishlist = (id) => async (dispatch, getState) => {
       },
     };
     const { data } = await axios.delete(
-      `https://arktasticbackend.herokuapp.com/api/user/wishlist/${id}`,
+      `${BACK_URI}/api/user/wishlist/${id}`,
       config
     );
     dispatch({

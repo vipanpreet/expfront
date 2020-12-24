@@ -185,7 +185,9 @@ const Products = () => {
                 </section>
 
                 <div className="title mt-3">
-                  <span> Women Page - {page} </span>
+                  <span>
+                    {department} Page - {page}{" "}
+                  </span>
                 </div>
                 <div className="para mb-5 mt-2 __400">
                   Lorem, ipsum dolor sit amet consectetur adipisicing elit.
@@ -333,7 +335,7 @@ const Products = () => {
                   products.length > 0 &&
                   products.map((product) => {
                     return (
-                      <div className={`col-lg-${viewOption}`}>
+                      <div key={product._id} className={`col-lg-${viewOption}`}>
                         <Card
                           col12={viewOption === 12 ? true : false}
                           singleProduct={product}
@@ -374,24 +376,5 @@ const Products = () => {
     </div>
   );
 };
-
-// this is to preload the html static page at build time for faster result
-// export async function getStaticPaths() {
-//   // here paths will be added from api for all categroies
-//   const paths = [
-//     { params: { subcategory: "men-casual-shirts" } },
-//     { params: { subcategory: "men-jeans" } },
-//   ];
-//   return { paths, fallback: true };
-// }
-
-// export async function getStaticProps(context) {
-//   const res = await fetch(
-//     `https://arktasticbackend.herokuapp.com/api/products/${context.params.subcategory}`
-//   );
-//   const products = await res.json();
-//   // Pass data to the page via props
-//   return { props: { products } };
-// }
 
 export default Products;

@@ -135,7 +135,7 @@ const ProfileMain = () => {
             <div className="subtitle mb-2">Your Address</div>
             <form onSubmit={submitHandler}>
               <div className="form-group">
-                <label for="address">Phone number:</label>
+                <label htmlFor="address">Phone number:</label>
                 <input
                   type="text"
                   className="input"
@@ -146,18 +146,18 @@ const ProfileMain = () => {
               </div>
 
               <div className="form-group">
-                <label for="locality">Country:</label>
+                <label htmlFor="locality">Country:</label>
                 <input
                   type="text"
                   className="input"
                   value={country}
                   onChange={(e) => setCountry(e.target.value)}
-                  readonly
+                  readOnly
                 />
               </div>
 
               <div className="form-group">
-                <label for="state">State:</label>
+                <label htmlFor="state">State:</label>
                 <input
                   type="text"
                   className="input"
@@ -168,7 +168,7 @@ const ProfileMain = () => {
               </div>
 
               <div className="form-group">
-                <label for="state">Suburb:</label>
+                <label htmlFor="state">Suburb:</label>
                 <input
                   type="text"
                   className="input"
@@ -179,7 +179,7 @@ const ProfileMain = () => {
               </div>
 
               <div className="form-group">
-                <label for="street">Street:</label>
+                <label htmlFor="street">Street:</label>
                 <input
                   type="text"
                   className="input"
@@ -190,7 +190,7 @@ const ProfileMain = () => {
               </div>
 
               <div className="form-group">
-                <label for="address">Zip Code:</label>
+                <label htmlFor="address">Zip Code:</label>
                 <input
                   type="text"
                   className="input"
@@ -201,7 +201,7 @@ const ProfileMain = () => {
               </div>
 
               <div className="form-group">
-                <label for="locality">Locality / Landmark:</label>
+                <label htmlFor="locality">Locality / Landmark:</label>
                 <input
                   type="text"
                   className="input"
@@ -295,70 +295,72 @@ const ProfileMain = () => {
           <div className="profile-main--active">
             <div className="subtitle mb-4">Your Wishlist</div>
 
-            {profile !== undefined ? (
-              profile.wishlist.map((product) => {
-                return (
-                  <>
-                    {getLoading ? (
-                      <>
-                        <h2
-                          style={{
-                            position: "absolute",
-                            left: "45%",
-                            transform: "translate(-50%)",
-                          }}
-                        >
-                          <Spinner />
-                        </h2>
-                      </>
-                    ) : (
-                      <div className="orderslist" style={{ marginBottom: 20 }}>
-                        <div className="orderslist--img">
-                          <img src={product.images[0].url} alt="" />
-                        </div>
+            {getLoading ? (
+              <>
+                <h2
+                  style={{
+                    position: "absolute",
+                    left: "45%",
+                    transform: "translate(-50%)",
+                  }}
+                >
+                  <Spinner />
+                </h2>
+              </>
+            ) : (
+              <>
+                {profile !== undefined && profile.wishlist.length > 0 ? (
+                  profile.wishlist.map((product) => (
+                    <div
+                      key={product._id}
+                      className="orderslist"
+                      style={{ marginBottom: 20 }}
+                    >
+                      <div className="orderslist--img">
+                        <img src={product.images[0].url} alt="" />
+                      </div>
+                      <div
+                        className="orderslist__body"
+                        style={{ paddingTop: 0 }}
+                      >
                         <div
-                          className="orderslist__body"
-                          style={{ paddingTop: 0 }}
+                          className="orderslist__body--title"
+                          style={{ lineHeight: 1 }}
                         >
-                          <div
-                            className="orderslist__body--title"
-                            style={{ lineHeight: 1 }}
+                          {product.name}
+                        </div>
+                        <h4 style={{ paddingTop: "10px" }}>{product.brand}</h4>
+                        <div className="orderslist__body--desc">
+                          {product.description.slice(0, 250)}
+                        </div>
+                        <div className="mt-2">
+                          <a
+                            href={`/details/${product._id}`}
+                            target="_blank"
+                            className="btn btn--primary"
                           >
-                            {product.name}
-                          </div>
-                          <h4 style={{ paddingTop: "10px" }}>
-                            {product.brand}
-                          </h4>
-                          <div className="orderslist__body--desc">
-                            {product.description.slice(0, 250)}
-                          </div>
-                          <div className="mt-2">
-                            <a
-                              href={`/details/${product._id}`}
-                              target="_blank"
-                              className="btn btn--primary"
-                            >
-                              Order
-                            </a>
+                            Order
+                          </a>
 
-                            <button
-                              className="btn btn--primary"
-                              style={{ marginLeft: "10px" }}
-                              onClick={() => {
-                                handleRemoveBtn(product._id);
-                              }}
-                            >
-                              Remove
-                            </button>
-                          </div>
+                          <button
+                            className="btn btn--primary"
+                            style={{ marginLeft: "10px" }}
+                            onClick={() => {
+                              handleRemoveBtn(product._id);
+                            }}
+                          >
+                            Remove
+                          </button>
                         </div>
                       </div>
-                    )}
+                    </div>
+                  ))
+                ) : (
+                  <>
+                    <h1 className="title text-center">Wishlist is Empty</h1>
                   </>
-                );
-              })
-            ) : (
-              <div>Wishlist is empty</div>
+                )}
+              </>
             )}
           </div>
         )}
@@ -368,15 +370,15 @@ const ProfileMain = () => {
             <div className="subtitle mb-4">Security</div>
             <div className="title mb-3">Change Password</div>
             <div className="form-group">
-              <label for="password">Current Password:</label>
+              <label htmlFor="password">Current Password:</label>
               <input type="text" className="input" />
             </div>
             <div className="form-group pt-3">
-              <label for="password">New Password:</label>
+              <label htmlFor="password">New Password:</label>
               <input type="text" className="input" />
             </div>
             <div className="form-group">
-              <label for="password">Confirm Password:</label>
+              <label htmlFor="password">Confirm Password:</label>
               <input type="text" className="input" />
             </div>
             <div className="mt-2">

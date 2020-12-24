@@ -19,9 +19,7 @@ const CategoriesList = () => {
 
   // function to fetch all the subcategories
   async function fetchData() {
-    const response = await axios.get(
-      `https://arktasticbackend.herokuapp.com/api/subcategory`
-    );
+    const response = await axios.get(`${BACK_URI}/api/subcategory`);
     setSubCategories(response.data);
     sessionStorage.removeItem("subCategories");
     sessionStorage.setItem("subCategories", JSON.stringify(response.data));

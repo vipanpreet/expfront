@@ -1,6 +1,12 @@
 .text-gold {
   color: var(--luxury-gold) !important;
 }
+.pt-none {
+  padding-top: 0 !important;
+}
+.mt-none {
+  margin-top: 0 !important;
+}
 .wrapperv {
   position: absolute;
   height: 100vh;

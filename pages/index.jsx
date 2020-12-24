@@ -22,13 +22,4 @@ function Home() {
   );
 }
 
-// // fetching the products form backend in server side
-// export async function getStaticProps() {
-//   // Fetch data from external API
-//   const res = await fetch(`https://arktasticbackend.herokuapp.com/api/products/recommended`);
-//   const products = await res.json();
-//   // Pass data to the page via props
-//   return { props: { products } };
-// }
-
 export default Home;

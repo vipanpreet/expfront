@@ -1,4 +1,5 @@
 import axios from "axios";
+import { BACK_URI } from "../../config/keys";
 import {
   PRODUCTS_LIST_REQUEST,
   PRODUCTS_LIST_SUCCESS,
@@ -9,6 +10,9 @@ import {
   REVIEW_ADD_REQUEST,
   REVIEW_ADD_FAIL,
   REVIEW_ADD_SUCCESS,
+  PRODUCT_GET_REQUEST,
+  PRODUCT_GET_SUCCESS,
+  PRODUCT_GET_FAIL,
 } from "./products.types";
 import { removeAlert, setAlert } from "../Alert/alert.actions";
 
@@ -36,11 +40,11 @@ export const productList = (
 
     if (subcategory && subcategory.length > 3) {
       response = await axios.get(
-        `https://arktasticbackend.herokuapp.com/api/products/all/${category}/${subcategory}?q=${q}&type=${type}&department=${department}&pagenumber=${pageNumber}&sortby=${sortBy}&sortdirection=${sortDirection}`
+        `${BACK_URI}/api/products/all/${category}/${subcategory}?q=${q}&type=${type}&department=${department}&pagenumber=${pageNumber}&sortby=${sortBy}&sortdirection=${sortDirection}`
       );
     } else {
       response = await axios.get(
-        `https://arktasticbackend.herokuapp.com/api/products/all/${category}?q=${q}&type=${type}&department=${department}&pagenumber=${pageNumber}&sortby=${sortBy}&sortdirection=${sortDirection}`
+        `${BACK_URI}/api/products/all/${category}?q=${q}&type=${type}&department=${department}&pagenumber=${pageNumber}&sortby=${sortBy}&sortdirection=${sortDirection}`
       );
     }
 
@@ -64,9 +68,7 @@ export const productList = (
 export const getSearchList = (query) => async (dispatch) => {
   try {
     dispatch({ type: SEARCH_LIST_REQUEST });
-    const { data } = await axios.get(
-      `https://arktasticbackend.herokuapp.com/api/search/${query}`
-    );
+    const { data } = await axios.get(`${BACK_URI}/api/search/${query}`);
 
     dispatch({
       type: SEARCH_LIST_SUCCESS,
@@ -100,7 +102,7 @@ export const addRating = (id, rating, comment) => async (
       },
     };
     const { data } = await axios.post(
-      `https://arktasticbackend.herokuapp.com/api/products/${id}/reviews`,
+      `${BACK_URI}/api/products/${id}/reviews`,
       { rating, comment },
       config
     );
@@ -113,6 +115,29 @@ export const addRating = (id, rating, comment) => async (
   } catch (error) {
     dispatch({
       type: REVIEW_ADD_FAIL,
+      payload:
+        error.response && error.response.data.msg
+          ? error.response.data.msg
+          : error.msg,
+    });
+  }
+};
+
+export const getSingleProduct = (productId) => async (dispatch) => {
+  try {
+    dispatch({ type: PRODUCT_GET_REQUEST });
+
+    const { data } = await axios.get(
+      `${BACK_URI}/api/products/single/${productId}`
+    );
+
+    dispatch({
+      type: PRODUCT_GET_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: PRODUCT_GET_FAIL,
       payload:
         error.response && error.response.data.msg
           ? error.response.data.msg

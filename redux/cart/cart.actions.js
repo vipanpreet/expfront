@@ -7,14 +7,19 @@ import {
   CART_GET_FAIL,
 } from "./cart.types";
 import axios from "axios";
+import { BACK_URI } from "../../config/keys";
+import _ from "lodash";
 
 export const addItem = (cart) => async (dispatch, getState) => {
   try {
-    dispatch({ type: CART_ADD_REQUEST });
-
     const {
       auth: { userInfo },
     } = getState();
+    if (_.isEmpty(userInfo)) {
+      return;
+    }
+    dispatch({ type: CART_ADD_REQUEST });
+
     const config = {
       headers: {
         "Content-Type": "application/json",
@@ -22,7 +27,7 @@ export const addItem = (cart) => async (dispatch, getState) => {
       },
     };
     const { data } = await axios.post(
-      `https://arktasticbackend.herokuapp.com/api/user/cart`,
+      `${BACK_URI}/api/user/cart`,
       { cart },
       config
     );
@@ -45,11 +50,14 @@ export const addItem = (cart) => async (dispatch, getState) => {
 
 export const getCartItems = () => async (dispatch, getState) => {
   try {
-    dispatch({ type: CART_GET_REQUEST });
-
     const {
       auth: { userInfo },
     } = getState();
+    if (_.isEmpty(userInfo)) {
+      localStorage.removeItem("cart");
+      return;
+    }
+    dispatch({ type: CART_GET_REQUEST });
 
     const config = {
       headers: {
@@ -58,10 +66,7 @@ export const getCartItems = () => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.get(
-      `https://arktasticbackend.herokuapp.com/api/user/cart`,
-      config
-    );
+    const { data } = await axios.get(`${BACK_URI}/api/user/cart`, config);
 
     dispatch({
       type: CART_GET_SUCCESS,

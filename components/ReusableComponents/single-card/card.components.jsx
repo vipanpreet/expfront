@@ -29,7 +29,7 @@ const Card = ({ singleProduct, col12, col3, windowDimensions }) => {
           <div className="card__body--name">{singleProduct.name}</div>
           <div className="card__hover">
             <div className="card__hover--wrapper">
-              <div class="card__hover--rating">
+              <div className="card__hover--rating">
                 <UserRating value={singleProduct.rating} />
               </div>
               <div className="card__hover--desc">

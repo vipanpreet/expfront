@@ -1,4 +1,5 @@
 import axios from "axios";
+import { BACK_URI } from "../../config/keys";
 import {
   CATEGORY_LIST_REQUEST,
   CATEGORY_LIST_SUCCESS,
@@ -14,9 +15,7 @@ import {
 export const listCategories = () => async (dispatch) => {
   try {
     dispatch({ type: CATEGORY_LIST_REQUEST });
-    const { data } = await axios.get(
-      `https://arktasticbackend.herokuapp.com/api/category/`
-    );
+    const { data } = await axios.get(`${BACK_URI}/api/category/`);
     dispatch({
       type: CATEGORY_LIST_SUCCESS,
       payload: data,
@@ -36,7 +35,7 @@ export const listSubCategories = (slug) => async (dispatch) => {
   try {
     dispatch({ type: SUBCATEGORY_LIST_REQUEST });
     const { data } = await axios.get(
-      `https://arktasticbackend.herokuapp.com/api/category/subcategories/${slug}`
+      `${BACK_URI}/api/category/subcategories/${slug}`
     );
     dispatch({
       type: SUBCATEGORY_LIST_SUCCESS,
@@ -51,4 +50,10 @@ export const listSubCategories = (slug) => async (dispatch) => {
           : error.msg,
     });
   }
+};
+
+export const resetSubCategoriesState = () => {
+  return {
+    type: SUBCATEGORY_STATE_REMOVE,
+  };
 };

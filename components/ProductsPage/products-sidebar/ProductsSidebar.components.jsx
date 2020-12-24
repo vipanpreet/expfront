@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   listCategories,
   listSubCategories,
+  resetSubCategoriesState,
 } from "../../../redux/category/category.actions";
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
@@ -22,16 +23,7 @@ const ProductSidebar = () => {
   const subCategoryList = useSelector((state) => state.subCategoryList);
   const { subcategories } = subCategoryList;
 
-  var {
-    category,
-    subcategory,
-    type,
-    department,
-    sortby,
-    sortdirection,
-    page,
-    q,
-  } = router.query;
+  var { category, subcategory, type, department, page, q } = router.query;
 
   var queryList = {};
   q && (queryList.q = q);
@@ -50,6 +42,8 @@ const ProductSidebar = () => {
     }
     if (category) {
       dispatch(listSubCategories(router.query.category));
+    } else {
+      dispatch(resetSubCategoriesState());
     }
   }, [dispatch, category]);
 
@@ -122,27 +116,28 @@ const ProductSidebar = () => {
             <div className="title">SubCategories</div>
           )}
           <div className="mt-2">
-            {subcategories.map((subcategory) => {
-              return (
-                <Link
-                  href={{
-                    pathname: "/products",
-                    query: { ...queryList, subcategory: subcategory.slug },
-                  }}
-                  className="link"
-                >
-                  <li
-                    className="sidebar--item"
-                    style={{ cursor: "pointer" }}
+            {category != "undefined" ? (
+              subcategories.map((subcategory) => {
+                return (
+                  <Link
+                    href={{
+                      pathname: "/products",
+                      query: { ...queryList, subcategory: subcategory.slug },
+                    }}
+                    className="link"
                     key={subcategory._id}
                   >
-                    <button style={{ cursor: "pointer" }}>
-                      {subcategory.name}
-                    </button>
-                  </li>
-                </Link>
-              );
-            })}
+                    <li className="sidebar--item" style={{ cursor: "pointer" }}>
+                      <button style={{ cursor: "pointer" }}>
+                        {subcategory.name}
+                      </button>
+                    </li>
+                  </Link>
+                );
+              })
+            ) : (
+              <></>
+            )}
           </div>
         </div>
       </div>

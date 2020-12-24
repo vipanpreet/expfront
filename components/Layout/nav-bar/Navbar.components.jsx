@@ -1,3 +1,4 @@
+import _ from "lodash";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/router";
@@ -12,6 +13,7 @@ import { Expo, TimelineMax, TweenMax } from "gsap";
 import { getSearchList } from "../../../redux/products/products.actions";
 import "animate.css";
 import Spinner from "../Spinner/Spinner";
+import { setAlert } from "../../../redux/Alert/alert.actions";
 
 const Navbar = () => {
   const router = useRouter();
@@ -514,6 +516,7 @@ const Navbar = () => {
 
   const handleLogoutBtn = () => {
     dispatch(logout());
+    dispatch(setAlert("Logout Successfully", "success", 2200));
   };
 
   const goHome = (e) => {
@@ -748,7 +751,9 @@ const Navbar = () => {
           <div className="d-flex justify-content-between align-content-center">
             <div className="wrapper-cart__details--title">Shopping cart</div>
             <div className="title">
-              {cartItems && cartItems.products ? cartItems.products.length : 0}
+              {cartItems && cartItems.products.length > 0
+                ? cartItems.products.length
+                : 0}
               items
             </div>
           </div>
@@ -766,65 +771,78 @@ const Navbar = () => {
                 </tr>
               </thead>
               <tbody>
-                {cartItems && cartItems.products.length > 0 ? (
-                  cartItems.products.map((cartItem) => {
-                    return (
-                      <tr
-                        key={cartItem.product._id}
-                        className="wrapper-cart__table--data animate__animated animate__fadeIn"
-                      >
-                        <td className="d-flex">
-                          <div className="wrapper-cart__table--img">
-                            <img src={cartItem.product.images[0].url} alt="" />
-                          </div>
-                          <div className="wrapper-cart__table--name">
-                            <h2>{cartItem.product.name}</h2>
-                            <h5>{cartItem.product.brand}</h5>
-                          </div>
-                        </td>
-                        <td>M</td>
-                        <td>
-                          <div className="wrapper-cart__table--quantity">
-                            <span>
-                              <ion-icon
-                                name="remove-circle-outline"
-                                onClick={() => {
-                                  handleSubQuantity(cartItem.product);
-                                }}
-                              ></ion-icon>
-                            </span>
-                            <span>{cartItem.count}</span>
-                            <span>
-                              <ion-icon
-                                name="add-circle-outline"
-                                onClick={() => {
-                                  handleAddQuantity(cartItem.product);
-                                }}
-                              ></ion-icon>
-                            </span>
-                          </div>
-                        </td>
-                        <td className="wrapper-cart__table--price">
-                          ${cartItem.price}
-                        </td>
-                        <td
-                          className="wrapper-cart__table--delete"
-                          style={{ cursor: "pointer" }}
-                        >
-                          <ion-icon
-                            name="close-outline"
-                            onClick={() => {
-                              handleDeleteItem(cartItem.product);
-                            }}
-                          ></ion-icon>
-                        </td>
-                      </tr>
-                    );
-                  })
+                {_.isEmpty(userInfo) ? (
+                  <>
+                    <tr className="subtitle mt-4 __300 text-center">
+                      Please Login to use Cart
+                    </tr>
+                  </>
                 ) : (
-                  <tr>
-                    <td>CART IS EMPTY</td>
-                  </tr>
+                  <>
+                    {cartItems && cartItems.products.length > 0 ? (
+                      cartItems.products.map((cartItem) => {
+                        return (
+                          <tr
+                            key={cartItem.product._id}
+                            className="wrapper-cart__table--data animate__animated animate__fadeIn"
+                          >
+                            <td className="d-flex">
+                              <div className="wrapper-cart__table--img">
+                                <img
+                                  src={cartItem.product.images[0].url}
+                                  alt=""
+                                />
+                              </div>
+                              <div className="wrapper-cart__table--name">
+                                <h2>{cartItem.product.name}</h2>
+                                <h5>{cartItem.product.brand}</h5>
+                              </div>
+                            </td>
+                            <td>M</td>
+                            <td>
+                              <div className="wrapper-cart__table--quantity">
+                                <span>
+                                  <ion-icon
+                                    name="remove-circle-outline"
+                                    onClick={() => {
+                                      handleSubQuantity(cartItem.product);
+                                    }}
+                                  ></ion-icon>
+                                </span>
+                                <span>{cartItem.count}</span>
+                                <span>
+                                  <ion-icon
+                                    name="add-circle-outline"
+                                    onClick={() => {
+                                      handleAddQuantity(cartItem.product);
+                                    }}
+                                  ></ion-icon>
+                                </span>
+                              </div>
+                            </td>
+                            <td className="wrapper-cart__table--price">
+                              ${cartItem.price}
+                            </td>
+                            <td
+                              className="wrapper-cart__table--delete"
+                              style={{ cursor: "pointer" }}
+                            >
+                              <ion-icon
+                                name="close-outline"
+                                onClick={() => {
+                                  handleDeleteItem(cartItem.product);
+                                }}
+                              ></ion-icon>
+                            </td>
+                          </tr>
+                        );
+                      })
+                    ) : (
+                      <tr>
+                        <td>CART IS EMPTY</td>
+                      </tr>
+                    )}
+                  </>
                 )}
               </tbody>
             </table>
