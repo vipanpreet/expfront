@@ -132,13 +132,13 @@ const DetailsProduct = ({ singleProduct }) => {
           <div className="pdetails__body__cart">
             <div className="pdetails__body__cart--buttons">
               <button
-                className="btn btn--primary btn--simple"
+                className="btn btn--primary btn--simple mr-2"
                 onClick={handleAddToCart}
               >
-                Add to Bag
+                Add to Bag <ion-icon name="bag-add-outline"></ion-icon>
               </button>
               <button className="btn btn--female btn--simple">
-                Add to wishlist
+                Add to wishlist <ion-icon name="list-outline"></ion-icon>
               </button>
             </div>
           </div>
