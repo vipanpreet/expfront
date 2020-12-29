@@ -6,7 +6,7 @@ import UserRating from "../../DetailsPage/Details-rating/UserRating.component";
 
 const Card = ({ singleProduct, col12, col3, windowDimensions }) => {
   const dispatch = useDispatch();
-  const lifestyleState = useSelector((state) => state.lifestyleState);
+  const lifestyleState = useSelector((state) => state.storeSelectState);
   const { storeType, department } = lifestyleState; // will be used somewhere else
 
   const handleWishlist = (id) => {

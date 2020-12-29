@@ -21,7 +21,7 @@ const Lifestyle = () => {
         style={{ position: "absolute", top: "106%", width: "100vw" }}
       >
         <LuxuryMenCollection />
-        <LuxuryMenCollectionList />
+        {/* <LuxuryMenCollectionList /> */}
         <LuxuryRecommendation />
         <LuxuryTopBrands />
         <Footer />

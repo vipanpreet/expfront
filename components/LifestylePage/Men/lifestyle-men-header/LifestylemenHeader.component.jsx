@@ -16,60 +16,35 @@ const LifestyleMenHeader = (props) => {
     >
       <SwiperSlide>
         <header className="header header-male1">
-          <div className="header__container">
-            <div className="header--title">Brillirant collections</div>
-            <div className="header--subtitle">
-              Find the best clothing for you.
+          <div class="header__container">
+            <div class="header--title roboto">winter collection</div>
+            <div class="header--subtitle">
+              clothes are the spirit of fashion
             </div>
-            <div className="header--text">
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cum
-              nesciunt omnis aperiam non doloremque qui sint distinctio corporis
-              cupiditate odio esse sunt.
-            </div>
-            <div className="mt-3">
-              <a href="#" className="btn btn--dark-simple">
-                Read more
-              </a>
+            <div class="mt-3 header--btn">
+              <a href="#">Read more</a>
             </div>
           </div>
         </header>
       </SwiperSlide>
       <SwiperSlide>
-        <header className="header header-male1">
-          <div className="header__container">
-            <div className="header--title">Brillirant collections 2</div>
-            <div className="header--subtitle">
-              Find the best clothing for you.
-            </div>
-            <div className="header--text">
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cum
-              nesciunt omnis aperiam non doloremque qui sint distinctio corporis
-              cupiditate odio esse sunt.
-            </div>
-            <div className="mt-3">
-              <a href="#" className="btn btn--dark-simple">
-                Read more
-              </a>
+        <header className="header header-male2">
+          <div class="header__container">
+            <div class="header--title roboto">feel fragrance</div>
+            <div class="header--subtitle">premium perfume for men</div>
+            <div class="mt-3 header--btn">
+              <a href="#">Read more</a>
             </div>
           </div>
         </header>
       </SwiperSlide>
       <SwiperSlide>
-        <header className="header header-male1">
-          <div className="header__container">
-            <div className="header--title">Brillirant collections</div>
-            <div className="header--subtitle">
-              Find the best clothing for you.
-            </div>
-            <div className="header--text">
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cum
-              nesciunt omnis aperiam non doloremque qui sint distinctio corporis
-              cupiditate odio esse sunt.
-            </div>
-            <div className="mt-3">
-              <a href="#" className="btn btn--dark-simple">
-                Read more
-              </a>
+        <header className="header header-female3">
+          <div class="header__container">
+            <div class="header--title roboto">omega fasion</div>
+            <div class="header--subtitle">now it`s your time</div>
+            <div class="mt-3 header--btn">
+              <a href="#">Read more</a>
             </div>
           </div>
         </header>

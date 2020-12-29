@@ -18,8 +18,8 @@ import {
 } from "./auth.types.js";
 
 if (typeof window !== "undefined") {
-  var userInfoFromStorage = sessionStorage.getItem("userInfo")
-    ? JSON.parse(sessionStorage.getItem("userInfo"))
+  var userInfoFromStorage = localStorage.getItem("userInfo")
+    ? JSON.parse(localStorage.getItem("userInfo"))
     : null;
 }
 

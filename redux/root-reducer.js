@@ -14,7 +14,7 @@ import {
   subCategoryListReducer,
 } from "./category/category.reducers";
 import { productsReducer } from "./products/products.reducer";
-import lifestyleReducer from "./lifestyle/lifestyle.reducers";
+import storeSelectReducer from "./storeSelect/storeSelect.reducers";
 
 // const persistConfig = {
 //   key: "root",
@@ -32,7 +32,7 @@ const rootReducer = combineReducers({
   categoryList: categoryListReducer,
   subCategoryList: subCategoryListReducer,
   productsState: productsReducer,
-  lifestyleState: lifestyleReducer,
+  storeSelectState: storeSelectReducer,
 });
 
 // export default persistReducer(persistConfig, rootReducer);

@@ -73,7 +73,7 @@ const Navbar = () => {
   const cartState = useSelector((state) => state.cart);
   const { cartItems, loading } = cartState;
 
-  const lifestyleState = useSelector((state) => state.lifestyleState);
+  const lifestyleState = useSelector((state) => state.storeSelectState);
   const { storeType, department } = lifestyleState;
 
   useEffect(() => {
@@ -637,9 +637,9 @@ const Navbar = () => {
                         query: { settings: "orders" },
                       }}
                     >
-                      <a href="/profile">
+                      <h5 href="/profile">
                         <ion-icon name="cube-outline"></ion-icon> Orders
-                      </a>
+                      </h5>
                     </Link>
                   </li>
                   <li>
@@ -649,9 +649,9 @@ const Navbar = () => {
                         query: { settings: "address" },
                       }}
                     >
-                      <a href="#">
+                      <h5>
                         <ion-icon name="bookmark-outline"></ion-icon> Address
-                      </a>
+                      </h5>
                     </Link>
                   </li>
                   <li>
@@ -661,31 +661,31 @@ const Navbar = () => {
                         query: { settings: "wishlist" },
                       }}
                     >
-                      <a href="#">
+                      <h5>
                         <ion-icon name="heart-outline"></ion-icon> Wishlist
-                      </a>
+                      </h5>
                     </Link>
                   </li>
                   <li>
-                    <a onClick={handleLogoutBtn} href="#">
+                    <h5 onClick={handleLogoutBtn} href="#">
                       <ion-icon name="log-out-outline"></ion-icon> Logout
-                    </a>
+                    </h5>
                   </li>
                 </>
               ) : (
                 <>
                   <li>
                     <Link href="/register">
-                      <a href="/register">
+                      <h5>
                         <ion-icon name="people-outline"></ion-icon> Register
-                      </a>
+                      </h5>
                     </Link>
                   </li>
                   <li>
                     <Link href="/login">
-                      <a href="/login">
+                      <h5>
                         <ion-icon name="key-outline"></ion-icon> Login
-                      </a>
+                      </h5>
                     </Link>
                   </li>
                 </>
@@ -710,7 +710,7 @@ const Navbar = () => {
           />
         </form>
 
-        <div className={searchKeyword.length >= 3 ? "autolist" : null}>
+        <div className="autolist">
           {search && search.length > 0
             ? search.map((autocomplete, i) => {
                 return (
@@ -779,7 +779,7 @@ const Navbar = () => {
                   </>
                 ) : (
                   <>
-                    {cartItems && cartItems.products.length > 0 ? (
+                    {cartItems && cartItems.products ? (
                       cartItems.products.map((cartItem) => {
                         return (
                           <tr
@@ -851,7 +851,9 @@ const Navbar = () => {
 
         <div ref={(el) => (cartSummary = el)} className="wrapper-cart__summary">
           <div className="wrapper-cart__summary--top">
-            <div className="heading inherit mb-6">Summary</div>
+            <div className="wrapper-cart__summary--summary heading inherit">
+              Summary
+            </div>
 
             <div className="d-flex justify-content-between inherit align-content-center">
               <div className="subheading inherit __500">Subtotal</div>

@@ -40,7 +40,7 @@ const LuxuryRecommendation = () => {
           // navigation
           breakpoints={{
             0: {
-              slidesPerView: 1,
+              slidesPerView: 2,
             },
             1024: {
               slidesPerView: 4,

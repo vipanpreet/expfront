@@ -1,1 +1,1 @@
-export const BACK_URI = "http://localhost:5000";
+export const BACK_URI = "https://arktasticbackend.herokuapp.com";

@@ -1,15 +1,23 @@
-import Link from "next/link";
-
 import { login } from "../../../redux/auth/auth.actions";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Router from "next/router";
+import Link from "next/link";
 
-const SigninForm = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+// validator
+import validateLogin from "../../../utils/validateLogin";
+
+const SigninForm = ({ optMessage }) => {
+  const [values, setValues] = useState({
+    email: "",
+    password: "",
+  });
+
+  const [errors, setErrors] = useState({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const dispatch = useDispatch();
+
   const auth = useSelector((state) => state.auth);
   const { error, userInfo } = auth;
 
@@ -17,59 +25,93 @@ const SigninForm = () => {
   if (Object.keys(userInfo).length !== 0 && userInfo.constructor === Object) {
     Router.push("/");
   }
+  useEffect(() => {
+    if (
+      Object.keys(errors).length === 0 &&
+      errors.constructor === Object &&
+      isSubmitting
+    ) {
+      dispatch(login(values.email, values.password));
+    } else {
+      setIsSubmitting(false);
+    }
+  }, [errors]);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setValues({
+      ...values,
+      [name]: value,
+    });
+  };
 
   const submitHandler = (e) => {
     e.preventDefault();
-    dispatch(login(email, password));
+    setErrors(validateLogin(values));
+    setIsSubmitting(true);
   };
   return (
     <>
-      <div className="title mt-2">Login to your Account</div>
-      {error && <h1>{error}</h1>}
-      <form>
-        <div className="input-group">
-          <input
-            className="input"
-            type="email"
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-          <span className="highlight"></span>
-          <span className="bar"></span>
-          <label className="label">Email Address</label>
-        </div>
+      <div class="auth__form">
+        <div class="auth__form--container">
+          <h4>Login Account</h4>
 
-        <div className="input-group">
-          <input
-            className="input"
-            type="password"
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-          <span className="highlight"></span>
-          <span className="bar"></span>
-          <label className="label">Password</label>
-        </div>
-        <div className="mt-4">
-          <a
-            href="#"
-            className="btn btn--primary btn-block-mobile mr-2"
-            onClick={submitHandler}
-          >
-            login to account
-          </a>
-          <Link href="forgot">
-            <a type="button" className="btn btn--font btn-block-mobile">
-              Forgot?
-            </a>
-          </Link>
-          <Link href="/register">
-            <div style={{ cursor: "pointer" }} className="subheading">
-              Not Registered?
+          <p>
+            {optMessage
+              ? `Use newly created account credentials to login into your fresh account`
+              : `Lorem ipsum dolor sit, amet consectetur adipisicing elit. Deserunt
+            exercitationem tempora quaerat reprehenderit et nesciunt ipsam
+            cupiditate.`}
+          </p>
+          <form onSubmit={submitHandler} class="mt-2">
+            {error && <p className="text-warn text-left">{error}</p>}
+            <div class="form-group">
+              <input
+                // type="email"
+                placeholder="Email ID"
+                class="auth-input"
+                name="email"
+                value={values.email}
+                onChange={handleChange}
+              />
+              {errors.email && (
+                <p className="text-warn text-left">{errors.email}</p>
+              )}
             </div>
-          </Link>
+            <div class="form-group">
+              <input
+                type="password"
+                placeholder="Password"
+                class="auth-input"
+                name="password"
+                value={values.password}
+                onChange={handleChange}
+              />
+              {errors.password && (
+                <p className="text-warn text-left">{errors.password}</p>
+              )}
+            </div>
+            <div class="d-flex justify-content-between">
+              <div class="checkbox-group">
+                <input type="checkbox" id="css" />
+                <label for="css">Keep me signed in</label>
+              </div>
+              <div>
+                <Link href="/forgot" as="/forgot">
+                  <a href="#" class="text-primary btn--text">
+                    Forgot password?
+                  </a>
+                </Link>
+              </div>
+            </div>
+            <div class="mt-2">
+              <button type="submit" class="btn btn--primary btn--simple border">
+                Login
+              </button>
+            </div>
+          </form>
         </div>
-      </form>
+      </div>
     </>
   );
 };

@@ -15,7 +15,10 @@ export default function Confirm(props) {
     if (token) {
       dispatch(confirmUser(token));
       if (message) {
-        router.push("/login");
+        router.push({
+          pathname: "/login",
+          query: { returning: "true" },
+        });
       }
     }
   }, [error, message, token]);
@@ -33,6 +36,7 @@ export default function Confirm(props) {
           </div>
           <div className="register--form">
             <div className="para">{error && error}</div>
+            <div className="para">{message && message}</div>
           </div>
         </div>
       </main>

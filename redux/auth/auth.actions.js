@@ -85,7 +85,7 @@ export const login = (email, password) => async (dispatch) => {
       type: USER_LOGIN_SUCCESS,
       payload: data,
     });
-    sessionStorage.setItem("userInfo", JSON.stringify(data));
+    localStorage.setItem("userInfo", JSON.stringify(data));
     dispatch(removeAlert());
   } catch (error) {
     dispatch(removeAlert());
@@ -144,7 +144,7 @@ export const forgot = (email) => async (dispatch) => {
     };
 
     const { data } = await axios.post(
-      "${BACK_URI}/api/auth/forgot",
+      `${BACK_URI}/api/auth/forgot`,
       { email },
       config
     );

@@ -37,7 +37,7 @@ const ProductSidebar = () => {
     window.scrollTo({ top: 500, behavior: "smooth" });
 
     // fetching the categories list on render.
-    if (categories.length < 2) {
+    if (categories && categories.length < 2) {
       dispatch(listCategories());
     }
     if (category) {
@@ -116,7 +116,7 @@ const ProductSidebar = () => {
             <div className="title">SubCategories</div>
           )}
           <div className="mt-2">
-            {category != "undefined" ? (
+            {category != "undefined" && subcategories ? (
               subcategories.map((subcategory) => {
                 return (
                   <Link

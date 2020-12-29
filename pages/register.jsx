@@ -12,10 +12,20 @@ export default function Register(props) {
         />
       </Head>
       <main>
-        <div className="register">
-          <div className="register--form">
-            <Signupform />
+        <div class="auth">
+          <div class="auth__bg">
+            <div class="auth__bg--container">
+              <h4>JOIN THE TEAM</h4>
+              <h1>Howdy User</h1>
+              <div class="para text-white">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat
+                ratione amet distinctio sit error quam harum perferendis atque
+                quae autem assumenda modi facere, commodi incidunt dolores
+                dolorem reiciendis! Voluptatum, maiores!
+              </div>
+            </div>
           </div>
+          <Signupform />
         </div>
       </main>
     </>

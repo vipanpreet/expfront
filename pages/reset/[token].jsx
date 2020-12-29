@@ -3,10 +3,17 @@ import { useDispatch, useSelector } from "react-redux";
 import { reset } from "../../redux/auth/auth.actions";
 import { useRouter } from "next/router";
 
+// validate
+import validateReset from "../../utils/validateReset";
+
 export default function Reset() {
-  const [password, setPassword] = useState("");
-  const [cPassword, setCPassword] = useState("");
-  const [msg, setMsg] = useState("");
+  const [values, setValues] = useState({
+    password: "",
+    password2: "",
+  });
+
+  const [errors, setErrors] = useState({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const router = useRouter();
   const auth = useSelector((state) => state.auth);
@@ -16,66 +23,96 @@ export default function Reset() {
   const { token } = router.query;
 
   useEffect(() => {
-    setTimeout(function () {
-      setMsg("");
-      if (message) {
-        router.push("/login");
-      }
-    }, 2000);
-  }, [msg, message]);
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (password !== cPassword) {
-      setMsg("Passwords must match");
-    } else {
-      dispatch(reset(token, password));
+    if (
+      Object.keys(errors).length === 0 &&
+      errors.constructor === Object &&
+      isSubmitting
+    ) {
+      setIsSubmitting(false);
+      dispatch(reset(token, values.password));
+    } else if (message) {
+      router.push("/login");
     }
+  }, [errors, message]);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setValues({
+      ...values,
+      [name]: value,
+    });
+  };
+
+  const submitHandler = (e) => {
+    e.preventDefault();
+    setErrors(validateReset(values));
+    setIsSubmitting(true);
   };
 
   return (
     <>
       <main>
-        <div className="register">
-          <div className="register--form">
-            <div className="title mt-2">Create new password</div>
-            {msg && msg}
-            {error && error}
-            <form onSubmit={handleSubmit}>
-              <div className="input-group">
-                <input
-                  className="input"
-                  type="password"
-                  onChange={(e) => setPassword(e.target.value)}
-                  required
-                />
-                <span className="highlight"></span>
-                <span className="bar"></span>
-                <label className="label">Password</label>
+        <div class="auth">
+          <div class="auth__bg">
+            <div class="auth__bg--container">
+              <h4>RESET YOUR PASSWORD</h4>
+              <h1>secure the account</h1>
+              <div class="para text-white">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat
+                ratione amet distinctio sit error quam harum perferendis atque
+                quae autem assumenda modi facere, commodi incidunt dolores
+                dolorem reiciendis! Voluptatum, maiores!
               </div>
+            </div>
+          </div>
+          <div class="auth__form">
+            <div class="auth__form--container">
+              <h4>Enter New Password</h4>
+              <p>
+                Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                Deserunt, exercitationem tempora quaerat reprehenderit et
+                nesciunt ipsam cupiditate.
+              </p>
+              {error && error}
+              {message && message}
+              <form onSubmit={submitHandler} class="mt-3">
+                <div class="form-group">
+                  <input
+                    type="password"
+                    placeholder="New Password"
+                    class="auth-input"
+                    name="password"
+                    value={values.password}
+                    onChange={handleChange}
+                  />
+                  {errors.password && (
+                    <p className="text-warn text-left">{errors.password}</p>
+                  )}
+                </div>
+                <div class="form-group">
+                  <input
+                    type="password"
+                    placeholder="Confirm Password"
+                    class="auth-input"
+                    name="password2"
+                    value={values.password2}
+                    onChange={handleChange}
+                  />
+                  {errors.password2 && (
+                    <p className="text-warn text-left">{errors.password2}</p>
+                  )}
+                </div>
 
-              <div className="input-group">
-                <input
-                  className="input"
-                  type="password"
-                  onChange={(e) => setCPassword(e.target.value)}
-                  required
-                />
-                <span className="highlight"></span>
-                <span className="bar"></span>
-                <label className="label">Confirm Password</label>
-              </div>
-
-              <div className="mt-4">
-                <button
-                  type="submit"
-                  href="#"
-                  className="btn btn--primary btn-block-mobile mr-2"
-                >
-                  Change Password
-                </button>
-              </div>
-            </form>
+                <div class="mt-2">
+                  <button
+                    type="submit"
+                    class="btn btn--primary btn--simple border"
+                  >
+                    change password
+                  </button>
+                </div>
+              </form>
+            </div>
           </div>
         </div>
       </main>

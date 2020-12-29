@@ -14,6 +14,7 @@ import Alert from "../components/Layout/Alert/Alert.module";
 import { store, persistor } from "../redux/store";
 import GoToTop from "../components/Layout/go-to-top/GoToTop.module";
 import Cursor from "../components/Layout/Cursor/Cursor.js";
+import Head from "next/head";
 // import { store} from '../redux/store';
 
 function MyApp({ Component, pageProps }) {
@@ -22,6 +23,13 @@ function MyApp({ Component, pageProps }) {
     <Provider store={store}>
       {/* <PersistGate persistor={persistor}> */}
       {/* <Overlay /> */}
+      <Head>
+        <title>Arktastic</title>
+        <meta
+          name="viewport"
+          content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"
+        />
+      </Head>
       <Navbar />
       <Alert />
       <GoToTop />

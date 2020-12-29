@@ -20,14 +20,14 @@ import LifestyleMenDealSection from "../../components/LifestylePage/Men/lifestyl
 import LifestyleMenUpsellSection from "../../components/LifestylePage/Men/lifestyle-men-upsell-section/LifestylemenUpsellSection.components";
 
 import { getProfile } from "../../redux/profile/profile.actions";
-import { saveLifestyleState } from "../../redux/lifestyle/lifestyle.actions";
+import { saveStoreState } from "../../redux/storeSelect/storeSelect.actions";
 
 const Lifestyle = () => {
   const dispatch = useDispatch();
   const router = useRouter();
   var header, dealSection, upsellSection;
   const profileGet = useSelector((state) => state.profileGet);
-  const lifestyleState = useSelector((state) => state.lifestyleState);
+  const lifestyleState = useSelector((state) => state.storeSelectState);
   const { storeType, department } = lifestyleState; // will be used somewhere else
   const { profile } = profileGet;
 
@@ -38,7 +38,7 @@ const Lifestyle = () => {
       dispatch(getProfile());
     }
     dispatch(
-      saveLifestyleState({
+      saveStoreState({
         storeType: "lifestyle",
         department: gender,
       })

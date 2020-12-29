@@ -1,3 +1,0 @@
-  export const SAVE_LIFESTYLE_STATE = "SAVE_LIFESTYLE_STATE";
-  
-  

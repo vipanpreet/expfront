@@ -9,7 +9,7 @@ import UserRating from "../Details-rating/UserRating.component";
 
 const DetailsProduct = ({ singleProduct }) => {
   const dispatch = useDispatch();
-  const lifestyleState = useSelector((state) => state.lifestyleState);
+  const lifestyleState = useSelector((state) => state.storeSelectState);
   const { storeType, department } = lifestyleState;
 
   const handleAddToCart = () => {

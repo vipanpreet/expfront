@@ -18,9 +18,10 @@ const Productadditional = ({ singleProduct }) => {
 
   const auth = useSelector((state) => state.auth);
   const { userInfo } = auth;
+
+  console.log(userInfo);
   useEffect(() => {
     let aDone = singleProduct.reviews.find((x) => x.user === userInfo.id);
-    console.log(aDone);
     setAlreadyCommented(aDone);
   }, []);
   const submitHandler = (e) => {
@@ -96,7 +97,14 @@ const Productadditional = ({ singleProduct }) => {
           <div className="pothers__body--item pothers__body--rev display-block">
             <h1 className="title">{message && message}</h1>
             <h1 className="title">{error && error}</h1>
-            {alreadyCommented !== undefined ? (
+            {Object.keys(userInfo).length === 0 &&
+            userInfo.constructor === Object ? (
+              <div className="bg-cream p-3 mt-2">
+                <div className="title __300 text-center">
+                  Please login to review products
+                </div>
+              </div>
+            ) : alreadyCommented !== undefined ? (
               <div className="bg-cream p-3 mt-2">
                 <div className="title __300 text-center">
                   Already Reviewed by you
