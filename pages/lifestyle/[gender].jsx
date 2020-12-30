@@ -25,7 +25,6 @@ import { saveStoreState } from "../../redux/storeSelect/storeSelect.actions";
 const Lifestyle = () => {
   const dispatch = useDispatch();
   const router = useRouter();
-  var header, dealSection, upsellSection;
   const profileGet = useSelector((state) => state.profileGet);
   const lifestyleState = useSelector((state) => state.storeSelectState);
   const { storeType, department } = lifestyleState; // will be used somewhere else
@@ -45,21 +44,21 @@ const Lifestyle = () => {
     );
   }, [dispatch, gender]);
 
-  if (gender == "women") {
-    header = <LifestyleWomenHeader />;
-    dealSection = <LifestyleWomenDealSection />;
-    upsellSection = <LifestyleWomenUpsellSection />;
-  } else if (gender == "men") {
-    header = <LifestyleMenHeader />;
-    dealSection = <LifestyleMenDealSection />;
-    upsellSection = <LifestyleMenUpsellSection />;
-  }
-
   return (
     <main>
-      {header}
-      {upsellSection}
-      {dealSection}
+      {gender == "men" ? (
+        <>
+          <LifestyleMenHeader />
+          <LifestyleMenDealSection />
+          <LifestyleMenUpsellSection />
+        </>
+      ) : (
+        <>
+          <LifestyleWomenHeader />
+          <LifestyleWomenDealSection />
+          <LifestyleWomenUpsellSection />
+        </>
+      )}
       <LifestyleSection />
       <LifestyleTrendingSection />
       <LifestyleExclusive />

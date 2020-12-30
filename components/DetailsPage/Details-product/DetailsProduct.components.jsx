@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 import { addItem } from "../../../redux/cart/cart.actions";
+import { addItemWishlist } from "../../../redux/profile/profile.actions";
 import { useDispatch, useSelector } from "react-redux";
 import { setAlert } from "../../../redux/Alert/alert.actions";
 
@@ -40,6 +41,10 @@ const DetailsProduct = ({ singleProduct }) => {
       dispatch(addItem(cart));
     }
     dispatch(setAlert("Adding to Cart", "success", 2500));
+  };
+
+  const handleAddToWishlist = (id) => {
+    dispatch(addItemWishlist(id));
   };
 
   return (
@@ -137,7 +142,12 @@ const DetailsProduct = ({ singleProduct }) => {
               >
                 Add to Bag <ion-icon name="bag-add-outline"></ion-icon>
               </button>
-              <button className="btn btn--female btn--simple">
+              <button
+                className="btn btn--female btn--simple"
+                onClick={() => {
+                  handleAddToWishlist(singleProduct._id);
+                }}
+              >
                 Add to wishlist <ion-icon name="list-outline"></ion-icon>
               </button>
             </div>

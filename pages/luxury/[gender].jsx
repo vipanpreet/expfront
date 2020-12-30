@@ -8,11 +8,23 @@ import Footer from "../../components/ReusableComponents/footer/Footer.components
 import LuxuryMenCollection from "../../components/LuxuryPage/Men/luxury-men-collection/LuxuryMenCollection.component";
 import LuxuryMenCollectionList from "../../components/LuxuryPage/Men/luxury-men-collection-list/LuxuryMenCollectionList.component";
 import LuxuryTopBrands from "../../components/LuxuryPage/luxury-top-brands/LuxuryTopBrands.component";
+import { saveStoreState } from "../../redux/storeSelect/storeSelect.actions";
 
 const Lifestyle = () => {
   const dispatch = useDispatch();
   const router = useRouter();
   const { gender } = router.query;
+  const luxuryState = useSelector((state) => state.storeSelectState);
+
+  useEffect(() => {
+    dispatch(
+      saveStoreState({
+        storeType: "luxury",
+        department: gender,
+      })
+    );
+  }, [dispatch, gender]);
+
   return (
     <main className="bg-luxury">
       <LuxuryHeader />
