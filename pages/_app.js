@@ -15,6 +15,7 @@ import { store, persistor } from "../redux/store";
 import GoToTop from "../components/Layout/go-to-top/GoToTop.module";
 import Cursor from "../components/Layout/Cursor/Cursor.js";
 import Head from "next/head";
+import ChangeStore from "../components/Layout/Changestore/ChangeStore";
 // import { store} from '../redux/store';
 
 function MyApp({ Component, pageProps }) {
@@ -32,12 +33,13 @@ function MyApp({ Component, pageProps }) {
       </Head>
       <Navbar />
       <Alert />
+      <ChangeStore />
       <GoToTop />
       {/* <Cursor /> */}
       <Component {...pageProps} />
       {/* // do not render the footer if the cart page is opened */}
-      {route.pathname == "/cart" || route.pathname == "/luxury/[gender]" ? (
-        " "
+      {route.asPath == "/luxury/men" || route.asPath == "/luxury/women" ? (
+        ""
       ) : (
         <Footer />
       )}

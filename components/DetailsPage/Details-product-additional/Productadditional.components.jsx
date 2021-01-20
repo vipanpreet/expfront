@@ -5,9 +5,12 @@ import { setAlert } from "../../../redux/Alert/alert.actions";
 
 import Moment from "react-moment";
 import UserRating from "../Details-rating/UserRating.component";
+// islogin
+import isLogin from "../../../utils/isLogin";
 
 const Productadditional = ({ singleProduct }) => {
-  const [alreadyCommented, setAlreadyCommented] = useState(null);
+  const [alreadyCommented, setAlreadyCommented] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const [rating, setRating] = useState(5);
   const [comment, setComment] = useState("");
@@ -19,10 +22,11 @@ const Productadditional = ({ singleProduct }) => {
   const auth = useSelector((state) => state.auth);
   const { userInfo } = auth;
 
-  console.log(userInfo);
   useEffect(() => {
-    let aDone = singleProduct.reviews.find((x) => x.user === userInfo.id);
-    setAlreadyCommented(aDone);
+    if (singleProduct.reviews.find((x) => x.user === userInfo.id)) {
+      setAlreadyCommented(true);
+    }
+    setIsLoggedIn(isLogin());
   }, []);
   const submitHandler = (e) => {
     e.preventDefault();
@@ -30,147 +34,108 @@ const Productadditional = ({ singleProduct }) => {
     dispatch(setAlert("Review will appear later", "success", 2500));
   };
 
-  const [detailsActive, setDetailsActive] = useState(true);
-  const [additionalsActive, setAdditionalsActive] = useState(false);
-  const [reviewsActive, setReviewsActive] = useState(false);
-
-  const openDetails = () => {
-    setDetailsActive(true);
-    setAdditionalsActive(false);
-    setReviewsActive(false);
-  };
-  const openAdditionals = () => {
-    setDetailsActive(false);
-    setAdditionalsActive(true);
-    setReviewsActive(false);
-  };
-  const openReviews = () => {
-    setDetailsActive(false);
-    setAdditionalsActive(false);
-    setReviewsActive(true);
-  };
-
   return (
-    <div className="pothers mt-6">
-      <div className="pothers__menu">
-        <li
-          style={{ cursor: "pointer" }}
-          className={`pothers__menu--item ${detailsActive ? "active" : ""}`}
-          onClick={openDetails}
-        >
-          Description
-        </li>
-        <li
-          style={{ cursor: "pointer" }}
-          className={`pothers__menu--item  ${
-            additionalsActive ? "active" : ""
-          }`}
-          onClick={openAdditionals}
-        >
-          Additional Details
-        </li>
-        <li
-          style={{ cursor: "pointer" }}
-          className={`pothers__menu--item  ${reviewsActive ? "active" : ""}`}
-          onClick={openReviews}
-        >
-          Reviews
-        </li>
-      </div>
-      <div className="pothers__body">
-        {/* <!-- ------- PANEL 1 DESCRIPTION --------- --> */}
-        {detailsActive && (
-          <div className="pothers__body--item pothers__body--desc display-block">
-            {singleProduct.description}
+    <div class="productdetails">
+      <div class="container-xlarge">
+        <div class="productdetails__description">
+          <div class="title __600">Description</div>
+          <div>
+            <h3>
+              Red and white night suit consists of t-shirt and pyjamas Red and
+              white printed t-shirt, has a round neck, short sleeves A pair of
+              red and white printed pyjamas, has drawstring closure, two pockets
+            </h3>
+            <br />
+            <h3>
+              <b>Size & Fit</b>
+            </h3>
+            <h3>The model (height 5'8') is wearing a size S</h3>
+            <br />
+            <h3>
+              <b>Material & Care</b>
+            </h3>
+            <h3>
+              Top fabric: 52% cotton, 48% polyester Bottom fabric: 52% cotton,
+              48% polyester Machine-wash
+            </h3>
           </div>
-        )}
-        {/* <!-- ------- PANEL 2 ADDITIONAL --------- --> */}
-        {additionalsActive && (
-          <div className="pothers__body--item pothers__body--add display-block">
-            Molestiae harum voluptatibus quas, exercitationem, amet delectus
-            quam nihil atque iste tempora illo?
+        </div>
+        <div class="productdetails__specification mt-3">
+          <div class="d-flex">
+            <div class="title __600">Composition:</div>
+            <div class="title __400">{singleProduct.composition}</div>
           </div>
-        )}
-
-        {/* <!-- ------- PANEL 3 REVIEWS --------- --> */}
-        {reviewsActive && (
-          <div className="pothers__body--item pothers__body--rev display-block">
-            <h1 className="title">{message && message}</h1>
-            <h1 className="title">{error && error}</h1>
-            {Object.keys(userInfo).length === 0 &&
-            userInfo.constructor === Object ? (
-              <div className="bg-cream p-3 mt-2">
-                <div className="title __300 text-center">
-                  Please login to review products
-                </div>
-              </div>
-            ) : alreadyCommented !== undefined ? (
-              <div className="bg-cream p-3 mt-2">
-                <div className="title __300 text-center">
-                  Already Reviewed by you
-                </div>
-              </div>
-            ) : (
-              <div className="bg-cream p-3 mt-2">
-                <div className="title __300 ">Add a Review</div>
-                <div className="subheading mt-3">Your Rating</div>
-                <select
-                  onChange={(e) => setRating(e.target.value)}
-                  value={rating}
-                  name=""
-                  className="select"
-                  id=""
-                >
-                  <option value="1">1 star</option>
-                  <option value="2">2 stars</option>
-                  <option value="3">3 stars</option>
-                  <option value="4">4 stars</option>
-                  <option value="5">5 stars</option>
-                </select>
-                <div className="subheading mt-3">Your Review</div>
-                <textarea
-                  onChange={(e) => setComment(e.target.value)}
-                  rows="5"
-                  value={comment}
-                  className="input bg-white"
-                ></textarea>
-                <div className="mt-3">
-                  <button
-                    onClick={submitHandler}
-                    className="btn btn--primary btn--simple"
-                    href="#"
+        </div>
+        <div class="productdetails__reviews mt-3 mb">
+          <div class="title __600">
+            {alreadyCommented ? "You have already reviewed" : "User Reviews"}
+          </div>
+          <div class="reviews-sys">
+            {isLoggedIn && !alreadyCommented ? (
+              <div class="review-sys__form">
+                <div class="form">
+                  <input
+                    type="text"
+                    onChange={(e) => setComment(e.target.value)}
+                    placeholder="add review here"
+                    value={comment}
+                  />
+                  <select
+                    name="rating"
+                    value={rating}
+                    id=""
+                    onChange={(e) => setRating(e.target.value)}
                   >
-                    Submit
+                    <option value="5">5 stars</option>
+                    <option value="4">4 stars</option>
+                    <option value="3">3 stars</option>
+                    <option value="2">2 stars</option>
+                    <option value="1">1 stars</option>
+                  </select>
+                </div>
+                <div class="mt-2">
+                  <button onClick={submitHandler} class="btn btn--cream">
+                    Add Review
                   </button>
                 </div>
               </div>
+            ) : (
+              ""
             )}
 
-            {/* <!-- Reviews --> */}
-            <div className="preview">
-              <div className="title">
-                {singleProduct.numReviews}
-                comment on {singleProduct.name}
+            <div class={`review-sys__reviews ${isLogin() ? "mt-4" : ""}`}>
+              <div class="review-sys__reviews--title">
+                {singleProduct.numReviews} comment on {singleProduct.name}
               </div>
-
-              {/* <!-- REVIEWS FROM DB --> */}
               {singleProduct.reviews.length > 0 ? (
                 <>
                   {singleProduct.reviews.map((review) => (
-                    <div key={review._id} className="preview-item">
-                      <div className="preview-item__body">
-                        <div className="preview-item__body--stars">
-                          <UserRating key={review._id} value={review.rating} />
+                    <div key={review._id} class="review-sys__item">
+                      <div class="review-sys__item--user">
+                        <span className="text-upper">
+                          {review.name.charAt(0)}
+                        </span>
+                      </div>
+                      <div class="review-sys__item__body">
+                        <div class="review-sys__item__body--name">
+                          {review.name}
                         </div>
-                        <div className="preview-item__body--username">
-                          <span>{review.name}</span>
-                          <span>
-                            <Moment format="YYYY/MM/DD">
+                        <div class="review-sys__item__body__rating">
+                          <div class="review-sys__item__body__rating--stars">
+                            <UserRating
+                              key={review._id}
+                              value={review.rating}
+                            />
+                          </div>
+                          <p>
+                            <Moment format="DD-MM-YYYY">
                               {review.createdAt}
                             </Moment>
-                          </span>
+                          </p>
                         </div>
-                        <div className="para">{review.comment}</div>
+                        <div class="review-sys__item__body--desc">
+                          <p class="para">{review.comment}</p>
+                        </div>
                       </div>
                     </div>
                   ))}
@@ -178,7 +143,7 @@ const Productadditional = ({ singleProduct }) => {
               ) : null}
             </div>
           </div>
-        )}
+        </div>
       </div>
     </div>
   );

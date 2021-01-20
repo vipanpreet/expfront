@@ -38,34 +38,34 @@
 }
 /* theme */
 .dark {
-  background: #0e0e0e !important;
+  background: #0b0c0e !important;
   color: #fff !important;
 }
 .dark.navigation .toggle > span {
   background: #fff;
 }
 .dark.navigation .wrapper-menu {
-  background: #0e0e0e;
+  background: #0b0c0e;
 }
 .dark.navigation .wrapper-search {
   background: #222;
 }
 .dark.navigation .wrapper-cart {
-  background: #0e0e0e;
+  background: #0b0c0e;
 }
 .dark.navigation .wrapper-cart__details {
-  background: #0e0e0e;
+  background: #0b0c0e;
   color: #fff;
 }
 .dark.navigation .wrapper-cart__summary {
-  background: #222;
+  background: #111;
   color: #fff;
 }
 .dark.navigation .account-card {
-  background: #222;
+  background: #111;
 }
 .dark.navigation .account-card::before {
-  background: #222;
+  background: #111;
 }
 .dark.navigation .account-card a {
   color: #fff;
@@ -99,7 +99,23 @@
   left: 0;
   width: 35px;
   height: 2px;
-  background: #3e3e3e;
+  background: #111;
+}
+.navigation .toggle > p {
+  position: absolute;
+  top: none;
+  bottom: 10px;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  line-height: 0.8;
+  letter-spacing: 2px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  font-family: "Roboto", sans-serif;
+  left: 3px;
+}
+.navigation .toggle:hover > p {
+  opacity: 0;
 }
 .navigation .toggle > span:nth-of-type(2) {
   top: 56%;
@@ -146,7 +162,7 @@
   height: 25px;
 }
 .logo-text {
-  color: #3e3e3e;
+  color: #111;
   font-size: 2rem;
   text-transform: uppercase;
   font-weight: 400;
@@ -157,21 +173,29 @@
 /* ACTIONS */
 
 .navigation .actions > span {
-  width: 35px;
-  height: 35px;
+  width: 45px;
+  height: 30px;
   margin-right: 10px;
   cursor: pointer !important;
   display: inline-block;
+  text-align: center;
   z-index: 1008;
 }
 
 .navigation > .actions > span > img {
   width: 35px;
-  height: 35px;
+  height: 32px;
   position: relative;
   z-index: 1009;
 }
-
+.navigation > .actions > span > p {
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  line-height: 0.8;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  font-family: "Roboto", sans-serif;
+}
 /* ------------ wrapper menu ---------- */
 .wrapper-menu {
   position: absolute;
@@ -432,6 +456,7 @@
   max-width: 200px;
   border-radius: 2px;
   box-shadow: 3px 0 12px rgba(62, 62, 62, 0.15);
+  text-align: left !important;
 }
 .account--trigger .account-card::before {
   position: absolute;
@@ -464,7 +489,7 @@
     padding: 0 10px 0 10px;
   }
   .navigation .toggle {
-    width: 80px;
+    width: 120px;
   }
   .wrapper-menu > .menu {
     padding: 2rem;
@@ -474,10 +499,14 @@
     line-height: 2.4rem;
   }
   .navigation .actions > span {
-    width: 20px;
-    height: 20px;
+    width: 45px;
+    height: 30px;
+    margin-right: 0;
   }
-
+  .navigation > .actions > span > img {
+    width: 30px;
+    height: 30px;
+  }
   .account--trigger .account-card {
     right: -10px;
     top: 55px;
@@ -564,4 +593,42 @@
 .cursor--clicked {
   transform: translate(-50%, -50%) scale(0.9);
   background-color: var(--cream-d);
+}
+
+/* new Nav */
+.v-nav {
+  width: 100%;
+  height: 8rem;
+  box-shadow: 2px 2px 40px rgba(0, 0, 0, 0.1);
+  position: relative;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 999;
+  background: #fff;
+  padding: 0 8rem;
+}
+.v-logo {
+  font-size: 2rem;
+  font-family: "Roboto", sans-serif;
+  font-weight: 300;
+}
+.v-searchbar {
+}
+.v-searchbar input {
+  background: var(--cream);
+  width: 480px;
+}
+.v-actions {
+  display: flex;
+  align-items: center;
+}
+.v-actions h4 {
+  font-family: "Roboto", sans-serif;
+  margin: 0 1.5rem;
+  font-weight: 500;
+  font-size: 1.4rem;
 }

@@ -23,7 +23,7 @@ const Details = () => {
 
   return (
     <>
-      <main>
+      <main style={{ minHeight: "100vh" }}>
         {loading ? (
           <>
             <h2
@@ -32,16 +32,14 @@ const Details = () => {
                 // left: "45%",
                 marginLeft: "45%",
                 transform: "translate(-50%)",
-                minHeight: "400px",
+                minHeight: "100vh",
               }}
             >
               <Spinner />
             </h2>
           </>
-        ) : singleProduct ? (
-          <DetailsProduct singleProduct={singleProduct} />
         ) : (
-          <></>
+          singleProduct && <DetailsProduct singleProduct={singleProduct} />
         )}
       </main>
     </>

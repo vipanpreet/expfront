@@ -557,6 +557,7 @@ const Navbar = () => {
       >
         <span ref={(el) => (one = el)}></span>
         <span ref={(el) => (two = el)}></span>
+        <p>menu</p>
       </div>
 
       {/* Logo */}
@@ -588,6 +589,7 @@ const Navbar = () => {
             }
             alt=""
           />
+          <p>Search</p>
         </span>
 
         {/* cart */}
@@ -600,6 +602,7 @@ const Navbar = () => {
             }
             alt=""
           />
+          <p>Cart</p>
         </span>
 
         {/* account */}
@@ -614,6 +617,7 @@ const Navbar = () => {
             }
             alt=""
           />
+          <p>Account</p>
 
           {accOpen === true ? (
             <div className="account-card" ref={(el) => (accountCard = el)}>

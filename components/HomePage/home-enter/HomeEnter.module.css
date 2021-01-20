@@ -1,0 +1,16 @@
+.homeenter {
+  background: url("/assets/sections/enter.jpg") no-repeat;
+  background-size: cover;
+  background-position: top;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.enterbtn {
+  font-size: 12rem;
+  color: #000;
+  cursor: pointer;
+}

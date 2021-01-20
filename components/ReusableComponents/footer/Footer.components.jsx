@@ -1,11 +1,11 @@
 import styles from "./Footer.module.scss";
 import FooterFeatuesSection from "./FooterFeaturesSection.components";
 
-const Footer = () => {
+const Footer = ({ dark }) => {
   return (
     <>
-      <FooterFeatuesSection />
-      <footer className="footer">
+      <FooterFeatuesSection dark={dark} />
+      <footer className={`footer ${dark ? "bg-black text-white" : ""}`}>
         <div className="container-large">
           <div className="row  row-cols-2">
             <div className="col-md-4">

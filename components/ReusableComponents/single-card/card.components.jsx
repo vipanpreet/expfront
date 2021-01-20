@@ -14,7 +14,7 @@ const Card = ({ singleProduct, col12, col3, windowDimensions }) => {
   };
 
   return (
-    <div className={`card animate__animated animate__fadeIn ${department}`}>
+    <div className={`card animate__animated animate__fadeInUp ${department}`}>
       <div className="card--inner">
         <div className="card__img">
           <img

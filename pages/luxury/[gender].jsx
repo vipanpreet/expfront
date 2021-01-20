@@ -9,6 +9,12 @@ import LuxuryMenCollection from "../../components/LuxuryPage/Men/luxury-men-coll
 import LuxuryMenCollectionList from "../../components/LuxuryPage/Men/luxury-men-collection-list/LuxuryMenCollectionList.component";
 import LuxuryTopBrands from "../../components/LuxuryPage/luxury-top-brands/LuxuryTopBrands.component";
 import { saveStoreState } from "../../redux/storeSelect/storeSelect.actions";
+import LuxuryApps from "../../components/LuxuryPage/luxury-apps/LuxuryApps";
+import LuxuryTrendingSub from "../../components/LuxuryPage/luxury-trendingsub/LuxuryTrendingSub";
+import LifestyleMenDealSection from "../../components/LifestylePage/Men/lifestyle-men-deal-section/LifestylemenDealSection.components";
+import LuxuryFeaturedItem from "../../components/LuxuryPage/luxury-featured-item/LuxuryFeaturedItem";
+import LuxurySection from "../../components/LuxuryPage/luxury-section/LuxurySection";
+import LuxuryAdv from "../../components/LuxuryPage/luxury-adv/LuxuryAdv";
 
 const Lifestyle = () => {
   const dispatch = useDispatch();
@@ -33,10 +39,17 @@ const Lifestyle = () => {
         style={{ position: "absolute", top: "106%", width: "100vw" }}
       >
         <LuxuryMenCollection />
+        {/* <LuxuryApps /> */}
+
+        <LuxurySection />
+
+        <LuxuryTrendingSub />
         {/* <LuxuryMenCollectionList /> */}
-        <LuxuryRecommendation />
+        <LuxuryFeaturedItem />
+        <LuxuryAdv />
         <LuxuryTopBrands />
-        <Footer />
+        <LuxuryRecommendation />
+        <Footer dark={true} />
       </div>
     </main>
   );

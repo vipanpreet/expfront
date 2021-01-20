@@ -49,114 +49,132 @@ const DetailsProduct = ({ singleProduct }) => {
 
   return (
     <>
-      <div className="pdetails">
-        <div className="pdetails__img">
-          <div className="pdetails__img--img">
-            <img
-              src={singleProduct.images[0] && singleProduct.images[0].url}
-              alt=""
-            />
-          </div>
-        </div>
-        <div id="pdetails__body" className="pdetails__body">
-          <Link href={`/${storeType}/${department}`}>
-            <a style={{ cursor: "pointer" }} className="pdetails__body--back">
-              <ion-icon name="arrow-back-outline"></ion-icon> Back to Shirts
-            </a>
-          </Link>
-
-          <div className="pdetails__body--brand">{singleProduct.brand}</div>
-          <div className="pdetails__body--name">{singleProduct.name}</div>
-          <div className="pdetails__body--rating">
-            <span className="pdetails__body--rating--stars">
-              <UserRating value={singleProduct.rating} />
-            </span>
-            <span className="pdetails__body--rating--count">
-              ({singleProduct.numReviews} Reviews)
-            </span>
-          </div>
-
-          <div className="pdetails__body--price">
-            <s>AUD {singleProduct.defaultPrice}</s> AUD {singleProduct.price}
-          </div>
-          <div className="pdetails__body--btns">
-            <h4>Select Color</h4>
-            <input
-              type="radio"
-              id="grey"
-              name="color"
-              value="grey"
-              defaultChecked
-            />
-            <label htmlFor="grey">Grey</label>
-
-            <input type="radio" id="black" name="color" value="black" />
-            <label htmlFor="black">Black</label>
-
-            <input type="radio" id="white" name="color" value="white" />
-            <label htmlFor="white">White</label>
-          </div>
-          <div className="pdetails__body--btns">
-            <h4>Select Size</h4>
-            {singleProduct && singleProduct.sizes.length > 0 ? (
-              <>
-                {singleProduct.sizes.map((size) => (
-                  <>
-                    {size.quantity > 0 && (
-                      <span key={size._id}>
-                        <input
-                          type="radio"
-                          id={size.name}
-                          name="size"
-                          value={size.name}
-                          defaultChecked
-                        />
-                        <label htmlFor={size.name}>{size.name}</label>
-                      </span>
-                    )}
-                  </>
-                ))}
-              </>
-            ) : (
-              <>
-                <input
-                  type="radio"
-                  id="regular"
-                  name="size"
-                  value="regular"
-                  defaultChecked
-                />
-                <label htmlFor="regular">Regular</label>
-              </>
-            )}
-          </div>
-          <div className="pdetails__body--category">
-            Category: <span>{singleProduct.category}</span> <a href=""></a>
-          </div>
-
-          <div className="pdetails__body__cart">
-            <div className="pdetails__body__cart--buttons">
-              <button
-                className="btn btn--primary btn--simple mr-2"
-                onClick={handleAddToCart}
-              >
-                Add to Bag <ion-icon name="bag-add-outline"></ion-icon>
-              </button>
-              <button
-                className="btn btn--female btn--simple"
-                onClick={() => {
-                  handleAddToWishlist(singleProduct._id);
-                }}
-              >
-                Add to wishlist <ion-icon name="list-outline"></ion-icon>
-              </button>
+      <div class="product">
+        <div class="product__images">
+          <div class="product__images--container">
+            <div class="product__images--img">
+              <img
+                src={singleProduct.images[0] && singleProduct.images[0].url}
+                alt=""
+              />
+            </div>
+            <div class="product__images-nav">
+              <span class="product__body-nav--back">
+                <ion-icon name="chevron-back"></ion-icon>
+              </span>
+              <span class="product__body-nav--forward">
+                <ion-icon name="chevron-forward"></ion-icon>
+              </span>
             </div>
           </div>
+        </div>
+        <div class="product__body">
+          <div class="product__body-nav">
+            <span class="product__body-nav--back"> back </span>/
+            <span class="product__body-nav--forward"> next </span>
+          </div>
+          <Link href={`/${storeType}/${department}`}>
+            <h2 class="product__body--back">Back to Shirts</h2>
+          </Link>
+          <h4 class="product__body--price">${singleProduct.price}</h4>
+          <h1 class="product__body--name">{singleProduct.name}</h1>
+          <div class="product__body__rating">
+            <span class="product__body__rating--stars">
+              <UserRating value={singleProduct.rating} />
+            </span>
+            <span class="product__body__rating--num">
+              {singleProduct.rating} / 5.0
+            </span>
+          </div>
+          <h4 class="product__body--brand">
+            <span>Brand</span> louis vuitton
+          </h4>
+          <p class="product__body--description">
+            Red and white night suit consists of t-shirt and pyjamas Red and
+            white printed t-shirt, has a round neck, short sleeves A pair of red
+            and white printed pyjamas, has drawstring closure, two pockets..
+          </p>
 
-          {/* Product Others */}
-          <Productadditional singleProduct={singleProduct} />
+          <div class="product__body__sizes">
+            <span class="product__body__sizes--title"> Select Sizes: </span>
+            <span class="product__body__sizes--container">
+              {singleProduct && singleProduct.sizes.length > 0 ? (
+                <>
+                  {singleProduct.sizes.map((size) => (
+                    <>
+                      {size.quantity > 0 && (
+                        <span key={size._id}>
+                          <input
+                            type="radio"
+                            name="size"
+                            id={size.name}
+                            value={size.name}
+                          />
+                          <label htmlFor={size.name}>{size.name}</label>
+                        </span>
+                      )}
+                    </>
+                  ))}
+                </>
+              ) : (
+                <>
+                  <input
+                    type="radio"
+                    id="regular"
+                    name="size"
+                    value="regular"
+                    defaultChecked
+                  />
+                  <label htmlFor="regular">REGULAR</label>
+                </>
+              )}
+            </span>
+          </div>
+          <div class="product__body--offers">
+            This is product is already at its best price
+          </div>
+          <div class="product__body--pin">
+            <span class="product__body__sizes--title">Check Availibility:</span>
+            <section class="input-container">
+              <label>
+                <input type="text" placeholder="Pincode" name="product_name" />
+                <span>Pincode</span>
+              </label>
+            </section>
+          </div>
+          <div class="product__body__usage">
+            <span class="product__body__sizes--title">How To Use:</span>
+            <div>
+              <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. In eos
+                ad saepe quisquam eum impedit asperiores quas nobis
+                reprehenderit debitis accusantium obcaecati officiis recusandae
+                maxime ipsa, soluta eligendi quis neque!
+              </p>
+              <ul>
+                <li>Shake well</li>
+                <li>Squeeze bottle and rub some syrup on your palm</li>
+                <li>apply it on your face gently</li>
+                <li>leave for 5 minutes &amp; wash your face</li>
+              </ul>
+            </div>
+          </div>
+          <div class="mt-5">
+            <button class="product__body--btn mr-2" onClick={handleAddToCart}>
+              Add to Bag <ion-icon name="bag-outline"></ion-icon>
+            </button>
+            <button
+              class="product__body--btn"
+              onClick={() => {
+                handleAddToWishlist(singleProduct._id);
+              }}
+            >
+              Wishlist <ion-icon name="heart-outline"></ion-icon>
+            </button>
+          </div>
         </div>
       </div>
+      <Productadditional singleProduct={singleProduct} />
     </>
   );
 };
