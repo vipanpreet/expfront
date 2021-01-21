@@ -11,6 +11,7 @@ const Details = () => {
 
   const router = useRouter();
   const { productId } = router.query;
+  
   const { singleProduct, loading } = useSelector(
     (state) => state.productsState
   );
@@ -19,7 +20,7 @@ const Details = () => {
     if (productId) {
       dispatch(getSingleProduct(productId));
     }
-  }, [dispatch, productId]);
+  }, [ productId]);
 
   return (
     <>
