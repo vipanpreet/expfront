@@ -689,9 +689,11 @@ video {
     font-size: 1.45rem;
     width: 100%;
   }
-
+  .changestore-head::before {
+    top: 40%;
+  }
   .changestore-head::after {
-    top: 50%;
+    top: 70%;
   }
   .section-luxury-topbrands--title {
     font-size: 4rem;
