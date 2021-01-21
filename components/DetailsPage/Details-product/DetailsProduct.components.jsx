@@ -9,10 +9,13 @@ import Productadditional from "../Details-product-additional/Productadditional.c
 import UserRating from "../Details-rating/UserRating.component";
 
 const DetailsProduct = ({ singleProduct }) => {
-  
+
   const dispatch = useDispatch();
   const lifestyleState = useSelector((state) => state.storeSelectState);
   const { storeType, department } = lifestyleState;
+
+  const auth = useSelector((state) => state.auth);
+  const { userInfo } = auth;
 
   const handleAddToCart = () => {
     if (singleProduct) {
@@ -175,7 +178,7 @@ const DetailsProduct = ({ singleProduct }) => {
           </div>
         </div>
       </div>
-      <Productadditional singleProduct={singleProduct} />
+      <Productadditional userInfo={userInfo} singleProduct={singleProduct} />
     </>
   );
 };

@@ -6,27 +6,21 @@ import { setAlert } from "../../../redux/Alert/alert.actions";
 import Moment from "react-moment";
 import UserRating from "../Details-rating/UserRating.component";
 // islogin
-import isLogin from "../../../utils/isLogin";
 
-const Productadditional = ({ singleProduct }) => {
+const Productadditional = ({ userInfo, singleProduct }) => {
   const [alreadyCommented, setAlreadyCommented] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const [rating, setRating] = useState(5);
   const [comment, setComment] = useState("");
 
   const dispatch = useDispatch();
-  const productsState = useSelector((state) => state.productsState);
-  const { message, error } = productsState;
 
-  const auth = useSelector((state) => state.auth);
-  const { userInfo } = auth;
+
 
   useEffect(() => {
     if (singleProduct.reviews.find((x) => x.user === userInfo.id)) {
       setAlreadyCommented(true);
     }
-    setIsLoggedIn(isLogin());
   }, []);
   const submitHandler = (e) => {
     e.preventDefault();
@@ -71,7 +65,7 @@ const Productadditional = ({ singleProduct }) => {
             {alreadyCommented ? "You have already reviewed" : "User Reviews"}
           </div>
           <div class="reviews-sys">
-            {isLoggedIn && !alreadyCommented ? (
+            {userInfo && userInfo.length > 0 && !alreadyCommented ? (
               <div class="review-sys__form">
                 <div class="form">
                   <input
@@ -103,7 +97,7 @@ const Productadditional = ({ singleProduct }) => {
               ""
             )}
 
-            <div class={`review-sys__reviews ${isLogin() ? "mt-4" : ""}`}>
+            <div class={`review-sys__reviews ${userInfo && userInfo.length > 0 ? "mt-4" : ""}`}>
               <div class="review-sys__reviews--title">
                 {singleProduct.numReviews} comment on {singleProduct.name}
               </div>
