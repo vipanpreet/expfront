@@ -30,9 +30,9 @@ const INITIAL_STATE = {
   forgotmessage: "",
   userInfo: {},
 };
-if (userInfoFromStorage) {
-  INITIAL_STATE.userInfo = userInfoFromStorage;
-}
+// if (userInfoFromStorage) {
+//   INITIAL_STATE.userInfo = userInfoFromStorage;
+// }
 export const authReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case USER_REGISTER_REQUEST:
