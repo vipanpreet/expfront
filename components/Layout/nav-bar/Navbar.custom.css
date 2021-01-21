@@ -562,6 +562,12 @@
   .wrapper-search > .autolist {
     padding: 0 20px;
   }
+  .navigation .toggle > p {
+    bottom: 8px;
+    font-size: 0.7rem;
+    letter-spacing: 0px;
+    font-weight: 400;
+  }
 }
 /* CURSOR */
 .cursor {
@@ -616,8 +622,7 @@
   font-family: "Roboto", sans-serif;
   font-weight: 300;
 }
-.v-searchbar {
-}
+
 .v-searchbar input {
   background: var(--cream);
   width: 480px;
